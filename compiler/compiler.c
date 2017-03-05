@@ -54,6 +54,7 @@ void	write_comment(int fdin, int fdout)
 {
 	char	*line;
 	char	*str;
+	char	*dump;
 	t_bool 	have_comment;
 	t_bool	have_name;
 	int 	len;
@@ -76,12 +77,11 @@ void	write_comment(int fdin, int fdout)
 			ft_printf("Hey : %s\n", str);
 			if (len > PROG_NAME_LENGTH)
 				error("Name too long");
-			
-			write(fdout, str + 1, len - 2);
+			dump = ft_memalloc(PROG_NAME_LENGTH);
+			ft_memcpy(dump, str + 1, len - 2);
+			write(fdout, dump, PROG_NAME_LENGTH);
 			free(str);
-			str = ft_memalloc(PROG_NAME_LENGTH - len);
-			write(fdout, str, PROG_NAME_LENGTH - len);
-			free(str);
+			free(dump);
 			exit(0);
 		}
 		else if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && !have_name)

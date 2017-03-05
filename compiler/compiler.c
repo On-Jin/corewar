@@ -31,7 +31,7 @@ char *get_output_path(char *name)
 	return (ft_strjoin_multi(FALSE, name, ".cor", NULL));
 }
 
-void	write_exec_magic(int fd)
+void	write_exec_magic(int fd, header_t *header)
 {
 	int nbr;
 	int revnbr;
@@ -47,14 +47,14 @@ void	write_exec_magic(int fd)
 		nbr = nbr >> 8;
 		i--;
 	}
-	write(fd, &revnbr, 4);
+	//write(fd, &revnbr, 4);
+	header->magic = revnbr;
 }
 
-void	write_comment(int fdin, int fdout)
+void	write_comment(int fdin, header_t *header)
 {
 	char	*line;
 	char	*str;
-	char	*dump;
 	t_bool 	have_comment;
 	t_bool	have_name;
 	int 	len;
@@ -67,7 +67,7 @@ void	write_comment(int fdin, int fdout)
 			continue;
 		else if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && !have_comment)
 		{
-			have_comment = TRUE;
+			have_name = TRUE;
 			str = ft_strtrim(line + ft_strlen(NAME_CMD_STRING));
 			len = ft_strlen(str);
 			if (*str != '"')
@@ -77,20 +77,32 @@ void	write_comment(int fdin, int fdout)
 			ft_printf("Hey : %s\n", str);
 			if (len > PROG_NAME_LENGTH)
 				error("Name too long");
-			dump = ft_memalloc(PROG_NAME_LENGTH);
-			ft_memcpy(dump, str + 1, len - 2);
-			write(fdout, dump, PROG_NAME_LENGTH);
+			ft_bzero(&(header->prog_name), PROG_NAME_LENGTH + 1);
+			ft_memcpy(&(header->prog_name), str + 1, len - 2);
 			free(str);
-			free(dump);
-			exit(0);
+			if (have_comment && have_name)
+				break;
 		}
-		else if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && !have_name)
+		else if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && !have_comment)
 		{
-			// comment
-			have_name = TRUE;
+			have_comment = TRUE;
+			str = ft_strtrim(line + ft_strlen(COMMENT_CMD_STRING));
+			len = ft_strlen(str);
+			if (*str != '"')
+				error("Name don't start by '\"'\n");
+			if (str[len - 1] != '"')
+				error("Name don't end by '\"'\n");
+			ft_printf("Hey : %s\n", str);
+			if (len > COMMENT_LENGTH)
+				error("Name too long");
+			ft_bzero(&(header->comment), COMMENT_LENGTH + 1);
+			ft_memcpy(&(header->comment), str + 1, len - 2);
+			free(str);
+			if (have_comment && have_name)
+				break;
 		}
 		else
-			break ;
+			error("Error in name/description.\n");
 	}
 	if (!have_comment || !have_name)
 		error("Missing comment or name.\n");
@@ -101,14 +113,17 @@ int main(int argc, char **argv)
 	char	*output_path;
 	int		fdin;
 	int		fdout;
+	header_t header;
 
 	if (argc != 2)
 		error("Usage : ./asm mychampion.s\n");
 	fdin = open(argv[1], O_RDONLY);
 	output_path = get_output_path(argv[1]);
 	fdout = open(output_path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	write_exec_magic(fdout);
-	write_comment(fdin, fdout);
+	
+	write_exec_magic(fdin, &header);
+	write_comment(fdin, &header);
+	write(fdout, &header, sizeof(header_t));
 	//ft_putstr_fd("Hey !\n", fd);
 	exit(0);
 	return (0);

@@ -1,0 +1,99 @@
+projet en mode brouillon a rendre propre
+
+Trois projets :
+	virtual machine (VM)
+	assembleur (asm)
+	champions
+
+Le but :
+	creer une machine virtuelle dans laquelle des champions s'affronterons
+	les champions seront recompile depuis un psedo-assembleur en  'bytecde',
+	par notre asm
+	la machine virtuelle prendra les champions-asm en leur atribuant un numero
+	puis lira les instructions de ceux-ci jusqu'a la fin de la partie
+	la partie est finie quand plus aucun processus n'est en vie
+	le gagnant de la partie est dernier joueur ayant declare etre en vie.
+
+## VM
+	lancement {> ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...}
+	{-dump arrete la partie au bout de -dump cycles, l'affiche sur l'entree puis quitte}
+	{-n fixe le numero du joueur si besoin}
+	sert d'arene ou les champions vont s'affronter
+	peut executer plusieurs processus en simultane
+	Les processus s'executent sequentiellement et dans le meme espace memoire
+	ils peuvent donc s'ecrire les uns sur les autres se corrompre, etc...
+	les champions ne pevent pas avoir plus de CHAMP_MAX_SIZE octets
+	!!la machine virtuelle lit les octets en BIG_ENDIAN(de gauche a droite)
+	La machine virtuelle est supposee parfaitement parallele mais pour des raisons pratiques
+	chaque instruction s'execute uniquement a la fin de son cycle(et attends toute sa duree)
+	et dans l'ordre decroissant des numeros de processus
+
+	les differentes parties de la machine.
+	## les processus
+	chaque processus a a sa disposition les elements suivants qui lui sont propre :
+		##les registers
+			la chaque processus a a sa disposition des registeurs propres
+			ces registeurs sont au nombre de REG_NUMBER registers
+			chaque registeur fait REG_SIZE octets.
+			un rgister est une petite case memoire contenant une seule valeur
+			(s'ils font REG_SIZE, cela implique que la valeur fait REG_SIZE octets)
+			%% le registre r1 du premier processus de chaque joueur
+			%% lui fourni son numero de joueur, tous autres sont mis a 0 (sauf le PC)
+		## le PC
+			c'est un registre special qui contient juste
+			l'adresse (dans la memeoire de la VM) de la prochaine instruction
+			a decoder et executer(Très utile pour savoir où l’on se trouve dans l’exécution, afin d’écrire des choses en mémoire...)
+		## carry
+			un flag nomme carry qui vaut 1 si l'opperation a reussie
+	##le numero du joueur
+		il est generer par la machine ou specifie au lancement et est
+		fourni aux joueurs via le registeur r1 de leur premier processus
+	## les champions dans a VM
+		les champions sont charges en memoire de facon a espacer equitablement leur point d'entree
+	## les CYCLE
+		une verification correspond a CYCLE_TO_DIE cycles
+		a la fin la machine verifie que chaque processus a executer
+		au moins un live depuis la derniere verification
+		S'il ne l'as pas fait il est juge comme mort(remis a 0?)
+		si durant la verification on se rendscompte qu'il y a eu NBR_LIVE live
+		ou si on attent MAX_CHECKS vérifications,
+		un decremente CyCLE_TO_DIE de CYCLE_DELTA. (-50 suvant les param de base)
+	## fin de la partie
+		quand il n'y a plus de processus en vie la partie est finie et le gagnant
+		est le dernier joueur rapporte en vie
+	## affichage fin de partie
+		afficher : "le joueur x(nom_champion) a gagne", où x est le numéro
+		du joueur et nom_champion le nom de son champion.
+		Exemple : "le joueur 2(rainbowdash) a gagne"
+	## les executions
+		A chaque exécution valide de l’instruction live, la machine doit afficher :
+		"un processus dit que le joueur x(nom_champion) est en vie"
+		%%une execution est valide si carry == 1 ?
+	## taille de la VM
+		la memoire(%%de l'arene%%) est circulaire et fait MEM_SIZE octets.
+
+
+	## non definie par le PDF
+		MAX_ARGS_NUMBER			4
+		REG_CODE				1
+		DIR_CODE				2
+		IND_CODE				3
+		IND_SIZE				2
+		typedef char	t_arg_type;
+		T_REG					1
+		T_DIR					2
+		T_IND					4
+		T_LAB					8
+
+
+
+## Assembleur
+
+## champions
+	utilisent les instructions validees par l'assembleur
+	pour se battre dans l'arene
+	projet a part
+	pas important pour le projet corewar
+	des champions ayant chaque instruction a faire pour les tests
+
+%noms

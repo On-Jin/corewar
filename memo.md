@@ -79,10 +79,12 @@
 	* Chaque instruction est encodée par :
 	* Code de l'instruction (live == 0x01, ld == 0x02 ...)
 	* L’octet de codage des paramètres (OCP), jusqu'a MAX_ARGS_NUMBER (4):
-			-------(Chaque parametre prends 2bits)
-			01 SI Registre, Suivie d’un octet            (le numéro de registre)
-			10 SI Direct,   Suivie de DIR_SIZE (4)octets (la valeur directement)
-			11 Si Indirect, Suivie de IND_SIZE octets    (la valeur de l’indirection)
+		* -------(Chaque parametre prends 2bits)
+		* 01 SI Registre, Suivie d’un octet            (le numéro de registre)
+		* 10 SI Direct,   Suivie de DIR_SIZE (4)octets (la valeur directement)
+		* 11 Si Indirect, Suivie de IND_SIZE octets    (la valeur de l’indirection)
 	
-			Ex : sti r1, %:live, %1 == 0x0b | 0x68
+				Ex : sti r1, %:live, %1 == 0x0b | 0x68
 									  (sti)	| (r1, %:line, %1) == (01, 10, 10, 00)
+
+	*Incoming;

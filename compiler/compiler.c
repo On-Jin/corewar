@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../shared/op.h"
-#include "../shared/libft/libft.h"
+#include "../includes/op.h"
+#include "../includes/libft/libft.h"
 
 void error(char *str)
 {

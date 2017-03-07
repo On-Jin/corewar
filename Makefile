@@ -17,6 +17,8 @@ CC = gcc
 FLAGS = -Wall -Werror -Wextra
 SPE_FLAGS =
 
+AUTOR = auteur
+
 COREWAR_NAME = corewar
 ASM_NAME = asm
 NAME = $(COREWAR_NAME) $(ASM_NAME)
@@ -25,7 +27,7 @@ COREWAR_DIR = ./VM/
 ASM_DIR = ./compiler/
 
 LIB = $(LIB_DIR)libft.a
-LIB_DIR = ./shared/libft/
+LIB_DIR = ./includes/libft/
 
 SRC =
 SRC_DIR = ./srcs/
@@ -33,9 +35,9 @@ SRC_DIR = ./srcs/
 OBJ = $(SRC:.c=.o)
 OBJ_DIR = ./objs/
 
-INC = ./include/
+INC = ./includes/
 
-all : $(NAME)
+all : $(AUTOR) $(NAME)
 
 sall : $(LIB)
 	rm -f $(COREWAR_NAME)
@@ -44,6 +46,9 @@ sall : $(LIB)
 	cp $(COREWAR_DIR)$(COREWAR_NAME) ./
 	@(cd $(ASM_DIR) && $(MAKE) $(ASM_NAME))
 	cp $(ASM_DIR)$(ASM_NAME) ./
+
+$(AUTOR) :
+	echo "gnebie\nntoniolo\nmprevot" > auteur;
 
 $(LIB) :
 	@(cd $(LIB_DIR) && MAKE)

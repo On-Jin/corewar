@@ -24,9 +24,9 @@ DEBUG_FLAG = -fsanitize=address
 NAME = asm
 
 LIB = $(LIB_DIR)libft.a
-LIB_DIR = ./../shared/libft/
+LIB_DIR = ./../includes/libft/
 
-SRC = compileur.c
+SRC =
 SRC_DIR = ./srcs/
 
 OBJ = $(SRC:.c=.o)
@@ -36,7 +36,7 @@ INC = ./includes/
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ./includes/lemin.h
+$(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ../includes/corewar.h
 	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME)
 
 $(LIB) :

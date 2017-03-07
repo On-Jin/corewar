@@ -18,22 +18,29 @@ FLAGS = -Wall -Werror -Wextra
 SPE_FLAGS =
 DEBUG_FLAG = -fsanitize=address
 
-NAME = asm
+NAME = corewar
 
 LIB = $(LIB_DIR)libft.a
-LIB_DIR = ./../shared/libft/
+LIB_DIR = ./../includes/libft/
 
-SRC = compileur.c
+SRC = VM_main.c \
+		vm_create_flags.c \
+		vm_init_champ.c \
+		vm_show_arene.c \
+		ft_void_error.c \
+		ft_int_error.c \
+		ft_itoa_base_unsigned.c
+
 SRC_DIR = ./srcs/
 
 OBJ = $(SRC:.c=.o)
 OBJ_DIR = ./objs/
 
-INC = ./includes/
+INC = ../includes/
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ./includes/lemin.h
+$(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ../includes/corewar.h
 	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME)
 
 $(LIB) :

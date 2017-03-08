@@ -45,11 +45,18 @@ typedef struct		s_process
 {
 	char			reg[REG_NUMBER * REG_SIZE];
 	char			PC[REG_SIZE];
-	int				carry;
+	int				cycle;
+	char			carry;
+	char			live;
+	char			instruction;
+	char			champion;
 }					t_process;
 
 typedef struct		s_datas
 {
+	t_vm			*arene;
+	t_process		*begin_process;
+	t_champ			*begin_champ;
 	int				player_nbr;
 	int				nbr_cycles;
 	int				flag;

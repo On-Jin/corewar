@@ -18,7 +18,6 @@ void		vm_verif_champ(char *chmp_info, t_champ *champ)
 	unsigned char *c;
 
 	c = (unsigned char*)chmp_info;
-
 	i = COREWAR_EXEC_MAGIC;
 	if (c[0] == (i >> 24) && c[1] == ((i >> 16) & 0xff)
 	&& c[2] == ((i >> 8) & 0xff) && c[3] == (i & 0xff))

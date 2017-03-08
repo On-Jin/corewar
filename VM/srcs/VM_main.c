@@ -21,6 +21,29 @@
 ** etape 5 fin de la machine, affichage du champion
 */
 
+/*
+** char code_instruction;
+** char parm_format;
+** char parm[REG_SIZE * 4]
+*/
+
+/*
+** un op de la table
+** 1 => nom du paramettre
+** 2 => nombre d'arguments
+** 3 => arguments acceptees(lien avec le nombre d'arguments)
+** 4 => numero op_code
+** 5 => nombre de cycles pour realiser l'instruction
+** 6 => ?retour/affichage?
+** 7 => carry(0 | 1)
+** 8 => ?si 1 alors les valeurs direct sont sur 2 octets?
+*/
+
+/*
+** A faire : define error
+** pour verifier que les macros sont valides;
+*/
+
 void		vm_innit_to_0(t_champ *champs, t_vm *arene, int champs_size)
 {
 	ft_bzero((void *)champs, champs_size);

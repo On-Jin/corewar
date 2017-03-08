@@ -54,8 +54,8 @@ void		vm_show_arene_element(char elem)
 	line[2] = 0;
 	line[1] = (unsigned char)elem % 16;
 	line[0] = ((unsigned char)elem / 16) % 16;
-	line[0] += (line[0] > 10) ? ('a' - 10) : ('0');
-	line[1] += (line[1] > 10) ? ('a' - 10) : ('0');
+	line[0] += (line[0] >= 10) ? ('a' - 10) : ('0');
+	line[1] += (line[1] >= 10) ? ('a' - 10) : ('0');
 	ft_putstr(line);
 	ft_putchar(' ');
 }

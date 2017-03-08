@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/06 05:21:33 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:57:48 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@
 ** pour verifier que les macros sont valides;
 */
 
+void		place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYERS + 1])
+{
+	int i;
+	int size;
+
+	i = 0;
+	size = 0;
+	while (i < data->player_nbr)
+	{
+		size += champ[i].champ_size;
+		i++;
+	}
+	i = 1;
+	while (i <= data->player_nbr)
+	{
+		ft_printf("Try Place %i\n", i);
+		ft_memcpy((void *)&arene->arene[0/*Place du chmapion*/], (void *)&champ[i - 1], champ[i - 1].champ_size);
+		ft_printf("End Place %i\n", i);
+		if (champ || arene)
+			;
+		i++;
+	}
+}
+
 void		vm_innit_to_0(t_champ *champs, t_vm *arene, int champs_size)
 {
 	ft_bzero((void *)champs, champs_size);
@@ -61,8 +85,8 @@ int			main(int argc, char **argv)
 	datas.player_nbr = vm_create_flags(argv, argc, &datas.flag);
 	vm_innit_to_0(champs, &arene, sizeof(champs));
 	datas.player_nbr = vm_init_champ(champs, argc, argv, &datas);
-	ft_printf("champ_size %d, champ nbr %d\n", champs[0].champ_size, champs[0].champ_nbr);
-	ft_memcpy((void *)&arene, (void *)&champs[0], CHAMP_MAX_SIZE);
+//	ft_memcpy((void *)&arene, (void *)&champs[0], champs[0].champ_size);
+	place_champ(&datas, &arene, champs);
 	vm_show_arene(&arene);
 //	vm_pose_champ();
 //	vm_do_cycles();

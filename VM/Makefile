@@ -6,7 +6,7 @@
 #    By: gnebie <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/06 05:41:35 by gnebie            #+#    #+#              #
-#    Updated: 2017/03/06 05:41:36 by gnebie           ###   ########.fr        #
+#    Updated: 2017/03/08 15:24:22 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = VM_main.c \
 		vm_create_flags.c \
 		vm_init_champ.c \
 		vm_show_arene.c \
+		vm_ocp_tools.c \
 		ft_void_error.c \
 		ft_int_error.c \
 		ft_itoa_base_unsigned.c

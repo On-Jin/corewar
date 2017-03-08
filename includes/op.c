@@ -12,6 +12,13 @@
 
 #include "op.h"
 
+/*
+** [0] Chaîne de caratère correspondant au nom de l'op
+** [1] int correspondant aux nombres d'arguments
+** [2] tableau d'int permettant d'avoir l'information de chaque type d'argument
+** 
+*/
+
 t_op    op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},

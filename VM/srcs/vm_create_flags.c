@@ -12,6 +12,11 @@
 
 #include "corewar.h"
 
+/*
+** Options a voir suivant les situations et les besoins
+** Actuellement Flag V utilise pour afficher plus d'informations
+*/
+
 void		vm_add_flag(char *line, int *flag)
 {
 	int		i;
@@ -21,13 +26,13 @@ void		vm_add_flag(char *line, int *flag)
 	while (line[i])
 	{
 		cp = *flag;
-		('d' == line[i]) ? (*flag |= 1) : 0;
-		('n' == line[i]) ? (*flag |= 1 << 1) : 0;
-		('s' == line[i]) ? (*flag |= 1 << 2) : 0;
-		('v' == line[i]) ? (*flag |= 1 << 3) : 0;
-		('f' == line[i]) ? (*flag |= 1 << 4) : 0;
-		('g' == line[i]) ? (*flag |= 1 << 5) : 0;
-		('h' == line[i]) ? (*flag |= 1 << 6) : 0;
+		('v' == line[i]) ? (*flag |= FLAG_V) : 0;
+		('b' == line[i]) ? (*flag |= FLAG_B) : 0;
+		('n' == line[i]) ? (*flag |= FLAG_N) : 0;
+		('m' == line[i]) ? (*flag |= FLAG_M) : 0;
+		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
+		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
+		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
 		if (cp == *flag)
 			exit (ft_int_error("Option invalide ou champion invalide"));
 		++i;
@@ -53,5 +58,5 @@ int			vm_create_flags(char **argv, int argc, int *flag)
 			exit (ft_int_error("Option invalide ou champion invalide"));
 		++i;
 	}
-	return (0);
+	return (1);
 }

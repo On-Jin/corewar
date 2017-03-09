@@ -28,6 +28,8 @@ SRC = VM_main.c \
 		vm_init_champ.c \
 		vm_show_arene.c \
 		vm_ocp_tools.c \
+		vm_verif_macro.c \
+		vm_op_1_4.c \
 		ft_void_error.c \
 		ft_int_error.c \
 		ft_itoa_base_unsigned.c

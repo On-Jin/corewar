@@ -56,40 +56,133 @@ void		place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYERS + 1])
 		size += champ[i].champ_size;
 		i++;
 	}
-	i = 1;
-	while (i <= data->player_nbr)
+	i = 0;
+	while (i < data->player_nbr)
 	{
-		ft_printf("Try Place %i\n", i);
-		ft_memcpy((void *)&arene->arene[0/*Place du chmapion*/], (void *)&champ[i - 1], champ[i - 1].champ_size);
-		ft_printf("End Place %i\n", i);
+		ft_printf("Try Place %i : %s\n", i + 1, champ[i].champ_name);
+		ft_memcpy((void *)&arene->arene[(i) *
+					(MEM_SIZE / data->player_nbr)], (void *)&champ[i],
+					champ[i].champ_size);
+		ft_printf("End Place %i\n", i + 1);
 		if (champ || arene)
 			;
 		i++;
 	}
 }
 
-void		vm_innit_to_0(t_champ *champs, t_vm *arene, int champs_size)
+void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
+						t_lives *lives)
 {
-	ft_bzero((void *)champs, champs_size);
+	ft_bzero((void *)datas, MEM_SIZE);
+	ft_bzero((void *)champs, sizeof(t_champ) * (MAX_PLAYERS + 1));
+	ft_bzero((void *)lives, sizeof(t_lives));
 	ft_bzero((void *)arene->arene, MEM_SIZE);
+	datas->lives = lives;
+	datas->begin_champ = champs;
+	datas->arene = arene;
 }
+
+/*
+** a refaire avec les fonctions de creation de liste chainee?
+*/
+t_process	*vm_create_process(t_datas *datas)
+{
+	t_process	*process;
+	t_process	*tmp;
+
+	if (!(process = ft_memalloc(sizeof(t_process))))
+		exit (ft_int_error("Malloc invalide"));
+	tmp = datas->begin_process;
+	datas->begin_process = process;
+	process->next = tmp;
+	return (process);
+}
+
+void		vm_destroy_process(t_process *process, t_datas *datas)
+{
+	t_process	*process2;
+
+	process2 = datas->begin_process;
+	while (process2 && process2->next == process)
+		process2 = process2->next;
+	if (process2)
+	{
+		process2 = process->next;
+		ft_memdel((void **)&process);
+	}
+}
+
+void		vm_destroy_all_process(t_datas *datas)
+{
+	t_process	*process;
+	t_process	*tmp;
+
+	process = datas->begin_process;
+	while (process)
+	{
+		tmp = process;
+		process = process->next;
+		ft_memdel((void **)&tmp);
+	}
+}
+int			vm_init_process(t_datas *datas)
+{
+	t_process		*process;
+	int				i;
+
+	i = 0;
+	while (i < datas->player_nbr)
+	{
+		process = vm_create_process(datas);
+		process->reg[0] = datas->begin_champ[i].champ_nbr;
+		i++;
+	}
+	return (0);
+}
+
+t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
+{
+	t_process		*new;
+
+	new = vm_create_process(datas);
+	ft_memmove(new, process, sizeof(process->reg) + sizeof(process->in_stock));
+	new->PC = PC;
+	return (new);
+}
+
+int			vm_do_cycles(t_datas *datas)
+{
+	(void)datas;
+	/*
+	** creation d un tableau de fonction(vm_op_0-vm_op_16)
+	** creation d un tableau de fonction(vm_op_0_exec-vm_op_16_exec)
+	** creation des instructions d'execution des cycles
+	** creation des fonctions de verification des fin cycles
+	** creation de la boucle verifiant chaque parammetre a chaque cycle;
+	** creation de la fonction de fin du jeu;
+	*/
+	return (0);
+}
+
+/*
+** le numero du champion ne peut pas etre 0;
+*/
 
 int			main(int argc, char **argv)
 {
-	int			i;
-	t_champ		champs[MAX_PLAYERS + 1];
 	t_vm		arene;
+	t_lives		lives;
+	t_champ		champs[MAX_PLAYERS + 1];
 	t_datas		datas;
 
-	i = 0;
+	vm_verif_macro();
+	vm_innit_to_0(&datas, champs, &arene, &lives);
 	datas.player_nbr = vm_create_flags(argv, argc, &datas.flag);
-	vm_innit_to_0(champs, &arene, sizeof(champs));
 	datas.player_nbr = vm_init_champ(champs, argc, argv, &datas);
-//	ft_memcpy((void *)&arene, (void *)&champs[0], champs[0].champ_size);
 	place_champ(&datas, &arene, champs);
 	vm_show_arene(&arene);
-//	vm_pose_champ();
-//	vm_do_cycles();
+	vm_init_process(&datas);
+	vm_do_cycles(&datas);
 	exit(0);
 	return (0);
 }

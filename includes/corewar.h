@@ -25,7 +25,7 @@
 */
 
 # define OP_LIVE 1
-# define OP_LD 2 
+# define OP_LD 2
 # define OP_ST 3
 # define OP_ADD 4
 # define OP_SUB 5
@@ -40,6 +40,18 @@
 # define OP_LLDI 14
 # define OP_LFORK 15
 # define OP_AFF 16
+
+/*
+** Define flags
+*/
+
+# define FLAG_V 1
+# define FLAG_B (1 << 1)
+# define FLAG_N (1 << 2)
+# define FLAG_M (1 << 3)
+# define FLAG_K (1 << 4)
+# define FLAG_G (1 << 5)
+# define FLAG_H (1 << 6)
 
 /*
 ** MACROS
@@ -67,6 +79,7 @@ typedef struct		s_champ
 	char			champ_name[PROG_NAME_LENGTH + 1];
 	int				champ_nbr;
 	int				champ_size;
+	int				champ_position;
 }					t_champ;
 
 typedef struct		s_vm
@@ -76,8 +89,10 @@ typedef struct		s_vm
 
 typedef struct		s_process
 {
-	char			reg[REG_NUMBER * REG_SIZE];
-	char			PC[REG_SIZE];
+	int				reg[REG_NUMBER + 1];
+	int				in_stock[4];
+	struct s_process *next;
+	int				PC;
 	int				cycle;
 	char			carry;
 	char			live;
@@ -85,11 +100,21 @@ typedef struct		s_process
 	char			champion;
 }					t_process;
 
+typedef struct		s_lives
+{
+	long			total_lives;
+	long			cycle_lives;
+	long			champ_total_lives[CHAMP_MAX_SIZE];
+	long			champ_cycle_lives[CHAMP_MAX_SIZE];
+	int				last_live;
+}					t_lives;
+
 typedef struct		s_datas
 {
 	t_vm			*arene;
 	t_process		*begin_process;
 	t_champ			*begin_champ;
+	t_lives			*lives;
 	int				player_nbr;
 	int				nbr_cycles;
 	int				flag;
@@ -99,6 +124,7 @@ typedef struct		s_datas
  ** Prototypes
  */
 
+void				vm_verif_macro(void);
 int					vm_create_flags(char **argv, int argc, int *flag);
 void				vm_show_arene(t_vm *arene);
 int					vm_init_champ(t_champ *champs, int argc,

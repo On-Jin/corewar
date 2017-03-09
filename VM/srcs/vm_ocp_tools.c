@@ -45,7 +45,8 @@ int		vm_havent_ocp(int op_code)
 
 int		vm_have_ocp(int op_code)
 {
-	if (op_code != OP_LIVE && op_code != OP_FORK && op_code != OP_LFORK && op_code != OP_ZJMP)
+	if (op_code != OP_LIVE && op_code != OP_FORK && op_code != OP_LFORK
+		&& op_code != OP_ZJMP)
 		return (1);
 	return (0);
 }

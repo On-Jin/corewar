@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:18:36 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/08 16:57:39 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:07:33 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int		vm_ocp_size(char ocp, int nb_arg, int op_flag)
 	int i;
 
 	i = 0;
-	//ft_printf("%b | %i A %i\n", (char)ocp, i, nb_arg);
 	while (nb_arg)
 	{
 		ocp = ocp >> 2;
+		//ft_printf("%b == %b == %i || FLAGS %i\n", (char)ocp, ocp & 3 ,ocp & 3, op_flag);
 		if ((ocp & 3) == 1)
 			i += 1;
 		else if ((ocp & 3) == 2 && !op_flag)

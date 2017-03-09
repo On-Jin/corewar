@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/08 16:45:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:17:24 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,28 @@ static int		vm_size_champ(t_champ *champ, t_datas *datas)
 {
 	int size;
 	int save;
+	int cur;
 
 	size = 0;
-	while ((int)champ->champ[size] > 0 && (int)champ->champ[size] < 17)
+	cur = (int)champ->champ[size];
+	while (cur >= 1 && cur <= 16)
 	{
 		save = size;
-		if (vm_have_ocp((int)champ->champ[size]))
+		if (vm_have_ocp(cur))
 		{
-
 			size += vm_ocp_size(champ->champ[size + 1], 3,
-					op_tab[(int)champ->champ[size]].nbr_octet_dir);
+					op_tab[cur - 1].nbr_octet_dir);
 			size += 2;
 		}
 		else
 		{
-			size += vm_havent_ocp((int)champ->champ[size]);
+			size += vm_havent_ocp(cur);
 			size ++;
 		}
 		if (datas->flag & FLAG_V)
-			ft_printf("Size Op%i [%x] : %i\n", (int)champ->champ[save],
+			ft_printf("AFTER Size Op%i [%x] : %i\n", (int)champ->champ[save],
 				champ->champ[save + 1], size);
+		cur = (int)champ->champ[size];
 	}
 	return (size);
 }

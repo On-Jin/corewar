@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/08 16:57:48 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 17:47:30 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,18 @@ int			vm_do_cycles(t_datas *datas)
 
 /*
 ** le numero du champion ne peut pas etre 0;
+** Usage
 */
+
+void		vm_verif_arg(int argc)
+{
+	if (argc == 1)
+	{
+		//Usage
+	}
+	if (argc > 5)
+		exit (ft_int_error("Too many champ !"));
+}
 
 int			main(int argc, char **argv)
 {
@@ -176,6 +187,7 @@ int			main(int argc, char **argv)
 	t_datas		datas;
 
 	vm_verif_macro();
+	vm_verif_arg(argc);
 	vm_innit_to_0(&datas, champs, &arene, &lives);
 	datas.player_nbr = vm_create_flags(argv, argc, &datas.flag);
 	datas.player_nbr = vm_init_champ(champs, argc, argv, &datas);

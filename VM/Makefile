@@ -6,7 +6,7 @@
 #    By: gnebie <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/06 05:41:35 by gnebie            #+#    #+#              #
-#    Updated: 2017/03/08 15:24:22 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/09 16:10:46 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 .SUFFIXES :
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
+##############################-g
 SPE_FLAGS =
 DEBUG_FLAG = -fsanitize=address
 

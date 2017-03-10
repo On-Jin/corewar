@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 23:05:14 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/09 18:14:42 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 15:08:58 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,8 +287,8 @@ void			vm_op_2_create(t_datas *datas, t_process *process)
 		process->in_stock[0] = vm_recup_indirect_num(process, datas->arene, process->PC + 2);
 		tmp = 2;
 	}
-	else
-		ft_printf("fuck %i\n\n", datas->arene->arene[(process->PC + 1) % MEM_SIZE]);
+//	else
+//		ft_printf("fuck %i\n\n", datas->arene->arene[(process->PC + 1) % MEM_SIZE]);
 	process->in_stock[2] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
 	process->in_stock[1] = vm_recup_arena_num(1, datas->arene, (process->PC + 2 + tmp) % MEM_SIZE);
 }
@@ -471,8 +471,8 @@ void			vm_op_6_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-	if (process->in_stock[3] == 0)
-		{ft_printf("exec 6 jump de 0\n");}
+//	if (process->in_stock[3] == 0)
+//		{ft_printf("exec 6 jump de 0\n");}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
@@ -500,8 +500,8 @@ void			vm_op_7_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-	if (process->in_stock[3] == 0)
-		{ft_printf("exec 7 jump de 0\n"); process->in_stock[3] += 3;}
+//	if (process->in_stock[3] == 0)
+//		{ft_printf("exec 7 jump de 0\n"); process->in_stock[3] += 3;}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
@@ -529,8 +529,8 @@ void			vm_op_8_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-	if (process->in_stock[3] == 0)
-		{ft_printf("exec 8 jump de 0\n");}
+//	if (process->in_stock[3] == 0)
+//		{ft_printf("exec 8 jump de 0\n");}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 

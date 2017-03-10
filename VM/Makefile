@@ -6,7 +6,7 @@
 #    By: gnebie <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/06 05:41:35 by gnebie            #+#    #+#              #
-#    Updated: 2017/03/09 16:10:46 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/10 14:41:33 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ INC = ../includes/
 all : $(NAME)
 
 $(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ../includes/corewar.h
-	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME)
+	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME) -lncurses
 
 $(LIB) :
 	@(cd $(LIB_DIR) && MAKE)

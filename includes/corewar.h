@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/09 23:22:13 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 17:29:41 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # include "op.h"
 # include "libft.h"
-
+# include <ncurses.h>
 /*
 ** Define
 */
@@ -118,7 +118,9 @@ typedef struct		s_datas
 	int				player_nbr;
 	int				nbr_cycles;
 	int				start[4];
+	int				size_champ[4];
 	int				flag;
+	WINDOW			*win;
 }					t_datas;
 
 /*
@@ -127,7 +129,7 @@ typedef struct		s_datas
 
 void				vm_verif_macro(void);
 int					vm_create_flags(char **argv, int argc, int *flag);
-void				vm_show_arene(t_vm *arene);
+void				vm_show_arene(t_datas *datas, t_vm *arene);
 int					vm_init_champ(t_champ *champs, int argc,
 		char **argv, t_datas *datas);
 

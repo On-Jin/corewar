@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 02:19:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 21:37:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	tmp = datas->begin_process;
 	datas->begin_process = process;
 	process->next = tmp;
-	process->PC = datas->start[nbr_champ];
+	process->PC = datas->start[nbr_champ - 1];
 	process->champion = nbr_champ;
 	recup_op(datas, process);
 	return (process);
@@ -374,6 +374,7 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 			*/
 
 			turn_process(datas, exec, create);
+			vm_show_arene(datas, datas->arene);
 			cycle.cycle++;
 		}
 //		ft_printf("\033[H\033[2J");
@@ -394,7 +395,6 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 		{
 			ft_printf("total_live %d\n", datas->lives->total_lives);
 			ft_printf("total_cycle %d\n", cycle.total_cycle);
-			vm_show_arene(datas->arene);
 			exit(ft_int_error("Fin de cycle to die"));// temp
 		}
 	}
@@ -432,14 +432,20 @@ int			main(int argc, char **argv)
 	t_lives		lives;
 	t_champ		champs[MAX_PLAYERS + 1];
 	t_datas		datas;
+	int i;
 
+	i = 0;
 	vm_verif_macro();
 	vm_verif_arg(argc);
 	vm_innit_to_0(&datas, champs, &arene, &lives);
 	datas.player_nbr = vm_create_flags(argv, argc, &datas.flag);
 	datas.player_nbr = vm_init_champ(champs, argc, argv, &datas);
 	place_champ(&datas, &arene, champs);
-	vm_show_arene(&arene);
+	while (i < datas.player_nbr)
+	{
+		datas.size_champ[i] = champs[i].champ_size;
+		i++;
+	}
 	vm_init_process(&datas);
 	vm_op_create_exec(&datas);
 	exit(0);

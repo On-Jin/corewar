@@ -181,10 +181,13 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 }
 */
 
-int			turn_process(t_datas *datas)
+/*
+int			turn_process(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**create)(t_datas *, t_process *))
 {
 	t_process *pros;
 
+	(void)create;
+	(void)exec;
 	int	cur_ocp;
 	pros = datas->begin_process;
 	while (pros)
@@ -210,7 +213,34 @@ int			turn_process(t_datas *datas)
 			pros->PC = (pros->PC + 1) % MEM_SIZE;
 			recup_op(datas, pros);
 		}
-//		ft_printf("Size %i\n", pros->cycle);
+		pros = pros->next;
+	}
+	return (0);
+}
+*/
+
+int			turn_process(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**create)(t_datas *, t_process *))
+{
+	t_process *pros;
+	unsigned int	cur_ocp;
+
+	pros = datas->begin_process;
+	while (pros)
+	{
+		if (pros->cycle == 1)
+			exec[(int)pros->instruction](datas, pros);
+		if (pros->cycle == 0)
+		{
+			cur_ocp = datas->arene->arene[pros->PC];
+			if (17 <= cur_ocp)
+				cur_ocp = 0;
+		//	ft_printf("cur_ocp = %d\n", cur_ocp);
+			create[cur_ocp](datas, pros);
+		}
+		else
+			pros->cycle--;
+		if (pros->cycle < 0)
+			ft_printf("erreur procycle");
 		pros = pros->next;
 	}
 	return (0);
@@ -224,6 +254,51 @@ typedef struct		s_cycle
 	int				check;
 }					t_cycle;
 
+# define NBR_FONC 17
+
+int			vm_op_create_create(t_datas *datas, int (**exec)(t_datas *, t_process *));
+int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**create)(t_datas *, t_process *));
+int			vm_op_0_exec(t_datas *, t_process *);
+int			vm_op_1_exec(t_datas *, t_process *);
+int			vm_op_2_exec(t_datas *, t_process *);
+int			vm_op_3_exec(t_datas *, t_process *);
+int			vm_op_4_exec(t_datas *, t_process *);
+int			vm_op_5_exec(t_datas *, t_process *);
+int			vm_op_6_exec(t_datas *, t_process *);
+int			vm_op_7_exec(t_datas *, t_process *);
+int			vm_op_8_exec(t_datas *, t_process *);
+int			vm_op_9_exec(t_datas *, t_process *);
+int			vm_op_10_exec(t_datas *, t_process *);
+int			vm_op_11_exec(t_datas *, t_process *);
+int			vm_op_12_exec(t_datas *, t_process *);
+int			vm_op_13_exec(t_datas *, t_process *);
+int			vm_op_14_exec(t_datas *, t_process *);
+int			vm_op_15_exec(t_datas *, t_process *);
+int			vm_op_16_exec(t_datas *, t_process *);
+int			vm_op_0_create(t_datas *, t_process *);
+int			vm_op_1_create(t_datas *, t_process *);
+int			vm_op_2_create(t_datas *, t_process *);
+int			vm_op_3_create(t_datas *, t_process *);
+int			vm_op_4_create(t_datas *, t_process *);
+int			vm_op_5_create(t_datas *, t_process *);
+int			vm_op_6_create(t_datas *, t_process *);
+int			vm_op_7_create(t_datas *, t_process *);
+int			vm_op_8_create(t_datas *, t_process *);
+int			vm_op_9_create(t_datas *, t_process *);
+int			vm_op_10_create(t_datas *, t_process *);
+int			vm_op_11_create(t_datas *, t_process *);
+int			vm_op_12_create(t_datas *, t_process *);
+int			vm_op_13_create(t_datas *, t_process *);
+int			vm_op_14_create(t_datas *, t_process *);
+int			vm_op_15_create(t_datas *, t_process *);
+int			vm_op_16_create(t_datas *, t_process *);
+
+
+
+
+
+
+
 void		vm_init_cycle(t_cycle *cycle)
 {
 	cycle->cycle = 0;
@@ -232,9 +307,61 @@ void		vm_init_cycle(t_cycle *cycle)
 	cycle->check = 0;
 }
 
-int			vm_do_cycles(t_datas *datas)
+int			vm_op_create_exec(t_datas *datas)
 {
-	t_cycle cycle;
+	int		(*exec[NBR_FONC])(t_datas *, t_process *);
+
+	if (NBR_FONC != 17)
+		exit (ft_int_error("Mauvais nombre de fonctions"));
+	exec[0] = vm_op_0_exec;
+	exec[1] = vm_op_1_exec;
+	exec[2] = vm_op_2_exec;
+	exec[3] = vm_op_3_exec;
+	exec[4] = vm_op_4_exec;
+	exec[5] = vm_op_5_exec;
+	exec[6] = vm_op_6_exec;
+	exec[7] = vm_op_7_exec;
+	exec[8] = vm_op_8_exec;
+	exec[9] = vm_op_9_exec;
+	exec[10] = vm_op_10_exec;
+	exec[11] = vm_op_11_exec;
+	exec[12] = vm_op_12_exec;
+	exec[13] = vm_op_13_exec;
+	exec[14] = vm_op_14_exec;
+	exec[15] = vm_op_15_exec;
+	exec[16] = vm_op_16_exec;
+	return (vm_op_create_create(datas, exec));
+}
+
+int			vm_op_create_create(t_datas *datas, int (**exec)(t_datas *, t_process *))
+{
+	int		(*create[NBR_FONC])(t_datas *, t_process *);
+
+	if (NBR_FONC != 17)
+		exit (ft_int_error("Mauvais nombre de fonctions"));
+	create[0] = vm_op_0_create;
+	create[1] = vm_op_1_create;
+	create[2] = vm_op_2_create;
+	create[3] = vm_op_3_create;
+	create[4] = vm_op_4_create;
+	create[5] = vm_op_5_create;
+	create[6] = vm_op_6_create;
+	create[7] = vm_op_7_create;
+	create[8] = vm_op_8_create;
+	create[9] = vm_op_9_create;
+	create[10] = vm_op_10_create;
+	create[11] = vm_op_11_create;
+	create[12] = vm_op_12_create;
+	create[13] = vm_op_13_create;
+	create[14] = vm_op_14_create;
+	create[15] = vm_op_15_create;
+	create[16] = vm_op_16_create;
+	return (vm_do_cycles(datas, exec, create));
+}
+
+int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**create)(t_datas *, t_process *))
+{
+	t_cycle	cycle;
 
 	vm_init_cycle(&cycle);
 	while (datas->begin_process)
@@ -245,15 +372,17 @@ int			vm_do_cycles(t_datas *datas)
 			/*
 			** instructions de cycle...
 			*/
-			turn_process(datas);
+
+			turn_process(datas, exec, create);
 			cycle.cycle++;
 		}
-		ft_printf("\033[H\033[2J");
-		vm_show_arene(datas->arene);
-		usleep(40000);
+//		ft_printf("\033[H\033[2J");
+//		vm_show_arene(datas->arene);
+//		usleep(40000);
 		cycle.total_cycle += cycle.cycle;
 		if (datas->lives->cycle_lives >= NBR_LIVE || cycle.check == MAX_CHECKS)
 		{
+			ft_printf("cycle_live = %i\n", datas->lives->cycle_lives);
 			ft_printf("cycle_to_die = %i\n", cycle.cycle_to_die);
 			cycle.cycle_to_die -= CYCLE_DELTA;
 			cycle.check = 0;
@@ -263,7 +392,9 @@ int			vm_do_cycles(t_datas *datas)
 		datas->lives->cycle_lives = 0;
 		if (cycle.cycle_to_die <= 0)
 		{
+			ft_printf("total_live %d\n", datas->lives->total_lives);
 			ft_printf("total_cycle %d\n", cycle.total_cycle);
+			vm_show_arene(datas->arene);
 			exit(ft_int_error("Fin de cycle to die"));// temp
 		}
 	}
@@ -281,6 +412,8 @@ int			vm_do_cycles(t_datas *datas)
 
 /*
 ** le numero du champion ne peut pas etre 0;
+** faire une fonction Usage
+** faire une condition dans init_champ pour renvoyer erreur si champ > MAX_PLAYERS
 */
 
 void		vm_verif_arg(int argc)
@@ -308,7 +441,7 @@ int			main(int argc, char **argv)
 	place_champ(&datas, &arene, champs);
 	vm_show_arene(&arene);
 	vm_init_process(&datas);
-	vm_do_cycles(&datas);
+	vm_op_create_exec(&datas);
 	exit(0);
 	return (0);
 }

@@ -123,19 +123,18 @@ int			recup_op(t_datas *datas, t_process *pros)
 	int cur_pros;
 	static int i = 0;
 
-
 	cur_pros = (int)datas->arene->arene[pros->PC] - 1;
-	if (cur_pros + 1 >= 1 && cur_pros + 1 <= 16)
+	if (cur_pros + 1 >= 0 && cur_pros + 1 <= 16)
 	{
 		if (cur_pros == -1)
 			cur_pros = 16;
 		pros->instruction = op_tab[cur_pros].op_code;
 		pros->cycle = op_tab[cur_pros].cycle;
-		ft_printf("Start %s %i | Size PC : %i, cur_pros = %i\n", op_tab[cur_pros].name, i, pros->PC, cur_pros + 1);
+	//	ft_printf("Start %s %i | Size PC : %i, cur_pros = %i\n", op_tab[cur_pros].name, i, pros->PC, cur_pros + 1);
 	}
-	else
+/*	else
 		ft_printf("_");
-	i++;
+*/	i++;
 	return (0);
 }
 
@@ -176,7 +175,7 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 	t_process		*new;
 
 	new = vm_create_process(datas);
-	ft_memmove(new, process, sizeof(process->reg) + sizeof(process->in_stock));
+	ft_memmove(new, process, sizeof(process->reg));
 	new->PC = PC;
 	return (new);
 }
@@ -190,9 +189,9 @@ int			turn_process(t_datas *datas)
 	pros = datas->begin_process;
 	while (pros)
 	{
-		cur_ocp = pros->PC + 1;
+		cur_ocp = (pros->PC + 1) % MEM_SIZE;
 		pros->cycle--;
-		if (pros->cycle <= 0)
+		if (pros->cycle == 0)
 		{
 			//OCP, NB_ARG, NBR_OCTET_DIR
 			if (datas->arene->arene[pros->PC] > 0 && datas->arene->arene[pros->PC] < 17)
@@ -204,9 +203,14 @@ int			turn_process(t_datas *datas)
 				recup_op(datas, pros);
 			}
 			else
-				pros->PC += (pros->PC + 1) % MEM_SIZE;
+				pros->PC = (pros->PC + 1) % MEM_SIZE;
 		}
-		ft_printf("Size %i\n", pros->cycle);
+		else if (pros->cycle < 0)
+		{
+			pros->PC = (pros->PC + 1) % MEM_SIZE;
+			recup_op(datas, pros);
+		}
+//		ft_printf("Size %i\n", pros->cycle);
 		pros = pros->next;
 	}
 	return (0);
@@ -214,33 +218,56 @@ int			turn_process(t_datas *datas)
 
 typedef struct		s_cycle
 {
-	int			cycle;
-	int			total_cycle;
-	int			cycle_to_die;
-	int			check;
+	int				cycle;
+	int				total_cycle;
+	int				cycle_to_die;
+	int				check;
 }					t_cycle;
+
+void		vm_init_cycle(t_cycle *cycle)
+{
+	cycle->cycle = 0;
+	cycle->total_cycle = 0;
+	cycle->cycle_to_die = CYCLE_TO_DIE;
+	cycle->check = 0;
+}
 
 int			vm_do_cycles(t_datas *datas)
 {
-	int cycle;
-	
-	cycle = 0;
-	while (datas->nbr_cycles)
+	t_cycle cycle;
+
+	vm_init_cycle(&cycle);
+	while (datas->begin_process)
 	{
-		if (cycle == datas->nbr_cycles)
+		cycle.cycle = 0;
+		while (cycle.cycle < cycle.cycle_to_die)
 		{
-			datas->nbr_cycles -= CYCLE_DELTA;
-			if (datas->nbr_cycles <= 0)
-				exit(0);// temp
-			cycle = datas->nbr_cycles;
-			cycle = 0;
+			/*
+			** instructions de cycle...
+			*/
+			turn_process(datas);
+			cycle.cycle++;
 		}
-		ft_printf("%i\n", cycle);
-		if (cycle % 10 == 0)
-			ft_printf("\n");
-		turn_process(datas);
-		cycle++;
+		ft_printf("\033[H\033[2J");
+		vm_show_arene(datas->arene);
+		usleep(40000);
+		cycle.total_cycle += cycle.cycle;
+		if (datas->lives->cycle_lives >= NBR_LIVE || cycle.check == MAX_CHECKS)
+		{
+			ft_printf("cycle_to_die = %i\n", cycle.cycle_to_die);
+			cycle.cycle_to_die -= CYCLE_DELTA;
+			cycle.check = 0;
+		}
+		else
+			cycle.check++;
+		datas->lives->cycle_lives = 0;
+		if (cycle.cycle_to_die <= 0)
+		{
+			ft_printf("total_cycle %d\n", cycle.total_cycle);
+			exit(ft_int_error("Fin de cycle to die"));// temp
+		}
 	}
+	ft_printf("%d", datas->lives->last_live);
 	/*
 	** creation d un tableau de fonction(vm_op_0-vm_op_16)
 	** creation d un tableau de fonction(vm_op_0_exec-vm_op_16_exec)

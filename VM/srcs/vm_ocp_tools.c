@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:18:36 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/09 16:07:33 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 23:11:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		vm_ocp_size(char ocp, int nb_arg, int op_flag)
 		else if ((ocp & 3) == 2 && !op_flag)
 			i += DIR_SIZE;
 		else if ((ocp & 3) == 2 && op_flag)
-			i+= IND_SIZE;
+			i += IND_SIZE;
 		else if ((ocp & 3) == 3)
 			i += IND_SIZE;
 		nb_arg--;

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/08 15:23:54 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 23:22:13 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 
 typedef struct		s_op
 {
-	char			*str_op_code;
+	char			*name;
 	int				nb_arg;
 	int				tab_arg[7];
 	int				op_code;
@@ -91,7 +91,7 @@ typedef struct		s_process
 {
 	int				reg[REG_NUMBER + 1];
 	int				in_stock[4];
-	struct s_process *next;
+	struct			s_process *next;
 	int				PC;
 	int				cycle;
 	char			carry;
@@ -117,6 +117,7 @@ typedef struct		s_datas
 	t_lives			*lives;
 	int				player_nbr;
 	int				nbr_cycles;
+	int				start[4];
 	int				flag;
 }					t_datas;
 

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 02:20:12 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/09 02:20:13 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/09 18:46:05 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void		vm_verif_macro(void)
 		MAX_ARGS_NUMBER > 8 || MAX_PLAYERS > 8 ||
 		MAX_ARGS_NUMBER < 2 || MAX_PLAYERS < 2 ||
 		MEM_SIZE < (MAX_PLAYERS * CHAMP_MAX_SIZE) || MEM_SIZE < 0x100 ||
-		MEM_SIZE > 0x10000 || CYCE_TO_DIE < 0x100 || CYCE_TO_DIE > 0x10000 ||
-		CYCLE_DELTA < 10 || CYCLE_DELTA > (CYCE_TO_DIE / 2) || NBR_LIVE < 1 ||
-		NBR_LIVE > CYCE_TO_DIE || MAX_CHECKS < 1 ||
+		MEM_SIZE > 0x10000 || CYCLE_TO_DIE < 0x100 || CYCLE_TO_DIE > 0x10000 ||
+		CYCLE_DELTA < 10 || CYCLE_DELTA > (CYCLE_TO_DIE / 2) || NBR_LIVE < 1 ||
+		NBR_LIVE > CYCLE_TO_DIE || MAX_CHECKS < 1 ||
 		MAX_CHECKS > CYCLE_DELTA || T_REG != 1 || T_DIR != 2 || T_IND != 4 ||
 		T_LAB != 8 || PROG_NAME_LENGTH < 16 || PROG_NAME_LENGTH > 0x1000 ||
 		COMMENT_LENGTH < 0x80 || COMMENT_LENGTH > 0x1000 ||

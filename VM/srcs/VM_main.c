@@ -6,12 +6,12 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/09 17:47:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 02:19:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+#include "global.h"
 /*
 ** etape 1 recuperer et verifier les champions
 ** etape 2 initialisation de la machine virtuelle
@@ -63,6 +63,7 @@ void		place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYERS + 1])
 		ft_memcpy((void *)&arene->arene[(i) *
 					(MEM_SIZE / data->player_nbr)], (void *)&champ[i],
 					champ[i].champ_size);
+		data->start[i] = i * (MEM_SIZE / data->player_nbr);
 		ft_printf("End Place %i\n", i + 1);
 		if (champ || arene)
 			;
@@ -80,24 +81,14 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
 	datas->lives = lives;
 	datas->begin_champ = champs;
 	datas->arene = arene;
+	datas->nbr_cycles = CYCLE_TO_DIE;
 }
 
 /*
 ** a refaire avec les fonctions de creation de liste chainee?
 */
-t_process	*vm_create_process(t_datas *datas)
-{
-	t_process	*process;
-	t_process	*tmp;
 
-	if (!(process = ft_memalloc(sizeof(t_process))))
-		exit (ft_int_error("Malloc invalide"));
-	tmp = datas->begin_process;
-	datas->begin_process = process;
-	process->next = tmp;
-	return (process);
-}
-
+/*
 void		vm_destroy_process(t_process *process, t_datas *datas)
 {
 	t_process	*process2;
@@ -125,6 +116,45 @@ void		vm_destroy_all_process(t_datas *datas)
 		ft_memdel((void **)&tmp);
 	}
 }
+*/
+
+int			recup_op(t_datas *datas, t_process *pros)
+{
+	int cur_pros;
+	static int i = 0;
+
+
+	cur_pros = (int)datas->arene->arene[pros->PC] - 1;
+	if (cur_pros + 1 >= 1 && cur_pros + 1 <= 16)
+	{
+		if (cur_pros == -1)
+			cur_pros = 16;
+		pros->instruction = op_tab[cur_pros].op_code;
+		pros->cycle = op_tab[cur_pros].cycle;
+		ft_printf("Start %s %i | Size PC : %i, cur_pros = %i\n", op_tab[cur_pros].name, i, pros->PC, cur_pros + 1);
+	}
+	else
+		ft_printf("_");
+	i++;
+	return (0);
+}
+
+t_process	*vm_create_process(t_datas *datas, int nbr_champ)
+{
+	t_process	*process;
+	t_process	*tmp;
+
+	if (!(process = ft_memalloc(sizeof(t_process))))
+		exit (ft_int_error("Malloc invalide"));
+	tmp = datas->begin_process;
+	datas->begin_process = process;
+	process->next = tmp;
+	process->PC = datas->start[nbr_champ];
+	process->champion = nbr_champ;
+	recup_op(datas, process);
+	return (process);
+}
+
 int			vm_init_process(t_datas *datas)
 {
 	t_process		*process;
@@ -133,13 +163,14 @@ int			vm_init_process(t_datas *datas)
 	i = 0;
 	while (i < datas->player_nbr)
 	{
-		process = vm_create_process(datas);
+		process = vm_create_process(datas, i + 1);
 		process->reg[0] = datas->begin_champ[i].champ_nbr;
+		process->carry = 1;
 		i++;
 	}
 	return (0);
 }
-
+/*
 t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 {
 	t_process		*new;
@@ -149,10 +180,67 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 	new->PC = PC;
 	return (new);
 }
+*/
+
+int			turn_process(t_datas *datas)
+{
+	t_process *pros;
+
+	int	cur_ocp;
+	pros = datas->begin_process;
+	while (pros)
+	{
+		cur_ocp = pros->PC + 1;
+		pros->cycle--;
+		if (pros->cycle <= 0)
+		{
+			//OCP, NB_ARG, NBR_OCTET_DIR
+			if (datas->arene->arene[pros->PC] > 0 && datas->arene->arene[pros->PC] < 17)
+			{
+				if (vm_have_ocp(datas->arene->arene[pros->PC]))
+					pros->PC = (pros->PC + 2 + vm_ocp_size(datas->arene->arene[cur_ocp], 3, op_tab[(int)datas->arene->arene[pros->PC] - 1].nbr_octet_dir)) % MEM_SIZE;
+				else
+					pros->PC = (pros->PC + 1 + vm_havent_ocp(datas->arene->arene[pros->PC])) % MEM_SIZE;
+				recup_op(datas, pros);
+			}
+			else
+				pros->PC += (pros->PC + 1) % MEM_SIZE;
+		}
+		ft_printf("Size %i\n", pros->cycle);
+		pros = pros->next;
+	}
+	return (0);
+}
+
+typedef struct		s_cycle
+{
+	int			cycle;
+	int			total_cycle;
+	int			cycle_to_die;
+	int			check;
+}					t_cycle;
 
 int			vm_do_cycles(t_datas *datas)
 {
-	(void)datas;
+	int cycle;
+	
+	cycle = 0;
+	while (datas->nbr_cycles)
+	{
+		if (cycle == datas->nbr_cycles)
+		{
+			datas->nbr_cycles -= CYCLE_DELTA;
+			if (datas->nbr_cycles <= 0)
+				exit(0);// temp
+			cycle = datas->nbr_cycles;
+			cycle = 0;
+		}
+		ft_printf("%i\n", cycle);
+		if (cycle % 10 == 0)
+			ft_printf("\n");
+		turn_process(datas);
+		cycle++;
+	}
 	/*
 	** creation d un tableau de fonction(vm_op_0-vm_op_16)
 	** creation d un tableau de fonction(vm_op_0_exec-vm_op_16_exec)
@@ -166,7 +254,6 @@ int			vm_do_cycles(t_datas *datas)
 
 /*
 ** le numero du champion ne peut pas etre 0;
-** Usage
 */
 
 void		vm_verif_arg(int argc)

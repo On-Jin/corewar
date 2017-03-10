@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:33:08 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/06 06:33:09 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/09 18:42:17 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 
 # define REG_NUMBER				16
 
-# define CYCE_TO_DIE			1536
+# define CYCLE_TO_DIE			1536
 # define CYCLE_DELTA			50
 # define NBR_LIVE				21
 # define MAX_CHECKS				10

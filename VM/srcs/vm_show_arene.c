@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/07 09:42:02 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/09 18:58:19 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void		vm_show_arene(t_vm *arene)
 			vm_show_arene_separ_line();
 	}
 	vm_show_arene_end(j);
+	ft_printf("\n");
 }

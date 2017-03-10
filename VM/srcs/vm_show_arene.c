@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 21:37:03 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 23:25:43 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,13 +191,6 @@ void        vm_show_arene(t_datas *datas, t_vm *arene)
 	char	*line;
 	init_draw(&d);
 
-	initscr();
-	start_color();
-	init_pair(0, COLOR_RED, COLOR_BLACK);
-	init_pair(1, COLOR_BLUE, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
-	noecho();
 	datas->win = create_newwin(64 + 2, 64 * 3 + 4, 0, 0);
 	line = arene->arene;
 	size_draw_champ(datas, &d);
@@ -215,6 +208,5 @@ void        vm_show_arene(t_datas *datas, t_vm *arene)
 			waddstr(datas->win, "\n| ");
 	}
 	destroy_win(datas->win);
-	usleep(10000);
-	endwin();
+	usleep(19000);
 }

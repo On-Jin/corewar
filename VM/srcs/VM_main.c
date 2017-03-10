@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 21:37:00 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/10 23:19:23 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ void		place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYERS + 1])
 	i = 0;
 	while (i < data->player_nbr)
 	{
-		ft_printf("Try Place %i : %s\n", i + 1, champ[i].champ_name);
 		ft_memcpy((void *)&arene->arene[(i) *
 					(MEM_SIZE / data->player_nbr)], (void *)&champ[i],
 					champ[i].champ_size);
 		data->start[i] = i * (MEM_SIZE / data->player_nbr);
-		ft_printf("End Place %i\n", i + 1);
 		if (champ || arene)
 			;
 		i++;
@@ -383,8 +381,8 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 		cycle.total_cycle += cycle.cycle;
 		if (datas->lives->cycle_lives >= NBR_LIVE || cycle.check == MAX_CHECKS)
 		{
-			ft_printf("cycle_live = %i\n", datas->lives->cycle_lives);
-			ft_printf("cycle_to_die = %i\n", cycle.cycle_to_die);
+		//	ft_printf("cycle_live = %i\n", datas->lives->cycle_lives);
+		//	ft_printf("cycle_to_die = %i\n", cycle.cycle_to_die);
 			cycle.cycle_to_die -= CYCLE_DELTA;
 			cycle.check = 0;
 		}
@@ -393,12 +391,13 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 		datas->lives->cycle_lives = 0;
 		if (cycle.cycle_to_die <= 0)
 		{
+			endwin();
 			ft_printf("total_live %d\n", datas->lives->total_lives);
 			ft_printf("total_cycle %d\n", cycle.total_cycle);
 			exit(ft_int_error("Fin de cycle to die"));// temp
 		}
 	}
-	ft_printf("%d", datas->lives->last_live);
+	//ft_printf("%d", datas->lives->last_live);
 	/*
 	** creation d un tableau de fonction(vm_op_0-vm_op_16)
 	** creation d un tableau de fonction(vm_op_0_exec-vm_op_16_exec)
@@ -425,7 +424,15 @@ void		vm_verif_arg(int argc)
 	if (argc > 5)
 		exit (ft_int_error("Too many champ !"));
 }
-
+/*
+WINDOW *create_newwin(int height, int width, int starty, int startx)
+{
+	WINDOW *local_win;
+	local_win = newwin(height, width, starty, startx);
+	wrefresh(local_win);
+	return local_win;
+}
+*/
 int			main(int argc, char **argv)
 {
 	t_vm		arene;
@@ -434,6 +441,14 @@ int			main(int argc, char **argv)
 	t_datas		datas;
 	int i;
 
+	initscr();
+	start_color();
+	init_pair(0, COLOR_RED, COLOR_BLACK);
+	init_pair(1, COLOR_BLUE, COLOR_BLACK);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
+//	datas.win = create_newwin(64 + 2, 64 * 3 + 4, 0, 0);
+	noecho();
 	i = 0;
 	vm_verif_macro();
 	vm_verif_arg(argc);
@@ -448,6 +463,7 @@ int			main(int argc, char **argv)
 	}
 	vm_init_process(&datas);
 	vm_op_create_exec(&datas);
+	endwin();
 	exit(0);
 	return (0);
 }

@@ -69,15 +69,44 @@ t_bool		get_next_instruct(char **output)
 
 }
 
+int		get_argtype(char *str, int conf)
+{
+	int type = T_UNK;
+	if (*str == DIRECT_CHAR && ft_strchr(LABEL_CHARS, str[1]))
+		type = DIR_CODE;
+	if (*str == 'r') // registre
+		type = REG_CODE;
+	if (*str == '-' || ft_isdigit(*str)) // indirect
+		type = IND_CODE;
+	if (*str == DIRECT_CHAR && str[1] == LABEL_CHAR)
+		type = T_LAB;
+	if (type == T_UNK)
+		exit("Error : Unknow argtype.");
+	if (type & conf == 0)
+		exit("Error : argtype");
+	return type;
+	return (0);
+}
+
+
+t_instructs *newinstruct()
+{
+	return (ft_memalloc(sizeof(t_instructs)));
+}
 
 t_bool compiler_compile_line(char *line, int fdout)
 {
 	char *str;
 	char *str2;
 	int i;
+	int y;
 	char *opcode;
+	char **splited;
 	t_op opecode_config;
+	t_instructs *inst;
 
+	if (!(inst = newinstruct()))
+		exit("Malloc error");
 	str = ft_strtrim(line);
 	i = 0;
 	while (ft_strchr(OPCODE_CHARS, str[i]))
@@ -85,10 +114,37 @@ t_bool compiler_compile_line(char *line, int fdout)
 	opcode = ft_strsub(str, 0, i - 1);
 	str2 = ft_strtrim(str + i);
 	opecode_config = get_config(opcode);
-	opecode_config[1] // Contient  le nombre d'arguments
-	opecode_config[2][0] // Contient l'information sur le type d'argument
+	inst->opcode = opecode_config[3];
+	inst->arg_nbrs = opecode_config[1];
+	y = 0;
+	splited = ft_strsplit(str2, SEPARATOR_CHAR); /////// COUPER ICI
+	while (y < opecode_config[1])
+	{
+		// opcode
+		inst->args[y][0] = get_argtype(splited[y], opecode_config[2][y]);
+		//  argcode
+		inst->argcode = inst->argcode << 2;
+		if (inst->opcode == DIR_CODE)
+			inst->argcode = inst->argcode | 2;
+		if (inst->opcode == REG_CODE)
+			inst->argcode = inst->argcode | 1;
+		if (inst->opcode == IND_CODE || inst->opcode == T_LAB)
+			inst->argcode = inst->argcode | 3;
+		// Extract arg value
+
+		if (inst->opcode == T_LAB)
+			inst->args_labels[y] = extract_label_name( == coder ici == );
+		if (inst->opcode == DIR_CODE)
+			inst->args_labels[y] = extract_direct( == coder ici == );
+		if (inst->opcode == REG_CODE)
+			inst->args_labels[y] = extract_registre( == coder ici == );
+		if (inst->opcode == IND_CODE)
+			inst->args_labels[y] = extract_indirect( == coder ici == );
+	}
+	if (splited[y] != 0)
+		exit("Too many arguments.");
+	
 	(line - str) + i
-	if ()
 	free(str);
 }
 
@@ -105,6 +161,7 @@ t_labels	*compiler_compile(int fdin, int fdout)
 		lineclr = ft_strtrim(line);
 		free(line);
 		endlabel = compiler_compile_get_label(lineclr);
+		inst->label_name = ft_strsub(endlabel, 0, endlabel);
 		line = (endlabel != -1) ? lineclr + endlabel : lineclr;
 		compiler_compile_line(char *line, fdout)
 

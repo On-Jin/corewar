@@ -55,6 +55,7 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
+# define T_UNK					0
 # define T_REG					1
 # define T_DIR					2
 # define T_IND					4

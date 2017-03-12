@@ -6,12 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 23:05:14 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 15:08:58 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/09 18:14:42 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC);
 #define A_CHANGER 1
 /*
 ** Ce dont j'ai besoin pour realiser un op
@@ -155,10 +156,15 @@ int			*vm_recup_all_process(t_process *process, t_vm *arene, int flag)
 				process->in_stock[i] = vm_recup_process_reg(process,arene, adress);
 			adress += 1;
 		}
+		else if ((tmp & 0xff) == 0b10 && flag & 0b10)
+		{
+			process->in_stock[i] = vm_recup_arena_num(2, arene, adress);
+			adress += 2;
+		}
 		else if ((tmp & 0xff) == 0b10)
 		{
 			process->in_stock[i] = vm_recup_arena_num(4, arene, adress);
-			adress += 4;//T_DIR;
+			adress += 4;
 		}
 		else if ((tmp & 0xff) == 0b11)
 		{
@@ -287,9 +293,9 @@ void			vm_op_2_create(t_datas *datas, t_process *process)
 		process->in_stock[0] = vm_recup_indirect_num(process, datas->arene, process->PC + 2);
 		tmp = 2;
 	}
-//	else
-//		ft_printf("fuck %i\n\n", datas->arene->arene[(process->PC + 1) % MEM_SIZE]);
-	process->in_stock[2] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
+/*	else
+		ft_printf("fuck %i\n\n", datas->arene->arene[(process->PC + 1) % MEM_SIZE]);
+*/	process->in_stock[2] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
 	process->in_stock[1] = vm_recup_arena_num(1, datas->arene, (process->PC + 2 + tmp) % MEM_SIZE);
 }
 
@@ -471,8 +477,8 @@ void			vm_op_6_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-//	if (process->in_stock[3] == 0)
-//		{ft_printf("exec 6 jump de 0\n");}
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 6 jump de 0\n");*/}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
@@ -500,8 +506,8 @@ void			vm_op_7_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-//	if (process->in_stock[3] == 0)
-//		{ft_printf("exec 7 jump de 0\n"); process->in_stock[3] += 3;}
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 7 jump de 0\n");*/ process->in_stock[3] += 3;}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
@@ -529,8 +535,8 @@ void			vm_op_8_exec(t_datas *datas, t_process *process)
 	if (process->in_stock[3] != -1)
 		process->carry = 1;
 	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-//	if (process->in_stock[3] == 0)
-//		{ft_printf("exec 8 jump de 0\n");}
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 8 jump de 0\n");*/}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
@@ -554,6 +560,8 @@ void			vm_op_9_exec(t_datas *datas, t_process *process)
 	*/
 	(void)datas;
 	process->carry = 0;
+	if (!process->in_stock[0])
+		process->in_stock[0]++;
 	process->PC = (process->PC + process->in_stock[0]) % MEM_SIZE;
 }
 
@@ -562,6 +570,12 @@ void			vm_op_10_create(t_datas *datas, t_process *process)
 		(void)datas;
 	process->cycle = 1;
 	process->instruction = 10;
+	if (!(vm_verif_i_code(datas->arene->arene[process->PC + 1 % MEM_SIZE], 7, 3, 1)))
+	{
+		process->in_stock[3] = -1;
+		return ;
+	}
+	vm_recup_all_process(process, datas->arene, (1 << 8) | (1 << 17) | (1 << 25));
 	/*
 	**recuperation des information
 	**traitement d'informations invalides?
@@ -574,21 +588,30 @@ void			vm_op_10_exec(t_datas *datas, t_process *process)
 	/*
 	** executions
 	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	if (process->in_stock[3] == -1 || !process->in_stock[2])
+	{
+		process->in_stock[3] = 0;
+		return ;
+	}
+	process->reg[process->in_stock[2]] = ((process->in_stock[0] + process->in_stock[1]) % IDX_MOD);
+	(void)datas;
+//	process->carry = 0;
+	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 10 jump de 0\n");*/}
+	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
 void			vm_op_11_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 1;
+	process->cycle = 25;
 	process->instruction = 11;
-	/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
+	if (!(vm_verif_i_code(datas->arene->arene[process->PC + 1 % MEM_SIZE], 1, 7, 3)))
+	{
+		process->in_stock[3] = -1;
+		return ;
+	}
+	vm_recup_all_process(process, datas->arene, 1 << 9 | 1 << 17);
 }
 
 void			vm_op_11_exec(t_datas *datas, t_process *process)
@@ -596,60 +619,72 @@ void			vm_op_11_exec(t_datas *datas, t_process *process)
 	/*
 	** executions
 	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	if (process->in_stock[3] == -1)
+		process->in_stock[3] = 0;
+	else
+	{
+		ft_printf("hello adresse dans l'arene %i valeur de l'adresse %i, valeur de remplacement %i\n",(process->PC + (process->in_stock[1] + process->in_stock[2]) % IDX_MOD) % MEM_SIZE, *(int *)(&datas->arene->arene[(process->PC + (process->in_stock[1] + process->in_stock[2]) % IDX_MOD) % MEM_SIZE]), process->in_stock[0]);
+		*(int *)(&datas->arene->arene[(process->PC + (process->in_stock[1] + process->in_stock[2]) % IDX_MOD) % MEM_SIZE]) = process->in_stock[0];
+
+	}
+		process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 11 jump de 0\n");*/process->in_stock[3] = 3;}
+	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
 void			vm_op_12_create(t_datas *datas, t_process *process)
 {
 		(void)datas;
-	process->cycle = 1;
+	process->cycle = 800;
 	process->instruction = 12;
-	/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
 }
 
 void			vm_op_12_exec(t_datas *datas, t_process *process)
 {
-	/*
-	** executions
-	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+
+	vm_copy_process(datas, process, (process->PC + vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD) % MEM_SIZE);
+	process->PC = (process->PC + 3) % MEM_SIZE;
 }
 
 void			vm_op_13_create(t_datas *datas, t_process *process)
 {
 		(void)datas;
-	process->cycle = 1;
+	process->cycle = 10;
 	process->instruction = 13;
-	/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
+	if (!(vm_verif_i_code(datas->arene->arene[process->PC + 1 % MEM_SIZE], 6, 1, 0)))
+	{
+		process->in_stock[3] = -1;
+		return ;
+	}
+	vm_recup_all_process(process, datas->arene, 0);
 }
 
 void			vm_op_13_exec(t_datas *datas, t_process *process)
 {
-	/*
-	** executions
-	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	if (process->in_stock[3] != -1)
+	{
+		process->carry = 1;
+		if (process->in_stock[1] > 0 && process->in_stock[1] < REG_NUMBER)
+			process->reg[process->in_stock[1]] = process->in_stock[0];
+	}
+	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
+	if (process->in_stock[3] == 0)
+		{process->in_stock[3] = 3;}
+	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
+
 }
 
 void			vm_op_14_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 1;
+	process->cycle = 50;
 	process->instruction = 14;
+	if (!(vm_verif_i_code(datas->arene->arene[process->PC + 1 % MEM_SIZE], 1, 7, 3)))
+	{
+		process->in_stock[3] = -1;
+		return ;
+	}
+	vm_recup_all_process(process, datas->arene, 1 << 9 | 1 << 17);
 	/*
 	**recuperation des information
 	**traitement d'informations invalides?
@@ -659,41 +694,38 @@ void			vm_op_14_create(t_datas *datas, t_process *process)
 
 void			vm_op_14_exec(t_datas *datas, t_process *process)
 {
-	/*
-	** executions
-	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	if (process->in_stock[3] == -1 || !process->in_stock[2])
+		process->in_stock[3] = 0;
+	else
+		datas->arene->arene[(process->PC + (process->in_stock[1] + process->in_stock[2])) % MEM_SIZE] = process->in_stock[0];
+	process->in_stock[3] = vm_ocp_size(datas->arene->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
+	if (process->in_stock[3] == 0)
+		{/*ft_printf("exec 11 jump de 0\n");*/process->in_stock[3] = 3;}
+	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
 void			vm_op_15_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 1;
-	process->instruction = 15;
-	/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
-}
+	(void)datas;
+	process->cycle = 1000;
+	process->instruction = 15;}
 
 void			vm_op_15_exec(t_datas *datas, t_process *process)
 {
-	/*
-	** executions
-	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	vm_copy_process(datas, process, (process->PC + vm_recup_arena_num(2, datas->arene, process->PC + 1)) % MEM_SIZE);
+	process->PC = (process->PC + 3) % MEM_SIZE;
 }
 
 void			vm_op_16_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 1;
+	process->cycle = 2;
 	process->instruction = 16;
+	if (!(vm_verif_i_code(datas->arene->arene[process->PC + 1 % MEM_SIZE], 1, 0, 0)))
+	{
+		process->in_stock[3] = -1;
+		return ;
+	}
+	vm_recup_all_process(process, datas->arene, 0);
 	/*
 	**recuperation des information
 	**traitement d'informations invalides?
@@ -703,12 +735,12 @@ void			vm_op_16_create(t_datas *datas, t_process *process)
 
 void			vm_op_16_exec(t_datas *datas, t_process *process)
 {
-	/*
-	** executions
-	*/
-		(void)datas;
-	process->carry = 0;
-	process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	(void)datas;
+	if (process->in_stock[3] != -1)
+		ft_putchar(process->in_stock[0] % (1 << 8));
+	if (process->in_stock[3] <= 0)
+		{process->in_stock[3] = 3;}
+	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
 }
 
 

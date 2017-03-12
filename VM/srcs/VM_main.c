@@ -86,7 +86,6 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
 ** a refaire avec les fonctions de creation de liste chainee?
 */
 
-/*
 void		vm_destroy_process(t_process *process, t_datas *datas)
 {
 	t_process	*process2;
@@ -114,7 +113,6 @@ void		vm_destroy_all_process(t_datas *datas)
 		ft_memdel((void **)&tmp);
 	}
 }
-*/
 
 int			recup_op(t_datas *datas, t_process *pros)
 {
@@ -167,18 +165,47 @@ int			vm_init_process(t_datas *datas)
 	}
 	return (0);
 }
-/*
+
 t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 {
 	t_process		*new;
+	t_process		*tmp;
 
-	new = vm_create_process(datas);
-	ft_memmove(new, process, sizeof(process->reg));
+	new = vm_create_process(datas, process->champion);
+	tmp = new->next;
+	ft_memmove((void *)new, (void *)process, sizeof(process->reg));
+	new->next = tmp;
 	new->PC = PC;
 	return (new);
 }
-*/
 
+void			vm_delete_unlive_process(t_datas *datas)
+{
+	t_process		*tmp;
+	t_process		*process;
+	t_process		*tmp_next;
+
+	while (datas->begin_process && !datas->begin_process->live)
+	{
+		process = datas->begin_process;
+		datas->begin_process = process->next;
+		ft_memdel((void **)&process);
+	}
+	if ((process = datas->begin_process))
+		while (process->next)
+		{
+			if (!process->next->live)
+			{
+				tmp_next = NULL;
+				tmp = process->next;
+				if (tmp)
+					tmp_next = tmp->next;
+				process->next = tmp_next;
+				ft_memdel((void **)&tmp);
+			}
+			process = process->next;
+		}
+}
 /*
 int			turn_process(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**create)(t_datas *, t_process *))
 {
@@ -232,7 +259,8 @@ int			turn_process(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 			cur_ocp = datas->arene->arene[pros->PC];
 			if (17 <= cur_ocp)
 				cur_ocp = 0;
-		//	ft_printf("cur_ocp = %d\n", cur_ocp);
+	//*		if (11 == cur_ocp)
+	//			ft_printf("cur_ocp = %d\n", cur_ocp);
 			create[cur_ocp](datas, pros);
 		}
 		else
@@ -379,6 +407,7 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 //		vm_show_arene(datas->arene);
 //		usleep(40000);
 		cycle.total_cycle += cycle.cycle;
+		vm_delete_unlive_process(datas);
 		if (datas->lives->cycle_lives >= NBR_LIVE || cycle.check == MAX_CHECKS)
 		{
 		//	ft_printf("cycle_live = %i\n", datas->lives->cycle_lives);
@@ -397,7 +426,7 @@ int			vm_do_cycles(t_datas *datas, int (**exec)(t_datas *, t_process *), int (**
 			exit(ft_int_error("Fin de cycle to die"));// temp
 		}
 	}
-	//ft_printf("%d", datas->lives->last_live);
+	ft_printf("%d", datas->lives->last_live);
 	/*
 	** creation d un tableau de fonction(vm_op_0-vm_op_16)
 	** creation d un tableau de fonction(vm_op_0_exec-vm_op_16_exec)

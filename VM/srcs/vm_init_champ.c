@@ -121,6 +121,8 @@ int				vm_init_champ(t_champ *champs, int argc, char **argv,
 					champs[i - 1].champ_nbr);
 		++i;
 		++champ_nbr;
+		if (champ_nbr > MAX_PLAYERS)
+			exit (ft_int_error("Too many champs"));
 	}
 	return (champ_nbr);
 }

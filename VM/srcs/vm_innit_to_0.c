@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:12:17 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 12:58:14 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:12:19 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,7 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
 	datas->arene = arene;
 	datas->nbr_cycles = CYCLE_TO_DIE;
 	datas->key = NC_PAUSE;
+	datas->cur_pros = 0;
+	datas->nbr_process = 0;
+	datas->i_debug = 0;
 }

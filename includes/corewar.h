@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 13:00:40 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:11:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@
 ** Ncurses
 */
 
-# define SIZE_MAX_Y 64 + 2
-# define SIZE_MAX_X 64 * 3 + 2
 # define NC_PAUSE 'e'
 # define NC_SBS 's'
+# define NC_PROC_NEXT '+'
+# define NC_PROC_BACK '-'
+# define NC_DEBUG_X datas->size_max_x + 2 + 3
+# define NC_DEBUG_Y 23
 
 /*
 ** MACROS
@@ -75,6 +77,17 @@
 /*
 ** Structures
 */
+
+typedef struct		s_draw
+{
+	int				index;
+	int				max;
+	int				count;
+	int				in_champ;
+	int				cur_champ;
+	int				size_champ;
+	int				save_pros;
+}					t_draw;
 
 typedef struct		s_cycle
 {
@@ -144,17 +157,23 @@ typedef struct		s_datas
 	int				start[4];
 	int				size_champ[4];
 	int				flag;
+	int				nbr_process;
+
 	int				key;
+	int				size_max_y;
+	int				size_max_x;
+	int				cur_pros;
+	int				i_debug;
+
 	WINDOW			*win;
 }					t_datas;
 
 /*
-	** Prototypes
- */
+** Prototypes
+*/
 
 void				vm_verif_macro(void);
 int					vm_create_flags(char **argv, int argc, int *flag);
-void				vm_show_arene(t_datas *datas, t_vm *arene);
 int					vm_init_champ(t_champ *champs, int argc,
 		char **argv, t_datas *datas);
 
@@ -169,6 +188,8 @@ int					vm_have_ocp(int op_code);
 int					ft_int_error(char *line);
 void				ft_void_error(char *line);
 char				*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a);
+int					ft_gcd(int nbr);
+int					ft_square_root(int square);
 
 
 
@@ -279,5 +300,6 @@ void		vm_op_16_create(t_datas *datas, t_process *process);
 void		ncurses_init(t_datas *datas, int height, int width);
 void		ncurses_end(t_datas *datas);
 void		ncurses_key(t_datas *datas);
+void		ncurses_show_arene(t_datas *datas);
 
 #endif

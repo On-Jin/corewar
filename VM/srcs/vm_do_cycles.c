@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 12:55:04 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:20:48 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 	{
 		process = datas->begin_process;
 		datas->begin_process = process->next;
+		datas->nbr_process--;
 		ft_memdel((void **)&process);
 	}
 	process = datas->begin_process;
@@ -34,6 +35,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 				tmp = process->next;
 				tmp_next = (tmp) ? tmp->next : NULL;
 				process->next = tmp_next;
+				datas->nbr_process--;
 				ft_memdel((void **)&tmp);
 			}
 			process = process->next;
@@ -114,9 +116,9 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (
 		cycle->cycle = 0;
 		while (cycle->cycle < cycle->cycle_to_die)
 		{
+			datas->i_debug = 0;
 			ncurses_key(datas);
-			vm_show_arene(datas, datas->arene);
-				//(!(cycle->cycle % 10)) ? vm_show_arene(datas, datas->arene) : 0;
+			ncurses_show_arene(datas);
 			if (datas->key != NC_PAUSE)
 			{
 				if (datas->key == NC_SBS)

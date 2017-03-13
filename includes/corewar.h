@@ -20,9 +20,14 @@
 # include "op.h"
 # include "libft.h"
 # include <ncurses.h>
+//# include "tmp.h"
+
+
+
 /*
 ** Define
 */
+# define NBR_FONC 17
 
 # define OP_LIVE 1
 # define OP_LD 2
@@ -144,6 +149,120 @@ int					vm_have_ocp(int op_code);
 int					ft_int_error(char *line);
 void				ft_void_error(char *line);
 char				*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+typedef struct		s_cycle
+{
+	int				cycle;
+	int				total_cycle;
+	int				cycle_to_die;
+	int				check;
+}					t_cycle;
+
+t_process	*vm_create_process(t_datas *datas, int nbr_champ);
+t_process	*vm_copy_process(t_datas *datas, t_process *process, int PC);
+void		vm_destroy_process(t_process *process, t_datas *datas);
+void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
+						t_lives *lives);
+int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *),
+							void (**create)(t_datas *, t_process *));
+int			vm_init_process(t_datas *datas);
+void		vm_champ_process(t_datas *datas, int argc, char **argv);
+int			vm_champ_number_to_position(int champ_num, t_champ *champ_tab);
+int			vm_champ_position_to_number(int champ_pos, t_champ *champ_tab);
+int			vm_recup_process_reg(t_process *process, t_vm *arene, int adresse);
+int			*vm_recup_all_process(t_process *process, t_vm *arene, int flag);
+int			vm_verif_i_code(char code, char a, char b, char c);
+int			vm_recup_indirect_num(t_process *process, t_vm *arene, int adresse);
+int			vm_recup_arena_num(int size, t_vm *arena, int PC);
+int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (**create)(t_datas *, t_process *));
+void		vm_op_0_exec(t_datas *datas, t_process *process);
+void		vm_op_1_exec(t_datas *datas, t_process *process);
+void		vm_op_2_exec(t_datas *datas, t_process *process);
+void		vm_op_3_exec(t_datas *datas, t_process *process);
+void		vm_op_4_exec(t_datas *datas, t_process *process);
+void		vm_op_5_exec(t_datas *datas, t_process *process);
+void		vm_op_6_exec(t_datas *datas, t_process *process);
+void		vm_op_7_exec(t_datas *datas, t_process *process);
+void		vm_op_8_exec(t_datas *datas, t_process *process);
+void		vm_op_9_exec(t_datas *datas, t_process *process);
+void		vm_op_10_exec(t_datas *datas, t_process *process);
+void		vm_op_11_exec(t_datas *datas, t_process *process);
+void		vm_op_12_exec(t_datas *datas, t_process *process);
+void		vm_op_13_exec(t_datas *datas, t_process *process);
+void		vm_op_14_exec(t_datas *datas, t_process *process);
+void		vm_op_15_exec(t_datas *datas, t_process *process);
+void		vm_op_16_exec(t_datas *datas, t_process *process);
+void		vm_op_0_create(t_datas *datas, t_process *process);
+void		vm_op_1_create(t_datas *datas, t_process *process);
+void		vm_op_2_create(t_datas *datas, t_process *process);
+void		vm_op_3_create(t_datas *datas, t_process *process);
+void		vm_op_4_create(t_datas *datas, t_process *process);
+void		vm_op_5_create(t_datas *datas, t_process *process);
+void		vm_op_6_create(t_datas *datas, t_process *process);
+void		vm_op_7_create(t_datas *datas, t_process *process);
+void		vm_op_8_create(t_datas *datas, t_process *process);
+void		vm_op_9_create(t_datas *datas, t_process *process);
+void		vm_op_10_create(t_datas *datas, t_process *process);
+void		vm_op_11_create(t_datas *datas, t_process *process);
+void		vm_op_12_create(t_datas *datas, t_process *process);
+void		vm_op_13_create(t_datas *datas, t_process *process);
+void		vm_op_14_create(t_datas *datas, t_process *process);
+void		vm_op_15_create(t_datas *datas, t_process *process);
+void		vm_op_16_create(t_datas *datas, t_process *process);
+
 
 
 #endif

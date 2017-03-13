@@ -6,7 +6,7 @@
 #    By: gnebie <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/06 05:41:35 by gnebie            #+#    #+#              #
-#    Updated: 2017/03/10 14:41:33 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/13 12:56:10 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ SRC2 = vm_champ_number_to_position.c \
 		vm_recup_arena_num.c \
 		vm_recup_indirect_num.c \
 		vm_recup_process_reg.c \
-		vm_verif_i_code.c
+		vm_verif_i_code.c \
 
 SRC = VM_main.c \
 		vm_copy_process.c \
@@ -81,7 +81,10 @@ SRC = VM_main.c \
 		vm_verif_macro.c \
 		ft_void_error.c \
 		ft_int_error.c \
-		ft_itoa_base_unsigned.c
+		ft_itoa_base_unsigned.c \
+		ncurses_end.c \
+		ncurses_key.c \
+		ncurses_init.c
 
 SRC_DIR = ./srcs/
 SRC2_DIR = ./srcs/vm_op_mod/

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 17:29:41 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/13 13:00:40 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@
 # define FLAG_G (1 << 5)
 # define FLAG_H (1 << 6)
 
+
+/*
+** Ncurses
+*/
+
+# define SIZE_MAX_Y 64 + 2
+# define SIZE_MAX_X 64 * 3 + 2
+# define NC_PAUSE 'e'
+# define NC_SBS 's'
+
 /*
 ** MACROS
 */
@@ -65,6 +75,14 @@
 /*
 ** Structures
 */
+
+typedef struct		s_cycle
+{
+	int				cycle;
+	int				total_cycle;
+	int				cycle_to_die;
+	int				check;
+}					t_cycle;
 
 typedef struct		s_op
 {
@@ -120,16 +138,18 @@ typedef struct		s_datas
 	t_process		*begin_process;
 	t_champ			*begin_champ;
 	t_lives			*lives;
+	t_cycle			cycle;
 	int				player_nbr;
 	int				nbr_cycles;
 	int				start[4];
 	int				size_champ[4];
 	int				flag;
+	int				key;
 	WINDOW			*win;
 }					t_datas;
 
 /*
- ** Prototypes
+	** Prototypes
  */
 
 void				vm_verif_macro(void);
@@ -203,13 +223,6 @@ char				*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a);
 
 
 
-typedef struct		s_cycle
-{
-	int				cycle;
-	int				total_cycle;
-	int				cycle_to_die;
-	int				check;
-}					t_cycle;
 
 t_process	*vm_create_process(t_datas *datas, int nbr_champ);
 t_process	*vm_copy_process(t_datas *datas, t_process *process, int PC);
@@ -263,6 +276,8 @@ void		vm_op_14_create(t_datas *datas, t_process *process);
 void		vm_op_15_create(t_datas *datas, t_process *process);
 void		vm_op_16_create(t_datas *datas, t_process *process);
 
-
+void		ncurses_init(t_datas *datas, int height, int width);
+void		ncurses_end(t_datas *datas);
+void		ncurses_key(t_datas *datas);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 05:20:52 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/13 12:55:04 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,42 @@ static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
 	ft_printf("total_live %d\n", datas->lives->total_lives);
 	ft_printf("total_cycle %d\n", cycle->total_cycle);
 	vm_destroy_all_process(datas);
+	ncurses_end(datas);
 	exit(ft_int_error("Fin de cycle to die"));// temp
 }
 
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (**create)(t_datas *, t_process *))
 {
-	t_cycle	cycle;
+	t_cycle	*cycle;
 
-	vm_init_cycle(&cycle);
+	cycle = &datas->cycle;
+	vm_init_cycle(cycle);
 	while (datas->begin_process)
 	{
-		cycle.cycle = 0;
-		while (cycle.cycle < cycle.cycle_to_die)
+		cycle->cycle = 0;
+		while (cycle->cycle < cycle->cycle_to_die)
 		{
-			turn_process(datas, exec, create);
-			(!(cycle.cycle % 10)) ? vm_show_arene(datas, datas->arene) : 0;
-			cycle.cycle++;
+			ncurses_key(datas);
+			vm_show_arene(datas, datas->arene);
+				//(!(cycle->cycle % 10)) ? vm_show_arene(datas, datas->arene) : 0;
+			if (datas->key != NC_PAUSE)
+			{
+				if (datas->key == NC_SBS)
+					datas->key = NC_PAUSE;
+				turn_process(datas, exec, create);
+				cycle->cycle++;
+			}
 		}
-//		ft_printf("\033[H\033[2J"); vm_show_arene(datas->arene); usleep(40000);
-		cycle.total_cycle += cycle.cycle;
+		cycle->total_cycle += cycle->cycle;
 		vm_delete_unlive_process(datas);
-		if (datas->lives->cycle_lives >= NBR_LIVE || cycle.check == MAX_CHECKS)
+		if (datas->lives->cycle_lives >= NBR_LIVE || cycle->check == MAX_CHECKS)
 		{
-			cycle.cycle_to_die -= CYCLE_DELTA;
-			cycle.check = 0;
+			cycle->cycle_to_die -= CYCLE_DELTA;
+			cycle->check = 0;
 		}
 		else
-			cycle.check++;
+			cycle->check++;
 		datas->lives->cycle_lives = 0;
 	}
-	return(vm_do_cycles_end(datas, &cycle));
+	return(vm_do_cycles_end(datas, cycle));
 }

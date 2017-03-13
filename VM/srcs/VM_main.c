@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/10 23:19:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/13 13:09:02 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@
 ** faire une condition dans init_champ pour renvoyer erreur si champ > MAX_PLAYERS
 */
 
-/*
-WINDOW *create_newwin(int height, int width, int starty, int startx)
-{
-	WINDOW *local_win;
-	local_win = newwin(height, width, starty, startx);
-	wrefresh(local_win);
-	return local_win;
-}
-*/
-
 void		vm_verif_arg(int argc)
 {
 	if (argc == 1)
@@ -47,25 +37,24 @@ void		vm_verif_arg(int argc)
 
 }
 
-void	vm_init_color(void)
-{
-	initscr();
-	start_color();
-	init_pair(0, COLOR_RED, COLOR_BLACK);
-	init_pair(1, COLOR_BLUE, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
-//	datas.win = create_newwin(64 + 2, 64 * 3 + 4, 0, 0);
-	noecho();
-}
-
 int		vm_end_main(void)
 {
-	endwin();
 	exit(0);
 	return (0);
 }
 
+static void	recup_size_champ(t_datas *datas, t_champ champs[MAX_PLAYERS + 1])
+{
+	int i;
+
+	i = 0;
+	while (i < datas->player_nbr)
+	{
+		datas->size_champ[i] = champs[i].champ_size;
+		dprintf(2, "%i\n", datas->size_champ[i]);
+		i++;
+	}
+}
 
 int			main(int argc, char **argv)
 {
@@ -75,10 +64,12 @@ int			main(int argc, char **argv)
 	t_datas		datas;
 
 	vm_verif_arg(argc);
-	vm_init_color();
 	vm_verif_macro();
 	vm_innit_to_0(&datas, champs, &arene, &lives);
 	vm_champ_process(&datas, argc, argv);
+	recup_size_champ(&datas, champs);
+	ncurses_init(&datas, SIZE_MAX_Y, SIZE_MAX_X);
 	vm_init_process(&datas);
+	ncurses_end(&datas);
 	return (vm_end_main());
 }

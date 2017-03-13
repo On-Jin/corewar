@@ -13,6 +13,17 @@
 #include "corewar.h"
 
 /*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
+/*
 ** Add
 ** Prend trois registres,
 ** additionne les 2 premiers,

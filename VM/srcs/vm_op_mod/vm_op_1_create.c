@@ -13,6 +13,27 @@
 #include "corewar.h"
 
 /*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
+/*
+** live recherche
+** prends un paramettre, sur 4 octets
+** lit live sur ce paramettre et inscrit live
+** si 0 live durant le jeu le vainqueur est le dernier champion a arriver
+** un processeur qui fait un live non valide reste en vie
+** les lives non valides ne sont pas ajouter au decompte des lives totaux
+** le prcesseur jump ensuite sur pc + 5
+*/
+
+/*
 ** Live
 ** faire un special pour live
 ** donc met +1 a nbr_live

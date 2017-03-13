@@ -13,6 +13,25 @@
 #include "corewar.h"
 
 /*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
+/*
+** ld recherche
+** write the value of the first parameter in the second parameter(a register)2
+** parameters T_DIR | T_IND, T_REG
+** ;carry?
+** ;
+*/
+
+/*
 ** Ld
 ** Prend un paramètre quelconque et un registre.
 ** Charge la valeur du premier paramètre dans le registre.

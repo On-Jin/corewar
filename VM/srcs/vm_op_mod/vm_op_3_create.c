@@ -13,6 +13,17 @@
 #include "corewar.h"
 
 /*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
+/*
 ** St
 ** Prend un registre et un registre ou un indirect,
 ** et stocke la valeur du registre vers le second paramètre.

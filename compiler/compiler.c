@@ -45,6 +45,7 @@ int main(int argc, char **argv)
 	
 	write_exec_magic(fdin, &header);
 	write_comment(fdin, &header);
+	compiler_compile(fdin);
 	write(fdout, &header, sizeof(header_t));
 	//ft_putstr_fd("Hey !\n", fd);
 	exit(0);

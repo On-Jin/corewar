@@ -88,11 +88,11 @@ typedef struct		s_op
 {
 	char			*name;
 	int				nb_arg;
-	int				tab_arg[7];
+	int				tab_arg[3];
 	int				op_code;
 	int				cycle;
 	char			*doc;
-	int				mod_carry;
+	int				have_bytearg;
 	int				nbr_octet_dir;
 }					t_op;
 

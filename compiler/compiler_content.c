@@ -1,5 +1,6 @@
 #include "compiler.h"
 
+
 t_op    op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
@@ -28,16 +29,20 @@ t_op    op_tab[17] =
 };
 
 
+
 t_op 	get_config(char *name)
 {
 	int i;
 
 	i = 0;
-	while(op_tab[i])
-		if (ft_strcmp(op_tab[i][0], name) == 0)
+	while(op_tab[i].name)
+	{
+		if (ft_strcmp(op_tab[i].name, name) == 0)
 			return (op_tab[i]);
+		i++;
+	}
 	error("Unknow instruct");
-	return (NULL);
+	return (op_tab[0]);
 }
 
 int 		compiler_compile_get_label(char *line)
@@ -48,53 +53,80 @@ int 		compiler_compile_get_label(char *line)
 	while (line[i])
 	{
 		if(!ft_strchr(LABEL_CHARS, line[i]))
+		{
 			if (line[i] == LABEL_CHAR)
 				return (++i);
 			else
 				return (-1);
+		}
 		i++;
 	}
 	return (-1);
 }
 
 
-char **compiler_cutline(char *line)
-{
-	
-}
-
-
-t_bool		get_next_instruct(char **output)
-{
-
-}
-
 int		get_argtype(char *str, int conf)
 {
 	int type = T_UNK;
 	if (*str == DIRECT_CHAR && ft_strchr(LABEL_CHARS, str[1]))
-		type = DIR_CODE;
+		type = T_DIR;
 	if (*str == 'r') // registre
-		type = REG_CODE;
+		type = T_REG;
 	if (*str == '-' || ft_isdigit(*str)) // indirect
-		type = IND_CODE;
+		type = T_IND;
 	if (*str == DIRECT_CHAR && str[1] == LABEL_CHAR)
 		type = T_LAB;
 	if (type == T_UNK)
-		exit("Error : Unknow argtype.");
-	if (type & conf == 0)
-		exit("Error : argtype");
+		error("Error : Unknow argtype.");
+	ft_printf("\n%s\n%b\n%b\n%b\n", str, T_DIR, conf, (T_DIR & conf));
+	if (type != T_LAB && (type & conf) == 0)
+		error("Error : argtype");
+	if (type == T_LAB && (T_DIR & conf) == 0)
+		error("Error : argtype label");
 	return type;
 	return (0);
 }
 
 
-t_instructs *newinstruct()
+t_instruct *newinstruct()
 {
-	return (ft_memalloc(sizeof(t_instructs)));
+	return (ft_memalloc(sizeof(t_instruct)));
 }
 
-t_bool compiler_compile_line(char *line, int fdout)
+char *extract_label_name(char *str)
+{
+	int end = 0;
+	int start = 0;
+
+	while (str[start] && !ft_isdigit(str[start]))
+		start++;
+	end = start;
+	while (str[end] && ft_isdigit(str[end]))
+		end++;
+	printf("======>%i et %i\n", start, end );
+	return ft_strsub(str, start, start - end);
+}
+
+int   extract_direct(char *str)
+{
+	int start = 0;
+
+	while (!ft_isdigit(str[start]))
+		start++;
+	return (ft_atoi(str + start));
+}
+
+int  extract_registre(char *str)
+{
+	return extract_direct(str);
+}
+
+int extract_indirect(char *str)
+{
+	return extract_direct(str);
+}
+
+void	compiler_compile_line(char *line, t_instruct *inst)
 {
 	char *str;
 	char *str2;
@@ -103,72 +135,124 @@ t_bool compiler_compile_line(char *line, int fdout)
 	char *opcode;
 	char **splited;
 	t_op opecode_config;
-	t_instructs *inst;
+	int tmp;
+	int endlabel;
 
-	if (!(inst = newinstruct()))
-		exit("Malloc error");
 	str = ft_strtrim(line);
 	i = 0;
 	while (ft_strchr(OPCODE_CHARS, str[i]))
 		i++;
-	opcode = ft_strsub(str, 0, i - 1);
+	opcode = ft_strsub(str, 0, i);
 	str2 = ft_strtrim(str + i);
 	opecode_config = get_config(opcode);
-	inst->opcode = opecode_config[3];
-	inst->arg_nbrs = opecode_config[1];
+	inst->opcode = opecode_config.op_code;
+	inst->arg_nbrs = opecode_config.nb_arg;
 	y = 0;
-	splited = ft_strsplit(str2, SEPARATOR_CHAR); /////// COUPER ICI
-	while (y < opecode_config[1])
+	ft_printf("=-->\"%s\"<--=\n", str2);
+	splited = ft_strsplit(str2, SEPARATOR_CHAR);
+	while (y < opecode_config.nb_arg)
 	{
+		tmp = 0;
 		// opcode
-		inst->args[y][0] = get_argtype(splited[y], opecode_config[2][y]);
+		ft_printf("%d…\n", y);
+		inst->args[y][0] = get_argtype(splited[y], opecode_config.tab_arg[y]);
+		if (inst->args[y][0] == REG_CODE)
+			inst->args[y][1] = 1;
+		else
+			inst->args[y][1] = (opecode_config.nbr_octet_dir) ? 2 : 4;
 		//  argcode
-		inst->argcode = inst->argcode << 2;
-		if (inst->opcode == DIR_CODE)
-			inst->argcode = inst->argcode | 2;
-		if (inst->opcode == REG_CODE)
-			inst->argcode = inst->argcode | 1;
-		if (inst->opcode == IND_CODE || inst->opcode == T_LAB)
-			inst->argcode = inst->argcode | 3;
+		if (opecode_config.have_bytearg)
+		{
+			inst->argcode = inst->argcode << 2;
+			if (inst->args[y][0] == DIR_CODE || inst->args[y][0] == T_LAB)
+				inst->argcode = inst->argcode | 2;
+			if (inst->args[y][0] == REG_CODE)
+				inst->argcode = inst->argcode | 1;
+			if (inst->args[y][0] == IND_CODE)
+				inst->argcode = inst->argcode | 3;
+		}
 		// Extract arg value
-
-		if (inst->opcode == T_LAB)
-			inst->args_labels[y] = extract_label_name( == coder ici == );
-		if (inst->opcode == DIR_CODE)
-			inst->args_labels[y] = extract_direct( == coder ici == );
-		if (inst->opcode == REG_CODE)
-			inst->args_labels[y] = extract_registre( == coder ici == );
-		if (inst->opcode == IND_CODE)
-			inst->args_labels[y] = extract_indirect( == coder ici == );
+		if (inst->args[y][0] == T_LAB)
+			inst->args_labels[y] = extract_label_name(splited[y]);
+		if (inst->args[y][0] == DIR_CODE)
+		{
+			tmp = extract_direct(splited[y]);
+		}
+		if (inst->args[y][0] == REG_CODE)
+			tmp = extract_registre(splited[y]);
+		if (inst->args[y][0] == IND_CODE)
+			tmp = extract_indirect(splited[y]);
+		ft_memmove(inst->args[y] + 2, &tmp, inst->args[y][1]); 
+		y++;
 	}
 	if (splited[y] != 0)
-		exit("Too many arguments.");
-	
-	(line - str) + i
+		error("Too many arguments.");
+	while (y < 4)
+	{
+		inst->argcode = inst->argcode << 2;
+		y++;
+	}
 	free(str);
 }
 
-t_labels	*compiler_compile(int fdin, int fdout)
+void		print_instruts(t_instruct *instructs)
 {
-	int size;
+	int i;
+	int y;
+	void *val;
+
+	i = 0;
+	ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ", instructs->label_name, instructs->size, instructs->opcode);
+	if (instructs->argcode)
+	{
+		ft_printf("%#0hhx ", instructs->argcode);
+	}
+	while (i <  instructs->arg_nbrs)
+	{
+		y = 0;
+		val = &(instructs->args[i][2]);
+		while (y < instructs->args[i][1])
+		{
+			ft_printf("%#0hhx ", ((char *)val)[instructs->args[i][1] - 1 - y]);
+			y++;
+		}
+		i++;
+		ft_printf(", ");
+	}
+	ft_printf("\n");
+}
+
+void	compiler_compile(int fdin)
+{
 	char *line;
 	char *lineclr;
 	int 	endlabel;
+	char *instruct;
+	t_instruct *inst;
 
-	size = 0;
 	while(ft_gnl(fdin, &line))
 	{
+		if (!(*line))
+			continue ;
 		lineclr = ft_strtrim(line);
 		free(line);
+		if (!(inst = newinstruct()))
+			error("Malloc error");
 		endlabel = compiler_compile_get_label(lineclr);
-		inst->label_name = ft_strsub(endlabel, 0, endlabel);
+		if (endlabel != -1)
+			inst->label_name = ft_strsub(lineclr, 0, endlabel);
 		line = (endlabel != -1) ? lineclr + endlabel : lineclr;
-		compiler_compile_line(char *line, fdout)
-
+		instruct = ft_strtrim(line);
+		if (instruct == NULL)
+		{
+			free(instruct);
+			ft_gnl(fdin, &instruct);
+		}
+		compiler_compile_line(instruct, inst);
+		print_instruts(inst);
+		//error("end ! :)");
 		// Ignorer les \n
 		// Ignorer les #
-
-		line
 	}
 }
 
@@ -176,4 +260,4 @@ t_labels	*compiler_compile(int fdin, int fdout)
 Syntaxes possible :
 entry:
 	st		r1, 6
-
+*/

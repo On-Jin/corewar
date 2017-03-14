@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 12:30:39 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 14:39:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ int			main(int argc, char **argv)
 	vm_innit_to_0(&datas, champs, &lives);
 	vm_champ_process(&datas, argc, argv);
 	recup_data_size_arena_and_champ(&datas, champs);
-	ncurses_init(&datas, datas.size_max_y, datas.size_max_x + 1);
+	if (datas.flag & FLAG_N)
+		ncurses_init(&datas, datas.size_max_y, datas.size_max_x + 1);
 	vm_init_process(&datas);
-	ncurses_end(&datas);
+	if (datas.flag & FLAG_N)
+		ncurses_end(&datas);
 	return (vm_end_main());
 }

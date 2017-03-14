@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 13:05:24 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 16:12:59 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ typedef struct		s_cycle
 
 typedef struct		s_op
 {
-	const char			*name;
+	const char		*name;
 	int				nb_arg;
 	int				tab_arg[7];
 	int				op_code;
 	int				cycle;
-	const char			*doc;
+	const char		*doc;
 	int				mod_carry;
 	int				nbr_octet_dir;
 }					t_op;
@@ -149,6 +149,7 @@ typedef struct		s_datas
 	t_champ			*begin_champ;
 	t_lives			*lives;
 	t_cycle			cycle;
+	t_op			op_tab[17];
 	int				player_nbr;
 	int				nbr_cycles;
 	int				start[4];

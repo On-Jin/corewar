@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 12:31:29 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 16:22:39 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ static void		vm_delete_unlive_process(t_datas *datas)
 	(process) ? process->live = 0: 0;
 }
 
-static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *),
-							void (**create)(t_datas *, t_process *))
+void		start_op_code(t_datas *datas, t_process *pros, int op_code)
+{
+	pros->instruction = datas->op_tab[op_code].op_code;
+	pros->cycle = datas->op_tab[op_code].cycle;
+}
+
+static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
 	t_process *pros;
 	unsigned int	cur_ocp;
@@ -59,7 +64,7 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *),
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
 			if (17 <= cur_ocp)
 				cur_ocp = 0;
-			create[cur_ocp](datas, pros);
+			start_op_code(datas, pros, cur_ocp);
 		}
 		else
 			pros->cycle--;
@@ -99,11 +104,12 @@ static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
 	ft_printf("total_live %d\n", datas->lives->total_lives);
 	ft_printf("total_cycle %d\n", cycle->total_cycle);
 	vm_destroy_all_process(datas);
-	ncurses_end(datas);
+	if (datas->flag & FLAG_N)
+		ncurses_end(datas);
 	exit(ft_int_error("Fin de cycle to die"));// temp
 }
 
-int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (**create)(t_datas *, t_process *))
+int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
 	t_cycle	*cycle;
 
@@ -115,13 +121,22 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (
 		while (cycle->cycle < cycle->cycle_to_die)
 		{
 			datas->i_debug = 0;
-			ncurses_key(datas);
-			ncurses_show_arene(datas);
-			if (datas->key != NC_PAUSE)
+			//Si flag N
+			if (datas->flag & FLAG_N)
 			{
-				if (datas->key == NC_SBS)
+				ncurses_key(datas);
+				ncurses_show_arene(datas);
+				if (datas->key != NC_PAUSE)
+				{
+					if (datas->key == NC_SBS)
 					datas->key = NC_PAUSE;
-				turn_process(datas, exec, create);
+					turn_process(datas, exec);
+					cycle->cycle++;
+				}
+			}
+			else // Sinon
+			{
+				turn_process(datas, exec);
 				cycle->cycle++;
 			}
 		}

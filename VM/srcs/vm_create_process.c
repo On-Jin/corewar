@@ -6,34 +6,24 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 13:06:20 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 17:29:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-/*
-** A SUPPRIMER
-*/
-
-// pourquoi un static int ???
-
-#include "global.h"
-
 static int			recup_op(t_datas *datas, t_process *pros)
 {
 	int cur_pros;
-	static int i = 0;
 
 	cur_pros = (int)datas->arene[pros->PC] - 1;
 	if (cur_pros + 1 >= 0 && cur_pros + 1 <= 16)
 	{
 		if (cur_pros == -1)
 			cur_pros = 16;
-		pros->instruction = (char)op_tab[cur_pros].op_code;
-		pros->cycle = op_tab[cur_pros].cycle;
+		pros->instruction = (char)datas->op_tab[cur_pros].op_code;
+		pros->cycle = datas->op_tab[cur_pros].cycle;
 	}
-	i++;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 16:12:59 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 17:25:19 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ typedef struct		s_op
 	int				op_code;
 	int				cycle;
 	const char		*doc;
-	int				mod_carry;
+	int				have_ocp;
 	int				nbr_octet_dir;
+	int				mod_carry;
 }					t_op;
 
 typedef struct		s_champ

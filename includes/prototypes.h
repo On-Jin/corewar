@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 09:32:31 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/14 13:05:53 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			vm_have_ocp(int op_code);
 t_process	*vm_create_process(t_datas *datas, int nbr_champ);
 t_process	*vm_copy_process(t_datas *datas, t_process *process, int PC);
 void		vm_destroy_process(t_process *process, t_datas *datas);
-void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
+void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *),
 							void (**create)(t_datas *, t_process *));
@@ -49,11 +49,11 @@ int			vm_init_process(t_datas *datas);
 void		vm_champ_process(t_datas *datas, int argc, char **argv);
 int			vm_champ_number_to_position(int champ_num, t_champ *champ_tab);
 int			vm_champ_position_to_number(int champ_pos, t_champ *champ_tab);
-int			vm_recup_process_reg(t_process *process, t_vm *arene, int adresse);
-int			*vm_recup_all_process(t_process *process, t_vm *arene, int flag);
+int			vm_recup_process_reg(t_process *process, char *arene, int adresse);
+int			*vm_recup_all_process(t_process *process, char *arene, int flag);
 int			vm_verif_i_code(char code, char a, char b, char c);
-int			vm_recup_indirect_num(t_process *process, t_vm *arene, int adresse);
-int			vm_recup_arena_num(int size, t_vm *arena, int PC);
+int			vm_recup_indirect_num(t_process *process, char *arene, int adresse);
+int			vm_recup_arena_num(int size, char *arena, int PC);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *), void (**create)(t_datas *, t_process *));
 void		vm_op_0_exec(t_datas *datas, t_process *process);
 void		vm_op_1_exec(t_datas *datas, t_process *process);

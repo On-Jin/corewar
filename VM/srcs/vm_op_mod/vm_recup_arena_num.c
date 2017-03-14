@@ -6,13 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:49:28 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 12:47:12 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 13:08:36 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			vm_recup_arena_num(int size, char *arena, int PC)
+int			vm_recup_arena_num(int size, char *arene, int PC)
 {
 	int		i;
 	int		res;

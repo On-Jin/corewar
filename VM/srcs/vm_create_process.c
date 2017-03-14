@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 16:10:59 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 13:06:20 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int			recup_op(t_datas *datas, t_process *pros)
 	int cur_pros;
 	static int i = 0;
 
-	cur_pros = (int)datas->arene->arene[pros->PC] - 1;
+	cur_pros = (int)datas->arene[pros->PC] - 1;
 	if (cur_pros + 1 >= 0 && cur_pros + 1 <= 16)
 	{
 		if (cur_pros == -1)

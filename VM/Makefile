@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/13 15:50:13 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/14 13:07:46 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ EXTRA_FLAGS = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
 	-Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused \
 	-Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef \
 	-Wshadow -Wpointer-arith -Wbad-function-cast \
-	-Wpadded  -Wwrite-strings -Wconversion -Weverything
-	# -std=c89 -pedantic -MMD
+	-Wpadded  -Wwrite-strings -Wconversion 
+	#-Weverything -std=c89 -pedantic -MMD
 
 NAME = corewar
 

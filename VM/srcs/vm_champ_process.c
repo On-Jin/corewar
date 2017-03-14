@@ -6,13 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:03:12 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:03:13 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/14 13:06:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		vm_place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYERS + 1])
+static void		vm_place_champ(t_datas *data, char *arene, t_champ champ[MAX_PLAYERS + 1])
 {
 	int i;
 	int size;
@@ -27,7 +27,7 @@ static void		vm_place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYER
 	i = 0;
 	while (i < data->player_nbr)
 	{
-		ft_memcpy((void *)&arene->arene[(i) *
+		ft_memcpy((void *)&arene[(i) *
 					(MEM_SIZE / data->player_nbr)], (void *)&champ[i],
 					(size_t)champ[i].champ_size);
 		data->start[i] = i * (MEM_SIZE / data->player_nbr);

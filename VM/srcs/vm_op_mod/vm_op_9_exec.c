@@ -12,8 +12,21 @@
 
 #include "corewar.h"
 
+
+/*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
 void			vm_op_9_exec(t_datas *datas, t_process *process)
 {
+		process->in_stock[0]= vm_recup_indirect_num(process, datas->arene, process->PC + 1);
 	/*
 	** executions
 	*/

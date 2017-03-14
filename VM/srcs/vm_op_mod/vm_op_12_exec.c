@@ -12,6 +12,17 @@
 
 #include "corewar.h"
 
+/*
+** Questions par commande:
+** Que fait la commande?
+** De qui a t'elle besoin?
+** que fait elle si ses instrictions sont eronnees ?
+** que fait elle si son op_code_instruc est erronne ?
+** carry ?
+** jump?
+** ;
+*/
+
 void			vm_op_12_exec(t_datas *datas, t_process *process)
 {
 

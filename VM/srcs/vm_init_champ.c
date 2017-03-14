@@ -98,8 +98,8 @@ static int			vm_create_champ(t_champ *champs, char *entry, int i,
 		exit (ft_int_error("Echec de read du champion"));
 	buff[sizeof(header_t) + CHAMP_MAX_SIZE] = 0;
 	vm_verif_champ(buff, &champs[i]);
-	ft_memmove((void *)&champs[i], (void *)(buff + sizeof(header_t)),
-			CHAMP_MAX_SIZE);
+	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(header_t)),
+			j - sizeof(header_t));
 	ft_printf("%s\n", (char *)&champs[i]);
 	champs[i].champ_nbr = i;
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);

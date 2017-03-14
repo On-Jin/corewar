@@ -43,30 +43,42 @@
 **  il changera le carry.
 */
 
+/*
+process->instruction = -1;
+if (vm_verif_i_code())
+{
+		vm_recup_all_process(process, datas->arene, 0);
+		execute...;
+		carry = ?;
+}
+process->PC = vm_op_jump(datas, process, 2);
+
+*/
+
+/*
+** 1 modifier process(live) et instruction
+** 2 verification de la validite de la demande
+** 2.1 recuperation des valeurs necessaires;
+** 2.2 execution de la fonction;
+** 2.3 modification du carry;
+** 3 jump sur le prochain process (fixe ou pc + vm_op_jump(op, nbr))
+*/
+
 void			vm_op_2_exec(t_datas *datas, t_process *process)
 {
-	(void)datas;
-	int		tmp;
-
-	tmp = datas->arene[(process->PC + 1) % MEM_SIZE] >> 6;
-	if ((tmp & 0x3) == 0b10)
+	if (vm_verif_datas(datas, process))
 	{
-		process->in_stock[0] = vm_recup_arena_num(4, datas->arene, process->PC + 2);
-		tmp = 4;
+		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "je suis la");
+		vm_recup_all_process(process, datas->arene, 1 << 24);
+		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "process_in_stock[%d][%d]",process->in_stock[0], process->in_stock[1] );
+		if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
+		{
+			process->reg[process->in_stock[1]] = process->in_stock[0];
+			process->carry = 1;
+		}
 	}
-	else if ((tmp & 0x3) == 0b11)
-	{
-		process->in_stock[0] = vm_recup_indirect_num(process, datas->arene, process->PC + 2);
-		tmp = 2;
-	}
-	process->in_stock[2] = vm_ocp_size(datas->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-	process->in_stock[1] = vm_recup_arena_num(1, datas->arene, (process->PC + 2 + tmp) % MEM_SIZE);
-	if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
-	{
-		process->reg[process->in_stock[1] - 1] = process->in_stock[0];
-		process->carry = 1;
-	}
-	if (!process->in_stock[2])
-		process->in_stock[2] = 2;
-	process->PC = vm_add_valid(process->PC + process->in_stock[2] + 1);
+	else if (datas->op_tab[(int)process->instruction].mod_carry)
+		process->carry = 0;
+	process->PC = vm_op_jump(datas, process,
+							datas->op_tab[(int)process->instruction].nb_arg);
 }

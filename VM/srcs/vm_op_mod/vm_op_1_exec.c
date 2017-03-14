@@ -46,17 +46,19 @@
 
 void				vm_op_1_exec(t_datas *datas, t_process *process)
 {
-	process->in_stock[0] = vm_recup_arena_num(4, datas->arene, process->PC + 1);
-	process->in_stock[1] = vm_champ_number_to_position(process->in_stock[0],
-														datas->begin_champ);
+	int		arg1;
+	int		arg2;
+
+	arg1 = vm_recup_arena_num(4, datas->arene, process->PC + 1);
+	arg2 = vm_champ_number_to_position(arg1, datas->begin_champ);
 	process->live = 1;
 	process->PC = vm_add_valid(process->PC + 5);
 	if (process->in_stock[1] != -1)
 	{
 		datas->lives->total_lives++;
 		datas->lives->cycle_lives++;
-		datas->lives->champ_total_lives[process->in_stock[1]]++;
-		datas->lives->champ_cycle_lives[process->in_stock[1]]++;
-		datas->lives->last_live = process->in_stock[0];
+		datas->lives->champ_total_lives[arg2]++;
+		datas->lives->champ_cycle_lives[arg2]++;
+		datas->lives->last_live = arg1;
 	}
 }

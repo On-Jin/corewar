@@ -12,21 +12,6 @@
 
 #include "corewar.h"
 
-static int			recup_op(t_datas *datas, t_process *pros)
-{
-	int cur_pros;
-
-	cur_pros = (int)datas->arene[pros->PC] - 1;
-	if (cur_pros + 1 >= 0 && cur_pros + 1 <= 16)
-	{
-		if (cur_pros == -1)
-			cur_pros = 16;
-		pros->instruction = (char)datas->op_tab[cur_pros].op_code;
-		pros->cycle = datas->op_tab[cur_pros].cycle;
-	}
-	return (0);
-}
-
 t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 {
 	t_process	*process;
@@ -40,6 +25,5 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	process->next = tmp;
 	process->PC = datas->start[nbr_champ - 1];
 	process->champion = (char)nbr_champ;
-	recup_op(datas, process);
 	return (process);
 }

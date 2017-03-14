@@ -12,43 +12,61 @@
 
 #include "corewar.h"
 
-int			*vm_recup_all_process(t_process *process, char *arene, int flag)
+/*
+** Flag :
+** 0b1 : recupere le numero du registre plutot que sa valeur
+** 0b10 : prends un direct de 2 plutot qu'un direct de 4
+** 0b100 : recupere le nombre indirect et non sa valeur
+** 0b1000 :
+** 0b10000 :
+** 0b100000 :
+** 0b1000000 :
+** 0b10000000 :
+*/
+
+int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 {
 	int			tmp;
+	int			flag;
 	int			i;
 	int			adress;
 
-	i = 3;
-	tmp = (arene[(process->PC + 1) % MEM_SIZE]);
+	i = 0;
+	tmp = (arene[vm_add_valid(process->PC + 1)]) >> 6;
+	flag = flg >> 24;
 	adress = process->PC + 2;
-	while (tmp && i > -1)
+
+	while (i < 4)
 	{
-		if ((tmp & 0xff) == 0b01)
+		if ((tmp & 3) == 0b01)
 		{
-			if ((flag & 0xff) == 1)
-				process->in_stock[i] = vm_recup_arena_num(1, arene, adress);
-			else
-				process->in_stock[i] = vm_recup_process_reg(process, arene, adress);
+			process->in_stock[i] = /*((flag & 1) == 1) ?*/ vm_recup_arena_num(1,
+				arene, adress) /*: vm_recup_process_reg(process, arene, adress)*/;
 			adress += 1;
 		}
-		else if ((tmp & 0xff) == 0b10 && flag & 0b10)
+		else if ((tmp & 3) == 0b10 && flag & 0b10)
 		{
 			process->in_stock[i] = vm_recup_arena_num(2, arene, adress);
 			adress += 2;
 		}
-		else if ((tmp & 0xff) == 0b10)
+		else if ((tmp & 3) == 0b10)
 		{
 			process->in_stock[i] = vm_recup_arena_num(4, arene, adress);
 			adress += 4;
 		}
-		else if ((tmp & 0xff) == 0b11)
+		else if ((tmp & 3) == 0b11 && flag & 0b100)
+		{
+			process->in_stock[i] = vm_recup_arena_num(4, arene, adress);
+			adress += 2;
+		}
+		else if ((tmp & 3) == 0b11)
 		{
 			process->in_stock[i] = vm_recup_indirect_num(process, arene, adress);
-			adress += 2;//T_IND;//??? bizzare dir et ind semblent inversees
+			adress += 2;
 		}
-		--i;
-		flag >>= 8;
-		tmp = tmp >> 2;
+		flag = flg >> 8 * (3 - i);
+		tmp = arene[vm_add_valid(process->PC + 1)] >> 2 * (3 - i);
+		i++;
 	}
 	return (process->in_stock);
 }

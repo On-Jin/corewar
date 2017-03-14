@@ -12,19 +12,19 @@
 
 #include "corewar.h"
 
+/*
+** ajouter le process?
+*/
 int				vm_recup_indirect_num(t_process *process, char *arene, int adresse)
 {
 	unsigned int		ind_adress;
 	int					val;
 
-	ind_adress = vm_recup_arena_num(2, arene, adresse) + 1;
-	if (1)
-	{
-		val = vm_recup_arena_num(2, arene, ind_adress);
-		val = val >> (4 * 8 - IND_SIZE * 8);
-		val = vm_recup_arena_num(2, arene, (process->PC + (val % IDX_MOD)) % MEM_SIZE);
-		val = val >> (4 * 8 - IND_SIZE * 8);
-		return (val);
-	}
-	return (0);
+	ind_adress = (vm_recup_arena_num(2, arene, adresse) % IDX_MOD);
+	ind_adress = vm_add_valid(ind_adress + process->PC);
+	val = vm_recup_arena_num(2, arene, ind_adress);
+	val = val >> (4 * 8 - IND_SIZE * 8);
+//	val = vm_recup_arena_num(2, arene, (process->PC + (val % IDX_MOD)) % MEM_SIZE);
+//	val = val >> (4 * 8 - IND_SIZE * 8);
+	return (val);
 }

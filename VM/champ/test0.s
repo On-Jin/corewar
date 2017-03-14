@@ -8,7 +8,7 @@ rrr 0b101010 ou 0b010101 ?
 ddd 0b101010
 iii 0b111111
 
-
+  
 
 
 first:						cycles	jump	opcode?

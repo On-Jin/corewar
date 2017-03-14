@@ -21,13 +21,13 @@ int			vm_verif_i_code(char code, char a, char b, char c)
 	if (code & 0b11)
 		return (0);
 	code >>= 2;
-	if (((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) && ((c & 4) && code != 3))
+	if ((c & 7) && ((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) && ((c & 4) && code != 3))
 		return (0);
 	code >>= 2;
-	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) && ((b & 4) && code != 3))
+	if ((b & 7) && ((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) && ((b & 4) && code != 3))
 		return (0);
 	code >>= 2;
-	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) && ((a & 4) && code != 3))
+	if ((a & 7) && ((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) && ((a & 4) && code != 3))
 		return (0);
 	return (1);
 }

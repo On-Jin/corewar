@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_0_exec.c                                     :+:      :+:    :+:   */
+/*   vm_op_jump.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 14:21:06 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:07 by gnebie           ###   ########.fr       */
+/*   Created: 2017/03/14 16:11:19 by gnebie            #+#    #+#             */
+/*   Updated: 2017/03/14 16:17:00 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				vm_op_0_exec(t_datas *datas, t_process *process)
+int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size)
 {
-	(void)datas;
-	process->PC = vm_add_valid(process->PC + 1);
+	unsigned char		i;
+	unsigned char		instruc;
+
+	instruc = datas->arene[vm_add_valid(process->PC + 1)];
+	i = 4 - size;
+	while (i)
+	{
+		instruc >>= 2;
+		--i;
+	}
+	while (instruc)
+	{
+		((instruc & 3) == 1) ? i += 1 : 0;
+		((instruc & 3) == 2) ? i += 4 : 0;
+		((instruc & 3) == 3) ? i += 2 : 0;
+		instruc >>= 2;
+	}
+	return (vm_add_valid(process->PC + 2 + i));
 }

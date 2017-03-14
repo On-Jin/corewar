@@ -33,22 +33,25 @@
 
 void			vm_op_3_exec(t_datas *datas, t_process *process)
 {
-	/*	if (!(vm_verif_i_code(datas->arene[process->PC + 1 % MEM_SIZE], 1, 5, 0)))
-			return ;
-	*/	vm_recup_all_process(process, datas->arene, 0);
-		/*
-		** a changer
-		*/
-		process->in_stock[3] = vm_ocp_size(datas->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-		process->in_stock[0] = vm_recup_arena_num(1, datas->arene, process->PC + 2);
-	(void)datas;
-	if (process->in_stock[0] > 0 && process->in_stock[0] < REG_NUMBER)
-	{
-		process->reg[process->in_stock[0]] = process->PC + (process->in_stock[1] % IDX_MOD);
-		process->carry = 0;
-	}
-	process->PC = (process->PC + process->in_stock[3] + 1) % MEM_SIZE;
+	char		i;
 
-//process->carry = 0;
-//process->PC = (process->PC + A_CHANGER) % MEM_SIZE;
+	i = datas->arene[vm_add_valid(process->PC + 1)];
+	if (vm_verif_datas(datas, process))
+	{
+		vm_recup_all_process(process, datas->arene, 1 << 16);
+		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "process_in_stock[%d][%d]",process->in_stock[0], process->in_stock[1] );
+		if (((i >> 4) & 3) == 1 && process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
+		{
+			process->reg[process->in_stock[1]] = process->in_stock[0];
+		}
+		else if (((i >> 4) & 3) == 3)
+		{
+			vm_put_nbr_in_arene(process->in_stock[0], process->in_stock[1], datas->arene, 4);
+		}
+
+	}
+	else if (datas->op_tab[(int)process->instruction].mod_carry)
+		process->carry = 0;
+	process->PC = vm_op_jump(datas, process,
+							datas->op_tab[(int)process->instruction].nb_arg);
 }

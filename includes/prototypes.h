@@ -28,7 +28,9 @@ int			ft_square_root(int square);
 /*
 ** Fonctions
 */
-
+void		vm_put_nbr_in_arene(int number, int adress, char *arene, int size);
+int			vm_verif_datas(t_datas *datas, t_process *process);
+int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size);
 void		vm_verif_macro(void);
 int			vm_create_flags(char **argv, int argc, int *flag);
 int			vm_init_champ(t_champ *champs, int argc, char **argv, t_datas *datas);

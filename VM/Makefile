@@ -84,6 +84,9 @@ SRC2 = vm_champ_number_to_position.c \
 	   vm_recup_indirect_num.c \
 	   vm_recup_process_reg.c \
 	   vm_verif_i_code.c \
+	   vm_verif_datas.c \
+	   vm_op_jump.c \
+	   vm_put_nbr_in_arene.c
 
 SRC = VM_main.c \
 	  vm_copy_process.c \

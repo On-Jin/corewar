@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_0_exec.c                                     :+:      :+:    :+:   */
+/*   vm_put_nbr_in_arene.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 14:21:06 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:07 by gnebie           ###   ########.fr       */
+/*   Created: 2017/03/14 18:51:47 by gnebie            #+#    #+#             */
+/*   Updated: 2017/03/14 18:51:49 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				vm_op_0_exec(t_datas *datas, t_process *process)
+void			vm_put_nbr_in_arene(int number, int adress, char *arene, int size)
 {
-	(void)datas;
-	process->PC = vm_add_valid(process->PC + 1);
+	while (size)
+	{
+		arene[adress % MEM_SIZE] = (char)(number & 0xff);
+		++adress;
+		number >>= number;
+		--size;
+	}
 }

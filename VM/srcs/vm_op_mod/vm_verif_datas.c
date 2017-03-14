@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_verif_datas.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/14 17:56:19 by gnebie            #+#    #+#             */
+/*   Updated: 2017/03/14 17:56:23 by gnebie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "corewar.h"
+
+int			vm_verif_i_cod(char code, char a, char b, char c)
+{
+	if (code & 0b11)
+		return (0);
+	code >>= 2;
+	if ( ((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) && ((c & 4) && code != 3))
+		return (0);
+	code >>= 2;
+	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) && ((b & 4) && code != 3))
+		return (0);
+	code >>= 2;
+	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) && ((a & 4) && code != 3))
+		return (0);
+	return (1);
+}
+
+int				vm_verif_datas(t_datas *datas, t_process *process)
+{
+	int			a;
+	int			b;
+	int			c;
+	t_op		*op_c;
+
+	op_c = &datas->op_tab[(int)process->instruction];
+	if (!op_c->have_ocp)
+		return (1);
+	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
+	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
+	c = (op_c->nb_arg = 3) ? op_c->tab_arg[2] : 0;
+	return (vm_verif_i_cod(datas->arene[vm_add_valid(process->PC + 1)], a, b, c));
+}

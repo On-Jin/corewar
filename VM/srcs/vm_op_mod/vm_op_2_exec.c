@@ -68,9 +68,9 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 {
 	if (vm_verif_datas(datas, process))
 	{
-		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "je suis la");
+//		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "je suis la");
 		vm_recup_all_process(process, datas->arene, 1 << 24);
-		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "process_in_stock[%d][%d]",process->in_stock[0], process->in_stock[1] );
+//		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "process_in_stock[%d][%d]",process->in_stock[0], process->in_stock[1] );
 		if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
 		{
 			process->reg[process->in_stock[1]] = process->in_stock[0];
@@ -81,4 +81,6 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 		process->carry = 0;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
+	process->in_stock[0] = 0;
+	process->in_stock[1] = 1;
 }

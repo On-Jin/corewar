@@ -35,13 +35,12 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 	tmp = (arene[vm_add_valid(process->PC + 1)]) >> 6;
 	flag = flg >> 24;
 	adress = process->PC + 2;
-
 	while (i < 4)
 	{
 		if ((tmp & 3) == 0b01)
 		{
-			process->in_stock[i] = /*((flag & 1) == 1) ?*/ vm_recup_arena_num(1,
-				arene, adress) /*: vm_recup_process_reg(process, arene, adress)*/;
+			process->in_stock[i] = (!(flag & 1)) ? vm_recup_arena_num(1,
+				arene, adress) : vm_recup_process_reg(process, arene, adress);
 			adress += 1;
 		}
 		else if ((tmp & 3) == 0b10 && flag & 0b10)
@@ -56,7 +55,7 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 		}
 		else if ((tmp & 3) == 0b11 && flag & 0b100)
 		{
-			process->in_stock[i] = vm_recup_arena_num(4, arene, adress);
+			process->in_stock[i] = vm_recup_arena_num(2, arene, adress);
 			adress += 2;
 		}
 		else if ((tmp & 3) == 0b11)
@@ -64,9 +63,9 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 			process->in_stock[i] = vm_recup_indirect_num(process, arene, adress);
 			adress += 2;
 		}
-		flag = flg >> 8 * (3 - i);
-		tmp = arene[vm_add_valid(process->PC + 1)] >> 2 * (3 - i);
 		i++;
+		flag = flg >> (8 * (3 - i));
+		tmp = arene[vm_add_valid(process->PC + 1)] >> (2 * (3 - i));
 	}
 	return (process->in_stock);
 }

@@ -17,7 +17,7 @@ int				vm_recup_process_reg(t_process *process, char *arene, int adresse)
 	unsigned int		reg;
 	int					val;
 
-	reg = vm_recup_arena_num(1, arene, adresse) + 1;
+	reg = vm_recup_arena_num(1, arene, adresse);
 	if (reg <= REG_NUMBER)
 	{
 		val = process->reg[reg];

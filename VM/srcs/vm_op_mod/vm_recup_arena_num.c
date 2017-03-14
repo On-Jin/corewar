@@ -19,7 +19,7 @@ int			vm_recup_arena_num(int size, char *arene, int PC)
 
 	i = 0;
 	res = 0;
-/*	if (PC + size < MEM_SIZE && (size & 7) == 1)
+	if (PC + size < MEM_SIZE && (size & 7) == 1)
 	{
 		if (size == 4)
 			return (res = *(unsigned int *)(&arene[PC]));
@@ -29,7 +29,7 @@ int			vm_recup_arena_num(int size, char *arene, int PC)
 			return (res = *(unsigned char *)(&arene[PC]));
 	}
 	else
-*/		while (i < size)
+		while (i < size)
 		{
 			res = res * 0x100;
 			res += (arene[(PC + (i % IDX_MOD)) % MEM_SIZE]);

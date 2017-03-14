@@ -23,9 +23,12 @@
 ** ;
 */
 
+/*
+** Fork
+*/
+
 void			vm_op_12_exec(t_datas *datas, t_process *process)
 {
-
-	vm_copy_process(datas, process, (process->PC + vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD) % MEM_SIZE);
-	process->PC = (process->PC + 3) % MEM_SIZE;
+	vm_copy_process(datas, process, vm_add_valid(process->PC + vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
+	process->PC = vm_add_valid(process->PC + 3);
 }

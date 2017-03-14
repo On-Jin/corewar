@@ -81,6 +81,7 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 		process->carry = 0;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
+	mvprintw(NC_DEBUG_Y + datas->i_debug++ + 5, NC_DEBUG_X, "hey reg[%d][%d][%d][%d][%d][%d]",process->reg[1], process->reg[2],process->reg[3], process->reg[4],process->reg[5], process->reg[6]);
 	process->in_stock[0] = 0;
-	process->in_stock[1] = 1;
+	process->in_stock[1] = 0;
 }

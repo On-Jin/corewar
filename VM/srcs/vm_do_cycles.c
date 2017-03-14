@@ -64,7 +64,7 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
-			if (4 <= cur_ocp)
+			if (5 <= cur_ocp)
 				cur_ocp = 0;
 			start_op_code(datas, pros, cur_ocp);
 		}

@@ -14,11 +14,12 @@
 
 void			vm_put_nbr_in_arene(int number, int adress, char *arene, int size)
 {
+	(adress < 0) ? (adress += MEM_SIZE) : 0;
 	while (size)
 	{
-		arene[adress % MEM_SIZE] = (char)(number & 0xff);
+		arene[adress % MEM_SIZE] = (char)((number >> (8 * (4 - size))) & 0xff);
 		++adress;
-		number >>= number;
+		number >>= 8;
 		--size;
 	}
 }

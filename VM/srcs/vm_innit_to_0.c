@@ -12,11 +12,6 @@
 
 #include "corewar.h"
 
-/*
-** A changer :
-** Utiliser unn flag FLAG_D plutot que i_debug
-*/
-
 static void	innit_op_tab(t_datas *datas)
 {
 	static t_op op_tab_init[17] =

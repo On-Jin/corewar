@@ -35,7 +35,8 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 {
 	char		i;
 
-	mvprintw(NC_DEBUG_Y + datas->i_debug++ + 5, NC_DEBUG_X, "yooooo reg[%d][%d]",process->reg[1], process->reg[2]);
+	mvprintw(NC_DEBUG_Y + datas->i_debug++ + 5, NC_DEBUG_X, "hey reg[%d][%d][%d][%d][%d][%d]",process->reg[1], process->reg[2],process->reg[3], process->reg[4],process->reg[5], process->reg[6]);
+
 	i = datas->arene[vm_add_valid(process->PC + 1)];
 	if (vm_verif_datas(datas, process))
 	{
@@ -47,13 +48,14 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 		}
 		else if (((i >> 4) & 3) == 3)
 		{
-			mvprintw(NC_DEBUG_Y + datas->i_debug++ + 3, NC_DEBUG_X, "good road");
-			vm_put_nbr_in_arene(process->in_stock[0], process->in_stock[1], datas->arene, 4);
+			mvprintw(NC_DEBUG_Y + datas->i_debug++ + 3, NC_DEBUG_X, "good road = {%d} ", process->PC + (process->in_stock[1] % IDX_MOD));
+			vm_put_nbr_in_arene(process->in_stock[0], process->PC + (process->in_stock[1] % IDX_MOD), datas->arene, 4);
 		}
-
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;
+	mvprintw(NC_DEBUG_Y + datas->i_debug++ + 7, NC_DEBUG_X, "process[%d][%d][%d]",process->in_stock[0], process->in_stock[1],process->in_stock[2]);
+
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

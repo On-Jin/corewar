@@ -24,15 +24,17 @@
 ** ;
 */
 
+/*
+** zjmp
+*/
+
 void			vm_op_9_exec(t_datas *datas, t_process *process)
 {
-		process->in_stock[0]= vm_recup_indirect_num(process, datas->arene, process->PC + 1);
-	/*
-	** executions
-	*/
-	(void)datas;
-	process->carry = 0;
-	if (!process->in_stock[0])
-		process->in_stock[0]++;
-	process->PC = (process->PC + process->in_stock[0]) % MEM_SIZE;
+
+	if (process->carry)
+	{
+		process->PC = vm_add_valid(process->PC + (vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
+	}
+	else
+		process->PC = vm_add_valid(process->PC + 2);
 }

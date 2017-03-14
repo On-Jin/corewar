@@ -23,17 +23,31 @@
 ** ;
 */
 
+/*
+**Ldi
+*/
+
 void			vm_op_10_exec(t_datas *datas, t_process *process)
 {
-	if (!(vm_verif_i_code(datas->arene[process->PC + 1 % MEM_SIZE], 7, 3, 1)))
+	if (vm_verif_datas(datas, process))
+	{
+		vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 16);
+		if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
+		{
+			process->reg[process->in_stock[2]] = vm_recup_indirect_num(process, datas->arene, process->PC + (process->in_stock[0] + process->in_stock[1]) % IDX_MOD);
+			process->carry = 1;
+		}
+	}
+	else if (datas->op_tab[(int)process->instruction].mod_carry)
+		process->carry = 0;
+	process->PC = vm_op_jump(datas, process,
+							datas->op_tab[(int)process->instruction].nb_arg);
+/*	if (!(vm_verif_i_code(datas->arene[process->PC + 1 % MEM_SIZE], 7, 3, 1)))
 	{
 		process->in_stock[3] = -1;
 		return ;
 	}
 	vm_recup_all_process(process, datas->arene, (1 << 8) | (1 << 17) | (1 << 25));
-	/*
-	** executions
-	*/
 	if (process->in_stock[3] == -1 || !process->in_stock[2])
 	{
 		process->in_stock[3] = 0;
@@ -41,9 +55,7 @@ void			vm_op_10_exec(t_datas *datas, t_process *process)
 	}
 	process->reg[process->in_stock[2]] = ((process->in_stock[0] + process->in_stock[1]) % IDX_MOD);
 	(void)datas;
-//	process->carry = 0;
 	process->in_stock[3] = vm_ocp_size(datas->arene[(process->PC + 1) % MEM_SIZE], 4, 0);
-	if (process->in_stock[3] == 0)
-		{/*ft_printf("exec 10 jump de 0\n");*/}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
+	*/
 }

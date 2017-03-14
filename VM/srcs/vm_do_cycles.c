@@ -56,11 +56,9 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *),
 			exec[(int)pros->instruction](datas, pros);
 		if (pros->cycle == 0)
 		{
-			cur_ocp = datas->arene->arene[pros->PC];
+			cur_ocp = (unsigned int)datas->arene->arene[pros->PC];
 			if (17 <= cur_ocp)
 				cur_ocp = 0;
-	//*		if (11 == cur_ocp)
-	//			ft_printf("cur_ocp = %d\n", cur_ocp);
 			create[cur_ocp](datas, pros);
 		}
 		else

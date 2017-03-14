@@ -14,10 +14,22 @@
 .SUFFIXES :
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -g
-##############################-g
-SPE_FLAGS =
+FLAGS = -Wall -Werror -Wextra
+SPE_FLAGS =  -lncurses -g
+OPTI_FLAGS = -O2
 DEBUG_FLAG = -fsanitize=address
+EXTRA_FLAGS = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
+	-Werror-implicit-function-declaration -Wmain -Wparentheses \
+	-Wsign-compare -Waggregate-return -Wstrict-prototypes \
+	-Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn \
+	-Wformat -Wmissing-format-attribute -Wno-deprecated-declarations \
+	-Wpacked -Wredundant-decls -Wnested-externs -Winline -Wlong-long \
+	-Wunreachable-code \
+	-Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused \
+	-Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef \
+	-Wshadow -Wpointer-arith -Wbad-function-cast \
+	-Wpadded  -Wwrite-strings -Wconversion -Weverything
+	# -std=c89 -pedantic -MMD
 
 NAME = corewar
 
@@ -31,6 +43,7 @@ SRC3 = ncurses_end.c \
 
 SRC2 = vm_champ_number_to_position.c \
 	   vm_champ_position_to_number.c \
+	   vm_add_valid.c \
 	   vm_op_0_create.c \
 	   vm_op_0_exec.c \
 	   vm_op_10_create.c \
@@ -106,7 +119,7 @@ INC = ../includes/
 all : $(NAME)
 
 $(NAME) : $(LIB) $(OBJ_DIR) $(OBJ2_DIR) $(OBJ3_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) ../includes/corewar.h
-	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(LIB) -I$(INC) -o $(NAME) -lncurses
+	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(LIB) -I$(INC) -o $(NAME)
 
 boubou :
 	-lncurses
@@ -124,15 +137,15 @@ $(OBJ3_DIR) :
 	mkdir $(OBJ3_DIR)
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c)
-	$(CC) $(FLAGS) $(SPE_FLAGS) -I$(INC) -c $(addprefix $(SRC_DIR), $(SRC))
+	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC_DIR), $(SRC)) $(EXTRA_FLAGS)
 	mv $(OBJ) $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC2_DIR), %.c)
-	$(CC) $(FLAGS) $(SPE_FLAGS) -I$(INC) -c $(addprefix $(SRC2_DIR), $(SRC2))
+	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC2_DIR), $(SRC2)) $(EXTRA_FLAGS)
 	mv $(OBJ2) $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC3_DIR), %.c)
-	$(CC) $(FLAGS) $(SPE_FLAGS) -I$(INC) -c $(addprefix $(SRC3_DIR), $(SRC3))
+	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC3_DIR), $(SRC3)) $(EXTRA_FLAGS)
 	mv $(OBJ3) $(OBJ_DIR)
 
 clean :

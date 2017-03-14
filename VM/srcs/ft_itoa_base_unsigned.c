@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "corewar.h"
 
-static int			count_uintmax(uintmax_t n, int base)
+static long			count_uintmax(uintmax_t n, uintmax_t base)
 {
 	long	i;
 
@@ -36,19 +35,19 @@ char				*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a)
 
 	if (base < 2 || base > 16)
 		return (NULL);
-	i = count_uintmax(n, base);
-	if (!(number = malloc(sizeof(char) * (i + 1))))
+	i = count_uintmax(n, (uintmax_t)base);
+	if (!(number = malloc(sizeof(char) * (size_t)(i + 1))))
 		return (NULL);
 	number[i--] = 0;
 	if (n == 0)
 		number[i] = '0';
 	while (n != 0)
 	{
-		if ((j = n % base) < 0)
+		if ((j = (long)n % (long)base) < 0)
 			j = j * -1;
-		(j < 10) ? (number[i] = (j + '0')) :
-					(number[i] = (j + a - 10));
-		n = n / base;
+		(j < 10) ? (number[i] = (char)(j + '0')) :
+					(number[i] = (char)(j + a - 10));
+		n = n / (uintmax_t)base;
 		i--;
 	}
 	return (number);

@@ -88,11 +88,13 @@ static int			vm_create_champ(t_champ *champs, char *entry, int i,
 		t_datas *datas)
 {
 	int		fd;
+	int		j;
 	char	buff[sizeof(header_t) + CHAMP_MAX_SIZE + 1];
 
 	if (1 > (fd = open(entry, O_RDONLY)))
 		exit (ft_int_error("Echec de lecture du champion"));
-	if (read(fd, &buff, sizeof(header_t) + CHAMP_MAX_SIZE) == -1)
+	if ((j = (int)read(fd, &buff, sizeof(header_t) + CHAMP_MAX_SIZE)) == -1
+		|| j < (int)sizeof(header_t) + 4)
 		exit (ft_int_error("Echec de read du champion"));
 	buff[sizeof(header_t) + CHAMP_MAX_SIZE] = 0;
 	vm_verif_champ(buff, &champs[i]);

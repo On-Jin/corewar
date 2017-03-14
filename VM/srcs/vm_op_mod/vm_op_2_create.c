@@ -27,8 +27,13 @@
 ** ld recherche
 ** write the value of the first parameter in the second parameter(a register)2
 ** parameters T_DIR | T_IND, T_REG
-** ;carry?
-** ;
+** ;carry si carry = 1 passe le carry a 0
+** ;si son op_code_instruc est erronne jump de 2
+** lit le nombre de paramettres de l'octets d'encodage et jump de la taille de
+** ses paramettes (exemple si 101010 et que deux paramettres jump de 1 + 2 * 4)
+** ne check pas si les paramettes sont valides pour la fonction
+** si repertory non valide ne fait rien / prends 0 a la place
+** lit les insturctions a la fin de son cycle
 */
 
 /*

@@ -30,16 +30,15 @@
 ** faire une condition dans init_champ pour renvoyer erreur si champ > MAX_PLAYERS
 */
 
-void		vm_verif_arg(int argc)
+static void		vm_verif_arg(int argc)
 {
 	if (argc == 1)
 		exit (ft_int_error("Usage : corewar [champ]"));
 
 }
 
-int		vm_end_main(void)
+static int		vm_end_main(void)
 {
-	exit(0);
 	return (0);
 }
 
@@ -51,7 +50,7 @@ static void	recup_data_size_arena_and_champ(t_datas *datas, t_champ champs[MAX_P
 	while (i < datas->player_nbr)
 	{
 		datas->size_champ[i] = champs[i].champ_size;
-		dprintf(2, "%i\n", datas->size_champ[i]);
+		dprintf(2, "%i\n", datas->size_champ[i]);//dprinft?
 		i++;
 	}
 	datas->size_max_y = ft_gcd(MEM_SIZE) + 2;

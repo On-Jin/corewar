@@ -17,7 +17,7 @@
 ** Actuellement Flag V utilise pour afficher plus d'informations
 */
 
-void		vm_add_flag(char *line, int *flag)
+static void		vm_add_flag(char *line, int *flag)
 {
 	int		i;
 	int		cp;

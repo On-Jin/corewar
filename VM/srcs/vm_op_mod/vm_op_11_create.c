@@ -23,6 +23,11 @@
 ** ;
 */
 
+/*
+** si le repertoire n'existe pas, ne rien faire
+** n'ecrit pas
+*/
+
 void			vm_op_11_create(t_datas *datas, t_process *process)
 {
 	process->cycle = 25;

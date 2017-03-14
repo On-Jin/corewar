@@ -23,6 +23,8 @@
 ** ;
 */
 
+
+
 void			vm_op_6_create(t_datas *datas, t_process *process)
 {
 	int i;

@@ -12,6 +12,12 @@
 
 #include "corewar.h"
 
+/*
+** A changer :
+** Utiliser unn flag FLAG_D plutot que i_debug
+** mettre en char *datas->arene
+*/
+
 void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_vm *arene,
 						t_lives *lives)
 {

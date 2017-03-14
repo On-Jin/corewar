@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_1_exec.c                                     :+:      :+:    :+:   */
+/*   vm_add_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:12 by gnebie           ###   ########.fr       */
+/*   Created: 2017/03/13 14:47:09 by gnebie            #+#    #+#             */
+/*   Updated: 2017/03/13 14:50:39 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				vm_op_1_exec(t_datas *datas, t_process *process)
+int			vm_add_valid(int adresse)
 {
-	datas->lives->total_lives++;
-	datas->lives->cycle_lives++;
-	process->live = 1;
-	process->PC = vm_add_valid(process->PC + 5);
-	if (process->in_stock[1] != -1)
-	{
-		datas->lives->champ_total_lives[process->in_stock[1]]++;
-		datas->lives->champ_cycle_lives[process->in_stock[1]]++;
-		datas->lives->last_live = process->in_stock[0];
-	}
+	return ((adresse < 0) ? (adresse += MEM_SIZE) : (adresse % MEM_SIZE));
 }

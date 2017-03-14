@@ -15,6 +15,9 @@
 /*
 ** A SUPPRIMER
 */
+
+// pourquoi un static int ???
+
 #include "global.h"
 
 static int			recup_op(t_datas *datas, t_process *pros)
@@ -27,7 +30,7 @@ static int			recup_op(t_datas *datas, t_process *pros)
 	{
 		if (cur_pros == -1)
 			cur_pros = 16;
-		pros->instruction = op_tab[cur_pros].op_code;
+		pros->instruction = (char)op_tab[cur_pros].op_code;
 		pros->cycle = op_tab[cur_pros].cycle;
 	}
 	i++;
@@ -46,7 +49,7 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	datas->begin_process = process;
 	process->next = tmp;
 	process->PC = datas->start[nbr_champ - 1];
-	process->champion = nbr_champ;
+	process->champion = (char)nbr_champ;
 	recup_op(datas, process);
 	return (process);
 }

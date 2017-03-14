@@ -29,7 +29,7 @@ static void		vm_place_champ(t_datas *data, t_vm *arene, t_champ champ[MAX_PLAYER
 	{
 		ft_memcpy((void *)&arene->arene[(i) *
 					(MEM_SIZE / data->player_nbr)], (void *)&champ[i],
-					champ[i].champ_size);
+					(size_t)champ[i].champ_size);
 		data->start[i] = i * (MEM_SIZE / data->player_nbr);
 		if (champ || arene)
 			;

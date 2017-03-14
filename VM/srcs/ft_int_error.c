@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int			ft_int_error(char *line)
+int			ft_int_error(const char *line)
 {
 	char	c;
 

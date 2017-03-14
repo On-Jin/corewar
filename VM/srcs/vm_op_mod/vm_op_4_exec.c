@@ -34,15 +34,16 @@
 
 void			vm_op_4_exec(t_datas *datas, t_process *process)
 {
+		unsigned int tmp;
 	/*
 	** executions
 	*/
-	tmp = (datas->arene[(process->PC + 1) % MEM_SIZE]);
+	tmp = (unsigned int)(datas->arene[(process->PC + 1) % MEM_SIZE]);
 	if (tmp <= REG_NUMBER)
 		process->in_stock[0] = process->reg[tmp];
 	else
 		process->in_stock[3] = -1;
-	tmp = (datas->arene[(process->PC + 2) % MEM_SIZE]);
+	tmp = (unsigned int)(datas->arene[(process->PC + 2) % MEM_SIZE]);
 	if (tmp <= REG_NUMBER)
 		process->in_stock[1] = process->reg[tmp];
 	else

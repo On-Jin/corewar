@@ -16,6 +16,7 @@
 
 void			vm_op_8_create(t_datas *datas, t_process *process)
 {
+		(void)datas;
 	process->cycle = 6;
 	process->instruction = 8;
 

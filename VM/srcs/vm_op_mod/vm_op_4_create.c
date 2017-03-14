@@ -14,7 +14,7 @@
 
 void			vm_op_4_create(t_datas *datas, t_process *process)
 {
-	unsigned int tmp;
+
 
 	(void)datas;
 	process->cycle = 10;

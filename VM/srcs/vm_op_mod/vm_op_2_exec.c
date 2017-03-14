@@ -46,7 +46,6 @@
 void			vm_op_2_exec(t_datas *datas, t_process *process)
 {
 	(void)datas;
-
 	int		tmp;
 
 	tmp = datas->arene[(process->PC + 1) % MEM_SIZE] >> 6;

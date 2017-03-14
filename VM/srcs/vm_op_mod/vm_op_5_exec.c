@@ -25,6 +25,7 @@
 
 void			vm_op_5_exec(t_datas *datas, t_process *process)
 {
+		unsigned int tmp;
 	/*
 	** executions
 	*/

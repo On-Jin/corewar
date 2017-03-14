@@ -16,7 +16,7 @@
 
 void			vm_op_2_create(t_datas *datas, t_process *process)
 {
-	int		tmp;
+
 
 	(void)datas;
 	process->cycle = 5;

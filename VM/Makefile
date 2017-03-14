@@ -18,7 +18,8 @@ FLAGS = -Wall -Werror -Wextra
 SPE_FLAGS =  -lncurses -g
 OPTI_FLAGS = -O2
 DEBUG_FLAG = -fsanitize=address
-EXTRA_FLAGS = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
+EXTRA_FLAGS =
+E = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
 	-Werror-implicit-function-declaration -Wmain -Wparentheses \
 	-Wsign-compare -Waggregate-return -Wstrict-prototypes \
 	-Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn \
@@ -28,7 +29,7 @@ EXTRA_FLAGS = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
 	-Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused \
 	-Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef \
 	-Wshadow -Wpointer-arith -Wbad-function-cast \
-	-Wpadded  -Wwrite-strings -Wconversion 
+	-Wpadded  -Wwrite-strings -Wconversion
 	#-Weverything -std=c89 -pedantic -MMD
 
 NAME = corewar

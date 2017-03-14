@@ -78,10 +78,8 @@ typedef struct			header_s
 {
 	unsigned int		magic;
 	char				prog_name[PROG_NAME_LENGTH + 1];
-	char				voider[3];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
-	char				voider2[3];
 }						header_t;
 
 /*

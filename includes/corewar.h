@@ -110,12 +110,12 @@ typedef struct		s_op
 
 typedef struct		s_champ
 {
-	int				champ_nbr;
-	int				champ_size;
-	int				champ_position;
 	char			champ[CHAMP_MAX_SIZE];
 	char			champ_name[PROG_NAME_LENGTH + 1];
 	char			voider;
+	int				champ_nbr;
+	int				champ_size;
+	int				champ_position;
 }					t_champ;
 
 typedef struct		s_process

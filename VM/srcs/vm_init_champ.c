@@ -100,6 +100,7 @@ static int			vm_create_champ(t_champ *champs, char *entry, int i,
 	vm_verif_champ(buff, &champs[i]);
 	ft_memmove((void *)&champs[i], (void *)(buff + sizeof(header_t)),
 			CHAMP_MAX_SIZE);
+	ft_printf("%s\n", (char *)&champs[i]);
 	champs[i].champ_nbr = i;
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);
 	if (close(fd) == -1)

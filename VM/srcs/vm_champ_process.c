@@ -15,15 +15,7 @@
 static void		vm_place_champ(t_datas *data, char *arene, t_champ champ[MAX_PLAYERS + 1])
 {
 	int i;
-	int size;
 
-	i = 0;
-	size = 0;
-	while (i < data->player_nbr)
-	{
-		size += champ[i].champ_size;
-		i++;
-	}
 	i = 0;
 	while (i < data->player_nbr)
 	{

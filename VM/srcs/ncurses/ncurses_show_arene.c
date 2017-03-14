@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 19:20:11 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:56:54 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	loop_arene(t_datas *datas, t_draw *d)
 		x = 2;
 		while (x < datas->size_max_x - 1  && i < MEM_SIZE)
 		{
-			vm_show_arene_element(datas, d, datas->arene->arene[i], y, x);
+			vm_show_arene_element(datas, d, datas->arene[i], y, x);
 			x += 3;
 			++i;
 		}

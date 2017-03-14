@@ -6,20 +6,20 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:50:32 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:50:33 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:50:14 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			*vm_recup_all_process(t_process *process, t_vm *arene, int flag)
+int			*vm_recup_all_process(t_process *process, char *arene, int flag)
 {
 	int			tmp;
 	int			i;
 	int			adress;
 
 	i = 3;
-	tmp = (arene->arene[(process->PC + 1) % MEM_SIZE]);
+	tmp = (arene[(process->PC + 1) % MEM_SIZE]);
 	adress = process->PC + 2;
 	while (tmp && i > -1)
 	{
@@ -28,7 +28,7 @@ int			*vm_recup_all_process(t_process *process, t_vm *arene, int flag)
 			if ((flag & 0xff) == 1)
 				process->in_stock[i] = vm_recup_arena_num(1, arene, adress);
 			else
-				process->in_stock[i] = vm_recup_process_reg(process,arene, adress);
+				process->in_stock[i] = vm_recup_process_reg(process, arene, adress);
 			adress += 1;
 		}
 		else if ((tmp & 0xff) == 0b10 && flag & 0b10)

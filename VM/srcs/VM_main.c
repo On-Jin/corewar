@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 18:12:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:30:39 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ static void	recup_data_size_arena_and_champ(t_datas *datas, t_champ champs[MAX_P
 
 int			main(int argc, char **argv)
 {
-	t_vm		arene;
 	t_lives		lives;
 	t_champ		champs[MAX_PLAYERS + 1];
 	t_datas		datas;
 
 	vm_verif_arg(argc);
 	vm_verif_macro();
-	vm_innit_to_0(&datas, champs, &arene, &lives);
+	vm_innit_to_0(&datas, champs, &lives);
 	vm_champ_process(&datas, argc, argv);
 	recup_data_size_arena_and_champ(&datas, champs);
 	ncurses_init(&datas, datas.size_max_y, datas.size_max_x + 1);

@@ -6,13 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:50:15 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:50:16 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:50:46 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int				vm_recup_process_reg(t_process *process, t_vm *arene, int adresse)
+int				vm_recup_process_reg(t_process *process, char *arene, int adresse)
 {
 	unsigned int		reg;
 	int					val;

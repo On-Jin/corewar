@@ -6,13 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:49:56 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:49:58 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:50:28 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int				vm_recup_indirect_num(t_process *process, t_vm *arene, int adresse)
+int				vm_recup_indirect_num(t_process *process, char *arene, int adresse)
 {
 	unsigned int		ind_adress;
 	int					val;

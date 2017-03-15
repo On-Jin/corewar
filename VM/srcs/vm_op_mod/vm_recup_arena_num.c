@@ -22,11 +22,11 @@ int			vm_recup_arena_num(int size, char *arene, int PC)
 	if (PC + size < MEM_SIZE && (size & 7) == 1)
 	{
 		if (size == 4)
-			return (res = *(unsigned int *)(&arene[PC]));
+			return (res = *(int *)(&arene[PC]));
 		if (size == 2)
-			return (res = *(unsigned short *)(&arene[PC]));
+			return (res = *(short *)(&arene[PC]));
 		if (size == 1)
-			return (res = *(unsigned char *)(&arene[PC]));
+			return (res = *(char *)(&arene[PC]));
 	}
 	else
 		while (i < size)

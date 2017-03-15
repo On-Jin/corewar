@@ -33,7 +33,7 @@ void			vm_op_9_exec(t_datas *datas, t_process *process)
 
 	if (process->carry)
 	{
-		process->PC = (char)vm_add_valid(process->PC + (vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
+		process->PC = vm_add_valid(process->PC + (vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
 	}
 	else
 		process->PC = vm_add_valid(process->PC + 2);

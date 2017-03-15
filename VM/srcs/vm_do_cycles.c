@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 16:22:39 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/15 15:14:04 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
-			if (5 <= cur_ocp)
-				cur_ocp = 0;
+		//	if (5 <= cur_ocp)
+		//		cur_ocp = 0;
 			start_op_code(datas, pros, cur_ocp);
 		}
 		else

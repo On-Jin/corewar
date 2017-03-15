@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:12 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/15 19:35:38 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 	process->PC = vm_add_valid(process->PC + 5);
 	if (process->in_stock[1] != -1)
 	{
-		datas->lives->total_lives++;
+		datas->lives->total_lives += 1;
 		datas->lives->cycle_lives++;
 		datas->lives->champ_total_lives[arg2]++;
 		datas->lives->champ_cycle_lives[arg2]++;

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 12:56:54 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:23:22 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ void		print_live(t_datas *datas, t_draw *d)
 {
 	if (d)
 		;
-	mvprintw(6, datas->size_max_x + 2, "Cycle_Lives_:_%i", datas->lives->cycle_lives);
-	mvprintw(7, datas->size_max_x + 2, "Last_Lives_:_%i", datas->lives->last_live);
+	mvprintw(6, datas->size_max_x + 2, "Cycle_Lives_:_%ld      ", datas->lives->cycle_lives);
+	mvprintw(7, datas->size_max_x + 2, "Last_Lives_:_%i      ", datas->lives->last_live);
+	mvprintw(8, datas->size_max_x + 2, "Total_Lives_:_%ld      ", datas->lives->total_lives);
 }
 
 void		print_process(t_datas *datas, t_draw *d)
@@ -154,6 +155,7 @@ void		print_process(t_datas *datas, t_draw *d)
 			mvprintw(16, datas->size_max_x + 4, "        ");
 			mvprintw(17, datas->size_max_x + 4, "                       ");
 		}
+		mvprintw(18, datas->size_max_x + 4, "Reg : [%i][%i][%i][%i][%i][%i][%i][%i]", pros->reg[1], pros->reg[2],pros->reg[3],pros->reg[4],pros->reg[5],pros->reg[6],pros->reg[7],pros->reg[8]);
 	}
 }
 //ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_BLCORNER, ACS_BRCORNER

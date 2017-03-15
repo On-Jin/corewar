@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:26 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:27 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/15 17:53:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void			vm_op_4_exec(t_datas *datas, t_process *process)
 			mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "process_in_stock[%d][%d][%d]---",process->in_stock[0], process->in_stock[1], process->in_stock[2] );
 		if (process->in_stock[2] > 0 && process->in_stock[2] <= REG_NUMBER)
 		{
+			mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "Coucou");
 			process->reg[process->in_stock[2]] = process->in_stock[0] + process->in_stock[1];
 			process->carry = 1;
 		}

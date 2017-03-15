@@ -35,13 +35,15 @@ t_op 	get_config(char *name)
 	int i;
 
 	i = 0;
+	//ft_printf("name = '%s'\n", name);
 	while(op_tab[i].name)
 	{
 		if (ft_strcmp(op_tab[i].name, name) == 0)
 			return (op_tab[i]);
 		i++;
 	}
-	error("Unknow instruct");
+	ft_printf("'%s'\n", name);
+	error("Unknow instruct\n");
 	return (op_tab[0]);
 }
 
@@ -55,7 +57,7 @@ int 		compiler_compile_get_label(char *line)
 		if(!ft_strchr(LABEL_CHARS, line[i]))
 		{
 			if (line[i] == LABEL_CHAR)
-				return (++i);
+				return (i);
 			else
 				return (-1);
 		}
@@ -68,7 +70,7 @@ int 		compiler_compile_get_label(char *line)
 int		get_argtype(char *str, int conf)
 {
 	int type = T_UNK;
-	if (*str == DIRECT_CHAR && ft_strchr(LABEL_CHARS, str[1]))
+	if (*str == DIRECT_CHAR)
 		type = T_DIR;
 	if (*str == 'r') // registre
 		type = T_REG;
@@ -77,12 +79,15 @@ int		get_argtype(char *str, int conf)
 	if (*str == DIRECT_CHAR && str[1] == LABEL_CHAR)
 		type = T_LAB;
 	if (type == T_UNK)
-		error("Error : Unknow argtype.");
-	ft_printf("\n%s\n%b\n%b\n%b\n", str, T_DIR, conf, (T_DIR & conf));
+	{
+		ft_printf("'%s'\n", str);
+		error("Error : Unknow argtype.\n");
+	}
+	//ft_printf("\n%s\n%b\n%b\n%b\n", str, T_DIR, conf, (T_DIR & conf));
 	if (type != T_LAB && (type & conf) == 0)
-		error("Error : argtype");
+		error("Error : argtype\n");
 	if (type == T_LAB && (T_DIR & conf) == 0)
-		error("Error : argtype label");
+		error("Error : argtype label\n");
 	return type;
 	return (0);
 }
@@ -98,21 +103,22 @@ char *extract_label_name(char *str)
 	int end = 0;
 	int start = 0;
 
-	while (str[start] && !ft_isdigit(str[start]))
+	while (str[start] && !ft_strchr(LABEL_CHARS, str[start]))
 		start++;
 	end = start;
-	while (str[end] && ft_isdigit(str[end]))
+	while (str[end] && ft_strchr(LABEL_CHARS, str[start]))
 		end++;
-	printf("======>%i et %i\n", start, end );
-	return ft_strsub(str, start, start - end);
+	//printf("======>%s start'%d' end'%d' et %s\n", str, start, end, ft_strsub(str, start, end - start) );
+	return ft_strsub(str, start, end - start);
 }
 
 int   extract_direct(char *str)
 {
 	int start = 0;
 
-	while (!ft_isdigit(str[start]))
+	while (!(ft_isdigit(str[start]) || str[start] == '-'))
 		start++;
+	//ft_printf("-->%s\n", str + start);
 	return (ft_atoi(str + start));
 }
 
@@ -140,6 +146,7 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 
 	str = ft_strtrim(line);
 	i = 0;
+	ft_printf("=======>%s\n", str);
 	while (ft_strchr(OPCODE_CHARS, str[i]))
 		i++;
 	opcode = ft_strsub(str, 0, i);
@@ -148,13 +155,13 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 	inst->opcode = opecode_config.op_code;
 	inst->arg_nbrs = opecode_config.nb_arg;
 	y = 0;
-	ft_printf("=-->\"%s\"<--=\n", str2);
+	//ft_printf("=-->\"%s\"<--=\n", str2);
 	splited = ft_strsplit(str2, SEPARATOR_CHAR);
 	while (y < opecode_config.nb_arg)
 	{
 		tmp = 0;
 		// opcode
-		ft_printf("%d…\n", y);
+		//ft_printf("%d…\n", y);
 		inst->args[y][0] = get_argtype(splited[y], opecode_config.tab_arg[y]);
 		if (inst->args[y][0] == REG_CODE)
 			inst->args[y][1] = 1;
@@ -186,12 +193,17 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 		y++;
 	}
 	if (splited[y] != 0)
-		error("Too many arguments.");
+		error("Too many arguments.\n");
 	while (y < 4)
 	{
 		inst->argcode = inst->argcode << 2;
 		y++;
 	}
+	
+	inst->size = inst->args[0][1] + inst->args[1][1] + inst->args[2][1];
+	inst->size++; // opcode
+	if (inst->argcode)
+		inst->size++;
 	free(str);
 }
 
@@ -201,35 +213,149 @@ void		print_instruts(t_instruct *instructs)
 	int y;
 	void *val;
 
-	i = 0;
-	ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ", instructs->label_name, instructs->size, instructs->opcode);
-	if (instructs->argcode)
+	while (instructs)
 	{
-		ft_printf("%#0hhx ", instructs->argcode);
-	}
-	while (i <  instructs->arg_nbrs)
-	{
-		y = 0;
-		val = &(instructs->args[i][2]);
-		while (y < instructs->args[i][1])
+		i = 0;
+		//ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ", instructs->label_name, instructs->size, instructs->opcode);
+		if (instructs->argcode)
 		{
-			ft_printf("%#0hhx ", ((char *)val)[instructs->args[i][1] - 1 - y]);
-			y++;
+			//ft_printf("%#0hhx ", instructs->argcode);
 		}
-		i++;
-		ft_printf(", ");
+		while (i <  instructs->arg_nbrs)
+		{
+			y = 0;
+			val = &(instructs->args[i][2]);
+			while (y < instructs->args[i][1])
+			{
+				//ft_printf("%#0hhx ", ((char *)val)[instructs->args[i][1] - 1 - y]);
+				y++;
+			}
+			i++;
+			//ft_printf(", ");
+		}
+		//ft_printf("\n\n");
+		instructs = instructs->next;
 	}
-	ft_printf("\n");
 }
 
-void	compiler_compile(int fdin)
+
+size_t			get_label_position(t_instruct *first, char *labelname)
+{
+	t_instruct *current;
+	int 		count;
+	t_bool		finded;
+
+	current = first;
+	finded = FALSE;
+	count = 0;
+	while (current)
+	{
+		//ft_printf("labelname >>> %s\n", current->label_name);
+		if (ft_strcmp(current->label_name, labelname) == 0)
+		{
+			finded = TRUE;
+			break ;
+		}
+		count += current->size;
+		current = current->next;
+	}
+	//ft_printf("Label position : %i\n", count);
+	if (!finded)
+		error("Label not exist\n");
+	return (count);
+}
+
+size_t			get_rquest_label_position(t_instruct *first, t_instruct *tofind, int argnbr)
+{
+	t_instruct *current;
+	int 		count;
+	t_bool		finded;
+
+	current = first;
+	finded = FALSE;
+	count = 0;
+	while (current)
+	{
+		if (current == tofind)
+		{
+			finded = TRUE;
+			break ;
+		}
+		count += current->size;
+		current = current->next;
+	}
+	//ft_printf("Label rquest position : %i\n", count);
+	if (!finded)
+		error("Unknow error\n");
+	return (count);
+}
+
+size_t			get_relative(t_instruct *first, t_instruct *tofind, int argnbr, char *labelname)
+{
+	return (get_label_position(first, labelname) - get_rquest_label_position(first, tofind, argnbr));
+}
+
+void		hydrate_labels(t_instruct *first)
+{
+	t_instruct *current;
+	int pos;
+	int i;
+
+	current = first;
+	while (current)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			if (current->args_labels[i])
+			{
+				pos = get_relative(first, current, i, current->args_labels[i]);
+				ft_memmove(current->args[i] + 2, &pos, current->args[i][1]); 
+			}
+			i++;
+		}
+		current = current->next;
+	}
+}
+
+void		instructs_add(t_instruct **instructs_list, t_instruct *instruct)
+{
+	t_instruct *current;
+
+	current = *instructs_list;
+	if (!current)
+	{
+		*instructs_list = instruct;
+		return ;
+	}
+	while (current->next)
+		current = current->next;
+	current->next = instruct;
+}
+
+size_t		get_instruct_size(t_instruct *current)
+{
+	size_t size;
+
+	size = 0;
+	while (current)
+	{
+		size += current->size;
+		current = current->next;
+	}
+	return (size);
+}
+
+t_instruct *compiler_compile(int fdin)
 {
 	char *line;
 	char *lineclr;
 	int 	endlabel;
 	char *instruct;
 	t_instruct *inst;
+	t_instruct *inst_first;
 
+	inst_first = NULL;
 	while(ft_gnl(fdin, &line))
 	{
 		if (!(*line))
@@ -237,11 +363,11 @@ void	compiler_compile(int fdin)
 		lineclr = ft_strtrim(line);
 		free(line);
 		if (!(inst = newinstruct()))
-			error("Malloc error");
+			error("Malloc error\n");
 		endlabel = compiler_compile_get_label(lineclr);
 		if (endlabel != -1)
 			inst->label_name = ft_strsub(lineclr, 0, endlabel);
-		line = (endlabel != -1) ? lineclr + endlabel : lineclr;
+		line = (endlabel != -1) ? lineclr + endlabel + 1 : lineclr;
 		instruct = ft_strtrim(line);
 		if (instruct == NULL)
 		{
@@ -249,11 +375,17 @@ void	compiler_compile(int fdin)
 			ft_gnl(fdin, &instruct);
 		}
 		compiler_compile_line(instruct, inst);
-		print_instruts(inst);
+		instructs_add(&inst_first, inst);
 		//error("end ! :)");
 		// Ignorer les \n
 		// Ignorer les #
 	}
+	hydrate_labels(inst_first);
+	print_instruts(inst_first);
+	return (inst_first);
+	//return (unsigned int)get_instruct_size(inst_first);
+	// Go write
+
 }
 
 /*

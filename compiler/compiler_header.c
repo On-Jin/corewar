@@ -1,23 +1,26 @@
 #include "compiler.h"
 
-void	write_exec_magic(int fd, header_t *header)
+void	invert_byte(unsigned int *val)
 {
-	int nbr;
-	int revnbr;
 	int i;
-	int size;
+	unsigned int revnbr;
+	unsigned int nbr;
 
 	i = 3;
-	nbr = COREWAR_EXEC_MAGIC;
-	revnbr = 0;
+	nbr = *val;
 	while (i >= 0)
 	{
 		((char*)(&revnbr))[i] = ((char*)(&nbr))[0];
 		nbr = nbr >> 8;
 		i--;
 	}
-	//write(fd, &revnbr, 4);
-	header->magic = revnbr;
+	*val = revnbr;
+}
+
+void	write_exec_magic(int fd, header_t *header)
+{
+	header->magic = COREWAR_EXEC_MAGIC;
+	invert_byte(&(header->magic));
 }
 
 void	write_comment(int fdin, header_t *header)

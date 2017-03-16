@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/15 15:14:04 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/16 13:48:16 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@ static void		vm_delete_unlive_process(t_datas *datas)
 	(process) ? process->live = 0: 0;
 }
 
-void		start_op_code(t_datas *datas, t_process *pros, int op_code)
-{
-	pros->instruction = datas->op_tab[op_code].op_code;
-	pros->cycle = datas->op_tab[op_code].cycle;
-}
-
 static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
 	t_process *pros;
@@ -57,16 +51,14 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	pros = datas->begin_process;
 	while (pros)
 	{
+		if (pros->cycle == 1)
+			exec[(int)pros->instruction](datas, pros);
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
 			if (17 <= cur_ocp)
 				cur_ocp = 0;
 			start_op_code(datas, pros, cur_ocp);
-		}
-		if (pros->cycle == 1)
-		{
-			exec[(int)pros->instruction](datas, pros);
 		}
 		pros->cycle--;
 		if (pros->cycle < 0)
@@ -119,7 +111,8 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	vm_init_cycle(cycle);
 	while (datas->begin_process)
 	{
-		cycle->cycle = (!cycle->total_cycle) ? 1 : 0;
+		//cycle->cycle = (cycle->total_cycle) == 0 ? 1 : 0;
+		cycle->cycle = 0;
 		while (cycle->cycle_to_die <= 0 || cycle->cycle < cycle->cycle_to_die)
 		{
 			datas->i_debug = 0;

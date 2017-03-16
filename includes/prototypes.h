@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 16:19:49 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/16 13:32:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *));
 int			vm_init_process(t_datas *datas);
+
+void		start_op_code(t_datas *datas, t_process *pros, int op_code);
 
 void		vm_champ_process(t_datas *datas, int argc, char **argv);
 int			vm_champ_number_to_position(int champ_num, t_champ *champ_tab);
@@ -93,6 +95,7 @@ void		vm_op_14_create(t_datas *datas, t_process *process);
 void		vm_op_15_create(t_datas *datas, t_process *process);
 void		vm_op_16_create(t_datas *datas, t_process *process);
 int			vm_add_valid(int adresse);
+
 void		ncurses_init(t_datas *datas, int height, int width);
 void		ncurses_end(t_datas *datas);
 void		ncurses_key(t_datas *datas);

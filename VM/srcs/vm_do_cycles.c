@@ -51,8 +51,6 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	pros = datas->begin_process;
 	while (pros)
 	{
-		if (pros->cycle == 1)
-			exec[(int)pros->instruction](datas, pros);
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
@@ -60,6 +58,8 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 				cur_ocp = 0;
 			start_op_code(datas, pros, cur_ocp);
 		}
+		if (pros->cycle == 1)
+			exec[(int)pros->instruction](datas, pros);
 		pros->cycle--;
 		if (pros->cycle < 0)
 			ft_printf("erreur procycle");

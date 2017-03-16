@@ -14,5 +14,5 @@
 
 int			vm_add_valid(int adresse)
 {
-	return ((adresse < 0) ? (adresse += MEM_SIZE) : (adresse % MEM_SIZE));
+	return (((adresse < 0) ? (adresse += MEM_SIZE) : (adresse)) % MEM_SIZE);
 }

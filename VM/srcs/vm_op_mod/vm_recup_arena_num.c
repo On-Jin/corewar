@@ -15,25 +15,17 @@
 int			vm_recup_arena_num(int size, char *arene, int PC)
 {
 	int		i;
-	int		res;
+	unsigned int		res;
 
 	i = 0;
 	res = 0;
-	if (PC + size < MEM_SIZE && (size & 7) == 1)
+	while (i < size)
 	{
-		if (size == 4)
-			return (res = *(int *)(&arene[PC]));
-		if (size == 2)
-			return (res = *(short *)(&arene[PC]));
-		if (size == 1)
-			return (res = *(char *)(&arene[PC]));
+		res <<= 8;
+		res |= (char)arene[(PC + i) % MEM_SIZE];
+		i++;
+//			mvprintw(NC_DEBUG_Y + 22 + i, ft_gcd(MEM_SIZE) * 3 + 10/*NC_DEBUG_X*/, "else result = %d", res);
 	}
-	else
-		while (i < size)
-		{
-			res = res * 0x100;
-			res += (arene[(PC + (i % IDX_MOD)) % MEM_SIZE]);
-			i++;
-		}
+//		mvprintw(NC_DEBUG_Y + 20, ft_gcd(MEM_SIZE) * 3 + 10/*NC_DEBUG_X*/, "else result = %d size = %d, pc  %d, %d, memsize %d", res,size,PC ,(size & 7), MEM_SIZE);
 	return (res);
 }

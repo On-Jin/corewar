@@ -12,29 +12,21 @@
 
 #include "corewar.h"
 
-
-/*
-** Questions par commande:
-** Que fait la commande?
-** De qui a t'elle besoin?
-** que fait elle si ses instrictions sont eronnees ?
-** que fait elle si son op_code_instruc est erronne ?
-** carry ?
-** jump?
-** ;
-*/
-
 /*
 ** zjmp
 */
 
 void			vm_op_9_exec(t_datas *datas, t_process *process)
 {
+	int		arg1;
+	int		arg2;
 
+	arg1 = process->PC;
 	if (process->carry)
-	{
-		process->PC = (char)vm_add_valid(process->PC + (vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
-	}
-	else
+{		process->PC = vm_add_valid(arg2 = (process->PC +
+			(vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD)));
+//	if (process->reg[1] == -2)
+//		mvprintw(NC_DEBUG_Y + datas->i_debug++ + 8, NC_DEBUG_X, "ancien PC == %d, recup_arg = %d nouveau PC %d ", arg1, arg2, process->PC);
+}	else
 		process->PC = vm_add_valid(process->PC + 3);
 }

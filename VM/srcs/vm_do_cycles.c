@@ -57,19 +57,18 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	pros = datas->begin_process;
 	while (pros)
 	{
+		if (pros->cycle == 0)
+		{
+			cur_ocp = (unsigned int)datas->arene[pros->PC];
+			if (17 <= cur_ocp)
+				cur_ocp = 0;
+			start_op_code(datas, pros, cur_ocp);
+		}
 		if (pros->cycle == 1)
 		{
 			exec[(int)pros->instruction](datas, pros);
 		}
-		if (pros->cycle == 0)
-		{
-			cur_ocp = (unsigned int)datas->arene[pros->PC];
-		//	if (5 <= cur_ocp)
-		//		cur_ocp = 0;
-			start_op_code(datas, pros, cur_ocp);
-		}
-		else
-			pros->cycle--;
+		pros->cycle--;
 		if (pros->cycle < 0)
 			ft_printf("erreur procycle");
 		pros = pros->next;
@@ -96,21 +95,22 @@ static void		vm_init_cycle(t_cycle *cycle)
 	cycle->cycle = 0;
 	cycle->total_cycle = 0;
 	cycle->cycle_to_die = CYCLE_TO_DIE;
-	cycle->check = 0;
+	cycle->check = 1;
 }
 
 static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
 {
 	ft_printf("\n\nlast %d\n\n", datas->lives->last_live);
+	ft_printf("\n\nlast live cycle %d\n\n", datas->lives->cycle_last_live);
 	endwin();
 	ft_printf("total_live %d\n", datas->lives->total_lives);
 	ft_printf("total_cycle %d\n", cycle->total_cycle);
 	vm_destroy_all_process(datas);
 	if (datas->flag & FLAG_N)
 		ncurses_end(datas);
-	exit(ft_int_error("Fin de cycle to die"));// temp
+	return(ft_int_error("Fin de cycle to die"));
 }
-
+//manque 1 cycle ~~~~~~~~~~
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
 	t_cycle	*cycle;
@@ -119,8 +119,8 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	vm_init_cycle(cycle);
 	while (datas->begin_process)
 	{
-		cycle->cycle = 0;
-		while (cycle->cycle < cycle->cycle_to_die)
+		cycle->cycle = (!cycle->total_cycle) ? 1 : 0;
+		while (cycle->cycle_to_die <= 0 || cycle->cycle < cycle->cycle_to_die)
 		{
 			datas->i_debug = 0;
 			//Si flag N
@@ -141,13 +141,15 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 				turn_process(datas, exec);
 				cycle->cycle++;
 			}
+			if (cycle->cycle_to_die <= 0)
+				break ;
 		}
 		cycle->total_cycle += cycle->cycle;
 		vm_delete_unlive_process(datas);
 		if (datas->lives->cycle_lives >= NBR_LIVE || cycle->check == MAX_CHECKS)
 		{
 			cycle->cycle_to_die -= CYCLE_DELTA;
-			cycle->check = 0;
+			cycle->check = 1;
 		}
 		else
 			cycle->check++;

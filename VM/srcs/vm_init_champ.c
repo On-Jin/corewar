@@ -74,7 +74,8 @@ static int			vm_create_champ(t_champ *champs, char *entry, int i,
 	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(header_t)),
 			j - sizeof(header_t));
 	ft_printf("%s\n", (char *)&champs[i]);
-	champs[i].champ_nbr = i;
+	champs[i].champ_nbr = -(i + 1);
+	ft_printf("champ_position = %i, champ_nbr = %d\n", i, champs[i].champ_nbr);
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);
 	if (close(fd) == -1)
 		exit (ft_int_error("Echec de close du champion"));

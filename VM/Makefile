@@ -14,7 +14,7 @@
 .SUFFIXES :
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 SPE_FLAGS =  -lncurses -g
 OPTI_FLAGS = -O2
 DEBUG_FLAG = -fsanitize=address

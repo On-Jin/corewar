@@ -65,7 +65,7 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 		}
 		i++;
 		flag = flg >> (8 * (3 - i));
-		tmp = arene[vm_add_valid(process->PC + 1)] >> (2 * (3 - i));
+		tmp = (char)arene[vm_add_valid(process->PC + 1)] >> (2 * (3 - i));
 	}
 	return (process->in_stock);
 }

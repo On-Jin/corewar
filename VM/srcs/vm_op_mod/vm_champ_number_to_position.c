@@ -19,7 +19,7 @@ int				vm_champ_number_to_position(int champ_num, t_champ *champ_tab)
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
-		if (champ_num == champ_tab[i].champ_position)
+		if (champ_num == champ_tab[i].champ_nbr)
 			return (i);
 		++i;
 	}

@@ -20,7 +20,7 @@ void		ncurses_key(t_datas *datas)
 	ret = getch();
 	if (ret > 'A' && ret < 'z')
 		datas->key = ret;
-	if (ret == NC_PROC_NEXT)
+	if (ret == NC_PROC_NEXT && datas->nbr_process > datas->cur_pros)
 		datas->cur_pros++;
 	if (ret == NC_PROC_BACK && datas->cur_pros > 0)
 		datas->cur_pros--;

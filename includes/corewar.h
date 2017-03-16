@@ -141,7 +141,7 @@ typedef struct		s_lives
 	long			champ_total_lives[CHAMP_MAX_SIZE];
 	long			champ_cycle_lives[CHAMP_MAX_SIZE];
 	int				last_live;
-	int				voider;
+	int				cycle_last_live;
 }					t_lives;
 
 typedef struct		s_datas

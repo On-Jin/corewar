@@ -47,7 +47,7 @@ int			vm_init_process(t_datas *datas)
 	while (i < datas->player_nbr)
 	{
 		process = vm_create_process(datas, i + 1);
-		process->reg[0] = datas->begin_champ[i].champ_nbr;
+		process->reg[1] = datas->begin_champ[i].champ_nbr;
 		process->carry = 1;
 		i++;
 	}

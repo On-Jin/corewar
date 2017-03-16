@@ -110,8 +110,8 @@ void		print_cycle(t_datas *datas, t_draw *d)
 	if(d)
 		;
 	mvprintw(1, datas->size_max_x + 2, "Total cycle : %i", datas->cycle.total_cycle + datas->cycle.cycle);
-	mvprintw(2, datas->size_max_x + 2, "%i/%i", datas->cycle.cycle, datas->cycle.cycle_to_die);
-	mvprintw(4, datas->size_max_x + 2, "Check : %i", datas->cycle.check);
+	mvprintw(2, datas->size_max_x + 2, "Cycle [%6i/%6i] Cycle to die", datas->cycle.cycle, datas->cycle.cycle_to_die);
+	mvprintw(4, datas->size_max_x + 2, "Check : %2i", datas->cycle.check);
 }
 
 void		print_live(t_datas *datas, t_draw *d)
@@ -119,7 +119,7 @@ void		print_live(t_datas *datas, t_draw *d)
 	if (d)
 		;
 	mvprintw(6, datas->size_max_x + 2, "Cycle_Lives_:_%ld      ", datas->lives->cycle_lives);
-	mvprintw(7, datas->size_max_x + 2, "Last_Lives_:_%i      ", datas->lives->last_live);
+	mvprintw(7, datas->size_max_x + 2, "Last_Lives_:_%10i     Last_Lives_cycle:_%10i ", datas->lives->last_live, datas->lives->cycle_last_live);
 	mvprintw(8, datas->size_max_x + 2, "Total_Lives_:_%ld      ", datas->lives->total_lives);
 }
 
@@ -129,7 +129,7 @@ void		print_process(t_datas *datas, t_draw *d)
 	int			i;
 	if (d)
 		;
-	
+
 	i = datas->nbr_process;
 	pros = datas->begin_process;
 	while (pros && i != datas->cur_pros)

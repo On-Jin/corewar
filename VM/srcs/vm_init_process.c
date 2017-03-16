@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:30:04 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 16:18:43 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:55:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			vm_init_process(t_datas *datas)
 	{
 		process = vm_create_process(datas, i + 1);
 		process->reg[1] = datas->begin_champ[i].champ_nbr;
-		process->carry = 1;
+		process->carry = 0;
 		i++;
 	}
 	vm_op_create_exec(datas);

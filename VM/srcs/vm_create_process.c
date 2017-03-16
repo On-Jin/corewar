@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/16 13:08:38 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:54:55 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	process->next = tmp;
 	process->PC = datas->start[nbr_champ - 1];
 	process->champion = (char)nbr_champ;
+	process->carry = 0;
 	return (process);
 }

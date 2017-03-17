@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:31:38 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/11 16:50:58 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 17:46:39 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void		ncurses_end(t_datas *datas)
 {
-	delwin(datas->win);
+	delwin(datas->nc.win);
 	endwin();
 }

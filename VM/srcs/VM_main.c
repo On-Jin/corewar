@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/16 17:16:33 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 17:41:11 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void	recup_data_size_arena_and_champ(t_datas *datas, t_champ champs[MAX_P
 		dprintf(2, "datas->size_champ %i\n", datas->size_champ[i]);//dprinft?
 		i++;
 	}
-	datas->size_max_y = ft_gcd(MEM_SIZE) + 2;
-	datas->size_max_x = ft_gcd(MEM_SIZE) * 3 + 2;
+	datas->nc.size_max_y = (ft_gcd(MEM_SIZE) + 2);
+	datas->nc.size_max_x = (ft_gcd(MEM_SIZE) * 3 + 2);
 }
 
 int			main(int argc, char **argv)
@@ -69,7 +69,7 @@ int			main(int argc, char **argv)
 	vm_champ_process(&datas, argc, argv);
 	recup_data_size_arena_and_champ(&datas, champs);
 	if (datas.flag & FLAG_N)
-		ncurses_init(&datas, datas.size_max_y, datas.size_max_x + 1);
+		ncurses_init(&datas, datas.nc.size_max_y, datas.nc.size_max_x + 1);
 	vm_init_process(&datas);
 	if (datas.flag & FLAG_N)
 		ncurses_end(&datas);

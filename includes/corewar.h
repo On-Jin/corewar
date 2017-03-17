@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 17:25:19 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:54:43 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
 # define NC_PROC_BACK '-'
 # define NC_DEBUG_X datas->size_max_x + 2 + 3
 # define NC_DEBUG_Y 23
-
+# define NC_W_INF 70
 /*
 ** MACROS
 */
@@ -138,11 +138,30 @@ typedef struct		s_lives
 {
 	long			total_lives;
 	long			cycle_lives;
-	long			champ_total_lives[CHAMP_MAX_SIZE];
-	long			champ_cycle_lives[CHAMP_MAX_SIZE];
+	long			champ_total_lives[MAX_PLAYERS];
+	long			champ_cycle_lives[MAX_PLAYERS];
 	int				last_live;
 	int				cycle_last_live;
 }					t_lives;
+
+typedef struct		s_ncurses
+{
+	WINDOW			*win;
+	WINDOW			*inf;
+	int				key;
+	int				size_max_y;
+	int				size_max_x;
+	int				cur_pros;
+	int				cur_menu;
+}					t_nc;
+typedef struct		s_inf
+{
+	long			nbr_process;
+	long			total_lives;
+	long			cycle_lives;
+	long			cycle_last_live;
+	int				champion;
+}					t_inf;
 
 typedef struct		s_datas
 {
@@ -150,7 +169,9 @@ typedef struct		s_datas
 	t_champ			*begin_champ;
 	t_lives			*lives;
 	t_cycle			cycle;
+	t_nc			nc;
 	t_op			op_tab[17];
+	t_inf			inf[5];
 	int				player_nbr;
 	int				nbr_cycles;
 	int				start[4];
@@ -158,14 +179,8 @@ typedef struct		s_datas
 	int				flag;
 	int				nbr_process;
 
-	int				key;
-	int				size_max_y;
-	int				size_max_x;
-	int				cur_pros;
 	int				i_debug;
-
 	int				voider;
-	WINDOW			*win;
 
 	char			arene[MEM_SIZE];
 }					t_datas;

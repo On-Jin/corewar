@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/16 13:32:49 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:43:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ void		ncurses_init(t_datas *datas, int height, int width);
 void		ncurses_end(t_datas *datas);
 void		ncurses_key(t_datas *datas);
 void		ncurses_show_arene(t_datas *datas);
+
+void		print_kirby(t_datas *datas, t_nc *nc);
+void		print_cycle(t_datas *datas, t_nc *nc);
 
 #endif

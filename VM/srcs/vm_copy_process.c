@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:15:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/16 23:59:32 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:20:48 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 	new->PC = PC;
 	new->live = 1;
 	new->carry = process->carry;
+	new->champion = process->champion;
 	return (new);
 }

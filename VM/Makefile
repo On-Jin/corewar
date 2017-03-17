@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/16 13:33:16 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/17 18:43:38 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ LIB_DIR = ./../includes/libft/
 
 SRC3 = ncurses_end.c \
 	   ncurses_key.c \
+	   ncurses_kirby.c \
+	   ncurses_cycle.c \
 	   ncurses_show_arene.c \
 	   ncurses_init.c
 

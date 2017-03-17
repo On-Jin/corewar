@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:12:17 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 17:26:02 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:31:25 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,22 @@ static void	innit_op_tab(t_datas *datas)
 	ft_memcpy((void*)&datas->op_tab[0], (void*)&op_tab_init[0], sizeof(t_op) * 17);
 }
 
+static void	vm_innit_inf(t_datas *datas)
+{
+	int i;
+
+	i = 0;
+	while (i <= datas->player_nbr)
+	{
+		datas->inf[i].nbr_process = 0;
+		datas->inf[i].total_lives = 0;
+		datas->inf[i].cycle_lives = 0;
+		datas->inf[i].cycle_last_live = 0;
+		datas->inf[i].champion = i;
+		i++;
+	}
+}
+
 void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_lives *lives)
 {
 	ft_bzero((void *)datas, MEM_SIZE);
@@ -52,9 +68,8 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs, t_lives *lives)
 	datas->lives = lives;
 	datas->begin_champ = champs;
 	datas->nbr_cycles = CYCLE_TO_DIE;
-	datas->key = NC_PAUSE;
-	datas->cur_pros = 0;
 	datas->nbr_process = 0;
 	datas->i_debug = 0;
+	vm_innit_inf(datas);
 	innit_op_tab(datas);
 }

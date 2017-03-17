@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/15 19:35:38 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:36:01 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 	{
 		datas->lives->total_lives++;
 		datas->lives->cycle_lives++;
+		datas->inf[arg2].total_lives++;
+		datas->inf[arg2].cycle_lives++;
+		datas->inf[arg2].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
 		datas->lives->champ_total_lives[arg2]++;
 		datas->lives->champ_cycle_lives[arg2]++;
 		datas->lives->last_live = arg1;

@@ -6,14 +6,21 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:23:46 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/13 12:59:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:56:05 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+static void	struct_init(t_nc *nc)
+{
+	nc->key = NC_PAUSE;
+	nc->cur_pros = 0;
+}
+
 void ncurses_init(t_datas *datas, int height, int width)
 {
+	struct_init(&datas->nc);
 	initscr();
 	cbreak();
 	keypad(stdscr, TRUE);
@@ -22,7 +29,10 @@ void ncurses_init(t_datas *datas, int height, int width)
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	datas->win = newwin(height, width, 0, 0);
+	init_pair(5, COLOR_CYAN, COLOR_BLACK);
+	datas->nc.cur_menu = 0;
+	datas->nc.win = newwin(height, width, 0, 0);
+	datas->nc.inf = newwin(height, NC_W_INF, 0 , datas->nc.size_max_x + 2);
 //	noecho();
-	wrefresh(datas->win);
+	wrefresh(datas->nc.win);
 }

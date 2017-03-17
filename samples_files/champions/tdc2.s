@@ -1,7 +1,6 @@
 .name 		"dtonc v1.0pl2"
 .comment	"ta mere elle fait du rodeo sur les kfar"
-.extend
-	
+
 begin:
 #	st	r1, :boucle+1
 #	st	r1, :rboucle+1
@@ -13,7 +12,7 @@ ld1:
 	ld	%15, r3 	#offset
 	ld	%195, r4	#limit
 	ld	%0, r7		#pattern faites nous confiance
-	ld	%0x00090000, r8	#pattern poison
+	ld	%9, r8	#pattern poison
 
 #gen:	
 #	live	%1

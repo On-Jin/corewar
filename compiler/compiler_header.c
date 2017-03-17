@@ -35,7 +35,8 @@ void	write_comment(int fdin, header_t *header)
 	have_name = FALSE;
 	while (ft_gnl(fdin, &line))
 	{
-		if (*line == '\0' || ft_strcmp(line, ".") == 0)
+		line = ft_strtrim(line);
+		if (*line == '\0' || *line == COMMENT_CHAR) // || ft_strcmp(line, ".") == 0 ???
 			continue;
 		else if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && !have_comment)
 		{

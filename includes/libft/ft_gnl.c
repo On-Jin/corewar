@@ -60,7 +60,7 @@ char				*ft_find_line(t_buff *buff)
 		}
 		free(tmp);
 		if (l == 0 && (buff->ended = 1))
-			return (buff->content);
+			return ft_strdup(buff->content);
 		return (NULL);
 	}
 	*rest = '\0';

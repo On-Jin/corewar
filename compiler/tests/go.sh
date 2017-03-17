@@ -5,7 +5,7 @@ do
 	cp $path zaz.s
 	cp $path me.s
 	../../samples_files/asm zaz.s
-	../a.out me.s
+	../a.out me.s # > /dev/null
 	hexdump zaz.cor > zaz.txt
 	hexdump me.cor > me.txt
 	diff me.txt zaz.txt

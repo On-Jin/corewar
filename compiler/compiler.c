@@ -39,7 +39,8 @@ void	write_instruct(int fdout, t_instruct *current)
 	while (current)
 	{
 		i = 0;
-		write(fdout, ((char*)(&(current->opcode))), 1);
+		if (current->opcode)
+			write(fdout, ((char*)(&(current->opcode))), 1);
 		if (current->argcode)
 			write(fdout, ((char*)(&(current->argcode))), 1);
 		while (i <  current->arg_nbrs)
@@ -71,13 +72,14 @@ int main(int argc, char **argv)
 		error("Usage : ./asm mychampion.s\n");
 	fdin = open(argv[1], O_RDONLY);
 	output_path = get_output_path(argv[1]);
-	fdout = open(output_path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	
+	ft_bzero(&header, sizeof(header_t));
 	write_exec_magic(fdin, &header);
 	write_comment(fdin, &header);
 	instructs = compiler_compile(fdin);
 	header.prog_size = (unsigned int)get_instruct_size(instructs);
 	invert_byte(&header.prog_size);
+	fdout = open(output_path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	write(fdout, &header, sizeof(header_t));
 	write_instruct(fdout, instructs);
 	exit(0);

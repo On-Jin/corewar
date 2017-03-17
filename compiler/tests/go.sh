@@ -1,5 +1,5 @@
 #FILES=`find ../.. | grep "\.s$"`
-FILES=`find ../../samples_files/champions | grep "\.s$"`
+FILES=`find ../..`
 for path in $FILES
 do
 	cp $path zaz.s
@@ -14,4 +14,5 @@ do
 		echo $path
 		exit;
 	fi
+	rm -f zaz.s me.s zaz.txt me.txt
 done

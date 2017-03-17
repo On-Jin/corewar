@@ -45,17 +45,24 @@ OBJ=$(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@(echo "\033[32m Librairie :[ \033[31m\t\c")
+	@(echo "$@ \033[32m]\033[0m \033[0K")
+	@($(CC) $(CFLAGS) -c -o $@ $<)
+	@(echo "\033[2F")
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@(ar rc $(NAME) $(OBJ))
+	@(ranlib $(NAME))
+	@(echo "\033[2K\033[2F")
+	@(echo "\n\033[32m Librairie compilée\033[0m";)
 
 clean:
-	$(RM) *.o
+	@($(RM) $(OBJ))
+#	@(echo "\033[32m Librairie : clean des .o \033[0m\t")
 
 fclean: clean
-	$(RM) $(NAME)
+	@($(RM) $(NAME))
+#	@(echo "\033[32m Librairie : clean de libft.a \033[0m\t")
 
 re: fclean all
 

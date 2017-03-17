@@ -124,10 +124,15 @@ INC = ../includes/
 all : $(NAME)
 
 $(NAME) : $(LIB) $(OBJ_DIR) $(OBJ2_DIR) $(OBJ3_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) ../includes/corewar.h
-	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(LIB) -I$(INC) -o $(NAME)
+	@($(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(LIB) -I$(INC) -o $(NAME))
+	@(echo "\033[2K\033[2F")
+	@(echo "\n\033[5m Ouverture de l'arene de Combat !!!!!!!!!!!\033[0m")
 
 boubou :
-	-lncurses
+	@(echo "bonjour");
+	@(echo "bonjour")
+	@(echo "\033[2F")
+	@(echo "bonjour");
 
 $(LIB) :
 	@(cd $(LIB_DIR) && MAKE)
@@ -142,23 +147,31 @@ $(OBJ3_DIR) :
 	mkdir $(OBJ3_DIR)
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c)
-	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC_DIR), $(SRC)) $(EXTRA_FLAGS)
-	mv $(OBJ) $(OBJ_DIR)
+	@(echo "\033[35m Preparation du terrin \033[31m\t\c")
+	@(echo "{\t$@\t}")
+	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
+	@(echo "\033[2F")
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC2_DIR), %.c)
-	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC2_DIR), $(SRC2)) $(EXTRA_FLAGS)
-	mv $(OBJ2) $(OBJ_DIR)
+	@(echo "\033[33m Preparation des armes \033[31m\t\c")
+	@(echo "{\t$@\t}")
+	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
+	@(echo "\033[2F")
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC3_DIR), %.c)
-	$(CC) $(FLAGS) -I$(INC) -c $(addprefix $(SRC3_DIR), $(SRC3)) $(EXTRA_FLAGS)
-	mv $(OBJ3) $(OBJ_DIR)
+	@(echo "\033[93m Demarage de la retransmition video \033[31m\t\c")
+	@(echo "{\t$@\t}")
+	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
+	@(echo "\033[2F")
 
 clean :
-	rm -f $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3))
+	@(rm -f $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)))
+	@(echo "\033[32m Destruction des infrastructures De l'arène\033[0m")
 	@(cd $(LIB_DIR) && MAKE $@)
 
 fclean : clean
-	rm -f $(NAME)
+	@(rm -f $(NAME))
+	@(echo "\033[32m Destruction de l'arène de combat\033[0m")
 	@(cd $(LIB_DIR) && MAKE $@)
 
 re : fclean all

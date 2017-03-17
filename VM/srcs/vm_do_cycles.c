@@ -27,7 +27,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 	}
 	process = datas->begin_process;
 	if (process)
-		while (process->next)
+		while (process && process->next)
 		{
 			process->live = 0;
 			if (!process->next->live)

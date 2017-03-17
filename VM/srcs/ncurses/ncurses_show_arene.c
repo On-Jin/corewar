@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/15 19:23:22 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 12:44:09 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ void		print_process(t_datas *datas, t_draw *d)
 	mvprintw(9, datas->size_max_x + 4, "Process %i/%i", datas->cur_pros, datas->nbr_process);
 	if (pros && i > 0)
 	{
+		mvwaddch(datas->win, pros->PC/64 +1, pros->PC %64*3  +2, 'L' | A_REVERSE);
+		mvwaddch(datas->win, pros->PC/64 +1, pros->PC %64*3 + 3, 'A' | A_REVERSE);
 		mvprintw(10, datas->size_max_x + 4, "[%i] PC        ", pros->PC);
 		mvprintw(11, datas->size_max_x + 4, "[%i] Cycle         ", pros->cycle);
 		mvprintw(12, datas->size_max_x + 4, "[%i] Carry            ", (int)pros->carry);

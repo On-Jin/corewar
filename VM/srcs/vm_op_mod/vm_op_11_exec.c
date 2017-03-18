@@ -33,4 +33,8 @@ void			vm_op_11_exec(t_datas *datas, t_process *process)
 		process->carry = 0;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
+	process->in_stock[0] = 0;
+	process->in_stock[1] = 0;
+	process->in_stock[2] = 0;
+	process->in_stock[3] = 0;
 }

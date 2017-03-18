@@ -14,10 +14,9 @@
 
 int			vm_verif_i_cod(char code, char a, char b, char c, t_datas *datas)
 {
-	if (datas)
-		;
+	(void)datas;
 	if (code & 0b11)
-{
+	{
 	//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 1");
 				return (0);
 	}
@@ -30,7 +29,7 @@ int			vm_verif_i_cod(char code, char a, char b, char c, t_datas *datas)
 }	code >>= 2;
 	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) && ((b & 4) && (code & 3) != 3))
 {
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 2"); 
+//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 2");
 	return (0);
 }	code >>= 2;
 	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) && ((a & 4) && (code & 3) != 3))
@@ -55,6 +54,6 @@ int				vm_verif_datas(t_datas *datas, t_process *process)
 	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
 	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
 	c = (op_c->nb_arg = 3) ? op_c->tab_arg[2] : 0;
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "a = %d, b = %d, c = %d, instruc = %d", a, b, c, process->instruction);
+
 	return (vm_verif_i_cod(datas->arene[vm_add_valid(process->PC + 1)], a, b, c, datas));
 }

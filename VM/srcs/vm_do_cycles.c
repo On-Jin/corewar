@@ -51,6 +51,8 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	unsigned int	cur_ocp;
 
 	pros = datas->begin_process;
+	if ((datas->cycle.cycle + datas->cycle.total_cycle) == 8891)
+		sleep(5);
 	while (pros)
 	{
 		if (pros->cycle == 0)

@@ -12,17 +12,17 @@
 
 #include "corewar.h"
 
-int				vm_recup_process_reg(t_process *process, char *arene, int adresse)
+int				vm_recup_process_reg(t_process *process, char *arene, int adresse, int *result)
 {
 	unsigned int		reg;
-	int					val;
 
 	reg = vm_recup_arena_num(1, arene, adresse);
-	if (reg <= REG_NUMBER)
+	if (reg && reg <= REG_NUMBER)
 	{
-		val = process->reg[reg];
-		val = val >> (4 * 8 - REG_SIZE * 8);
-		return (val);
+		*result = process->reg[reg];
+		*result = *result >> (4 * 8 - REG_SIZE * 8);
 	}
+	else
+		return (-1);
 	return (0);
 }

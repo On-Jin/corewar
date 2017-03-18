@@ -24,7 +24,7 @@
 ** 0b10000000 :
 */
 
-int			*vm_recup_all_process(t_process *process, char *arene, int flg)
+int			vm_recup_all_process(t_process *process, char *arene, int flg)
 {
 	int			tmp;
 	int			flag;
@@ -39,8 +39,13 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 	{
 		if ((tmp & 3) == 0b01)
 		{
-			process->in_stock[i] = (!(flag & 1)) ? vm_recup_arena_num(1,
-				arene, adress) : vm_recup_process_reg(process, arene, adress);
+			if (!(flag & 1))
+			{
+				if ((process->in_stock[i] = vm_recup_arena_num(1, arene, adress)) == -1)
+					return (-1);
+			}
+			else if ((vm_recup_process_reg(process, arene, adress, &process->in_stock[i])) == -1)
+				return (-1);
 			adress += 1;
 		}
 		else if ((tmp & 3) == 0b10 && flag & 0b10)
@@ -67,5 +72,5 @@ int			*vm_recup_all_process(t_process *process, char *arene, int flg)
 		flag = flg >> (8 * (3 - i));
 		tmp = (char)arene[vm_add_valid(process->PC + 1)] >> (2 * (3 - i));
 	}
-	return (process->in_stock);
+	return (0);
 }

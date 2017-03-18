@@ -16,13 +16,6 @@
 
 void			vm_op_8_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 6;
-	process->instruction = 8;
-
-	/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
+	(void)datas;
+	(void)process;
 }

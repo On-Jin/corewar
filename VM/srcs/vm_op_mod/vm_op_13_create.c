@@ -14,8 +14,6 @@
 
 void			vm_op_13_create(t_datas *datas, t_process *process)
 {
-		(void)datas;
-	process->cycle = 10;
-	process->instruction = 13;
-
+	(void)datas;
+	(void)process;
 }

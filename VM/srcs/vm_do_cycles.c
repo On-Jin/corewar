@@ -47,21 +47,55 @@ static void		vm_delete_unlive_process(t_datas *datas)
 
 static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
+	void		(*create[NBR_FONC])(t_datas *, t_process *);
+
+	if (NBR_FONC != 17)
+		exit (ft_int_error("Mauvais nombre de fonctions"));
+	create[0] = vm_op_0_create;
+	create[1] = vm_op_1_create;
+	create[2] = vm_op_2_create;
+	create[3] = vm_op_3_create;
+	create[4] = vm_op_4_create;
+	create[5] = vm_op_5_create;
+	create[6] = vm_op_6_create;
+	create[7] = vm_op_7_create;
+	create[8] = vm_op_8_create;
+	create[9] = vm_op_9_create;
+	create[10] = vm_op_10_create;
+	create[11] = vm_op_11_create;
+	create[12] = vm_op_12_create;
+	create[13] = vm_op_13_create;
+	create[14] = vm_op_14_create;
+	create[15] = vm_op_15_create;
+	create[16] = vm_op_16_create;
+
 	t_process *pros;
 	unsigned int	cur_ocp;
 
 	pros = datas->begin_process;
 	while (pros)
 	{
+		if (pros->cycle == 1)
+			create[(int)pros->instruction](datas, pros);
+		pros = pros->next;
+	}
+	pros = datas->begin_process;
+	while (pros)
+	{
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
-			if (17 <= cur_ocp)
-				cur_ocp = 0;
+			(17 <= cur_ocp) ? cur_ocp = 0 : 0;
 			start_op_code(datas, pros, cur_ocp);
 		}
 		if (pros->cycle == 1)
+		{
+//			cur_ocp = (unsigned int)datas->arene[pros->PC];
+//			(17 <= cur_ocp) ? cur_ocp = 0 : 0;
+//			pros->instruction = datas->op_tab[cur_ocp].op_code;
 			exec[(int)pros->instruction](datas, pros);
+		}
+
 		pros->cycle--;
 		if (pros->cycle < 0)
 			ft_printf("erreur procycle");
@@ -110,6 +144,7 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	t_cycle	*cycle;
 	int i;
 
+
 	cycle = &datas->cycle;
 	vm_init_cycle(cycle);
 	while (datas->begin_process)
@@ -131,6 +166,8 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 					turn_process(datas, exec);
 					cycle->cycle++;
 				}
+				if (cycle->cycle + cycle->total_cycle == 8892)
+					sleep(4);
 			}
 			else // Sinon
 			{

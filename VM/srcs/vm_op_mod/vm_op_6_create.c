@@ -14,13 +14,6 @@
 
 void			vm_op_6_create(t_datas *datas, t_process *process)
 {
-
 	(void)datas;
-	process->cycle = 6;
-	process->instruction = 6;
-		/*
-	**recuperation des information
-	**traitement d'informations invalides?
-	** recuperation du jump?
-	*/
+	(void)process;
 }

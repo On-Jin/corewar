@@ -17,7 +17,13 @@
 void			vm_op_3_create(t_datas *datas, t_process *process)
 {
 	(void)datas;
-	process->cycle = 5;
-	process->instruction = 3;
+	(void)process;
 
+	process->in_stock[3] = datas->arene[vm_add_valid(process->PC + 1)];
+	if (vm_verif_datas(datas, process))
+		vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 18);
+	else if (datas->op_tab[(int)process->instruction].mod_carry)
+		process->carry = 0;
+	else
+		process->in_stock[3] = 1;
 }

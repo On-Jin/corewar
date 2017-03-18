@@ -16,6 +16,7 @@
 void				vm_op_1_create(t_datas *datas, t_process *process)
 {
 	(void)datas;
-	process->cycle = 10;
-	process->instruction = 1;
+	(void)process;
+	process->in_stock[0] = vm_recup_arena_num(4, datas->arene, process->PC + 1);
+	process->in_stock[1] = vm_champ_number_to_position(process->in_stock[0], datas->begin_champ);
 }

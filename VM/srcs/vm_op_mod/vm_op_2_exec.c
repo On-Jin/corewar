@@ -66,17 +66,8 @@ process->PC = vm_op_jump(datas, process, 2);
 
 void			vm_op_2_exec(t_datas *datas, t_process *process)
 {
-	if (vm_verif_datas(datas, process))
-	{
-		vm_recup_all_process(process, datas->arene, 1 << 24);
-		if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
-		{
-			process->reg[process->in_stock[1]] = process->in_stock[0];
-			process->carry = 1;
-		}
-	}
-	else if (datas->op_tab[(int)process->instruction].mod_carry)
-		process->carry = 0;
+	if (process->carry == 1)
+		process->reg[process->in_stock[1]] = process->in_stock[0];
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 	process->in_stock[0] = 0;

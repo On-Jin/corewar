@@ -44,34 +44,22 @@
 ** met champ live cycle a +1
 */
 
-/*
-** zork resultat du corear
-** cycle 57955 manque 1 cycle
-** lives
-** valeurs de la ligne 0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 ff ff ff ff 09 ff fb OK
-**;
-*/
-
 void				vm_op_1_exec(t_datas *datas, t_process *process)
 {
-	int		arg1;
-	int		arg2;
 
-	arg1 = vm_recup_arena_num(4, datas->arene, process->PC + 1);
-	arg2 = vm_champ_number_to_position(arg1, datas->begin_champ);
 	process->live = 1;
 	process->PC = vm_add_valid(process->PC + 5);
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "champ == %x, position = %d    ",arg1, arg2);
-	if (arg2 != -1)
+//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "champ == %x, position = %d    ",process->in_stock[0], process->in_stock[1]);
+	if (process->in_stock[1] != -1)
 	{
 		datas->lives->total_lives++;
 		datas->lives->cycle_lives++;
-		datas->inf[arg2].total_lives++;
-		datas->inf[arg2].cycle_lives++;
-		datas->inf[arg2].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
-		datas->lives->champ_total_lives[arg2]++;
-		datas->lives->champ_cycle_lives[arg2]++;
-		datas->lives->last_live = arg1;
+		datas->inf[process->in_stock[1]].total_lives++;
+		datas->inf[process->in_stock[1]].cycle_lives++;
+		datas->inf[process->in_stock[1]].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
+		datas->lives->champ_total_lives[process->in_stock[1]]++;
+		datas->lives->champ_cycle_lives[process->in_stock[1]]++;
+		datas->lives->last_live = process->in_stock[0];
 		datas->lives->cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
 	}
 }

@@ -24,21 +24,30 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 {
 	char		i;
 
-	i = datas->arene[vm_add_valid(process->PC + 1)];
-	if (vm_verif_datas(datas, process))
+	i = process->in_stock[3];
+	if (i != 1)
 	{
-		vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 18);
 		if (((i >> 4) & 3) == 1 && process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
 		{
 			process->reg[process->in_stock[1]] = process->in_stock[0];
 		}
 		else if (((i >> 4) & 3) == 3)
 		{
-			vm_put_nbr_in_arene(process->in_stock[0], process->PC + (process->in_stock[1] % IDX_MOD), datas->arene, 4);
+/*			if ((datas->cycle.cycle + datas->cycle.total_cycle) >= 8894 && (datas->cycle.cycle + datas->cycle.total_cycle) <= 8898)
+			{
+				ft_printf("process->in_stock[0] = %lx\t process->in_stock[1] = %d\t pc = %d\t adresse = %d \t cycle %ld\n", process->in_stock[0], process->in_stock[1], process->PC , vm_add_valid(process->PC + (process->in_stock[1] % IDX_MOD)), (datas->cycle.cycle + datas->cycle.total_cycle));
+				if (vm_add_valid(process->PC + (process->in_stock[1] % IDX_MOD)) == 3969)
+					process->in_stock[0] = -1;
+			}
+*/			vm_put_nbr_in_arene(process->in_stock[0], vm_add_valid(process->PC + (process->in_stock[1] % IDX_MOD)), datas->arene, 4);
 		}
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
+	process->in_stock[0] = 0;
+	process->in_stock[1] = 0;
+	process->in_stock[2] = 0;
+	process->in_stock[3] = 0;
 }

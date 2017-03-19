@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 12:55:11 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/17 17:48:19 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:06:30 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,8 @@ void		ncurses_key(t_datas *datas)
 		datas->nc.cur_pros++;
 	if (ret == NC_PROC_BACK && datas->nc.cur_pros > 0)
 		datas->nc.cur_pros--;
+	if (ret == KEY_DOWN && datas->nc.cur_menu < datas->player_nbr )
+		datas->nc.cur_menu++;
+	if (ret == KEY_UP && datas->nc.cur_menu > 0)
+		datas->nc.cur_menu--;
 }

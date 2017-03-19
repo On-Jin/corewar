@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 19:39:31 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/17 22:47:22 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,36 +105,41 @@ static void	loop_arene(t_datas *datas, t_draw *d)
 	}
 }
 
-void		print_live(t_datas *datas, t_draw *d, t_nc *nc)
-{
-	if (d)
-		;
-	mvprintw(6, nc->size_max_x + 2, "Cycle_Lives_:_%ld      ", datas->lives->cycle_lives);
-	mvprintw(7, nc->size_max_x + 2, "Last_Lives_:_%10i     Last_Lives_cycle:_%10i ", datas->lives->last_live, datas->lives->cycle_last_live);
-	mvprintw(8, nc->size_max_x + 2, "Total_Lives_:_%ld      ", datas->lives->total_lives);
-}
-
 void		print_process(t_datas *datas, t_draw *d, t_nc *nc)
 {
 	t_process	*pros;
 	int			i;
-	if (d)
-		;
-
-	i = datas->nbr_process;
+	int			nbr_process;
+(void)d;
 	pros = datas->begin_process;
-	while (pros && i != datas->nc.cur_pros)
+	if (!nc->cur_menu)
 	{
-		pros = pros->next;
-		i--;
+		i = datas->nbr_process;
+		nbr_process = i;
+		while (pros && i != nc->cur_pros)
+		{
+			pros = pros->next;
+			i--;
+		}
 	}
-	mvprintw(9, nc->size_max_x + 4, "Process %i/%i", datas->nc.cur_pros, datas->nbr_process);
-	if (pros && i > 0)
+	else
+	{
+		i = datas->inf[nc->cur_menu - 1].nbr_process;
+		nbr_process = i;
+		while (pros && i != datas->nc.cur_pros)
+		{
+			if (pros->champion == nc->cur_menu)
+				i--;
+			pros = pros->next;
+		}
+	}
+	mvwprintw(nc->inf, 15, 2, "Process %i/%i", nc->cur_pros, nbr_process);
+/*	if (pros && i > 0)
 	{
 		mvwaddch(datas->nc.win, pros->PC/64 +1, pros->PC %64*3  +2, 'L' | A_REVERSE);
 		mvwaddch(datas->nc.win, pros->PC/64 +1, pros->PC %64*3 + 3, 'A' | A_REVERSE);
-		mvprintw(10, nc->size_max_x + 4, "[%i] PC        ", pros->PC);
-		mvprintw(11, nc->size_max_x + 4, "[%i] Cycle         ", pros->cycle);
+		mvprintw(10, nc->size_max_x + 4, "[%i] PC ", pros->PC);
+		mvprintw(11, nc->size_max_x + 4, "[%i] Cycle ", pros->cycle);
 		mvprintw(12, nc->size_max_x + 4, "[%i] Carry            ", (int)pros->carry);
 		mvprintw(13, nc->size_max_x + 4, "[%i] Instruction        ", (int)pros->instruction);
 		mvprintw(14, nc->size_max_x + 4, "[%i] Live                ", (int)pros->live);
@@ -149,7 +154,7 @@ void		print_process(t_datas *datas, t_draw *d, t_nc *nc)
 			mvprintw(17, nc->size_max_x + 4, "                       ");
 		}
 		mvprintw(18, nc->size_max_x + 4, "Reg : [%i][%i][%i][%i][%i][%i][%i][%i]", pros->reg[1], pros->reg[2],pros->reg[3],pros->reg[4],pros->reg[5],pros->reg[6],pros->reg[7],pros->reg[8]);
-	}
+	}*/
 }
 
 void		print_debug(t_datas *datas, t_nc *nc)
@@ -172,14 +177,28 @@ void		print_main_menu(t_datas *datas, t_nc *nc)
 
 	wattron(nc->inf, WA_BOLD);
 	mvwprintw(nc->inf, 6, 10, "%s   %s   %s   %s", "[Processes]", "[Cycle Lives]", "[Last Live]", "[Total live]");
-	mvwprintw(nc->inf, 7, 1, "%.9s", "!All");
+	if (nc->cur_menu == 0)
+	{
+		wattron(nc->inf, WA_REVERSE);
+		mvwprintw(nc->inf, 7, 1, "%.9s", "!All");
+		wattroff(nc->inf, WA_REVERSE);
+	}
+	else
+		mvwprintw(nc->inf, 7, 1, "%.9s", "!All");
 	mvwprintw(nc->inf, 7, 10, "[%9lli]   [%11lli]   [%9i]   [%10lli]", datas->nbr_process, datas->lives->cycle_lives,
 																	datas->lives->cycle_last_live, datas->lives->total_lives);
 	i = 0;
 	while (i < datas->player_nbr)
 	{
 		wattron(datas->nc.inf, COLOR_PAIR(i + 1));
-		mvwprintw(nc->inf, 7 + i + 1, 1, "%.9s%i", "!Num", i + 1);
+		if (nc->cur_menu == i +1)
+		{
+			wattron(nc->inf, WA_REVERSE);
+			mvwprintw(nc->inf, 7 + i + 1, 1, "%.9s%i", "!Num", i + 1);
+			wattroff(nc->inf, WA_REVERSE);
+		}
+		else
+			mvwprintw(nc->inf, 7 + i + 1, 1, "%.9s%i", "!Num", i + 1);
 		mvwprintw(nc->inf, 7 + i + 1, 10, "[%9lli]   [%11lli]   [%9i]   [%10lli]", datas->inf[i].nbr_process, datas->inf[i].cycle_lives,
 																	datas->inf[i].cycle_last_live, datas->inf[i].total_lives);
 		wattroff(nc->inf, COLOR_PAIR(i + 1));
@@ -203,8 +222,7 @@ void		ncurses_show_arene(t_datas *datas)
 	print_cycle(datas, &datas->nc);
 	print_kirby(datas, &datas->nc);
 	print_main_menu(datas, &datas->nc);
-//	print_live(datas, &d, &datas->nc);
-//	print_process(datas, &d, &datas->nc);
+	print_process(datas, &d, &datas->nc);
 //	print_debug(datas, &datas->nc);
 	wrefresh(datas->nc.win);
 	wrefresh(datas->nc.inf);

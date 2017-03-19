@@ -122,10 +122,11 @@ OBJ2_DIR = ./objs/vm_op_mod/
 OBJ2_DIR = ./objs/ncurses/
 
 INC = ../includes/
+INC_FILES = ../includes/corewar.h
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(OBJ_DIR) $(OBJ2_DIR) $(OBJ3_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) ../includes/corewar.h
+$(NAME) : $(LIB) $(OBJ_DIR) $(OBJ2_DIR) $(OBJ3_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(INC_FILES)
 	@($(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)) $(LIB) -I$(INC) -o $(NAME))
 	@(echo "\033[2K\033[2F")
 	@(echo "\n\033[5m Ouverture de l'arene de Combat !!!!!!!!!!!\033[0m")
@@ -148,19 +149,19 @@ $(OBJ2_DIR) :
 $(OBJ3_DIR) :
 	mkdir $(OBJ3_DIR)
 
-$(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c)
+$(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c) $(INC_FILES)
 	@(echo "\033[35m Preparation du terrin \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
 	@(echo "\033[2F")
 
-$(OBJ_DIR)%.o : $(addprefix $(SRC2_DIR), %.c)
+$(OBJ_DIR)%.o : $(addprefix $(SRC2_DIR), %.c) $(INC_FILES)
 	@(echo "\033[33m Preparation des armes \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
 	@(echo "\033[2F")
 
-$(OBJ_DIR)%.o : $(addprefix $(SRC3_DIR), %.c)
+$(OBJ_DIR)%.o : $(addprefix $(SRC3_DIR), %.c) $(INC_FILES)
 	@(echo "\033[93m Demarage de la retransmition video \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))

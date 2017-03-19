@@ -20,7 +20,9 @@ int				vm_recup_indirect_num(t_process *process, char *arene, int adresse)
 	unsigned int		ind_adress;
 	int					val;
 
-	ind_adress = (vm_recup_arena_num(2, arene, adresse) % IDX_MOD);
+	ind_adress = (vm_recup_arena_num(2, arene, adresse));
+	if (process->instruction < 13 || process->instruction > 15)
+		ind_adress = ind_adress % IDX_MOD;
 	ind_adress = vm_add_valid(ind_adress + process->PC);
 	val = vm_recup_arena_num(2, arene, ind_adress);
 	val = val >> (4 * 8 - IND_SIZE * 8);

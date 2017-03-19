@@ -20,10 +20,14 @@ void			vm_op_16_exec(t_datas *datas, t_process *process)
 		return ;
 	}
 	vm_recup_all_process(process, datas->arene, 0);
-	(void)datas;
+
 	if (process->in_stock[3] != -1)
 		ft_putchar(process->in_stock[0] % (1 << 8));
 	if (process->in_stock[3] <= 0)
 		{process->in_stock[3] = 3;}
 	process->PC = (process->PC + process->in_stock[3]) % MEM_SIZE;
+	process->in_stock[0] = 0;
+	process->in_stock[1] = 0;
+	process->in_stock[2] = 0;
+	process->in_stock[3] = 0;
 }

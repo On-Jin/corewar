@@ -19,11 +19,15 @@ int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size)
 
 	instruc = datas->arene[vm_add_valid(process->PC + 1)];
 	i = 4 - size;
+//	if (process->instruction == 2)
+//		ft_printf("size = %d \t %x",size, instruc);
 	while (i)
 	{
 		instruc >>= 2;
 		--i;
 	}
+//	if (process->instruction == 2)
+//		ft_printf(" \t\tnew size = %d \t %x\n",i, instruc);
 	while (instruc)
 	{
 		((instruc & 3) == 1) ? i += 1 : 0;

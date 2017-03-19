@@ -25,7 +25,7 @@ void			vm_op_7_exec(t_datas *datas, t_process *process)
 		{
 			process->reg[process->in_stock[2]] = process->in_stock[0]
 												| process->in_stock[1];
-			if (process->reg[process->in_stock[2]])
+			if (!process->reg[process->in_stock[2]])
 				process->carry = 1;
 			else
 				process->carry = 0;

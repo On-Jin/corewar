@@ -31,6 +31,8 @@ void			vm_op_13_exec(t_datas *datas, t_process *process)
 			process->reg[process->in_stock[1]] = process->in_stock[0];
 			process->carry = 1;
 		}
+		else
+			process->carry = 0;
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;

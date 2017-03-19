@@ -53,7 +53,7 @@ int				vm_verif_datas(t_datas *datas, t_process *process)
 		return (1);
 	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
 	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
-	c = (op_c->nb_arg = 3) ? op_c->tab_arg[2] : 0;
+	c = (op_c->nb_arg == 3) ? op_c->tab_arg[2] : 0;
 
 	return (vm_verif_i_cod(datas->arene[vm_add_valid(process->PC + 1)], a, b, c, datas));
 }

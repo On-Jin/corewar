@@ -55,6 +55,7 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		sleep(5);
 	while (pros)
 	{
+	//	ft_printf("[%d][%d][%d][%d][%d][%d][%d][%d]\n", pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4], pros->reg[5], pros->reg[6], pros->reg[7], pros->reg[8], pros->reg[9]);
 		if (pros->cycle == 0)
 		{
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
@@ -158,6 +159,12 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 			i++;
 		}
 		datas->lives->cycle_lives = 0;
+	}
+	int bob = 0;
+	while (bob < 17)
+	{
+		ft_printf("bob = %d datas->op_tab[bob].nb_arg = %d\n",bob,  datas->op_tab[bob].nb_arg);
+		bob++;
 	}
 	return(vm_do_cycles_end(datas, cycle));
 }

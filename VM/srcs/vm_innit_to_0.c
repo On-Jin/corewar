@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:12:17 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 19:31:25 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/19 21:31:20 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	vm_innit_inf(t_datas *datas)
 		datas->inf[i].total_lives = 0;
 		datas->inf[i].cycle_lives = 0;
 		datas->inf[i].cycle_last_live = 0;
-		datas->inf[i].champion = i;
+		datas->inf[i].champion = i + 1;
 		i++;
 	}
 }

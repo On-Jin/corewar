@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 20:02:16 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:46:34 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct		s_ncurses
 	int				size_max_x;
 	int				cur_pros;
 	int				cur_menu;
+	int				i_print;
 }					t_nc;
 typedef struct		s_inf
 {
@@ -161,6 +162,7 @@ typedef struct		s_inf
 	long			cycle_lives;
 	long			cycle_last_live;
 	int				champion;
+	int				cur_pros;
 }					t_inf;
 
 typedef struct		s_datas

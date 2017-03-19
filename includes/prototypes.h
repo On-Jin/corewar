@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 18:43:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:06:40 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void		vm_champ_process(t_datas *datas, int argc, char **argv);
 int			vm_champ_number_to_position(int champ_num, t_champ *champ_tab);
 int			vm_champ_position_to_number(int champ_pos, t_champ *champ_tab);
 
-int			vm_recup_process_reg(t_process *process, char *arene, int adresse);
-int			*vm_recup_all_process(t_process *process, char *arene, int flag);
+int			vm_recup_process_reg(t_process *process, char *arene, int adresse, int *result);
+int			vm_recup_all_process(t_process *process, char *arene, int flag);
 int			vm_verif_i_code(char code, char a, char b, char c);
 int			vm_recup_indirect_num(t_process *process, char *arene, int adresse);
 int			vm_recup_arena_num(int size, char *arena, int PC);
@@ -103,5 +103,7 @@ void		ncurses_show_arene(t_datas *datas);
 
 void		print_kirby(t_datas *datas, t_nc *nc);
 void		print_cycle(t_datas *datas, t_nc *nc);
+void		print_main_menu(t_datas *datas, t_nc *nc);
+void		print_process(t_datas *datas, t_nc *nc);
 
 #endif

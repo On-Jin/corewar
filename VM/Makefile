@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/17 18:43:38 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/19 23:07:08 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC3 = ncurses_end.c \
 	   ncurses_key.c \
 	   ncurses_kirby.c \
 	   ncurses_cycle.c \
+	   ncurses_main_menu.c \
+	   ncurses_process.c \
 	   ncurses_show_arene.c \
 	   ncurses_init.c
 

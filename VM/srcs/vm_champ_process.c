@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:03:12 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 16:28:32 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:15:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,7 @@ static void		vm_place_champ(t_datas *datas, char *arene, t_champ champ[MAX_PLAYE
 
 void		vm_champ_process(t_datas *datas, int argc, char **argv)
 {
-	int i;
-
-	i = 0;
 	datas->player_nbr = vm_create_flags(argv, argc, &datas->flag);
 	datas->player_nbr = vm_init_champ(datas->begin_champ, argc, argv, datas);
 	vm_place_champ(datas, datas->arene, datas->begin_champ);
-	while (i < datas->player_nbr)
-	{
-		datas->size_champ[i] = datas->begin_champ->champ_size;
-		i++;
-	}
 }

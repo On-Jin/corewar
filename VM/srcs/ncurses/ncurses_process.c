@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 18:25:56 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:45:55 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void			print_inf(t_datas *datas, t_nc *nc, t_process *pros)
 	mvwaddch(nc->win, pros->PC / 64 + 1, pros->PC % 64 * 3 + 3, 'A');
 	mvwprintw(nc->inf, ++nc->i_print, 3,
 			"Reg : [%i][%i][%i][%i][%i][%i][%i][%i]",
-			pros->reg[0], pros->reg[1], pros->reg[2], pros->reg[3],
-			pros->reg[4], pros->reg[5], pros->reg[6], pros->reg[7]);
+			pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4],
+			pros->reg[5], pros->reg[6], pros->reg[7], pros->reg[8]);
 	mvwprintw(nc->inf, ++nc->i_print, 3,
 			"Reg : [%i][%i][%i][%i][%i][%i][%i][%i]",
-			pros->reg[8], pros->reg[9], pros->reg[10], pros->reg[11],
-			pros->reg[12], pros->reg[13], pros->reg[14], pros->reg[15]);
+			pros->reg[9], pros->reg[10], pros->reg[11], pros->reg[12],
+			pros->reg[13], pros->reg[14], pros->reg[15], pros->reg[16]);
 	nc->i_print++;
 	mvwprintw(nc->inf, ++nc->i_print, 3, "PC    [%i]", pros->PC);
 	mvwprintw(nc->inf, ++nc->i_print, 3, "Cycle [%i]", pros->cycle);

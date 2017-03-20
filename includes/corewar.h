@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 18:05:00 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:18:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,6 @@ typedef struct		s_datas
 	int				player_nbr;
 	int				nbr_cycles;
 	int				start[4];
-	int				size_champ[4];
 	int				flag;
 
 	int				i_debug;

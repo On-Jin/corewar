@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 17:41:11 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:16:43 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,8 @@ static int		vm_end_main(void)
 	return (0);
 }
 
-static void	recup_data_size_arena_and_champ(t_datas *datas, t_champ champs[MAX_PLAYERS + 1])
+static void	recup_data_size_arena(t_datas *datas)
 {
-	int i;
-
-	i = 0;
-	while (i < datas->player_nbr)
-	{
-		datas->size_champ[i] = champs[i].champ_size;
-		dprintf(2, "datas->size_champ %i\n", datas->size_champ[i]);//dprinft?
-		i++;
-	}
 	datas->nc.size_max_y = (ft_gcd(MEM_SIZE) + 2);
 	datas->nc.size_max_x = (ft_gcd(MEM_SIZE) * 3 + 2);
 }
@@ -67,7 +58,7 @@ int			main(int argc, char **argv)
 	vm_verif_macro();
 	vm_innit_to_0(&datas, champs, &lives);
 	vm_champ_process(&datas, argc, argv);
-	recup_data_size_arena_and_champ(&datas, champs);
+	recup_data_size_arena(&datas);
 	if (datas.flag & FLAG_N)
 		ncurses_init(&datas, datas.nc.size_max_y, datas.nc.size_max_x + 1);
 	vm_init_process(&datas);

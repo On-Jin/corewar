@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/19 23:06:40 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 17:58:23 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,13 @@ int			vm_add_valid(int adresse);
 
 void		ncurses_init(t_datas *datas, int height, int width);
 void		ncurses_end(t_datas *datas);
+void		ncurses_loop_arene(t_datas *datas, t_draw *d);
 void		ncurses_key(t_datas *datas);
-void		ncurses_show_arene(t_datas *datas);
+void		ncurses_light(t_datas *datas);
+void		ncurses_base(t_datas *datas);
+void		ncurses_put_background(t_datas *datas, int PC, char champion, int size);
+void		ncurses_find_pc(t_datas *datas, t_draw *d);
+
 
 void		print_kirby(t_datas *datas, t_nc *nc);
 void		print_cycle(t_datas *datas, t_nc *nc);

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 13:57:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:05:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@
 
 typedef struct		s_draw
 {
-	int				index;
+	int				x;
+	int				y;
 	int				max;
 	int				count;
-	int				in_champ;
 	int				cur_champ;
-	int				size_champ;
 	int				save_pros;
+	int				highlight;
 }					t_draw;
 
 typedef struct		s_cycle
@@ -156,6 +156,8 @@ typedef struct		s_ncurses
 	int				cur_pros;
 	int				cur_menu;
 	int				i_print;
+	unsigned char	background[MEM_SIZE];
+	unsigned char	light[MEM_SIZE];
 }					t_nc;
 typedef struct		s_inf
 {

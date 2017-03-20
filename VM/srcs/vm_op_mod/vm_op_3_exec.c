@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:21 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/12 14:21:22 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/20 17:29:32 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,9 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 			}
 			else if (((i >> 4) & 3) == 3)
 			{
-				if ((datas->cycle.cycle + datas->cycle.total_cycle) >= 8894 && (datas->cycle.cycle + datas->cycle.total_cycle) <= 8898 && process->PC == 3967)
-				{
-		//			ft_printf("reg1[%8x]reg2[%8x]reg3[%8x]reg4[%8x] op_encode = %x \n", process->reg[1], process->reg[2], process->reg[3], process->reg[4], i);
-		//			ft_printf("process->in_stock[0] = %lx\t process->in_stock[1] = %d\t pc = %d\t adresse = %d \t cycle %ld\n", process->in_stock[0], process->in_stock[1], process->PC , vm_add_valid(process->PC + (process->in_stock[1] % IDX_MOD)), (datas->cycle.cycle + datas->cycle.total_cycle));
-		//			if (vm_add_valid(process->PC + (process->in_stock[1] % IDX_MOD)) == 3969)
-		//				process->in_stock[0] = -1;
-				}
-				vm_put_nbr_in_arene(process->in_stock[0], process->PC + (process->in_stock[1] % IDX_MOD), datas->arene, 4);
+				vm_put_nbr_in_arene(process->in_stock[0],
+						process->PC + (process->in_stock[1] % IDX_MOD), datas->arene, 4);
+				ncurses_put_background(datas,process->PC + (process->in_stock[1] % IDX_MOD), process->champion, 4);
 			}
 		}
 	}

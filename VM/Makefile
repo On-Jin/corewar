@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/19 23:07:08 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/20 17:58:56 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,15 @@ LIB_DIR = ./../includes/libft/
 
 SRC3 = ncurses_end.c \
 	   ncurses_key.c \
+	   ncurses_find_pc.c \
+	   ncurses_loop_arene.c \
+	   ncurses_light.c \
 	   ncurses_kirby.c \
 	   ncurses_cycle.c \
+	   ncurses_put_background.c \
 	   ncurses_main_menu.c \
 	   ncurses_process.c \
-	   ncurses_show_arene.c \
+	   ncurses_start_init.c \
 	   ncurses_init.c
 
 SRC2 = vm_champ_number_to_position.c \

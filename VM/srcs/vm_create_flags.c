@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:14:54 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/07 04:14:56 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/20 15:43:41 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		vm_add_flag(char *line, int *flag)
 	while (line[i])
 	{
 		cp = *flag;
+		ft_printf("[%c]{%d}{%d}\n", line[i], cp, *flag);
 		('v' == line[i]) ? (*flag |= FLAG_V) : 0;
 		('b' == line[i]) ? (*flag |= FLAG_B) : 0;
 		('n' == line[i]) ? (*flag |= FLAG_N) : 0;
@@ -33,6 +34,7 @@ static void		vm_add_flag(char *line, int *flag)
 		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
 		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
+		ft_printf("[%c]{%d}{%d}\n", line[i], cp, *flag);
 		if (cp == *flag)
 			exit (ft_int_error("Option invalide ou champion invalide"));
 		++i;

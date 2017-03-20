@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 13:44:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 17:54:03 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	unsigned int	cur_ocp;
 
 	pros = datas->begin_process;
-//	if ((datas->cycle.cycle + datas->cycle.total_cycle) == 8891)
-//		sleep(5);
 	while (pros)
 	{
 	//	ft_printf("[%d][%d][%d][%d][%d][%d][%d][%d]\n", pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4], pros->reg[5], pros->reg[6], pros->reg[7], pros->reg[8], pros->reg[9]);
@@ -126,11 +124,12 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 			if (datas->flag & FLAG_N)
 			{
 				ncurses_key(datas);
-				ncurses_show_arene(datas);
+				ncurses_base(datas);
 				if (datas->nc.key != NC_PAUSE)
 				{
+					ncurses_light(datas);
 					if (datas->nc.key == NC_SBS)
-					datas->nc.key = NC_PAUSE;
+						datas->nc.key = NC_PAUSE;
 					turn_process(datas, exec);
 					cycle->cycle++;
 				}

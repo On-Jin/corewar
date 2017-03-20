@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:22:02 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/13 19:21:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:45:21 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void			vm_op_11_exec(t_datas *datas, t_process *process)
 		vm_put_nbr_in_arene(process->in_stock[0], vm_add_valid(process->PC +
 			((process->in_stock[1] + process->in_stock[2]) % IDX_MOD)),
 			datas->arene, 4);
+		ncurses_put_background(datas, vm_add_valid(process->PC +
+			((process->in_stock[1] + process->in_stock[2]) % IDX_MOD)), process->champion, 4);
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;

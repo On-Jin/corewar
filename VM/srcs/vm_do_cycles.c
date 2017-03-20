@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/19 22:22:29 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:44:30 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 		process = datas->begin_process;
 		datas->begin_process = process->next;
 		datas->inf[(int)process->champion].nbr_process--;
-		datas->nbr_process--;
+		datas->inf[ALL].nbr_process--;
 		ft_memdel((void **)&process);
 	}
 	process = datas->begin_process;
@@ -37,7 +37,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 				tmp_next = (tmp) ? tmp->next : NULL;
 				process->next = tmp_next;
 				datas->inf[(int)process->champion].nbr_process--;
-				datas->nbr_process--;
+				datas->inf[ALL].nbr_process--;
 				ft_memdel((void **)&tmp);
 			}
 			process = process->next;
@@ -153,7 +153,7 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		else
 			cycle->check++;
 		i = 0;
-		while (i < datas->player_nbr)
+		while (i <= datas->player_nbr)
 		{
 			datas->inf[i].cycle_lives = 0;
 			i++;

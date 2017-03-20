@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 19:36:01 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:36:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 //	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "champ == %x, position = %d    ",arg1, arg2);
 	if (arg2 != -1)
 	{
+		datas->inf[arg2 + 1].total_lives++;
+		datas->inf[arg2 + 1].cycle_lives++;
+		datas->inf[arg2 + 1].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
+		datas->inf[ALL].total_lives++;
+		datas->inf[ALL].cycle_lives++;
+		datas->inf[ALL].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
 		datas->lives->total_lives++;
 		datas->lives->cycle_lives++;
-		datas->inf[arg2].total_lives++;
-		datas->inf[arg2].cycle_lives++;
-		datas->inf[arg2].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
 		datas->lives->champ_total_lives[arg2]++;
 		datas->lives->champ_cycle_lives[arg2]++;
 		datas->lives->last_live = arg1;

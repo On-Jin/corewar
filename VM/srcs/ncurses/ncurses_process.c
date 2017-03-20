@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/19 23:42:05 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:00:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,27 @@ void		print_process(t_datas *datas, t_nc *nc)
 	t_process	*pros;
 	t_process	*tmp;
 	int			i;
-		int k = 0;
 	int			nbr_process;
+
 	pros = NULL;
-	if (!nc->cur_menu)
+	nbr_process = datas->inf[nc->cur_menu].nbr_process;
+	i = datas->inf[nc->cur_menu].nbr_process;
+	tmp = datas->begin_process;
+	while (tmp && i != datas->inf[nc->cur_menu].cur_process)
 	{
-		pros = datas->begin_process;
-		i = datas->nbr_process;
-		nbr_process = i;
-		while (pros && i != nc->cur_pros)
+		if ((tmp->champion == nc->cur_menu) || nc->cur_menu == 0)
 		{
-			pros = pros->next;
 			i--;
+			pros = tmp;
 		}
+		tmp = tmp->next;
 	}
-	else
-	{
-		nbr_process = datas->inf[nc->cur_menu - 1].nbr_process;
-		i = datas->nbr_process;
-		tmp = datas->begin_process;
-		while (datas->nc.cur_pros != 0 && tmp && i != datas->nc.cur_pros)
-		{
-			if (tmp && tmp->champion == nc->cur_menu)
-			{
-				i--;
-				pros = tmp;
-			}
-			k++;
-			tmp = tmp->next;
-		}
-	}
-	mvwprintw(nc->inf, nc->i_print + 1, 4, "CurMenu %i / i %ii / k %i / Cur_pros %i", nc->cur_menu, i, k, nc->cur_pros);
 	nc->i_print += 4;
-	mvwprintw(nc->inf, nc->i_print, 9, "Process %i/%i", nc->cur_pros, nbr_process);
+	mvwprintw(nc->inf, nc->i_print, 9, "Process %i/%i", datas->inf[nc->cur_menu].cur_process + 1, nbr_process);
 	if (pros)
 	{
 		wattron(datas->nc.inf, COLOR_PAIR(pros->champion) | WA_UNDERLINE | WA_BOLD);
-		mvwprintw(nc->inf, nc->i_print, 9, "Process %i/%i", nc->cur_pros, nbr_process);
+		mvwprintw(nc->inf, nc->i_print, 9, "Process %i/%i", datas->inf[nc->cur_menu].cur_process + 1, nbr_process);
 		wattroff(datas->nc.inf, COLOR_PAIR(pros->champion) | WA_UNDERLINE | WA_BOLD);
 		mvwaddch(nc->win, pros->PC/64 +1, pros->PC %64*3  +2, 'L' | A_REVERSE);
 		mvwaddch(nc->win, pros->PC/64 +1, pros->PC %64*3 + 3, 'A' | A_REVERSE);

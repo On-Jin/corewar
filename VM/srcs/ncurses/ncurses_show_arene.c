@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/19 23:10:44 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:43:03 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,6 @@ static void	loop_arene(t_datas *datas, t_draw *d)
 	}
 }
 
-void		print_debug(t_datas *datas, t_nc *nc)
-{
-	if (datas)
-		;
-	mvvline(22, nc->size_max_x + 2, 0, 44);
-	mvvline(22, nc->size_max_x + 52, 0, 44);
-	mvhline(22, nc->size_max_x + 2, 0, 50);
-	mvhline(nc->size_max_y - 1, nc->size_max_x + 2, 0, 50);
-	mvaddch(22, nc->size_max_x + 2, ACS_ULCORNER);
-	mvaddch(22, nc->size_max_x + 2 + 50, ACS_URCORNER);
-	mvaddch(nc->size_max_y - 1, nc->size_max_x + 2, ACS_LLCORNER);
-	mvaddch(nc->size_max_y - 1, nc->size_max_x + 52, ACS_LRCORNER);
-}
-
 void		ncurses_show_arene(t_datas *datas)
 {
 	t_draw	d;
@@ -137,7 +123,6 @@ void		ncurses_show_arene(t_datas *datas)
 	print_kirby(datas, &datas->nc);
 	print_main_menu(datas, &datas->nc);
 	print_process(datas, &datas->nc);
-//	print_debug(datas, &datas->nc);
 	wrefresh(datas->nc.win);
 	wrefresh(datas->nc.inf);
 }

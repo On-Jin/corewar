@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/19 23:46:34 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:57:35 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@
 # define NC_DEBUG_X datas->size_max_x + 2 + 3
 # define NC_DEBUG_Y 23
 # define NC_W_INF 70
+# define ALL 0
+
 /*
 ** MACROS
 */
@@ -162,7 +164,7 @@ typedef struct		s_inf
 	long			cycle_lives;
 	long			cycle_last_live;
 	int				champion;
-	int				cur_pros;
+	int				cur_process;
 }					t_inf;
 
 typedef struct		s_datas
@@ -179,7 +181,6 @@ typedef struct		s_datas
 	int				start[4];
 	int				size_champ[4];
 	int				flag;
-	int				nbr_process;
 
 	int				i_debug;
 	int				voider;

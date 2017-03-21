@@ -3,7 +3,6 @@
 
 
 #include "../includes/corewar.h"
-#include "../includes/global.h"
 #include "../includes/libft/libft.h"
 
 typedef struct			s_instruct

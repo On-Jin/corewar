@@ -26,6 +26,7 @@ void	write_exec_magic(int fd, header_t *header)
 void	write_comment(int fdin, header_t *header)
 {
 	char	*line;
+	char	*linegnl;
 	char	*str;
 	t_bool 	have_comment;
 	t_bool	have_name;
@@ -33,11 +34,17 @@ void	write_comment(int fdin, header_t *header)
 
 	have_comment = FALSE;
 	have_name = FALSE;
-	while (ft_gnl(fdin, &line))
+	linegnl = NULL;
+	while (ft_gnl(fdin, &linegnl))
 	{
-		line = ft_strtrim(line);
+		line = ft_strtrim(linegnl);
+		ft_memdel((void**)&linegnl);
+		if (!line)
+			error("Can't read source file\n");
+		
 		if (*line == '\0' || *line == COMMENT_CHAR) // || ft_strcmp(line, ".") == 0 ???
-			continue;
+		{
+		}
 		else if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && !have_comment)
 		{
 			have_name = TRUE;
@@ -52,7 +59,7 @@ void	write_comment(int fdin, header_t *header)
 				error("Name too long");
 			ft_bzero(&(header->prog_name), PROG_NAME_LENGTH + 1);
 			ft_memcpy(&(header->prog_name), str + 1, len - 2);
-			free(str);
+			ft_memdel((void**)&str);
 			if (have_comment && have_name)
 				break;
 		}
@@ -70,13 +77,15 @@ void	write_comment(int fdin, header_t *header)
 				error("Name too long");
 			ft_bzero(&(header->comment), COMMENT_LENGTH + 1);
 			ft_memcpy(&(header->comment), str + 1, len - 2);
-			free(str);
+			ft_memdel((void**)&str);
 			if (have_comment && have_name)
 				break;
 		}
 		else
 			error("Error in name/description.\n");
+		ft_memdel((void**)&line);
 	}
+	ft_memdel((void**)&linegnl);
 	if (!have_comment || !have_name)
 		error("Missing comment or name.\n");
 }

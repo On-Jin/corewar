@@ -157,18 +157,20 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 	opcode = ft_strsub(str, 0, i);
 	str2 = ft_strtrim(str + i);
 	opecode_config = get_config(opcode);
+	ft_memdel((void**)&opcode);
 	if (opecode_config.op_code == 0)
 		return ;
 	inst->opcode = opecode_config.op_code;
 	inst->arg_nbrs = opecode_config.nb_arg;
 	i = 0;
-	free(str);
+	ft_memdel((void**)&str);
 	if ((str = ft_strchr(str2, COMMENT_CHAR)))
 		*str = 0;
 	y = 0;
 	//ft_printf("=-->\"%s\"<--=\n", str2);
 
 	splited = ft_strsplit(str2, SEPARATOR_CHAR);
+	ft_memdel((void**)&str2);
 	while (y < opecode_config.nb_arg)
 	{
 		tmp = 0;
@@ -194,6 +196,7 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 				inst->argcode = inst->argcode | 1;
 			if (inst->args[y][0] == T_IND || inst->args[y][0] == T_LABIND)
 				inst->argcode = inst->argcode | 3;
+			ft_printf("la -> %x\n", inst->argcode);
 		}
 		// Extract arg value
 		if (inst->args[y][0] > T_LAB)
@@ -213,6 +216,7 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 			tmp = extract_indirect(arg);
 			ft_printf("Indirect '%s' valeur '%i'\n", arg, tmp);
 		}
+		ft_memdel((void**)&arg);
 		ft_memmove(inst->args[y] + 2, &tmp, inst->args[y][1]); 
 		y++;
 	}
@@ -222,6 +226,13 @@ void	compiler_compile_line(char *line, t_instruct *inst)
 		ft_printf("-> %i\n", y);
 		error("Too many arguments.\n");
 	}
+	i = y;
+	while(i)
+	{
+		i--;
+		ft_memdel((void**)&splited[i]);
+	}
+	ft_memdel((void**)&splited);
 	while (y < 4)
 	{
 		inst->argcode = inst->argcode << 2;
@@ -244,10 +255,11 @@ void		print_instruts(t_instruct *instructs)
 	while (instructs)
 	{
 		i = 0;
-		//ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ", instructs->label_name, instructs->size, instructs->opcode);
+		ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ", instructs->label_name, instructs->size, instructs->opcode);
+		ft_printf("Forced argcode = %x\n", instructs->argcode);
 		if (instructs->argcode)
 		{
-			//ft_printf("%#0hhx ", instructs->argcode);
+			ft_printf("%#0hhx ", instructs->argcode);
 		}
 		while (i <  instructs->arg_nbrs)
 		{
@@ -255,13 +267,13 @@ void		print_instruts(t_instruct *instructs)
 			val = &(instructs->args[i][2]);
 			while (y < instructs->args[i][1])
 			{
-				//ft_printf("%#0hhx ", ((char *)val)[instructs->args[i][1] - 1 - y]);
+				ft_printf("%#0hhx ", ((char *)val)[instructs->args[i][1] - 1 - y]);
 				y++;
 			}
 			i++;
-			//ft_printf(", ");
+			ft_printf(", ");
 		}
-		//ft_printf("\n\n");
+		ft_printf("\n\n");
 		instructs = instructs->next;
 	}
 }
@@ -392,13 +404,17 @@ t_instruct *compiler_compile(int fdin)
 	{
 		if (!(*line) || *line == COMMENT_CHAR)
 		{
-			ft_printf("vide");
+			ft_memdel((void**)&line);
 			continue ;
 		}
 		lineclr = ft_strtrim(line);
+		ft_memdel((void**)&line);
 		if (!*lineclr || *lineclr == COMMENT_CHAR)
+		{
+			ft_memdel((void**)&lineclr);
 			continue;
-		free(line);
+		}
+		
 		if (!(inst = newinstruct()))
 			error("Malloc error\n");
 		endlabel = compiler_compile_get_label(lineclr);
@@ -406,9 +422,11 @@ t_instruct *compiler_compile(int fdin)
 			inst->label_name = ft_strsub(lineclr, 0, endlabel);
 		line = (endlabel != -1) ? lineclr + endlabel + 1 : lineclr;
 		instruct = ft_strtrim(line);
+		ft_memdel((void**)&lineclr);
+		line = NULL;
 		if (!*instruct)
 		{
-			//free(instruct);
+			//ft_memdel((void**)&instruct);
 			//ft_gnl(fdin, &instruct);
 			ft_printf("saut de ligne : %s\n", instruct);
 		}
@@ -417,11 +435,13 @@ t_instruct *compiler_compile(int fdin)
 			compiler_compile_line(instruct, inst);
 			
 		}
+		ft_memdel((void**)&instruct);
 		instructs_add(&inst_first, inst);
 		//error("end ! :)");
 		// Ignorer les \n
 		// Ignorer les #
 	}
+	ft_memdel((void**)&line);
 	hydrate_labels(inst_first);
 	print_instruts(inst_first);
 	return (inst_first);

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 16:31:04 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 00:11:43 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void			ncurses_base(t_datas *datas)
 	print_kirby(datas, &datas->nc);
 	print_main_menu(datas, &datas->nc);
 	print_process(datas, &datas->nc);
+	print_comment(datas, &datas->nc);
 	wrefresh(datas->nc.win);
 	wrefresh(datas->nc.inf);
 }

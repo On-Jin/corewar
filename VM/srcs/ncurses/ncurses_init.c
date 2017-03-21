@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:23:46 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/21 16:38:55 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 00:21:36 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	struct_init(t_nc *nc)
 	nc->key = NC_PAUSE;
 	nc->cur_pros = 0;
 	nc->wall_cycle = -5;
+	nc->i_com = 50;
+	gettimeofday(&nc->t1, NULL);
+	gettimeofday(&nc->t2, NULL);
 }
 
 void		ncurses_init(t_datas *datas, int height, int width)

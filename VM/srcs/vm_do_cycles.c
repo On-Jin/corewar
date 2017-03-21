@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 16:25:53 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 22:55:38 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
 		ncurses_end(datas);
 	return(ft_int_error("Fin de cycle to die"));
 }
-//manque 1 cycle ~~~~~~~~~~
+
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 {
 	t_cycle	*cycle;
@@ -140,6 +140,12 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 			{
 				turn_process(datas, exec);
 				cycle->cycle++;
+			}
+			if (datas->dump > 0 && cycle->cycle + cycle->total_cycle == datas->dump)
+			{
+				vm_show_arene(datas);
+				//FREE STP
+				exit(0);
 			}
 			if (cycle->cycle_to_die <= 0)
 				break ;

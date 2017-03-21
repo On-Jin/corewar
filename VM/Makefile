@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/20 17:58:56 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/22 00:12:24 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC3 = ncurses_end.c \
 	   ncurses_loop_arene.c \
 	   ncurses_light.c \
 	   ncurses_kirby.c \
+	   ncurses_comment.c \
 	   ncurses_cycle.c \
 	   ncurses_put_background.c \
 	   ncurses_main_menu.c \
@@ -90,6 +91,7 @@ SRC = VM_main.c \
 	  vm_init_process.c \
 	  vm_innit_to_0.c \
 	  vm_ocp_tools.c \
+	  vm_show_arene.c \
 	  vm_verif_macro.c \
 	  vm_start_op_code.c \
 	  ft_void_error.c \

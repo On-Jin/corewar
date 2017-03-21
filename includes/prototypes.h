@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 22:06:43 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 00:12:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void		print_kirby(t_datas *datas, t_nc *nc);
 void		print_cycle(t_datas *datas, t_nc *nc);
 void		print_main_menu(t_datas *datas, t_nc *nc);
 void		print_process(t_datas *datas, t_nc *nc);
+void		print_comment(t_datas *datas, t_nc *nc);
 
 #endif

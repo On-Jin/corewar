@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 23:37:33 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 00:23:47 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "op.h"
 # include "libft.h"
 # include <ncurses.h>
+#include <sys/time.h> //temp
 //# include "tmp.h"
 
 
@@ -117,7 +118,7 @@ typedef struct		s_champ
 {
 	char			champ[CHAMP_MAX_SIZE];
 	char			champ_name[PROG_NAME_LENGTH + 1];
-	char			champ_com[COMMENT_LENGTH];
+	char			champ_com[COMMENT_LENGTH + 1];
 	char			voider;
 	int				champ_nbr;
 	int				champ_size;
@@ -160,9 +161,11 @@ typedef struct		s_ncurses
 	int				cur_menu;
 	int				i_print;
 	int				wall_cycle;
-	int				voider;
+	int				i_com;
 	unsigned char	background[MEM_SIZE];
 	unsigned char	light[MEM_SIZE];
+	struct timeval	t1;
+	struct timeval	t2;
 }					t_nc;
 typedef struct		s_inf
 {

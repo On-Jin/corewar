@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/21 22:10:15 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/22 00:12:24 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC3 = ncurses_end.c \
 	   ncurses_loop_arene.c \
 	   ncurses_light.c \
 	   ncurses_kirby.c \
+	   ncurses_comment.c \
 	   ncurses_cycle.c \
 	   ncurses_put_background.c \
 	   ncurses_main_menu.c \

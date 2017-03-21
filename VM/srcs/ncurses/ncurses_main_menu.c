@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:05:27 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 18:12:57 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 00:07:29 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,19 @@ void		print_main_menu(t_datas *datas, t_nc *nc)
 		if (nc->cur_menu == i)
 		{
 			wattron(nc->inf, WA_REVERSE);
-			mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s%i", "!Num", i);
+			if (!i)
+				mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s", "!All");
+			else
+				mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s", datas->begin_champ[i - 1].champ_name);
 			wattroff(nc->inf, WA_REVERSE);
 		}
 		else
-			mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s%i", "!Num", i);
+		{
+			if (!i)
+				mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s", "!All");
+			else
+				mvwprintw(nc->inf, nc->i_print + i + 1, 1, "%.9s", datas->begin_champ[i - 1].champ_name);
+		}
 		mvwprintw(nc->inf, nc->i_print + i + 1, 10,
 			"[%9lli]   [%11lli]   [%9i]   [%10lli]",
 			datas->inf[i].nbr_process, datas->inf[i].cycle_lives,

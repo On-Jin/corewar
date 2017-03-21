@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 17:58:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 22:06:43 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		vm_put_nbr_in_arene(int number, int adress, char *arene, int size);
 int			vm_verif_datas(t_datas *datas, t_process *process);
 int			vm_op_jump(t_datas *datas, t_process *process, unsigned int instruc, unsigned char size);
 void		vm_verif_macro(void);
-int			vm_create_flags(char **argv, int argc, int *flag);
+int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag);
 int			vm_init_champ(t_champ *champs, int argc, char **argv, t_datas *datas);
 
 int			vm_ocp_size(char ocp, int nb_arg, int op_flag);
@@ -47,6 +47,8 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *));
 int			vm_init_process(t_datas *datas);
+
+void		vm_show_arene(t_datas *datas);
 
 void		start_op_code(t_datas *datas, t_process *pros, int op_code);
 

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:14:54 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 15:43:41 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:25:46 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void		vm_add_flag(char *line, int *flag)
 	while (line[i])
 	{
 		cp = *flag;
-		ft_printf("[%c]{%d}{%d}\n", line[i], cp, *flag);
 		('v' == line[i]) ? (*flag |= FLAG_V) : 0;
 		('b' == line[i]) ? (*flag |= FLAG_B) : 0;
 		('n' == line[i]) ? (*flag |= FLAG_N) : 0;
@@ -34,7 +33,6 @@ static void		vm_add_flag(char *line, int *flag)
 		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
 		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
-		ft_printf("[%c]{%d}{%d}\n", line[i], cp, *flag);
 		if (cp == *flag)
 			exit (ft_int_error("Option invalide ou champion invalide"));
 		++i;
@@ -45,14 +43,20 @@ static void		vm_add_flag(char *line, int *flag)
 ** voir les options possibles
 */
 
-int			vm_create_flags(char **argv, int argc, int *flag)
+int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag)
 {
 	int		i;
 
 	i = 1;
 	while (i < argc && argv[i])
 	{
-		if (*argv[i] == '-')
+		if (!ft_strcmp(argv[i], "-d"))
+		{
+			i++;
+			*flag |= FLAG_D;
+			datas->dump = ft_atoi(argv[i]);
+		}
+		else if (*argv[i] == '-')
 			vm_add_flag(argv[i], flag);
 		else if (ft_strstr(argv[i], ".cor"))
 			return (i);

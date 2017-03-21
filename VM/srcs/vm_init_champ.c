@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 16:15:15 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:56:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ static int			vm_create_champ(t_champ *champs, char *entry, int i,
 	vm_verif_champ(buff, &champs[i]);
 	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(header_t)),
 			j - sizeof(header_t));
-	ft_printf("%s\n", (char *)&champs[i]);
 	champs[i].champ_nbr = -(i + 1);
-	ft_printf("champ_position = %i, champ_nbr = %d\n", i, champs[i].champ_nbr);
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);
 	if (close(fd) == -1)
 		exit (ft_int_error("Echec de close du champion"));
+	ft_memcpy(champs[i].champ_com,  &buff[4 + PROG_NAME_LENGTH + 8] , COMMENT_LENGTH);
 	return (0);
 }
 

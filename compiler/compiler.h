@@ -24,4 +24,11 @@ void error(char *str);
 t_instruct *compiler_compile(int fdin);
 size_t		get_instruct_size(t_instruct *current);
 void	invert_byte(unsigned int *val);
+
+t_op		get_config(char *name);
+int			compiler_compile_get_label(char *line);
+int			get_argtype(char *str, int conf);
+char		*extract_str(char *str);
+int			extract_int(char *str);
+
 #endif

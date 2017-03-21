@@ -12,18 +12,6 @@
 
 #include "corewar.h"
 
-
-/*
-** Questions par commande:
-** Que fait la commande?
-** De qui a t'elle besoin?
-** que fait elle si ses instrictions sont eronnees ?
-** que fait elle si son op_code_instruc est erronne ?
-** carry ?
-** jump?
-** ;
-*/
-
 /*
 ** live recherche
 ** prends un paramettre, sur 4 octets
@@ -32,24 +20,6 @@
 ** un processeur qui fait un live non valide reste en vie
 ** les lives non valides ne sont pas ajouter au decompte des lives totaux
 ** le prcesseur jump ensuite sur pc + 5
-*/
-
-/*
-** Live
-** faire un special pour live
-** donc met +1 a nbr_live
-** stoque live nbr du champion pour affichage;
-** met param de live a 1
-** met champ_live total a +1
-** met champ live cycle a +1
-*/
-
-/*
-** zork resultat du corear
-** cycle 57955 manque 1 cycle
-** lives
-** valeurs de la ligne 0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 ff ff ff ff 09 ff fb OK
-**;
 */
 
 void				vm_op_1_exec(t_datas *datas, t_process *process)
@@ -61,20 +31,22 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 	arg2 = vm_champ_number_to_position(arg1, datas->begin_champ);
 	process->live = 1;
 	process->PC = vm_add_valid(process->PC + 5);
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "champ == %x, position = %d    ",arg1, arg2);
 	if (arg2 != -1)
 	{
 		datas->inf[arg2 + 1].total_lives++;
 		datas->inf[arg2 + 1].cycle_lives++;
-		datas->inf[arg2 + 1].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
+		datas->inf[arg2 + 1].cycle_last_live = datas->cycle.cycle +
+											datas->cycle.total_cycle + 1;
 		datas->inf[ALL].total_lives++;
 		datas->inf[ALL].cycle_lives++;
-		datas->inf[ALL].cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
+		datas->inf[ALL].cycle_last_live = datas->cycle.cycle +
+											datas->cycle.total_cycle + 1;
 		datas->lives->total_lives++;
 		datas->lives->cycle_lives++;
 		datas->lives->champ_total_lives[arg2]++;
 		datas->lives->champ_cycle_lives[arg2]++;
 		datas->lives->last_live = arg1;
-		datas->lives->cycle_last_live = datas->cycle.cycle + datas->cycle.total_cycle;
+		datas->lives->cycle_last_live = datas->cycle.cycle
+								+ datas->cycle.total_cycle + 1;
 	}
 }

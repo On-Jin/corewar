@@ -12,7 +12,8 @@
 
 #include "corewar.h"
 
-int				vm_recup_process_reg(t_process *process, char *arene, int adresse, int *result)
+int				vm_recup_process_reg(t_process *process, char *arene,
+													int adresse, int *result)
 {
 	unsigned int		reg;
 

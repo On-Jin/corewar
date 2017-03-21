@@ -126,7 +126,7 @@ typedef struct		s_process
 {
 	int				reg[REG_NUMBER + 1];
 	int				in_stock[4];
-	int				voider;
+	int				instruc;
 	struct			s_process *next;
 	int				PC;
 	int				cycle;

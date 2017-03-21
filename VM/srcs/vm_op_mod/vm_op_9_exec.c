@@ -23,9 +23,4 @@ void			vm_op_9_exec(t_datas *datas, t_process *process)
 			((vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD)));
 	else
 		process->PC = vm_add_valid(process->PC + 3);
-
-	process->in_stock[0] = 0;
-	process->in_stock[1] = 0;
-	process->in_stock[2] = 0;
-	process->in_stock[3] = 0;
 }

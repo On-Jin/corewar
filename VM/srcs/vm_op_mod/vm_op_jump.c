@@ -12,25 +12,25 @@
 
 #include "corewar.h"
 
-int			vm_op_jump(t_datas *datas, t_process *process, unsigned int instruc, unsigned char size)
+int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size)
 {
 	unsigned char		i;
+	unsigned int		instruc;
+	int					pr_i;
 
 	i = 4 - size;
-//	if (process->instruction == 2)
-//		ft_printf("size = %d \t %x",size, instruc);
+	instruc = process->instruc;
+	pr_i = process->instruction;
 	while (i)
 	{
 		instruc >>= 2;
 		--i;
 	}
-//	if (process->instruction == 2)
-//		ft_printf(" \t\tnew size = %d \t %x\n",i, instruc);
 	while (instruc)
 	{
 		((instruc & 3) == 1) ? i += 1 : 0;
-		((instruc & 3) == 2 && datas->op_tab[(int)process->instruction].nbr_octet_dir == 0) ? i += 4 : 0;
-		((instruc & 3) == 2 && datas->op_tab[(int)process->instruction].nbr_octet_dir == 1) ? i += 2 : 0;
+		((instruc & 3) == 2 && !datas->op_tab[pr_i].nbr_octet_dir) ? i += 4 : 0;
+		((instruc & 3) == 2 && datas->op_tab[pr_i].nbr_octet_dir) ? i += 2 : 0;
 		((instruc & 3) == 3) ? i += 2 : 0;
 		instruc >>= 2;
 	}

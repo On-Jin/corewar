@@ -12,7 +12,8 @@
 
 #include "corewar.h"
 
-void			vm_put_nbr_in_arene(int number, int adress, char *arene, int size)
+void			vm_put_nbr_in_arene(int number, int adress, char *arene,
+																	int size)
 {
 	(adress < 0) ? (adress += MEM_SIZE) : 0;
 	while (size)

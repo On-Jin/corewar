@@ -12,32 +12,32 @@
 
 #include "corewar.h"
 
-int			vm_verif_i_cod(char code, char a, char b, char c, t_datas *datas)
+/*
+** 1 = reg
+** 2 = dir
+** 4 = ind
+** 3 = reg || dir
+** 5 = ind || reg
+** 6 = dir || ind
+** 7 = any
+*/
+
+static int		vm_verif_i_cod(char code, char a, char b, char c)
 {
-	(void)datas;
 	if (code & 0b11)
-	{
-	//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 1");
-				return (0);
-	}
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "n_d = %d n_c = %d, n_b = %d, n_a = %d", code & 3, (code >> 2) & 3, (code >> 4) & 3, (code >> 6) & 3);
-	code >>= 2;
-	if ( ((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) && ((c & 4) && (code & 3) != 3))
-{
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 1");
-	return (0);
-}	code >>= 2;
-	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) && ((b & 4) && (code & 3) != 3))
-{
-//	mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 2");
-	return (0);
-}	code >>= 2;
-	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) && ((a & 4) && (code & 3) != 3))
-{
-//		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 3");
 		return (0);
-}
-//		mvprintw(NC_DEBUG_Y + datas->i_debug++, NC_DEBUG_X, "test 4");
+	code >>= 2;
+	if (((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) &&
+												((c & 4) && (code & 3) != 3))
+		return (0);
+	code >>= 2;
+	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) &&
+												((b & 4) && (code & 3) != 3))
+		return (0);
+	code >>= 2;
+	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) &&
+												((a & 4) && (code & 3) != 3))
+		return (0);
 	return (1);
 }
 
@@ -54,6 +54,7 @@ int				vm_verif_datas(t_datas *datas, t_process *process)
 	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
 	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
 	c = (op_c->nb_arg == 3) ? op_c->tab_arg[2] : 0;
-
-	return (vm_verif_i_cod(datas->arene[vm_add_valid(process->PC + 1)], a, b, c, datas));
+	process->instruc = (unsigned char)datas->arene[vm_add_valid(process->PC +
+																			1)];
+	return (vm_verif_i_cod(process->instruc, a, b, c));
 }

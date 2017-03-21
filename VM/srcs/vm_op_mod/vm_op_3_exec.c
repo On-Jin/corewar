@@ -29,7 +29,9 @@
 void			vm_op_3_exec(t_datas *datas, t_process *process)
 {
 	char		i;
+	unsigned int			instruc;
 
+	instruc = (unsigned char)datas->arene[vm_add_valid(process->PC + 1)];
 	i = datas->arene[vm_add_valid(process->PC + 1)];
 //if ((datas->cycle.cycle + datas->cycle.total_cycle) >= 8894 && (datas->cycle.cycle + datas->cycle.total_cycle) <= 8898 && process->PC == 3967)
 //	ft_printf("arg a la suite de l'op_encode [%2x][%2x][%2x]\n", datas->arene[vm_add_valid(process->PC + 2)], datas->arene[vm_add_valid(process->PC + 3)], datas->arene[vm_add_valid(process->PC + 4)]);
@@ -52,6 +54,6 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;
-	process->PC = vm_op_jump(datas, process,
+	process->PC = vm_op_jump(datas, process, instruc,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

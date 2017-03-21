@@ -12,12 +12,10 @@
 
 #include "corewar.h"
 
-int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size)
+int			vm_op_jump(t_datas *datas, t_process *process, unsigned int instruc, unsigned char size)
 {
 	unsigned char		i;
-	unsigned char		instruc;
 
-	instruc = datas->arene[vm_add_valid(process->PC + 1)];
 	i = 4 - size;
 //	if (process->instruction == 2)
 //		ft_printf("size = %d \t %x",size, instruc);

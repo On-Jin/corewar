@@ -66,6 +66,9 @@ process->PC = vm_op_jump(datas, process, 2);
 
 void			vm_op_2_exec(t_datas *datas, t_process *process)
 {
+	unsigned int			instruc;
+
+	instruc = (unsigned char)datas->arene[vm_add_valid(process->PC + 1)];
 	if (vm_verif_datas(datas, process))
 	{
 		if (!vm_recup_all_process(process, datas->arene, 1 << 24))
@@ -79,10 +82,11 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;
-	process->PC = vm_op_jump(datas, process,
+	process->PC = vm_op_jump(datas, process, instruc,
 							datas->op_tab[(int)process->instruction].nb_arg);
 	process->in_stock[0] = 0;
 	process->in_stock[1] = 0;
 	process->in_stock[2] = 0;
 	process->in_stock[3] = 0;
+	(void)datas;
 }

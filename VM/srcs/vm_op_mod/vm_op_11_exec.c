@@ -20,7 +20,9 @@
 void			vm_op_11_exec(t_datas *datas, t_process *process)
 {
 	char		i;
+	unsigned int			instruc;
 
+	instruc = (unsigned char)datas->arene[vm_add_valid(process->PC + 1)];
 	i = datas->arene[vm_add_valid(process->PC + 1)];
 	if (vm_verif_datas(datas, process))
 	{
@@ -35,7 +37,7 @@ void			vm_op_11_exec(t_datas *datas, t_process *process)
 	}
 	else if (datas->op_tab[(int)process->instruction].mod_carry)
 		process->carry = 0;
-	process->PC = vm_op_jump(datas, process,
+	process->PC = vm_op_jump(datas, process, instruc,
 							datas->op_tab[(int)process->instruction].nb_arg);
 	process->in_stock[0] = 0;
 	process->in_stock[1] = 0;

@@ -12,10 +12,15 @@
 
 #include "corewar.h"
 
+/*
+** L-fork
+** 0f 03 70 03 ff ff 01
+*/
+
 void			vm_op_15_exec(t_datas *datas, t_process *process)
 {
 	vm_copy_process(datas, process, vm_add_valid(process->PC +
-		vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD));
+		vm_recup_arena_num(2, datas->arene, process->PC + 1)));
 	process->PC = vm_add_valid(process->PC + 3);
 
 	process->in_stock[0] = 0;

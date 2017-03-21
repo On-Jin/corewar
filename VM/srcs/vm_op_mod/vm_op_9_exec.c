@@ -18,13 +18,9 @@
 
 void			vm_op_9_exec(t_datas *datas, t_process *process)
 {
-	int		arg1;
-	int		arg2;
-
-	arg1 = process->PC;
 	if (process->carry)
 		process->PC = vm_add_valid(process->PC +
-			(arg2 = (vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD)));
+			((vm_recup_arena_num(2, datas->arene, process->PC + 1) % IDX_MOD)));
 	else
 		process->PC = vm_add_valid(process->PC + 3);
 

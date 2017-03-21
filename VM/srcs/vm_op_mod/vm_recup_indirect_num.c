@@ -24,7 +24,7 @@ int				vm_recup_indirect_num(t_process *process, char *arene, int adresse)
 	if (process->instruction < 13 || process->instruction > 15)
 		ind_adress = ind_adress % IDX_MOD;
 	ind_adress = vm_add_valid(ind_adress + process->PC);
-	val = vm_recup_arena_num(2, arene, ind_adress);
+	val = vm_recup_arena_num(IND_SIZE, arene, ind_adress);
 	val = val >> (4 * 8 - IND_SIZE * 8);
 //	val = vm_recup_arena_num(2, arene, (process->PC + (val % IDX_MOD)) % MEM_SIZE);
 //	val = val >> (4 * 8 - IND_SIZE * 8);

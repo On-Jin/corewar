@@ -12,6 +12,10 @@
 
 #include "corewar.h"
 
+/*
+** Lldi
+*/
+
 void			vm_op_14_exec(t_datas *datas, t_process *process)
 {
 	unsigned int			instruc;
@@ -20,11 +24,13 @@ void			vm_op_14_exec(t_datas *datas, t_process *process)
 	if (vm_verif_datas(datas, process))
 	{
 		vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 16);
-		if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
+		if (process->in_stock[2] > 0 && process->in_stock[2] <= REG_NUMBER)
 		{
-			process->reg[process->in_stock[2]] = vm_recup_indirect_num(process,
+			process->reg[process->in_stock[2]] = vm_recup_arena_num(REG_SIZE, datas->arene, vm_add_valid(process->PC + (process->in_stock[0] +
+												process->in_stock[1])));
+			/*process->reg[process->in_stock[2]] = vm_recup_indirect_num(process,
 				datas->arene, process->PC + (process->in_stock[0] +
-				process->in_stock[1]));
+				process->in_stock[1]));*/
 			process->carry = 1;
 		}
 		else

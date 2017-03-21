@@ -6,11 +6,17 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 12:55:11 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 18:10:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:45:18 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static void	ncurses_key_putnbr(t_nc *nc, int ret)
+{
+	if (ret == NC_PUT_NBR)
+		mvwscanw(nc->inf, 50, 2, "%i", &nc->wall_cycle);
+}
 
 void		ncurses_key(t_datas *datas)
 {
@@ -20,6 +26,7 @@ void		ncurses_key(t_datas *datas)
 	ret = getch();
 	if (ret > 'A' && ret < 'z')
 		datas->nc.key = ret;
+	ncurses_key_putnbr(&datas->nc, ret);
 	if (ret == NC_PROC_NEXT)
 	{
 		if (datas->inf[datas->nc.cur_menu].cur_process <

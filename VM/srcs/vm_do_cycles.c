@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 17:54:03 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:25:53 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 				ncurses_base(datas);
 				if (datas->nc.key != NC_PAUSE)
 				{
+					if (datas->nc.wall_cycle - 1 == (cycle->total_cycle + cycle->cycle))
+						datas->nc.key =  NC_PAUSE;
 					ncurses_light(datas);
 					if (datas->nc.key == NC_SBS)
 						datas->nc.key = NC_PAUSE;

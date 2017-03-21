@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 13:44:18 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:46:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	process->next = tmp;
 	process->PC = datas->start[nbr_champ - 1];
 	process->champion = (char)nbr_champ;
-	mvprintw(40, 63*3 + 150, "LA  [%i]", nbr_champ);
 	datas->inf[nbr_champ].nbr_process++;
 	datas->inf[ALL].nbr_process++;
 	process->carry = 0;

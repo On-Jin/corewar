@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:23:46 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 18:10:17 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:38:55 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	struct_init(t_nc *nc)
 {
 	nc->key = NC_PAUSE;
 	nc->cur_pros = 0;
+	nc->wall_cycle = -5;
 }
 
 void		ncurses_init(t_datas *datas, int height, int width)
@@ -33,6 +34,6 @@ void		ncurses_init(t_datas *datas, int height, int width)
 	datas->nc.cur_menu = 0;
 	datas->nc.win = newwin(height, width, 0, 0);
 	datas->nc.inf = newwin(height, NC_W_INF, 0, datas->nc.size_max_x + 2);
-	noecho();
+	cbreak();
 	wrefresh(datas->nc.win);
 }

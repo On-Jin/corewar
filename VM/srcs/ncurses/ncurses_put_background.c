@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 16:31:59 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 18:14:22 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:21:30 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ncurses_put_background(t_datas *datas, int pc,
 {
 	int i;
 
+	if (pc < 0)
+		pc += MEM_SIZE;
 	i = 0;
 	while (i < size)
 	{

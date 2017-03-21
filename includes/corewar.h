@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 19:18:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:33:52 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@
 # define NC_SBS 's'
 # define NC_PROC_NEXT '+'
 # define NC_PROC_BACK '-'
+# define NC_PUT_NBR 'c'
 # define NC_DEBUG_X datas->size_max_x + 2 + 3
 # define NC_DEBUG_Y 23
 # define NC_W_INF 70
@@ -156,6 +157,8 @@ typedef struct		s_ncurses
 	int				cur_pros;
 	int				cur_menu;
 	int				i_print;
+	int				wall_cycle;
+	int				voider;
 	unsigned char	background[MEM_SIZE];
 	unsigned char	light[MEM_SIZE];
 }					t_nc;

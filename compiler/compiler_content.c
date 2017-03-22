@@ -12,6 +12,8 @@
 
 #include "compiler.h"
 
+
+// Découper en 3 - 4 fonction
 void		compiler_compile_line(
 	char *line, t_instruct *inst)
 {
@@ -97,147 +99,6 @@ void		compiler_compile_line(
 	inst->size++;
 	if (inst->argcode)
 		inst->size++;
-}
-
-void		print_instruts(t_instruct *instructs)
-{
-	int		i;
-	int		y;
-	void	*val;
-
-	while (instructs)
-	{
-		i = 0;
-		ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ",
-			instructs->label_name, instructs->size, instructs->opcode);
-		ft_printf("Forced argcode = %x\n", instructs->argcode);
-		if (instructs->argcode)
-		{
-			ft_printf("%#0hhx ", instructs->argcode);
-		}
-		while (i < instructs->arg_nbrs)
-		{
-			y = 0;
-			val = &(instructs->args[i][2]);
-			while (y < instructs->args[i][1])
-			{
-				ft_printf("%#0hhx ",
-					((char *)val)[instructs->args[i][1] - 1 - y]);
-				y++;
-			}
-			i++;
-			ft_printf(", ");
-		}
-		ft_printf("\n\n");
-		instructs = instructs->next;
-	}
-}
-
-size_t			get_label_position(t_instruct *first, char *labelname)
-{
-	t_instruct	*current;
-	int			count;
-	t_bool		finded;
-
-	current = first;
-	finded = FALSE;
-	count = 0;
-	while (current)
-	{
-		if (ft_strcmp(current->label_name, labelname) == 0)
-		{
-			finded = TRUE;
-			break ;
-		}
-		count += current->size;
-		current = current->next;
-	}
-	if (!finded)
-		error("Label not exist\n");
-	return (count);
-}
-
-size_t			get_rquest_label_position(
-	t_instruct *first, t_instruct *tofind, int argnbr)
-{
-	t_instruct	*current;
-	int			count;
-	t_bool		finded;
-
-	current = first;
-	finded = FALSE;
-	count = 0;
-	while (current)
-	{
-		if (current == tofind)
-		{
-			finded = TRUE;
-			break ;
-		}
-		count += current->size;
-		current = current->next;
-	}
-	if (!finded)
-		error("Unknow error\n");
-	return (count);
-}
-
-size_t			get_relative(
-	t_instruct *first, t_instruct *tofind, int argnbr, char *labelname)
-{
-	return (get_label_position(first, labelname) -
-		get_rquest_label_position(first, tofind, argnbr));
-}
-
-void			hydrate_labels(t_instruct *first)
-{
-	t_instruct	*current;
-	int			pos;
-	int			i;
-
-	current = first;
-	while (current)
-	{
-		i = 0;
-		while (i < 3)
-		{
-			if (current->args_labels[i])
-			{
-				pos = get_relative(first, current, i, current->args_labels[i]);
-				ft_memmove(current->args[i] + 2, &pos, current->args[i][1]);
-			}
-			i++;
-		}
-		current = current->next;
-	}
-}
-
-void			instructs_add(t_instruct **instructs_list, t_instruct *instruct)
-{
-	t_instruct	*current;
-
-	current = *instructs_list;
-	if (!current)
-	{
-		*instructs_list = instruct;
-		return ;
-	}
-	while (current->next)
-		current = current->next;
-	current->next = instruct;
-}
-
-size_t			get_instruct_size(t_instruct *current)
-{
-	size_t		size;
-
-	size = 0;
-	while (current)
-	{
-		size += current->size;
-		current = current->next;
-	}
-	return (size);
 }
 
 t_instruct		*compiler_compile(int fdin)

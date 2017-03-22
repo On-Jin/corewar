@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:16 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 16:51:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 00:23:57 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 ** ne check pas si les paramettes sont valides pour la fonction
 ** si repertory non valide ne fait rien / prends 0 a la place
 ** lit les insturctions a la fin de son cycle
+**
+** Si valeur de Load == 0 le CARRY == 1
+** Sinon dans les autres cas, CARRY == 0
 */
 
 void			vm_op_2_exec(t_datas *datas, t_process *process)
@@ -33,8 +36,11 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 		{
 			if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
 			{
+				if (0 == process->in_stock[0])
+					process->carry = 1;
+				else
+					process->carry = 0;
 				process->reg[process->in_stock[1]] = process->in_stock[0];
-				process->carry = 1;
 			}
 		}
 	}

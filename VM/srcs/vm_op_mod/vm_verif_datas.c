@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:56:19 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 17:30:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 00:05:04 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 static int		vm_verif_i_cod(char code, char a, char b, char c)
 {
+	if ((a + b + c) && !code)
+	  return (0);
 	if (code & 0b11)
 		return (0);
 	code >>= 2;

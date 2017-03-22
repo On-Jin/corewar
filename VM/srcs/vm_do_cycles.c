@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 22:55:38 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:49:35 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	//	ft_printf("[%d][%d][%d][%d][%d][%d][%d][%d]\n", pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4], pros->reg[5], pros->reg[6], pros->reg[7], pros->reg[8], pros->reg[9]);
 		if (pros->cycle == 0)
 		{
+			pros->in_stock[0] = 0;
+			pros->in_stock[1] = 0;
+			pros->in_stock[2] = 0;
+			pros->in_stock[3] = 0;
 			cur_ocp = (unsigned int)datas->arene[pros->PC];
 			if (17 <= cur_ocp)
 				cur_ocp = 0;
@@ -63,6 +67,7 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		}
 		if (pros->cycle == 1)
 			exec[(int)pros->instruction](datas, pros);
+
 		pros->cycle--;
 		if (pros->cycle < 0)
 			ft_printf("erreur procycle");

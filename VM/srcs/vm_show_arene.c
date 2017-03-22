@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 22:05:56 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/21 23:27:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:03:20 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,17 @@ if (datas)
 void		vm_show_arene(t_datas *datas)
 {
 	int i;
-
+i = 0;
+ft_printf("Introducing contestants...\n");
+while(i < datas->player_nbr)
+{
+	ft_printf("* Player %i, weighing %i bytes, \"%s\" (\"%s\") !\n",
+								i + 1, datas->begin_champ[i].champ_size, datas->begin_champ[i].champ_name, datas->begin_champ[i].champ_com);
+	i++;
+}
 	i = 0;
-	ft_printf("0x0%03x : ", i);
+	//ft_printf("0x0%03x : ", i);
+	ft_putstr("0x0000 : ");
 	while (i < MEM_SIZE)
 	{
 		if (i % 64 == 0 && i)

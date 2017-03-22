@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:57 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 17:41:39 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 23:37:18 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 
 void			vm_op_10_exec(t_datas *datas, t_process *process)
 {
+	static int k = 0;
 	if (vm_verif_datas(datas, process))
 	{
 		vm_recup_all_process(process, datas->arene, 1 << 25 | 1 << 24 |
-																	1 << 16);
+													1 << 16 | 1 << 17);
+		mvprintw(10 + k++, 64*3+85, "Stock [%i][%i][%i]", process->in_stock[0], process->in_stock[1], process->in_stock[2]);
 		if (process->in_stock[2] > 0 && process->in_stock[2] <= REG_NUMBER)
 		{
 			process->reg[process->in_stock[2]] = vm_recup_arena_num(4,

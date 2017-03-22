@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 00:23:47 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 20:11:30 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "libft.h"
 # include <ncurses.h>
 #include <sys/time.h> //temp
+#include <signal.h> //temp
 //# include "tmp.h"
 
 

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:50:32 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/14 12:50:14 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:17:48 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int			vm_recup_all_process_ind(t_process *process, char *arene, int *inf,
 	{
 		process->in_stock[inf[0]] = vm_recup_indirect_num(process, arene,
 																	*adress);
+		mvprintw(20, 64*3+85, "La : %i", process->in_stock[inf[0]]);
 		*adress += 2;
 	}
 	return (0);

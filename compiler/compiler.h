@@ -18,7 +18,7 @@ typedef struct			s_instruct
 	struct s_instruct	*next;
 }						t_instruct;
 
-void	write_exec_magic(int fd, header_t *header);
+void	write_exec_magic(header_t *header);
 void	write_comment(int fdin, header_t *header);
 void error(char *str);
 t_instruct *compiler_compile(int fdin);
@@ -35,8 +35,8 @@ void			instructs_add(t_instruct **instructs_list, t_instruct *instruct);
 void		print_instruts(t_instruct *instructs);
 size_t			get_label_position(t_instruct *first, char *labelname);
 size_t			get_request_label_position(
-	t_instruct *first, t_instruct *tofind, int argnbr);
+	t_instruct *first, t_instruct *tofind);
 size_t			get_relative(
-	t_instruct *first, t_instruct *tofind, int argnbr, char *labelname);
+	t_instruct *first, t_instruct *tofind, char *labelname);
 void			hydrate_labels(t_instruct *first);
 #endif

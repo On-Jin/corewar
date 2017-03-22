@@ -20,7 +20,6 @@ void error(char *str)
 
 char *get_output_path(char *name)
 {
-	char	*output_path;
 	char	*tmp;
 
 	tmp = ft_strrchr(name, '.');
@@ -74,7 +73,7 @@ int main(int argc, char **argv)
 	output_path = get_output_path(argv[1]);
 	
 	ft_bzero(&header, sizeof(header_t));
-	write_exec_magic(fdin, &header);
+	write_exec_magic(&header);
 	write_comment(fdin, &header);
 	instructs = compiler_compile(fdin);
 	header.prog_size = (unsigned int)get_instruct_size(instructs);

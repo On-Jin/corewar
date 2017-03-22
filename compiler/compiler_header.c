@@ -17,7 +17,7 @@ void	invert_byte(unsigned int *val)
 	*val = revnbr;
 }
 
-void	write_exec_magic(int fd, header_t *header)
+void	write_exec_magic(header_t *header)
 {
 	header->magic = COREWAR_EXEC_MAGIC;
 	invert_byte(&(header->magic));

@@ -10,7 +10,6 @@ do
 	if [ $? != 0 ]
 	then
 		exit;
-	f
 	fi
 	hexdump zaz.cor > zaz.txt
 	hexdump me.cor > me.txt

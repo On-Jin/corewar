@@ -245,4 +245,5 @@ char					*ft_strjoin_multi(t_bool autofree, ...);
 t_bool					ft_isdigit_str(char *str);
 t_list					*ft_lstlast(t_list *list);
 int						ft_intlen(int n);
+char					*ft_strtrim_free(char **str);
 #endif

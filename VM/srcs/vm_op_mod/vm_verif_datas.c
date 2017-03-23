@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:56:19 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:01:16 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:42:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ static int		vm_verif_i_cod(char code, char a, char b, char c)
 	if (code & 0b11)
 		return (0);
 	code >>= 2;
-	if (c && (code & 0b11) == 0)
+	if ((c && (code & 0b11) == 0)  || (!c && (code & 0b11) > 0))
 		return (0);
 	if (((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) &&
 												((c & 4) && (code & 3) != 3))
 		return (0);
 	code >>= 2;
-	if (b && (code & 0b11) == 0)
+	if ((b && (code & 0b11) == 0) || (!b && (code & 0b11) > 0))
 		return (0);
 	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) &&
 												((b & 4) && (code & 3) != 3))
 		return (0);
 	code >>= 2;
-	if (a && (code & 0b11) == 0)
+	if ((a && (code & 0b11) == 0) || (!a && (code & 0b11) > 0))
 		return (0);
 	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) &&
 												((a & 4) && (code & 3) != 3))

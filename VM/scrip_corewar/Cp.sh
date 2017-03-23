@@ -1,0 +1,1 @@
+rm corewar && cp ../corewar ./

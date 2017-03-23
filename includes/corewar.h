@@ -106,7 +106,7 @@ typedef struct		s_op
 {
 	const char		*name;
 	int				nb_arg;
-	int				tab_arg[7];
+	int				tab_arg[3];
 	int				op_code;
 	int				cycle;
 	const char		*doc;

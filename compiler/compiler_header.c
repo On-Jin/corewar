@@ -1,78 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compiler_header.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mprevot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 17:09:26 by mprevot           #+#    #+#             */
+/*   Updated: 2017/03/23 17:09:27 by mprevot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "compiler.h"
 
-void	write_exec_magic(int fd, header_t *header)
+void				invert_byte(unsigned int *val)
 {
-	int nbr;
-	int revnbr;
-	int i;
-	int size;
+	int				i;
+	unsigned int	revnbr;
+	unsigned int	nbr;
 
 	i = 3;
-	nbr = COREWAR_EXEC_MAGIC;
-	revnbr = 0;
+	nbr = *val;
 	while (i >= 0)
 	{
 		((char*)(&revnbr))[i] = ((char*)(&nbr))[0];
 		nbr = nbr >> 8;
 		i--;
 	}
-	//write(fd, &revnbr, 4);
-	header->magic = revnbr;
+	*val = revnbr;
 }
 
-void	write_comment(int fdin, header_t *header)
+void				write_exec_magic(header_t *header)
 {
-	char	*line;
-	char	*str;
-	t_bool 	have_comment;
-	t_bool	have_name;
-	int 	len;
+	header->magic = COREWAR_EXEC_MAGIC;
+	invert_byte(&(header->magic));
+}
+
+char				*write_comment_get_cmd(
+	char *line, t_bool *have_comment, t_bool *have_name)
+{
+	if (ft_strncmp(line, NAME_CMD_STRING,
+		ft_strlen(NAME_CMD_STRING)) == 0 && !*have_name)
+	{
+		*have_name = TRUE;
+		return (NAME_CMD_STRING);
+	}
+	if (ft_strncmp(line, COMMENT_CMD_STRING,
+		ft_strlen(COMMENT_CMD_STRING)) == 0 && !*have_comment)
+	{
+		*have_comment = TRUE;
+		return (COMMENT_CMD_STRING);
+	}
+	return (NULL);
+}
+
+void				write_comment_gnl(
+	header_t *header, char *line, char *cmd)
+{
+	char			*str;
+	int				len;
+
+	str = ft_strtrim(line + ft_strlen(cmd));
+	len = ft_strlen(str);
+	if (*str != '"')
+		error("Command don't start by '\"'\n");
+	if (str[len - 1] != '"')
+		error("Command don't end by '\"'\n");
+	if (ft_strcmp(cmd, NAME_CMD_STRING) == 0)
+	{
+		if (len > PROG_NAME_LENGTH)
+			error("Name too long");
+		ft_bzero(&(header->prog_name), PROG_NAME_LENGTH + 1);
+		ft_memcpy(&(header->prog_name), str + 1, len - 2);
+	}
+	else
+	{
+		if (len > COMMENT_LENGTH)
+			error("Command too long");
+		ft_bzero(&(header->comment), COMMENT_LENGTH + 1);
+		ft_memcpy(&(header->comment), str + 1, len - 2);
+	}
+	ft_memdel((void**)&str);
+}
+
+void				write_comment(int fdin, header_t *header)
+{
+	char			*line;
+	t_bool			have_comment;
+	t_bool			have_name;
+	char			*cmd;
 
 	have_comment = FALSE;
 	have_name = FALSE;
+	line = NULL;
 	while (ft_gnl(fdin, &line))
 	{
-		if (*line == '\0' || ft_strcmp(line, ".") == 0)
-			continue;
-		else if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && !have_comment)
+		if (!(line = ft_strtrim_free(&line)))
+			error("Can't read source file\n");
+		if ((cmd = write_comment_get_cmd(line, &have_comment, &have_name)))
 		{
-			have_name = TRUE;
-			str = ft_strtrim(line + ft_strlen(NAME_CMD_STRING));
-			len = ft_strlen(str);
-			if (*str != '"')
-				error("Name don't start by '\"'\n");
-			if (str[len - 1] != '"')
-				error("Name don't end by '\"'\n");
-			ft_printf("Hey : %s\n", str);
-			if (len > PROG_NAME_LENGTH)
-				error("Name too long");
-			ft_bzero(&(header->prog_name), PROG_NAME_LENGTH + 1);
-			ft_memcpy(&(header->prog_name), str + 1, len - 2);
-			free(str);
+			write_comment_gnl(header, line, cmd);
 			if (have_comment && have_name)
-				break;
+				break ;
 		}
-		else if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && !have_comment)
-		{
-			have_comment = TRUE;
-			str = ft_strtrim(line + ft_strlen(COMMENT_CMD_STRING));
-			len = ft_strlen(str);
-			if (*str != '"')
-				error("Name don't start by '\"'\n");
-			if (str[len - 1] != '"')
-				error("Name don't end by '\"'\n");
-			ft_printf("Hey : %s\n", str);
-			if (len > COMMENT_LENGTH)
-				error("Name too long");
-			ft_bzero(&(header->comment), COMMENT_LENGTH + 1);
-			ft_memcpy(&(header->comment), str + 1, len - 2);
-			free(str);
-			if (have_comment && have_name)
-				break;
-		}
-		else
+		else if (!(*line == '\0' || *line == COMMENT_CHAR))
 			error("Error in name/description.\n");
+		ft_memdel((void**)&line);
 	}
+	ft_memdel((void**)&line);
 	if (!have_comment || !have_name)
 		error("Missing comment or name.\n");
 }

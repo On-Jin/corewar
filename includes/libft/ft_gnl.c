@@ -26,14 +26,12 @@ t_buff				*ft_get_buff(int fd)
 		last = buff;
 		buff = buff->next;
 	}
-	if (!(buff = (t_buff *)malloc(sizeof(t_buff))))
+	if (!(buff = (t_buff *)ft_memalloc(sizeof(t_buff))))
 		return (NULL);
 	buff->fd = fd;
-	buff->ended = 0;
 	if (!(buff->content = ft_strnew(0)))
 		return (NULL);
 	buff->content_start = buff->content;
-	buff->next = NULL;
 	if (!firstbuff)
 		firstbuff = buff;
 	else
@@ -49,10 +47,12 @@ char				*ft_find_line(t_buff *buff)
 
 	if (!(rest = ft_strchr(buff->content, '\n')))
 	{
-		tmp = ft_strnew(BUFF_SIZE);
+		if (!(tmp = ft_strnew(BUFF_SIZE)))
+			return (NULL);
 		if ((l = read(buff->fd, tmp, BUFF_SIZE)) > 0)
 		{
-			buff->content = ft_strjoin(buff->content, tmp);
+			if (!(buff->content = ft_strjoin(buff->content, tmp)))
+				return (NULL);
 			free(buff->content_start);
 			buff->content_start = buff->content;
 			free(tmp);
@@ -60,7 +60,7 @@ char				*ft_find_line(t_buff *buff)
 		}
 		free(tmp);
 		if (l == 0 && (buff->ended = 1))
-			return (buff->content);
+			return ft_strdup(buff->content);
 		return (NULL);
 	}
 	*rest = '\0';
@@ -75,6 +75,7 @@ int					ft_gnl(const int fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
+
 	buff = ft_get_buff(fd);
 	if (!buff)
 	{

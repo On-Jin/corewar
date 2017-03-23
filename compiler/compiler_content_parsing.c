@@ -25,7 +25,7 @@
 
 t_op		get_config(char *name)
 {
-	t_op 	op;
+	t_op	op;
 
 	op = corewar_op_name2tab(name);
 	if (op.name)

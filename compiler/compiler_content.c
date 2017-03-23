@@ -25,7 +25,7 @@ void			compiler_hydrate_argument(
 		inst->args[arg_no][1] = 2;
 	else
 		inst->args[arg_no][1] = (opecode_config.nbr_octet_dir) ? 2 : 4;
-	if (opecode_config.have_bytearg)
+	if (opecode_config.have_ocp)
 	{
 		inst->argcode = inst->argcode << 2;
 		if (inst->args[arg_no][0] == T_DIR || inst->args[arg_no][0] == T_LABDIR)
@@ -142,6 +142,5 @@ t_instruct		*compiler_compile(int fdin)
 	}
 	ft_memdel((void**)&line);
 	hydrate_labels(inst_first);
-	print_instruts(inst_first);
 	return (inst_first);
 }

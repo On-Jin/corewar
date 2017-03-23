@@ -46,7 +46,6 @@ int						extract_int(char *str);
 size_t					get_instruct_size(t_instruct *current);
 void					instructs_add(
 	t_instruct **instructs_list, t_instruct *instruct);
-void					print_instruts(t_instruct *instructs);
 size_t					get_label_position(t_instruct *first, char *labelname);
 size_t					get_request_label_position(
 	t_instruct *first, t_instruct *tofind);

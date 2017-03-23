@@ -26,8 +26,10 @@ NAME = asm
 LIB = $(LIB_DIR)libft.a
 LIB_DIR = ./../includes/libft/
 
-SRC =
-SRC_DIR = ./srcs/
+SRC = compiler.c compiler_content.c compiler_content_hydrating.c \
+compiler_content_parsing.c compiler_content_struct.c compiler_header.c
+
+SRC_DIR = ./
 
 OBJ = $(SRC:.c=.o)
 OBJ_DIR = ./objs/

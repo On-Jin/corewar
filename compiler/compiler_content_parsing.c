@@ -59,7 +59,7 @@ t_op		get_config(char *name)
 	i = 0;
 	while (g_op_tab[i].name)
 	{
-		if (ft_strcmp(g_op_tab[i].name, name) == 0)
+		if (ft_strcmp((char*)g_op_tab[i].name, name) == 0)
 			return (g_op_tab[i]);
 		i++;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compiler_content_hydrating.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mprevot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 21:01:12 by mprevot           #+#    #+#             */
+/*   Updated: 2017/03/23 21:01:14 by mprevot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "compiler.h"
 
 size_t			get_label_position(t_instruct *first, char *labelname)
@@ -78,4 +90,3 @@ void			hydrate_labels(t_instruct *first)
 		current = current->next;
 	}
 }
-

@@ -1,3 +1,4 @@
+rm zaz.* me.*
 #FILES=`find ../.. | grep "\.s$"`
 FILES=`find ../..`
 for path in $FILES
@@ -6,7 +7,7 @@ do
 	cp $path zaz.s
 	cp $path me.s
 	../../samples_files/asm zaz.s
-	../a.out me.s # > /dev/null
+	../a.out me.s  > /dev/null
 	if [ $? != 0 ]
 	then
 		exit;

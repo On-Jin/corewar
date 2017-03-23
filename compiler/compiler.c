@@ -12,15 +12,15 @@
 
 #include "compiler.h"
 
-void error(char *str)
+void			error(char *str)
 {
 	ft_putstr_fd(str, STDERR_FILENO);
 	exit(0);
 }
 
-char *get_output_path(char *name)
+char			*get_output_path(char *name)
 {
-	char	*tmp;
+	char		*tmp;
 
 	tmp = ft_strrchr(name, '.');
 	if (!tmp)
@@ -29,11 +29,11 @@ char *get_output_path(char *name)
 	return (ft_strjoin_multi(FALSE, name, ".cor", NULL));
 }
 
-void	write_instruct(int fdout, t_instruct *current)
+void			write_instruct(int fdout, t_instruct *current)
 {
-	int i;
-	int y;
-	void *val;
+	int			i;
+	int			y;
+	void		*val;
 
 	while (current)
 	{
@@ -42,7 +42,7 @@ void	write_instruct(int fdout, t_instruct *current)
 			write(fdout, ((char*)(&(current->opcode))), 1);
 		if (current->argcode)
 			write(fdout, ((char*)(&(current->argcode))), 1);
-		while (i <  current->arg_nbrs)
+		while (i < current->arg_nbrs)
 		{
 			y = 0;
 			val = &(current->args[i][2]);
@@ -57,21 +57,18 @@ void	write_instruct(int fdout, t_instruct *current)
 	}
 }
 
-
-
-int main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	char	*output_path;
-	int		fdin;
-	int		fdout;
-	header_t header;
-	t_instruct *instructs;
+	char		*output_path;
+	int			fdin;
+	int			fdout;
+	header_t	header;
+	t_instruct	*instructs;
 
 	if (argc != 2)
 		error("Usage : ./asm mychampion.s\n");
 	fdin = open(argv[1], O_RDONLY);
 	output_path = get_output_path(argv[1]);
-	
 	ft_bzero(&header, sizeof(header_t));
 	write_exec_magic(&header);
 	write_comment(fdin, &header);

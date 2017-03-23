@@ -1,38 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compiler_content_struct.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mprevot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 21:00:58 by mprevot           #+#    #+#             */
+/*   Updated: 2017/03/23 21:00:59 by mprevot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "compiler.h"
-
-void		print_instruts(t_instruct *instructs)
-{
-	int		i;
-	int		y;
-	void	*val;
-
-	while (instructs)
-	{
-		i = 0;
-		ft_printf("Label : \"%s\"\nSize : %i\nCompile :\n%#0hhx ",
-			instructs->label_name, instructs->size, instructs->opcode);
-		ft_printf("Forced argcode = %x\n", instructs->argcode);
-		if (instructs->argcode)
-		{
-			ft_printf("%#0hhx ", instructs->argcode);
-		}
-		while (i < instructs->arg_nbrs)
-		{
-			y = 0;
-			val = &(instructs->args[i][2]);
-			while (y < instructs->args[i][1])
-			{
-				ft_printf("%#0hhx ",
-					((char *)val)[instructs->args[i][1] - 1 - y]);
-				y++;
-			}
-			i++;
-			ft_printf(", ");
-		}
-		ft_printf("\n\n");
-		instructs = instructs->next;
-	}
-}
 
 void			instructs_add(t_instruct **instructs_list, t_instruct *instruct)
 {

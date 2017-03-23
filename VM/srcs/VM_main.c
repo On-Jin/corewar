@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/20 19:16:43 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:16:47 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 /*
 ** le numero du champion ne peut pas etre 0;
 ** faire une fonction Usage
-** faire une condition dans init_champ pour renvoyer erreur si champ > MAX_PLAYERS
+** faire une condition dans init_champ
+** pour renvoyer erreur si champ > MAX_PLAYERS
 */
 
 static void		vm_verif_arg(int argc)
 {
 	if (argc == 1)
-		exit (ft_int_error("Usage : corewar [champ]"));
-
+		exit(ft_int_error("Usage : corewar [champ]"));
 }
 
 static int		vm_end_main(void)
@@ -42,13 +42,13 @@ static int		vm_end_main(void)
 	return (0);
 }
 
-static void	recup_data_size_arena(t_datas *datas)
+static void		recup_data_size_arena(t_datas *datas)
 {
 	datas->nc.size_max_y = (ft_gcd(MEM_SIZE) + 2);
 	datas->nc.size_max_x = (ft_gcd(MEM_SIZE) * 3 + 2);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	t_lives		lives;
 	t_champ		champs[MAX_PLAYERS + 1];

@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/22 00:12:24 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/23 17:40:55 by gnebie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRC = VM_main.c \
 	  ft_int_error.c \
 	  ft_square_root.c \
 	  ft_gcd.c \
-	  ft_itoa_base_unsigned.c
+	  ft_itoa_base_unsigned.c \
+	  ../../includes/share_c/corewar_op_tab.c
 
 SRC_DIR = ./srcs/
 SRC2_DIR = ./srcs/vm_op_mod/

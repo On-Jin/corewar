@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:14:54 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 23:25:46 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:48:27 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		vm_add_flag(char *line, int *flag)
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
 		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
 		if (cp == *flag)
-			exit (ft_int_error("Option invalide ou champion invalide"));
+			exit(ft_int_error("Option invalide ou champion invalide"));
 		++i;
 	}
 }
@@ -43,7 +43,8 @@ static void		vm_add_flag(char *line, int *flag)
 ** voir les options possibles
 */
 
-int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag)
+int				vm_create_flags(t_datas *datas, char **argv, int argc,
+																	int *flag)
 {
 	int		i;
 
@@ -61,7 +62,7 @@ int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag)
 		else if (ft_strstr(argv[i], ".cor"))
 			return (i);
 		else
-			exit (ft_int_error("Option invalide ou champion invalide"));
+			exit(ft_int_error("Option invalide ou champion invalide"));
 		++i;
 	}
 	return (1);

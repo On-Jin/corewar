@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 02:20:12 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/09 18:46:05 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:49:27 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		vm_verif_macro(void)
 		MAX_CHECKS > CYCLE_DELTA || T_REG != 1 || T_DIR != 2 || T_IND != 4 ||
 		T_LAB != 8 || PROG_NAME_LENGTH < 16 || PROG_NAME_LENGTH > 0x1000 ||
 		COMMENT_LENGTH < 0x80 || COMMENT_LENGTH > 0x1000 ||
-		COREWAR_EXEC_MAGIC > 0x1000000
-		)
-		exit (ft_int_error("DEFINITON DES MACROS NON VALIDES"));
+		COREWAR_EXEC_MAGIC > 0x1000000)
+		exit(ft_int_error("DEFINITON DES MACROS NON VALIDES"));
 }

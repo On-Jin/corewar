@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:30:04 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/16 23:55:49 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:46:35 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int			vm_op_create_exec(t_datas *datas)
 	void		(*exec[NBR_FONC])(t_datas *, t_process *);
 
 	if (NBR_FONC != 17)
-		exit (ft_int_error("Mauvais nombre de fonctions"));
+		exit(ft_int_error("Mauvais nombre de fonctions"));
 	exec[0] = vm_op_0_exec;
 	exec[1] = vm_op_1_exec;
 	exec[2] = vm_op_2_exec;
@@ -38,7 +38,7 @@ static int			vm_op_create_exec(t_datas *datas)
 	return (vm_do_cycles(datas, exec));
 }
 
-int			vm_init_process(t_datas *datas)
+int					vm_init_process(t_datas *datas)
 {
 	t_process		*process;
 	int				i;

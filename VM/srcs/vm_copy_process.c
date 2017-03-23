@@ -6,13 +6,13 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:15:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/17 19:20:48 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:30:57 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
+t_process		*vm_copy_process(t_datas *datas, t_process *process, int pc)
 {
 	t_process		*new;
 	t_process		*tmp;
@@ -21,7 +21,7 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int PC)
 	tmp = new->next;
 	ft_memmove((void *)new, (void *)process, sizeof(process->reg));
 	new->next = tmp;
-	new->PC = PC;
+	new->PC = pc;
 	new->live = 1;
 	new->carry = process->carry;
 	new->champion = process->champion;

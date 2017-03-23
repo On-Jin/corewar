@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/21 16:46:56 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:45:43 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	t_process	*tmp;
 
 	if (!(process = ft_memalloc(sizeof(t_process))))
-		exit (ft_int_error("Malloc invalide"));
+		exit(ft_int_error("Malloc invalide"));
 	tmp = datas->begin_process;
 	datas->begin_process = process;
 	process->next = tmp;

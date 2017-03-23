@@ -28,6 +28,9 @@ int			ft_square_root(int square);
 /*
 ** Fonctions
 */
+
+t_op		*corewar_op_tab(void);
+
 void		vm_put_nbr_in_arene(int number, int adress, char *arene, int size);
 int			vm_verif_datas(t_datas *datas, t_process *process);
 int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size);

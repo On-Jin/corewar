@@ -74,22 +74,22 @@ void			compiler_compile_line(
 {
 	int			y;
 	char		**splited;
-	t_op		opecode_config;
+	t_op		opecode_conf;
 	char		*arg;
 
 	splited = NULL;
-	opecode_config = compiler_hydrate_opcode(line, inst, &splited);
-	if (opecode_config.op_code == 0)
+	opecode_conf = compiler_hydrate_opcode(line, inst, &splited);
+	if (opecode_conf.op_code == 0)
 		return ;
 	y = 0;
-	while (y < opecode_config.nb_arg)
+	while (y < opecode_conf.nb_arg && splited[y])
 	{
 		arg = ft_strtrim(splited[y]);
-		compiler_hydrate_argument(opecode_config, arg, inst, y++);
+		compiler_hydrate_argument(opecode_conf, arg, inst, y++);
 		ft_memdel((void**)&arg);
 	}
-	if ((y = (y == 0) ? 1 : y) && splited[y] != 0)
-		error("Too many arguments.\n");
+	if (((y = (y == 0) ? 1 : y) && splited[y] != 0) || y != opecode_conf.nb_arg)
+		error("Bad arguments number.\n");
 	while (y++ < 4)
 		inst->argcode = inst->argcode << 2;
 	while (splited[y - 4])

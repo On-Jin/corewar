@@ -6,18 +6,15 @@
 #    By: gnebie <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/06 05:39:15 by gnebie            #+#    #+#              #
-#    Updated: 2017/03/06 05:39:17 by gnebie           ###   ########.fr        #
+#    Updated: 2017/03/24 15:16:51 by mprevot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#A faire : deplacer le compiler.c dans un docier srcs
-#ou changer le nom du dossier SRC_DIR = ./srcs/
 
 .PHONY : clean, fclean, re, all $(NAME)
 .SUFFIXES :
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 SPE_FLAGS =
 DEBUG_FLAG = -fsanitize=address
 

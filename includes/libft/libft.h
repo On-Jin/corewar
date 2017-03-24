@@ -40,6 +40,14 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct		s_fd
+{
+	int					fd_n;
+	int					lastbuff;
+	void				*tampon;
+	struct s_fd			*next;
+}					t_fd;
+
 typedef struct			s_parts_chars
 {
 	size_t				i;

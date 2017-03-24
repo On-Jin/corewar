@@ -112,7 +112,6 @@ typedef struct		s_op
 	const char		*doc;
 	int				have_ocp;
 	int				nbr_octet_dir;
-	int				mod_carry;
 }					t_op;
 
 typedef struct		s_champ

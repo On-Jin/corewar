@@ -38,7 +38,6 @@ void					error(char *str);
 t_instruct				*compiler_compile(int fdin);
 size_t					get_instruct_size(t_instruct *current);
 void					invert_byte(unsigned int *val);
-t_op					get_config(char *name);
 int						compiler_compile_get_label(char *line);
 int						get_argtype(char *str, int conf);
 char					*extract_str(char *str);
@@ -46,11 +45,13 @@ int						extract_int(char *str);
 size_t					get_instruct_size(t_instruct *current);
 void					instructs_add(
 	t_instruct **instructs_list, t_instruct *instruct);
-void					print_instruts(t_instruct *instructs);
 size_t					get_label_position(t_instruct *first, char *labelname);
 size_t					get_request_label_position(
 	t_instruct *first, t_instruct *tofind);
 size_t					get_relative(
 	t_instruct *first, t_instruct *tofind, char *labelname);
 void					hydrate_labels(t_instruct *first);
+t_op					get_config(char *name);
+t_op					corewar_op_name2tab(char *name);
+int						gnl(const int fd, char **line);
 #endif

@@ -12,12 +12,6 @@
 
 #include "compiler.h"
 
-void			error(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
-	exit(0);
-}
-
 char			*get_output_path(char *name)
 {
 	char		*tmp;

@@ -92,7 +92,7 @@ void				write_comment(int fdin, header_t *header)
 	have_comment = FALSE;
 	have_name = FALSE;
 	line = NULL;
-	while (ft_gnl(fdin, &line))
+	while (gnl(fdin, &line))
 	{
 		if (!(line = ft_strtrim_free(&line)))
 			error("Can't read source file\n");

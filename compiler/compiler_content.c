@@ -25,7 +25,7 @@ void			compiler_hydrate_argument(
 		inst->args[arg_no][1] = 2;
 	else
 		inst->args[arg_no][1] = (opecode_config.nbr_octet_dir) ? 2 : 4;
-	if (opecode_config.have_bytearg)
+	if (opecode_config.have_ocp)
 	{
 		inst->argcode = inst->argcode << 2;
 		if (inst->args[arg_no][0] == T_DIR || inst->args[arg_no][0] == T_LABDIR)
@@ -74,22 +74,22 @@ void			compiler_compile_line(
 {
 	int			y;
 	char		**splited;
-	t_op		opecode_config;
+	t_op		opecode_conf;
 	char		*arg;
 
 	splited = NULL;
-	opecode_config = compiler_hydrate_opcode(line, inst, &splited);
-	if (opecode_config.op_code == 0)
+	opecode_conf = compiler_hydrate_opcode(line, inst, &splited);
+	if (opecode_conf.op_code == 0)
 		return ;
 	y = 0;
-	while (y < opecode_config.nb_arg)
+	while (y < opecode_conf.nb_arg && splited[y])
 	{
 		arg = ft_strtrim(splited[y]);
-		compiler_hydrate_argument(opecode_config, arg, inst, y++);
+		compiler_hydrate_argument(opecode_conf, arg, inst, y++);
 		ft_memdel((void**)&arg);
 	}
-	if ((y = (y == 0) ? 1 : y) && splited[y] != 0)
-		error("Too many arguments.\n");
+	if (((y = (y == 0) ? 1 : y) && splited[y] != 0) || y != opecode_conf.nb_arg)
+		error("Bad arguments number.\n");
 	while (y++ < 4)
 		inst->argcode = inst->argcode << 2;
 	while (splited[y - 4])
@@ -125,7 +125,7 @@ t_instruct		*compiler_compile(int fdin)
 	t_instruct	*inst_first;
 
 	inst_first = NULL;
-	while (ft_gnl(fdin, &line))
+	while (gnl(fdin, &line))
 	{
 		if (!(*line) || *line == COMMENT_CHAR)
 		{
@@ -142,6 +142,5 @@ t_instruct		*compiler_compile(int fdin)
 	}
 	ft_memdel((void**)&line);
 	hydrate_labels(inst_first);
-	print_instruts(inst_first);
 	return (inst_first);
 }

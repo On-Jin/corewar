@@ -30,6 +30,7 @@ int			ft_square_root(int square);
 */
 
 t_op		*corewar_op_tab(void);
+t_op		corewar_op_name2tab(char *name);
 
 void		vm_put_nbr_in_arene(int number, int adress, char *arene, int size);
 int			vm_verif_datas(t_datas *datas, t_process *process);

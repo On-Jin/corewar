@@ -7,7 +7,7 @@ do
 	cp $path zaz.s
 	cp $path me.s
 	../../samples_files/asm zaz.s
-	../a.out me.s  > /dev/null
+	../asm me.s  > /dev/null
 	if [ $? != 0 ]
 	then
 		exit;

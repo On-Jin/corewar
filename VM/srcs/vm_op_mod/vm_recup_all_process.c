@@ -14,7 +14,7 @@
 
 /*
 ** Flag :
-** 0b1 : recupere le numero du registre plutot que sa valeur
+** 0b1 : recupere le contenu du registre plutot que son numero
 ** 0b10 : prends un direct de 2 plutot qu'un direct de 4
 ** 0b100 : recupere le nombre indirect et non sa valeur
 ** 0b1000 :

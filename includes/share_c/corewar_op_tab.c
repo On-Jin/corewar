@@ -12,6 +12,18 @@
 
 #include "../corewar.h"
 
+/*
+**instructions suplementaires
+** MUL = multiplier {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
+** DIV = diviser (division par 0 == 0) {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
+** NOT = d'un int
+** ASL = (decalage d'un bit a gauche)
+** ASR = (decalage d'un bit a droite)
+** ROL = (rotation des bits d'un tout vers la gauche)
+** ROR = (rotation des bits d'un tout vers la droite)
+** MOV = copie un registe dans un autre
+*/
+
 static t_op g_op_tab[40] =
 {
 	{0, 0, {0}, 0, 1, 0, 0, 0},
@@ -37,6 +49,22 @@ static t_op g_op_tab[40] =
 		"long load index", 1, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+	{"mul", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 17, 36,
+		"multiplier (mul  r1, r2, r3   r1*r2 -> r3", 1, 0},
+	{"div", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 18, 36,
+		"diviser (div  r1, r2, r3   r1/r2 -> r3", 1, 0},
+	{"not", 2, {T_REG | T_IND | T_DIR, T_REG}, 19, 6,
+		"non binaire (not  r1, r2   r1~ -> r2", 1, 0},
+	{"asl", 2, {T_REG | T_IND | T_DIR, T_REG}, 20, 12,
+		"decalage binaire a gauche (asl r1, r2   r1<<1 -> r2", 1, 0},
+	{"asr", 2, {T_REG | T_IND | T_DIR, T_REG}, 21, 12,
+		"decalage binaire a droite (asr r1, r2   r1>>1 -> r2", 1, 0},
+	{"rol", 2, {T_REG | T_IND | T_DIR, T_REG}, 22, 12,
+		"rotation binaire a gauche (rol r1, r2   r1<<1 -> r2", 1, 0},
+	{"ror", 2, {T_REG | T_IND | T_DIR, T_REG}, 23, 12,
+		"rotation binaire a droite (ror r1, r2   r1>>1 -> r2", 1, 0},
+	{"mov", 2, {T_REG, T_REG}, 24, 36,
+		"copier un registre dans un autre (mov  r1, r2  r1->r2", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
@@ -50,7 +78,7 @@ t_op		*corewar_op_tab(void)
 		write(2, "echec de malloc op_tab\n", 23);
 		exit(-1);
 	}
-	ft_memcpy((void*)&op_tab[0], (void*)&g_op_tab[0], sizeof(t_op) * 17);
+	ft_memcpy((void*)&op_tab[0], (void*)&g_op_tab[0], sizeof(t_op) * 40);
 	return (op_tab);
 }
 

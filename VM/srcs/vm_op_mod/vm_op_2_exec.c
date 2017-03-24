@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:16 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 20:57:37 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:20:08 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void			vm_op_2_exec(t_datas *datas, t_process *process)
 		{
 			if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
 			{
-				if (0 == process->in_stock[0])
-					process->carry = 1;
-				else
-					process->carry = 0;
 				process->reg[process->in_stock[1]] = process->in_stock[0];
 			}
+		//	else
+		//		process->carry = 0;
+			if (0 == process->in_stock[0])
+				process->carry = 1;
+			else
+				process->carry = 0;
 		}
 	}
 //	else if (datas->op_tab[(int)process->instruction].mod_carry)

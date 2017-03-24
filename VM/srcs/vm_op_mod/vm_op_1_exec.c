@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 16:49:20 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:08:21 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 		datas->inf[ALL].cycle_last_live = datas->cycle.cycle +
 											datas->cycle.total_cycle + 1;
 		datas->lives->total_lives++;
-		datas->lives->cycle_lives++;
 		datas->lives->champ_total_lives[arg2]++;
 		datas->lives->champ_cycle_lives[arg2]++;
 		datas->lives->last_live = arg1;
@@ -51,4 +50,5 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 		if (!(datas->flag & FLAG_N) && !(datas->flag & FLAG_D))
 			ft_printf("Player 2 (%s) is said to be alive\n", datas->begin_champ[(int)process->champion - 1].champ_name);
 	}
+	datas->lives->cycle_lives++;
 }

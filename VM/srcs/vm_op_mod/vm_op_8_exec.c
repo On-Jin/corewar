@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:46 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:32:25 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:33:03 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ void			vm_op_8_exec(t_datas *datas, t_process *process)
 		{
 			process->reg[process->in_stock[2]] = process->in_stock[0]
 													^ process->in_stock[1];
-			if (!process->reg[process->in_stock[2]])
-				process->carry = 1;
-			else
-				process->carry = 0;
-		}
-		else if (datas->op_tab[(int)process->instruction].mod_carry)
+		if ((process->in_stock[0] ^ process->in_stock[1]) == 0)
 			process->carry = 1;
+		else
+			process->carry = 0;
+		}
+//		else if (datas->op_tab[(int)process->instruction].mod_carry)
+//			process->carry = 1;
 	}
-	else if (datas->op_tab[(int)process->instruction].mod_carry)
-		process->carry = 1;
+//	else if (datas->op_tab[(int)process->instruction].mod_carry)
+//		process->carry = 1;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

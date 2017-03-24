@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:15:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:30:57 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:40:08 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int pc)
 	ft_memmove((void *)new, (void *)process, sizeof(process->reg));
 	new->next = tmp;
 	new->PC = pc;
-	new->live = 1;
+	new->live = process->live;
 	new->carry = process->carry;
 	new->champion = process->champion;
 	return (new);

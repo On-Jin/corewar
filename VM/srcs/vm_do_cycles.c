@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 18:49:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:39:14 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static void		vm_delete_unlive_process(t_datas *datas)
 				datas->inf[ALL].nbr_process--;
 				ft_memdel((void **)&tmp);
 			}
+			else
 			process = process->next;
 		}
+
 	(process) ? process->live = 0: 0;
 }
 
@@ -100,15 +102,16 @@ static void		vm_init_cycle(t_cycle *cycle)
 
 static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
 {
-	ft_printf("\n\nlast %d\n\n", datas->lives->last_live);
+/*	ft_printf("\n\nlast %d\n\n", datas->lives->last_live);
 	ft_printf("\n\nlast live cycle %d\n\n", datas->lives->cycle_last_live);
 	endwin();
 	ft_printf("total_live %d\n", datas->lives->total_lives);
-	ft_printf("total_cycle %d\n", cycle->total_cycle);
+	ft_printf("total_cycle %d\n", cycle->total_cycle);*/
 	vm_destroy_all_process(datas);
 	if (datas->flag & FLAG_N)
 		ncurses_end(datas);
-	return(ft_int_error("Fin de cycle to die"));
+	(void)cycle;
+	return(0/*ft_int_error("Fin de cycle to die")*/);
 }
 
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
@@ -171,12 +174,6 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 			i++;
 		}
 		datas->lives->cycle_lives = 0;
-	}
-	int bob = 0;
-	while (bob < 17)
-	{
-		ft_printf("bob = %d datas->op_tab[bob].nb_arg = %d\n",bob,  datas->op_tab[bob].nb_arg);
-		bob++;
 	}
 	return(vm_do_cycles_end(datas, cycle));
 }

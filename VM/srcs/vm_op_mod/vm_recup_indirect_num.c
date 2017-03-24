@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:49:56 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 19:42:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:13:52 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int				vm_recup_indirect_num(t_process *process, char *arene,
 																	int adresse)
 {
-	unsigned int		ind_adress;
+	int		ind_adress;
 	int					val;
 
 	ind_adress = (vm_recup_arena_num(2, arene, adresse));

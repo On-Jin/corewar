@@ -53,4 +53,5 @@ size_t					get_relative(
 void					hydrate_labels(t_instruct *first);
 t_op					get_config(char *name);
 t_op					corewar_op_name2tab(char *name);
+int						gnl(const int fd, char **line);
 #endif

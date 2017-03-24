@@ -28,7 +28,7 @@ LIB_DIR = ./../includes/libft/
 
 SRC = compiler.c compiler_content.c compiler_content_hydrating.c \
 compiler_content_parsing.c compiler_content_struct.c compiler_header.c \
-../includes/share_c/corewar_op_tab.c
+../includes/share_c/corewar_op_tab.c compiler_error.c
 
 SRC_DIR = ./
 

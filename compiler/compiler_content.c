@@ -125,7 +125,7 @@ t_instruct		*compiler_compile(int fdin)
 	t_instruct	*inst_first;
 
 	inst_first = NULL;
-	while (ft_gnl(fdin, &line))
+	while (gnl(fdin, &line))
 	{
 		if (!(*line) || *line == COMMENT_CHAR)
 		{

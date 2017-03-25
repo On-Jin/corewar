@@ -24,22 +24,25 @@
 
 static int		vm_verif_i_cod(char code, char a, char b, char c)
 {
-	code >>= 2;
-	if ((a | b | c) && !code)
-		return (0);
-	if ((c && !(code & 0b11)) || ((code & 0b11) & !c))
-		return (0);
-	if ((c ^ (code & 0b11)) && (c & 4) && (code & 3) != 3)
+	if ((a + b + c) && !code)
 		return (0);
 	code >>= 2;
-	if ((b && !(code & 0b11)) || ((code & 0b11) & !b))
+	if ((c && (code & 0b11) == 0)  || (!c && (code & 0b11) > 0))
 		return (0);
-	if ((b ^ (code & 0b11)) && (b & 4) && (code & 3) != 3)
+	if (((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) &&
+												((c & 4) != (code & 3) + 1))
 		return (0);
 	code >>= 2;
-	if ((a && !(code & 0b11)) || ((code & 0b11) & !a))
+	if ((b && (code & 0b11) == 0) || (!b && (code & 0b11) > 0))
 		return (0);
-	if ((a ^ (code & 0b11)) && (a & 4) && (code & 3) != 3)
+	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) &&
+												((b & 4) != (code & 3) + 1))
+		return (0);
+	code >>= 2;
+	if ((a && (code & 0b11) == 0) || (!a && (code & 0b11) > 0))
+		return (0);
+	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) &&
+												((a & 4) != (code & 3) + 1))
 		return (0);
 	return (1);
 }

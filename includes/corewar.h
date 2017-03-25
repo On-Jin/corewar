@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 20:11:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:13:36 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@
 # define NC_DEBUG_Y 23
 # define NC_W_INF 70
 # define ALL 0
+# define NC_FIND_NBR 'f'
 
 /*
 ** MACROS
@@ -162,6 +163,7 @@ typedef struct		s_ncurses
 	int				i_print;
 	int				wall_cycle;
 	int				i_com;
+	int				sort_cycle;
 	unsigned char	background[MEM_SIZE];
 	unsigned char	light[MEM_SIZE];
 	struct timeval	t1;

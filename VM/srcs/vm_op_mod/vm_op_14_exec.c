@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:22:16 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 20:04:11 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:40:35 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			vm_op_14_exec(t_datas *datas, t_process *process)
 		{
 			process->reg[process->in_stock[2]] = vm_recup_arena_num(REG_SIZE,
 							datas->arene, vm_add_valid(process->PC +
-							(process->in_stock[0] + process->in_stock[1])));
+							vm_add_valid(process->in_stock[0] + process->in_stock[1])));
 			if (process->reg[process->in_stock[2] == 0])
 				process->carry = 1;
 			else

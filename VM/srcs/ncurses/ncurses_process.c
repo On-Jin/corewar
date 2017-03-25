@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/20 19:45:55 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:27:35 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void			print_inf(t_datas *datas, t_nc *nc, t_process *pros)
 	mvwaddch(nc->win, pros->PC / 64 + 1, pros->PC % 64 * 3 + 2, 'L');
 	mvwaddch(nc->win, pros->PC / 64 + 1, pros->PC % 64 * 3 + 3, 'A');
 	mvwprintw(nc->inf, ++nc->i_print, 3,
-			"Reg : [%i][%i][%i][%i][%i][%i][%i][%i]",
+			"Reg : [%x][%x][%x][%x][%x][%x][%x][%x]",
 			pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4],
 			pros->reg[5], pros->reg[6], pros->reg[7], pros->reg[8]);
 	mvwprintw(nc->inf, ++nc->i_print, 3,
-			"Reg : [%i][%i][%i][%i][%i][%i][%i][%i]",
+			"Reg : [%x][%x][%x][%x][%x][%x][%x][%x]",
 			pros->reg[9], pros->reg[10], pros->reg[11], pros->reg[12],
 			pros->reg[13], pros->reg[14], pros->reg[15], pros->reg[16]);
 	nc->i_print++;
@@ -51,8 +51,19 @@ static t_process	*find_process(t_datas *datas, t_nc *nc, int *nbr_process)
 	{
 		if ((tmp->champion == nc->cur_menu) || nc->cur_menu == 0)
 		{
-			i--;
-			pros = tmp;
+			if (nc->sort_cycle != -1)
+			{
+				if (tmp->cycle == nc->sort_cycle)
+				{
+					i--;
+					pros = tmp;
+				}
+			}
+			else
+			{
+				i--;
+				pros = tmp;
+			}
 		}
 		tmp = tmp->next;
 	}

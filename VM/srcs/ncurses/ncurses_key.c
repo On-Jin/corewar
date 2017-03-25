@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 12:55:11 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/21 16:45:18 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:17:15 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static void	ncurses_key_putnbr(t_nc *nc, int ret)
 {
 	if (ret == NC_PUT_NBR)
 		mvwscanw(nc->inf, 50, 2, "%i", &nc->wall_cycle);
+	if (ret == NC_FIND_NBR)
+	{
+		mvwscanw(nc->inf, 50, 2, "%i", &nc->sort_cycle);
+		nc->key = NC_PAUSE;
+	}
 }
 
 void		ncurses_key(t_datas *datas)

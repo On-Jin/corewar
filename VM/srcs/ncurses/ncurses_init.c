@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:23:46 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/22 20:21:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:14:17 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	struct_init(t_nc *nc)
 	nc->cur_pros = 0;
 	nc->wall_cycle = -5;
 	nc->i_com = 50;
+	nc->sort_cycle = -1;
 	gettimeofday(&nc->t1, NULL);
 	gettimeofday(&nc->t2, NULL);
 }

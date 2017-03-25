@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:56:19 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 23:36:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:42:00 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,22 @@
 
 static int		vm_verif_i_cod(char code, char a, char b, char c)
 {
-	if ((a + b + c) && !code)
-	  return (0);
-//	if (code & 0b11)
-//		return (0);
 	code >>= 2;
-	if ((c && (code & 0b11) == 0)  || (!c && (code & 0b11) > 0))
+	if ((a | b | c) && !code)
 		return (0);
-	if (((c & 1) != (code & 3)) && ((c & 2) != (code & 3)) &&
-												((c & 4) && (code & 3) != 3))
+	if ((c && !(code & 0b11)) || ((code & 0b11) & !c))
+		return (0);
+	if ((c ^ (code & 0b11)) && (c & 4) && (code & 3) != 3)
 		return (0);
 	code >>= 2;
-	if ((b && (code & 0b11) == 0) || (!b && (code & 0b11) > 0))
+	if ((b && !(code & 0b11)) || ((code & 0b11) & !b))
 		return (0);
-	if (((b & 1) != (code & 3)) && ((b & 2) != (code & 3)) &&
-												((b & 4) && (code & 3) != 3))
+	if ((b ^ (code & 0b11)) && (b & 4) && (code & 3) != 3)
 		return (0);
 	code >>= 2;
-	if ((a && (code & 0b11) == 0) || (!a && (code & 0b11) > 0))
+	if ((a && !(code & 0b11)) || ((code & 0b11) & !a))
 		return (0);
-	if (((a & 1) != (code & 3)) && ((a & 2) != (code & 3)) &&
-												((a & 4) && (code & 3) != 3))
+	if ((a ^ (code & 0b11)) && (a & 4) && (code & 3) != 3)
 		return (0);
 	return (1);
 }
@@ -59,8 +54,8 @@ int				vm_verif_datas(t_datas *datas, t_process *process)
 	op_c = &datas->op_tab[(int)process->instruction];
 	if (!op_c->have_ocp)
 		return (1);
-	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0; //1
-	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0; //5 101
+	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
+	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
 	c = (op_c->nb_arg == 3) ? op_c->tab_arg[2] : 0;
 	process->instruc = (unsigned char)datas->arene[vm_add_valid(process->PC +
 																			1)];

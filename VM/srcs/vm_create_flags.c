@@ -30,7 +30,6 @@ static void		vm_add_flag(char *line, int *flag)
 		('b' == line[i]) ? (*flag |= FLAG_B) : 0;
 		('n' == line[i]) ? (*flag |= FLAG_N) : 0;
 		('m' == line[i]) ? (*flag |= FLAG_M) : 0;
-		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
 		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
 		if (cp == *flag)
@@ -57,9 +56,9 @@ int				vm_create_flags(t_datas *datas, char **argv, int argc,
 			*flag |= FLAG_D;
 			datas->dump = ft_atoi(argv[i]);
 		}
-		else if (*argv[i] == '-')
+		else if (*argv[i] == '-' && ft_strcmp(argv[i], "-k"))
 			vm_add_flag(argv[i], flag);
-		else if (ft_strstr(argv[i], ".cor"))
+		else if (ft_strstr(argv[i], ".cor") || !ft_strcmp(argv[i], "-k"))
 			return (i);
 		else
 			exit(ft_int_error("Option invalide ou champion invalide"));

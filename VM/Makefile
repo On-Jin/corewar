@@ -99,6 +99,7 @@ SRC = VM_main.c \
 	  ft_square_root.c \
 	  ft_gcd.c \
 	  ft_itoa_base_unsigned.c \
+	  ft_isatoied.c \
 	  ../../includes/share_c/corewar_op_tab.c
 
 SRC_DIR = ./srcs/

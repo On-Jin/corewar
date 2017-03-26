@@ -24,6 +24,7 @@ void		ft_void_error(char *line);
 char		*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a);
 int			ft_gcd(int nbr);
 int			ft_square_root(int square);
+int			ft_isatoied(char *str);
 
 /*
 ** Fonctions

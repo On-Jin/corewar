@@ -55,7 +55,7 @@ static void			vm_verif_champ(char *chmp_info, t_champ *champ, int j)
 {
 	int				i;
 	unsigned char	*c;
-	header_t			*champion;
+	header_t		*champion;
 
 	c = (unsigned char*)chmp_info;
 	i = COREWAR_EXEC_MAGIC;
@@ -92,7 +92,7 @@ static void			vm_create_champ(t_champ *champs, char *entry, int i,
 	vm_verif_champ(buff, &champs[i], j);
 	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(header_t)),
 			j - sizeof(header_t));
-	champs[i].champ_nbr = -(i + 1);
+	(!champs[i].champ_nbr) ? (champs[i].champ_nbr = -(i + 1)) : 0;
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);
 	if (close(fd) == -1)
 		exit(ft_int_error("Echec de close du champion"));
@@ -108,12 +108,22 @@ int					vm_init_champ(t_champ *champs, int argc, char **argv,
 
 	i = datas->player_nbr;
 	champ_nbr = 0;
-	while (i < argc)
+	while (i < argc && argv[i])
 	{
+		if (!ft_strcmp(argv[i], "-k"))
+		{
+			if (argv[i + 1] && ft_isatoied(argv[i + 1]) != -1)
+				((champs[champ_nbr].champ_nbr = ft_atoi(argv[i + 1])) > -4 &&
+				champs[champ_nbr].champ_nbr < 1) ?
+				exit(ft_int_error("Champ number 0 -1 -2 -3 -4 are forbiden !"))
+				: 0;
+			else
+				exit(ft_int_error("Number format invalide !"));
+			i += 2;
+		}
 		vm_create_champ(champs, argv[i], champ_nbr, datas);
 		++i;
-		++champ_nbr;
-		if (champ_nbr > MAX_PLAYERS)
+		if (++champ_nbr > MAX_PLAYERS)
 			exit(ft_int_error("Too many champs"));
 	}
 	return (champ_nbr);

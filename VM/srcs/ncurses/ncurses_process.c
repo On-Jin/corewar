@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/25 17:27:35 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:41:08 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void			print_inf(t_datas *datas, t_nc *nc, t_process *pros)
 									| WA_UNDERLINE | WA_BOLD);
 	mvwaddch(nc->win, pros->PC / 64 + 1, pros->PC % 64 * 3 + 2, 'L');
 	mvwaddch(nc->win, pros->PC / 64 + 1, pros->PC % 64 * 3 + 3, 'A');
+	mvwprintw(nc->inf, ++nc->i_print, 3, "Nb[%li]", pros->nb);
 	mvwprintw(nc->inf, ++nc->i_print, 3,
 			"Reg : [%x][%x][%x][%x][%x][%x][%x][%x]",
 			pros->reg[1], pros->reg[2], pros->reg[3], pros->reg[4],

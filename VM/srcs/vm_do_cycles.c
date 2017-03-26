@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 18:39:14 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:09:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		vm_delete_unlive_process(t_datas *datas)
 				tmp = process->next;
 				tmp_next = (tmp) ? tmp->next : NULL;
 				process->next = tmp_next;
-				datas->inf[(int)process->champion].nbr_process--;
+				datas->inf[(int)tmp->champion].nbr_process--;
 				datas->inf[ALL].nbr_process--;
 				ft_memdel((void **)&tmp);
 			}

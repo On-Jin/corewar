@@ -3,3 +3,6 @@
 *.gch
 *.a
 *.out
+*.cor
+.DS_Store
+asm

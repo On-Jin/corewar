@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/26 18:41:08 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 21:01:22 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void			print_inf(t_datas *datas, t_nc *nc, t_process *pros)
 	mvwprintw(nc->inf, ++nc->i_print, 3, "Carry [%i]", pros->carry);
 	mvwprintw(nc->inf, ++nc->i_print, 3, "Live  [%i]", pros->live);
 	nc->i_print++;
-	mvwprintw(nc->inf, ++nc->i_print, 3, "In_stock  [%i][%i][%i]",
+	mvwprintw(nc->inf, ++nc->i_print, 3, "In_stock  [%x][%x][%x]",
 				pros->in_stock[0], pros->in_stock[1], pros->in_stock[2]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:46 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 19:33:03 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 23:43:49 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void			vm_op_8_exec(t_datas *datas, t_process *process)
 {
 	if (vm_verif_datas(datas, process))
 	{
-		vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 16);
+		if (!(vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 16)))
+		{
 		if (process->in_stock[2] > 0 && process->in_stock[2] <= REG_NUMBER)
 		{
 			process->reg[process->in_stock[2]] = process->in_stock[0]
@@ -30,8 +31,7 @@ void			vm_op_8_exec(t_datas *datas, t_process *process)
 		else
 			process->carry = 0;
 		}
-//		else if (datas->op_tab[(int)process->instruction].mod_carry)
-//			process->carry = 1;
+		}
 	}
 //	else if (datas->op_tab[(int)process->instruction].mod_carry)
 //		process->carry = 1;

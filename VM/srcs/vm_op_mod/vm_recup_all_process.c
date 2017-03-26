@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:50:32 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 22:08:57 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:17:45 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ** 0b1 : recupere le contenu du registre plutot que son numero
 ** 0b10 : prends un direct de 2 plutot qu'un direct de 4
 ** 0b100 : recupere le nombre indirect et non sa valeur
+**	nombre = 2octet = definie adress;	valeur = 4octect a l'adress;
 ** 0b1000 :
 ** 0b10000 :
 ** 0b100000 :
@@ -90,11 +91,7 @@ static int	vm_recup_all_process_reg(t_process *process, char *arene,
 													int *inf, int *adress)
 {
 	if (!(inf[1] & 1))
-	{
-		if ((process->in_stock[inf[0]] = vm_recup_arena_num(1, arene,
-															*adress)) == -1)
-			return (-1);
-	}
+		process->in_stock[inf[0]] = vm_recup_arena_num(1, arene, *adress);
 	else if ((vm_recup_process_reg(process, arene, *adress,
 										&process->in_stock[inf[0]])) == -1)
 		return (-1);

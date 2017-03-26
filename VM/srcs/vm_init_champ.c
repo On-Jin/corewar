@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 15:00:46 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/26 18:54:54 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ static int			vm_size_champ(t_champ *champ, t_datas *datas)
 		}
 		else
 			size += (vm_havent_ocp(cur) % MEM_SIZE) + 1;
-		if (datas->flag & FLAG_V)
-			ft_printf("AFTER Size Op%i [%x] : %i\n", (int)champ->champ[save],
-					champ->champ[save + 1], size);
 		cur = (int)champ->champ[size];
 	}
 	return (size);
@@ -114,9 +111,6 @@ int					vm_init_champ(t_champ *champs, int argc, char **argv,
 	while (i < argc)
 	{
 		vm_create_champ(champs, argv[i], champ_nbr, datas);
-		if (datas->flag & FLAG_V)
-			ft_printf("champ_size %d, champ nbr %d\n", champs[i - 1].champ_size,
-					champs[i - 1].champ_nbr);
 		++i;
 		++champ_nbr;
 		if (champ_nbr > MAX_PLAYERS)

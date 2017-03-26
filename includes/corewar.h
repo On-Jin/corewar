@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/25 17:13:36 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:38:15 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ typedef struct		s_process
 	char			instruction;
 	char			champion;
 	int				voider2;
+	long int		nb;
 }					t_process;
 
 typedef struct		s_lives
@@ -194,6 +195,7 @@ typedef struct		s_datas
 	int				flag;
 	int				dump;
 
+	long int		nb_process;
 	int				i_debug;
 	int				voider;
 

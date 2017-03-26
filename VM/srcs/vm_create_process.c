@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:14:18 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/24 16:17:58 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:42:01 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	datas->inf[nbr_champ].nbr_process++;
 	datas->inf[ALL].nbr_process++;
 	process->carry = 0;
+	process->nb = ++datas->nb_process;
 	return (process);
 }

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:22:11 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/25 14:59:31 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/26 20:06:46 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ void			vm_op_13_exec(t_datas *datas, t_process *process)
 			else
 				process->carry = 0;
 		}
-//		else
-//			process->carry = 0;
 	}
-//	else if (datas->op_tab[(int)process->instruction].mod_carry)
-//		process->carry = 0;
 	process->PC = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

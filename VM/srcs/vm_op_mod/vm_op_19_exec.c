@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** not
 */
 
 void			vm_op_19_exec(t_datas *datas, t_process *process)

@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** rotation droite
 */
 
 void			vm_op_21_exec(t_datas *datas, t_process *process)
@@ -25,7 +25,7 @@ void			vm_op_21_exec(t_datas *datas, t_process *process)
 			if (process->in_stock[1] > 0 && process->in_stock[1] <= REG_NUMBER)
 			{
 				process->reg[process->in_stock[1]] = process->in_stock[0] >> 1 |
-												(process->in_stock[0] & 1) << 31;
+											(process->in_stock[0] & 1) << 31;
 				if (!process->reg[process->in_stock[1]])
 					process->carry = 1;
 				else

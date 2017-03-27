@@ -14,19 +14,19 @@
 
 /*
 ** ajouter le process?
+** val = val >> (4 * 8 - IND_SIZE * 8);
 */
 
 int				vm_recup_indirect_num(t_process *process, char *arene,
 																	int adresse)
 {
 	int			ind_adress;
-	int					val;
+	int			val;
 
 	ind_adress = (vm_recup_arena_num(2, arene, adresse));
 	if (process->instruction < 13 || process->instruction > 15)
 		ind_adress = ind_adress % IDX_MOD;
 	ind_adress = vm_add_valid(ind_adress + process->PC);
 	val = vm_recup_arena_num(4, arene, ind_adress);
-//	val = val >> (4 * 8 - IND_SIZE * 8);
 	return (val);
 }

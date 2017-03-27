@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** roataion gauche
 */
 
 void			vm_op_22_exec(t_datas *datas, t_process *process)

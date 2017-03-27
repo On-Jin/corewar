@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** decalage droite
 */
 
 void			vm_op_21_exec(t_datas *datas, t_process *process)

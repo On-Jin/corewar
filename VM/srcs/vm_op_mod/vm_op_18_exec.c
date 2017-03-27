@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** div
 */
 
 void			vm_op_18_exec(t_datas *datas, t_process *process)

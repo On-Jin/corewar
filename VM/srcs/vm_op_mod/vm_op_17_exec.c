@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** mul
 */
 
 void			vm_op_17_exec(t_datas *datas, t_process *process)

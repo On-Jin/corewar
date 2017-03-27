@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-**
+** mov reg to reg
 */
 
 void			vm_op_24_exec(t_datas *datas, t_process *process)

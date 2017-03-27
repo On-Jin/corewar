@@ -54,7 +54,7 @@
 **}
 */
 
-static int			vm_recup_all_process_dir(t_process *process, char *arene, int *inf,
+static int	vm_recup_all_process_dir(t_process *process, char *arene, int *inf,
 																	int *adress)
 {
 	if (inf[1] & 0b10)
@@ -70,7 +70,7 @@ static int			vm_recup_all_process_dir(t_process *process, char *arene, int *inf,
 	return (0);
 }
 
-static int			vm_recup_all_process_ind(t_process *process, char *arene, int *inf,
+static int	vm_recup_all_process_ind(t_process *process, char *arene, int *inf,
 																	int *adress)
 {
 	if ((inf[2] & 3) == 0b11 && inf[1] & 0b100)

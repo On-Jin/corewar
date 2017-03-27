@@ -31,30 +31,29 @@ static void		vm_add_flag(char *line, int *flag)
 		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
 		('m' == line[i]) ? (*flag |= FLAG_M) : 0;
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
-		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
 		if (cp == *flag)
 			exit(ft_int_error("Option invalide ou champion invalide"));
 		++i;
 	}
 }
 
-static int		vm_create_dump(t_datas *datas, char **argv, int *flag, int *i)
+static t_bool	vm_create_dump(t_datas *datas, char **argv, int *flag, int *i)
 {
 	if (!ft_strcmp(argv[*i], "-h"))
 	{
 		(*i)++;
 		*flag |= FLAG_H;
 		datas->dump = ft_atoi(argv[*i]);
-		return (1);
+		return (TRUE);
 	}
 	else if (!ft_strcmp(argv[*i], "-dump"))
 	{
 		(*i)++;
 		*flag |= FLAG_DUMP;
 		datas->dump = ft_atoi(argv[*i]);
-		return (1);
+		return (TRUE);
 	}
-	return (0);
+	return (FALSE);
 }
 
 int				vm_create_flags(t_datas *datas, char **argv, int argc,
@@ -65,7 +64,7 @@ int				vm_create_flags(t_datas *datas, char **argv, int argc,
 	i = 1;
 	while (i < argc && argv[i])
 	{
-		if (vm_create_dump(datas, argv, flag, &i))
+		if (i + 1 < argc && vm_create_dump(datas, argv, flag, &i))
 			;
 		else if (*argv[i] == '-' && ft_strcmp(argv[i], "-n"))
 			vm_add_flag(argv[i], flag);

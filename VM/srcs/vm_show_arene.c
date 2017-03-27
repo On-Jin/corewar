@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 22:05:56 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/27 01:59:36 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:09:06 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ static void	vm_print_elem(t_datas *datas, char elem)
 int			vm_show_arene(t_datas *datas)
 {
 	int i;
+	int	xmod;
 
+	xmod = (datas->flag & FLAG_H) >= 1 ? 64 : 32;
 	i = 0;
 	ft_putstr("0x0000 : ");
 	while (i < MEM_SIZE)
 	{
-		if (i % 64 == 0 && i)
+		if (i % xmod == 0 && i)
 			ft_printf("\n0x0%03x : ", i);
 		vm_print_elem(datas, datas->arene[i]);
 		i++;

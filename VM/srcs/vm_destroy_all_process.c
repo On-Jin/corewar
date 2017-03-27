@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ncurses_comment.c                                  :+:      :+:    :+:   */
+/*   vm_destroy_all_process.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 00:08:04 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/27 03:14:22 by ntoniolo         ###   ########.fr       */
+/*   Created: 2017/03/27 02:37:36 by ntoniolo          #+#    #+#             */
+/*   Updated: 2017/03/27 02:37:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		print_comment(t_datas *datas, t_nc *nc)
+void			vm_destroy_all_process(t_datas *datas)
 {
-	(void)datas;
-	if (nc->i_com == 0)
-		nc->i_com = 50;
-	if (((nc->t2.tv_sec - nc->t1.tv_sec)))
+	t_process	*process;
+	t_process	*tmp;
+
+	process = datas->begin_process;
+	while (process)
 	{
-		gettimeofday(&nc->t1, NULL);
-		nc->i_com--;
+		tmp = process;
+		process = process->next;
+		ft_memdel((void **)&tmp);
 	}
-	gettimeofday(&nc->t2, NULL);
 }

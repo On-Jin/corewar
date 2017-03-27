@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 01:12:56 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:35:51 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ int			vm_have_ocp(int op_code);
 t_process	*vm_create_process(t_datas *datas, int nbr_champ);
 t_process	*vm_copy_process(t_datas *datas, t_process *process, int PC);
 void		vm_destroy_process(t_process *process, t_datas *datas);
+void		vm_delete_unlive_process(t_datas *datas);
 void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *));
+int			turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *));
 int			vm_init_process(t_datas *datas);
 void		vm_destroy_all_process(t_datas *datas);
 

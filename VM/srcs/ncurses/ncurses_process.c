@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:03:13 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/26 21:01:22 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:28:20 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,8 @@ static t_process	*find_process(t_datas *datas, t_nc *nc, int *nbr_process)
 	{
 		if ((tmp->champion == nc->cur_menu) || nc->cur_menu == 0)
 		{
-			if (nc->sort_cycle != -1)
-			{
-				if (tmp->cycle == nc->sort_cycle)
-				{
-					i--;
-					pros = tmp;
-				}
-			}
-			else
-			{
-				i--;
-				pros = tmp;
-			}
+			i--;
+			pros = tmp;
 		}
 		tmp = tmp->next;
 	}

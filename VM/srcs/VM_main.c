@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 02:01:46 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:01:48 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@
 static void		vm_verif_arg(int argc)
 {
 	if (argc == 1)
-		exit(ft_int_error("Usage : corewar [champ]"));
+	{
+		ft_printf("./corewar [-h nbr_cycles] [-m] [-dump nbr_cycles]");
+		ft_printf(" [[-n number] champion1.cor] ...\n");
+		exit(0);
+	}
 }
 
 static int		vm_end_main(void)
@@ -60,10 +64,10 @@ int				main(int argc, char **argv)
 	vm_champ_process(&datas, argc, argv);
 	vm_print_start_battle(&datas);
 	recup_data_size_arena(&datas);
-	if (datas.flag & FLAG_N)
+	if (datas.flag & FLAG_M)
 		ncurses_init(&datas, datas.nc.size_max_y, datas.nc.size_max_x + 1);
 	vm_init_process(&datas);
-	if (datas.flag & FLAG_N)
+	if (datas.flag & FLAG_M)
 		ncurses_end(&datas);
 	if (datas.end)
 		vm_print_end_battle(&datas);

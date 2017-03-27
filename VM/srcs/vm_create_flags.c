@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:14:54 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:48:27 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/27 03:07:25 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,24 @@ static void		vm_add_flag(char *line, int *flag)
 	}
 }
 
-/*
-** voir les options possibles
-*/
+static int		vm_create_dump(t_datas *datas, char **argv, int *flag, int *i)
+{
+	if (!ft_strcmp(argv[*i], "-h"))
+	{
+		(*i)++;
+		*flag |= FLAG_H;
+		datas->dump = ft_atoi(argv[*i]);
+		return (1);
+	}
+	else if (!ft_strcmp(argv[*i], "-dump"))
+	{
+		(*i)++;
+		*flag |= FLAG_DUMP;
+		datas->dump = ft_atoi(argv[*i]);
+		return (1);
+	}
+	return (0);
+}
 
 int				vm_create_flags(t_datas *datas, char **argv, int argc,
 																	int *flag)
@@ -50,12 +65,8 @@ int				vm_create_flags(t_datas *datas, char **argv, int argc,
 	i = 1;
 	while (i < argc && argv[i])
 	{
-		if (!ft_strcmp(argv[i], "-d"))
-		{
-			i++;
-			*flag |= FLAG_D;
-			datas->dump = ft_atoi(argv[i]);
-		}
+		if (vm_create_dump(datas, argv, flag, &i))
+			;
 		else if (*argv[i] == '-' && ft_strcmp(argv[i], "-k"))
 			vm_add_flag(argv[i], flag);
 		else if (ft_strstr(argv[i], ".cor") || !ft_strcmp(argv[i], "-k"))

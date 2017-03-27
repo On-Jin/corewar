@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 18:54:54 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:09:23 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int			vm_size_champ(t_champ *champ, t_datas *datas)
 	return (size);
 }
 
-int				vm_inv_octets(unsigned int champion)
+int					vm_inv_octets(unsigned int champion)
 {
 	char	c[4];
 	int		i;

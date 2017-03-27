@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:22:29 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 00:17:40 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:29:08 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			vm_op_16_exec(t_datas *datas, t_process *process)
 //		return ;
 	}
 /*	vm_recup_all_process(process, datas->arene, 0);
-	if (process->in_stock[3] != -1 && (!(datas->flag & FLAG_D) || !(datas->flag & FLAG_N)))
+	if (process->in_stock[3] != -1 && (!(datas->flag & FLAG_H) || !(datas->flag & FLAG_M)))
 		ft_putchar(process->in_stock[0] % (1 << 8));
 	if (process->in_stock[3] <= 0)
 		process->in_stock[3] = 3;*/

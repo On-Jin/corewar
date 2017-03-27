@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/27 02:04:10 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/27 02:57:24 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ SRC2 = vm_champ_number_to_position.c \
 	   vm_op_jump.c \
 	   vm_put_nbr_in_arene.c
 
-SRC = VM_main.c \
+SRC = vm_main.c \
 	  vm_copy_process.c \
 	  vm_create_flags.c \
 	  vm_create_process.c \
@@ -93,6 +93,9 @@ SRC = VM_main.c \
 	  vm_ocp_tools.c \
 	  vm_show_arene.c \
 	  vm_verif_macro.c \
+	  vm_delete_unlive_process.c \
+	  vm_turn_process.c \
+	  vm_destroy_all_process.c \
 	  vm_start_op_code.c \
 	  vm_print_start_battle.c \
 	  vm_print_end_battle.c \

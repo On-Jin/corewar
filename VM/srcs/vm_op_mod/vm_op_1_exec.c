@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 00:51:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:09:28 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 void				vm_incr_lives(t_datas *datas, int arg1, int arg2)
 {
-	if (datas->flag & FLAG_N)
+	if (datas->flag & FLAG_M)
 	{
 		datas->inf[arg2 + 1].total_lives++;
 		datas->inf[arg2 + 1].cycle_lives++;

@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 02:34:28 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/27 03:12:16 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 00:04:55 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		init_cycle_process(t_datas *datas, t_process *pros)
 	pros->in_stock[2] = 0;
 	pros->in_stock[3] = 0;
 	cur_ocp = (unsigned int)datas->arene[pros->pc];
-	nbr_fonc = (datas->flag | FLAG_B) ? 25 : 17;
+	nbr_fonc = (datas->flag & FLAG_B) ? 25 : 17;
 	if (nbr_fonc <= cur_ocp)
 		cur_ocp = 0;
 	start_op_code(datas, pros, cur_ocp);

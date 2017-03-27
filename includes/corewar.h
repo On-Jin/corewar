@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 02:29:41 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 13:56:33 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define NC_W_INF 70
 # define ALL 0
 # define NC_FIND_NBR 'f'
+# define NC_COM_LEN (COMMENT_LENGTH + PROG_NAME_LENGTH + 12) * MAX_PLAYERS
 
 /*
 ** MACROS

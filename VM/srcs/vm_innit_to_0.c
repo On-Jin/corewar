@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:12:17 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 02:01:17 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:42:45 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void			vm_innit_to_0(t_datas *datas, t_champ *champs, t_lives *lives)
 	ft_bzero((void *)champs, sizeof(t_champ) * (MAX_PLAYERS + 1));
 	ft_bzero((void *)lives, sizeof(t_lives));
 	ft_bzero((void *)datas->arene, MEM_SIZE);
-	ft_bzero((void *)datas->nc.background, sizeof(MEM_SIZE));
-	ft_bzero((void *)datas->nc.light, sizeof(MEM_SIZE));
+	ft_bzero((void *)datas->nc.background, MEM_SIZE);
+	ft_bzero((void *)datas->nc.light, MEM_SIZE);
 	datas->lives = lives;
 	datas->begin_champ = champs;
 	datas->nbr_cycles = CYCLE_TO_DIE;

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 04:13:46 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 04:13:49 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/27 14:42:34 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef struct		s_ncurses
 	int				wall_cycle;
 	int				i_com;
 	int				sort_cycle;
+	char			str_com[NC_COM_LEN];
+	int				len_com;
 	unsigned char	background[MEM_SIZE];
 	unsigned char	light[MEM_SIZE];
 	struct timeval	t1;

@@ -6,27 +6,45 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:42:01 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 20:06:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:40:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		init_draw(t_draw *d)
+static void		init_draw(t_datas *datas, t_nc *nc, t_draw *d)
 {
+	int len;
+	int i;
+
 	d->max = 0;
 	d->cur_champ = 0;
 	d->count = 0;
 	d->save_pros = 0;
 	d->highlight = 0;
 	d->y = 1;
+	i = 0;
+	len = 0;
+	while (i < datas->player_nbr)
+	{
+		ft_strcpy(&nc->str_com[len], "  [");
+		len = ft_strlen(nc->str_com);
+		ft_strcpy(&nc->str_com[len], datas->begin_champ[i].champ_name);
+		len = ft_strlen(nc->str_com);
+		ft_strcpy(&nc->str_com[len], "] : ");
+		len = ft_strlen(nc->str_com);
+		ft_strcpy(&nc->str_com[len], datas->begin_champ[i].champ_com);
+		len = ft_strlen(nc->str_com);
+		i++;
+	}
+	nc->len_com = (int)ft_strlen(nc->str_com);
 }
 
 void			ncurses_base(t_datas *datas)
 {
 	t_draw	d;
 
-	init_draw(&d);
+	init_draw(datas, &datas->nc, &d);
 	d.cur_champ = 255;
 	datas->nc.i_print = 0;
 	werase(datas->nc.win);

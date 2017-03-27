@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:58:40 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/28 00:18:50 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 00:43:26 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		do_test(t_env *e)
 	ft_printf("{%i}|Fin de [%s] ||| i_champ[%i] | j[%i] | y[%i] | b[%i]\n",
 							e->count, e->cmd, e->i_champ, e->j, e->y, e->b);
 	ft_bzero(e->cmd, 500);
-	sprintf(e->cmd, "git diff %s %s", "ret_corewar.txt", "ret_corewar_zaz.txt");
+	sprintf(e->cmd, "diff -rcs %s %s", "ret_corewar.txt", "ret_corewar_zaz.txt");
 	system(e->cmd);
 }
 

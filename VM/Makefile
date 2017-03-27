@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/27 01:16:47 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/27 02:04:10 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ SRC = VM_main.c \
 	  ft_square_root.c \
 	  ft_gcd.c \
 	  ft_itoa_base_unsigned.c \
+	  ft_isatoied.c \
 	  ../../includes/share_c/corewar_op_tab.c
 
 SRC_DIR = ./srcs/

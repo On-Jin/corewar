@@ -47,6 +47,9 @@
 # define OP_LFORK 15
 # define OP_AFF 16
 
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
+
 /*
 ** Define flags
 */

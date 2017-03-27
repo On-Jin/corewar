@@ -20,7 +20,7 @@ static void		init_cycle_process(t_datas *datas, t_process *pros)
 	pros->in_stock[1] = 0;
 	pros->in_stock[2] = 0;
 	pros->in_stock[3] = 0;
-	cur_ocp = (unsigned int)datas->arene[pros->PC];
+	cur_ocp = (unsigned int)datas->arene[pros->pc];
 	if (17 <= cur_ocp)
 		cur_ocp = 0;
 	start_op_code(datas, pros, cur_ocp);

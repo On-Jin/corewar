@@ -34,5 +34,5 @@ int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size)
 		((instruc & 3) == 3) ? i += 2 : 0;
 		instruc >>= 2;
 	}
-	return (vm_add_valid(process->PC + 2 + i));
+	return (vm_add_valid(process->pc + 2 + i));
 }

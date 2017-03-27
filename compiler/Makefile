@@ -32,12 +32,18 @@ SRC_DIR = ./
 OBJ = $(SRC:.c=.o)
 OBJ_DIR = ./
 
-INC = ./includes/
+INC = ../includes/
 
 all : $(NAME)
 
 $(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ../includes/corewar.h
-	$(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME)
+	@(echo "\t\t\t\t\t\t\t\t   ____                   __        __           ";)
+	@(echo "\t\t\t\t\t\t\t\t  / ___| ___   _ __  ___  \\ \\      / /__ _  _ __ ";)
+	@(echo "\t\t\t\t\t\t\t\t | |    / _ \\ | '__|/ _ \\  \\ \\ /\\ / // _\` || '__|";)
+	@(echo "\t\t\t\t\t\t\t\t | |___| (_) || |  |  __/   \\ V  V /| (_| || |   ";)
+	@(echo "\t\t\t\t\t\t\t\t  \\____|\\___/ |_|   \\___|    \\_/\\_/  \\__,_||_|   ";)
+	@($(CC) $(FLAGS) $(SPE_FLAGS) $(addprefix $(OBJ_DIR), $(OBJ)) $(LIB) -I$(INC) -o $(NAME))
+	@(echo "\033[33mASM Pret\033[32;6m\n ---Les Champions peuvent commencer la compilation !---\033[0m")
 
 $(LIB) :
 	@(cd $(LIB_DIR) && MAKE)
@@ -46,14 +52,16 @@ $(OBJ_DIR) :
 	mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c)
-	$(CC) $(FLAGS) $(SPE_FLAGS) -I$(INC) -c -o $@ $<
+	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
 
 clean :
-	rm -f $(addprefix $(OBJ_DIR), $(OBJ))
+	@(rm -f $(addprefix $(OBJ_DIR), $(OBJ)))
+	@(echo "\033[33msupression des points o\033[0m")
 	@(cd $(LIB_DIR) && MAKE $@)
 
 fclean : clean
-	rm -f $(NAME)
+	@(rm -f $(NAME))
+	@(echo "\033[33msupression de l'asm\033[0m")
 	@(cd $(LIB_DIR) && MAKE $@)
 
 re : fclean all

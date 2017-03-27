@@ -27,7 +27,7 @@ void			vm_op_14_exec(t_datas *datas, t_process *process)
 			{
 				process->reg[process->in_stock[2]] =
 							vm_recup_arena_num(REG_SIZE, datas->arene,
-								vm_add_valid(process->PC +
+								vm_add_valid(process->pc +
 									vm_add_valid(process->in_stock[0] +
 									process->in_stock[1])));
 				if (process->reg[process->in_stock[2]] == 0)
@@ -37,6 +37,6 @@ void			vm_op_14_exec(t_datas *datas, t_process *process)
 			}
 		}
 	}
-	process->PC = vm_op_jump(datas, process,
+	process->pc = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

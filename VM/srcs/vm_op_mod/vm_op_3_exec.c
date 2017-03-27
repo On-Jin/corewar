@@ -24,7 +24,7 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 {
 	char		i;
 
-	i = datas->arene[vm_add_valid(process->PC + 1)];
+	i = datas->arene[vm_add_valid(process->pc + 1)];
 	if (vm_verif_datas(datas, process))
 	{
 		if (!(vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 18)))
@@ -36,13 +36,13 @@ void			vm_op_3_exec(t_datas *datas, t_process *process)
 			}
 			else if (((i >> 4) & 3) == 3)
 			{
-				vm_put_nbr_in_arene(process->in_stock[0], process->PC +
+				vm_put_nbr_in_arene(process->in_stock[0], process->pc +
 						(process->in_stock[1] % IDX_MOD), datas->arene, 4);
-				ncurses_put_background(datas, process->PC +
+				ncurses_put_background(datas, process->pc +
 						(process->in_stock[1] % IDX_MOD), process->champion, 4);
 			}
 		}
 	}
-	process->PC = vm_op_jump(datas, process,
+	process->pc = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

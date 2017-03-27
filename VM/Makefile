@@ -14,7 +14,7 @@
 .SUFFIXES :
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Werror -Wextra
 SPE_FLAGS =  -lncurses -g
 OPTI_FLAGS = -O2
 DEBUG_FLAG = -fsanitize=address
@@ -30,7 +30,7 @@ E = -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int \
 	-Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef \
 	-Wshadow -Wpointer-arith -Wbad-function-cast \
 	-Wpadded  -Wwrite-strings -Wconversion
-	#-Weverything -std=c89 -pedantic -MMD
+	-Weverything -std=c89 -pedantic -MMD
 
 NAME = corewar
 
@@ -129,11 +129,6 @@ $(NAME) : $(LIB) $(OBJ_DIR) $(OBJ2_DIR) $(OBJ3_DIR) $(addprefix $(OBJ_DIR), $(OB
 	@(echo "\033[2K\033[2F")
 	@(echo "\n\033[5m Ouverture de l'arene de Combat !!!!!!!!!!!\033[0m")
 	@(echo "\033[2K";)
-#	@(echo "\t\t\t\t\t\t\t\t   ____                   __        __           ";)
-#	@(echo "\t\t\t\t\t\t\t\t  / ___| ___   _ __  ___  \\ \\      / /__ _  _ __ ";)
-#	@(echo "\t\t\t\t\t\t\t\t | |    / _ \\ | '__|/ _ \\  \\ \\ /\\ / // _\` || '__|";)
-#	@(echo "\t\t\t\t\t\t\t\t | |___| (_) || |  |  __/   \\ V  V /| (_| || |   ";)
-#	@(echo "\t\t\t\t\t\t\t\t  \\____|\\___/ |_|   \\___|    \\_/\\_/  \\__,_||_|   ";)
 	@(echo "\t\t\t\t\t\t\t\t    Survive in the arena             ";)
 	@(echo "\t\t\t\t\t\t\t\t    Fight for fame and glory\n             ";)
 	@(echo "\t\t\t\t\t                            ==(W{==========-      /===-                        ";)
@@ -213,19 +208,19 @@ $(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c) $(INC_FILES)
 	@(echo "\033[35m Preparation du terrin \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
-	@(echo "\033[2K\033[2F")
+	@(echo "\033[2F\033[2K")
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC2_DIR), %.c) $(INC_FILES)
 	@(echo "\033[33m Preparation des armes \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
-	@(echo "\033[2K\033[2F")
+	@(echo "\033[2F\033[2K")
 
 $(OBJ_DIR)%.o : $(addprefix $(SRC3_DIR), %.c) $(INC_FILES)
 	@(echo "\033[93m Demarage de la retransmition video \033[31m\t\c")
 	@(echo "{\t$@\t}")
 	@($(CC) $(FLAGS) -I$(INC) -c -o $@ $< $(EXTRA_FLAGS))
-	@(echo "\033[2K\033[2F")
+	@(echo "\033[2F\033[2K")
 
 clean :
 	@(rm -f $(addprefix $(OBJ_DIR), $(OBJ)) $(addprefix $(OBJ_DIR), $(OBJ2)) $(addprefix $(OBJ_DIR), $(OBJ3)))

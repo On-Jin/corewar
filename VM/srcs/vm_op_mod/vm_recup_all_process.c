@@ -34,8 +34,8 @@
 **	int			adress;
 **
 **	i = -1;
-**	adress = process->PC + 2;
-**	while (++i < 4 && (tmp = (char)arene[vm_add_valid(process->PC + 1)] >> (2 *
+**	adress = process->pc + 2;
+**	while (++i < 4 && (tmp = (char)arene[vm_add_valid(process->pc + 1)] >> (2 *
 **			(3 - i))) && (flag = flg >> (8 * (3 - i))) != -1)
 **		if (((tmp & 3) == 0b01) && (adress += 1) && ((!(flag & 1) &&
 **			(process->in_stock[i] = vm_recup_arena_num(1, arene, adress)) == -1)
@@ -105,11 +105,11 @@ int			vm_recup_all_process(t_process *process, char *arene, int flg)
 	int			adress;
 
 	inf[0] = 0;
-	adress = process->PC + 2;
+	adress = process->pc + 2;
 	while (inf[0] < 4)
 	{
 		inf[1] = flg >> (8 * (3 - inf[0]));
-		inf[2] = (char)arene[vm_add_valid(process->PC + 1)] >> (2 *
+		inf[2] = (char)arene[vm_add_valid(process->pc + 1)] >> (2 *
 																(3 - inf[0]));
 		if ((inf[2] & 3) == 0b01)
 		{

@@ -22,7 +22,7 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	tmp = datas->begin_process;
 	datas->begin_process = process;
 	process->next = tmp;
-	process->PC = datas->start[nbr_champ - 1];
+	process->pc = datas->start[nbr_champ - 1];
 	process->champion = (char)nbr_champ;
 	datas->inf[nbr_champ].nbr_process++;
 	datas->inf[ALL].nbr_process++;

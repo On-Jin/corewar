@@ -65,7 +65,7 @@ typedef struct		s_process
 	int					in_stock[4];
 	int					instruc;
 	struct s_process	*next;
-	int					PC;
+	int					pc;
 	int					cycle;
 	char				carry;
 	char				live;

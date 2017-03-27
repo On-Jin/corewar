@@ -21,10 +21,10 @@ void		ncurses_find_pc(t_datas *datas, t_draw *d)
 	pros = datas->begin_process;
 	while (pros)
 	{
-		if (pros->PC < min && pros->PC > d->max)
+		if (pros->pc < min && pros->pc > d->max)
 		{
-			min = pros->PC;
-			d->save_pros = pros->PC;
+			min = pros->pc;
+			d->save_pros = pros->pc;
 		}
 		pros = pros->next;
 	}

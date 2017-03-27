@@ -28,11 +28,11 @@ void			vm_op_10_exec(t_datas *datas, t_process *process)
 			if (process->in_stock[2] > 0 && process->in_stock[2] <= REG_NUMBER)
 			{
 				process->reg[process->in_stock[2]] = vm_recup_arena_num(4,
-				datas->arene, vm_add_valid((process->PC + ((process->in_stock[0]
+				datas->arene, vm_add_valid((process->pc + ((process->in_stock[0]
 				+ process->in_stock[1]) % IDX_MOD))));
 			}
 		}
 	}
-	process->PC = vm_op_jump(datas, process,
+	process->pc = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

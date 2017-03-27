@@ -15,5 +15,5 @@
 void				vm_op_0_exec(t_datas *datas, t_process *process)
 {
 	(void)datas;
-	process->PC = vm_add_valid(process->PC + 1);
+	process->pc = vm_add_valid(process->pc + 1);
 }

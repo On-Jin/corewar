@@ -32,6 +32,6 @@ void			vm_op_20_exec(t_datas *datas, t_process *process)
 			}
 		}
 	}
-	process->PC = vm_op_jump(datas, process,
+	process->pc = vm_op_jump(datas, process,
 							datas->op_tab[(int)process->instruction].nb_arg);
 }

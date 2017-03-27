@@ -21,7 +21,7 @@ t_process		*vm_copy_process(t_datas *datas, t_process *process, int pc)
 	tmp = new->next;
 	ft_memmove((void *)new, (void *)process, sizeof(process->reg));
 	new->next = tmp;
-	new->PC = pc;
+	new->pc = pc;
 	new->live = process->live;
 	new->carry = process->carry;
 	new->champion = process->champion;

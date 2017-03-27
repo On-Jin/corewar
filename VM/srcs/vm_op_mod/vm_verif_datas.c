@@ -60,7 +60,7 @@ int				vm_verif_datas(t_datas *datas, t_process *process)
 	a = (op_c->nb_arg >= 1) ? op_c->tab_arg[0] : 0;
 	b = (op_c->nb_arg >= 2) ? op_c->tab_arg[1] : 0;
 	c = (op_c->nb_arg == 3) ? op_c->tab_arg[2] : 0;
-	process->instruc = (unsigned char)datas->arene[vm_add_valid(process->PC +
+	process->instruc = (unsigned char)datas->arene[vm_add_valid(process->pc +
 																			1)];
 	return (vm_verif_i_cod(process->instruc, a, b, c));
 }

@@ -48,10 +48,10 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 	int		arg1;
 	int		arg2;
 
-	arg1 = vm_recup_arena_num(4, datas->arene, process->PC + 1);
+	arg1 = vm_recup_arena_num(4, datas->arene, process->pc + 1);
 	arg2 = vm_champ_number_to_position(arg1, datas->begin_champ);
 	process->live = 1;
-	process->PC = vm_add_valid(process->PC + 5);
+	process->pc = vm_add_valid(process->pc + 5);
 	if (arg2 != -1)
 	{
 		vm_incr_lives(datas, arg1, arg2);

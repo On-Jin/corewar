@@ -21,7 +21,7 @@ AUTOR = auteur
 
 COREWAR_NAME = corewar
 ASM_NAME = asm
-NAME = $(COREWAR_NAME) $(ASM_NAME)
+NAME = $(ASM_NAME) $(COREWAR_NAME)
 
 COREWAR_DIR = ./VM/
 ASM_DIR = ./compiler/
@@ -57,19 +57,19 @@ $(LIB) :
 
 $(COREWAR_NAME) : $(LIB)
 	@(cd $(COREWAR_DIR) && $(MAKE) $@)
-	cp $(COREWAR_DIR)$(COREWAR_NAME) ./
+	@(cp $(COREWAR_DIR)$(COREWAR_NAME) ./)
 
 $(ASM_NAME) : $(LIB)
 	@(cd $(ASM_DIR) && $(MAKE) $@)
-	cp $(ASM_DIR)$(ASM_NAME) ./
+	@(cp $(ASM_DIR)$(ASM_NAME) ./)
 
 clean :
-	(cd $(LIB_DIR) && $(MAKE) $@)
-	(cd $(ASM_DIR) && $(MAKE) $@)
-	(cd $(COREWAR_DIR) && $(MAKE) $@)
+	@(cd $(LIB_DIR) && $(MAKE) $@)
+	@(cd $(ASM_DIR) && $(MAKE) $@)
+	@(cd $(COREWAR_DIR) && $(MAKE) $@)
 
-fclean : clean
-	rm -f $(NAME)
+fclean :
+	@(rm -f $(NAME))
 	@(cd $(LIB_DIR) && $(MAKE) $@)
 	@(cd $(ASM_DIR) && $(MAKE) $@)
 	@(cd $(COREWAR_DIR) && $(MAKE) $@)

@@ -29,7 +29,10 @@ int			ft_square_root(int square);
 
 t_op		*corewar_op_tab(void);
 t_op		corewar_op_name2tab(char *name);
-
+void		vm_delete_unlive_process(t_datas *datas);
+void		vm_print_start_battle(t_datas *datas);
+void		vm_destroy_all_process(t_datas *datas);
+void		vm_print_end_battle(t_datas *datas);
 void		vm_put_nbr_in_arene(int number, int adress, char *arene, int size);
 int			vm_verif_datas(t_datas *datas, t_process *process);
 int			vm_op_jump(t_datas *datas, t_process *process, unsigned char size);
@@ -37,7 +40,8 @@ void		vm_verif_macro(void);
 int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag);
 int			vm_init_champ(t_champ *champs, int argc, char **argv, t_datas
 																		*datas);
-
+int				turn_process(t_datas *datas,
+								void (**exec)(t_datas *, t_process *));
 int			vm_ocp_size(char ocp, int nb_arg, int op_flag);
 int			vm_havent_ocp(int op_code);
 int			vm_have_ocp(int op_code);
@@ -49,8 +53,8 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *));
 int			vm_init_process(t_datas *datas);
-
-void		vm_show_arene(t_datas *datas);
+int			ft_isatoied(char *src);
+int			vm_show_arene(t_datas *datas);
 
 void		start_op_code(t_datas *datas, t_process *pros, int op_code);
 

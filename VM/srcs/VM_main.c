@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:16:47 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/27 02:01:46 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,15 @@ int				main(int argc, char **argv)
 	vm_verif_macro();
 	vm_innit_to_0(&datas, champs, &lives);
 	vm_champ_process(&datas, argc, argv);
+	vm_print_start_battle(&datas);
 	recup_data_size_arena(&datas);
 	if (datas.flag & FLAG_N)
 		ncurses_init(&datas, datas.nc.size_max_y, datas.nc.size_max_x + 1);
 	vm_init_process(&datas);
 	if (datas.flag & FLAG_N)
 		ncurses_end(&datas);
+	if (datas.end)
+		vm_print_end_battle(&datas);
+	vm_destroy_all_process(&datas);
 	return (vm_end_main());
 }

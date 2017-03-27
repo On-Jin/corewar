@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:20:51 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 18:09:49 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:01:36 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	turn_process(t_datas *datas, void (**exec)(t_datas *, t_process *))
 	return (0);
 }
 
-static void		vm_destroy_all_process(t_datas *datas)
+void			vm_destroy_all_process(t_datas *datas)
 {
 	t_process	*process;
 	t_process	*tmp;
@@ -98,20 +98,6 @@ static void		vm_init_cycle(t_cycle *cycle)
 	cycle->total_cycle = 0;
 	cycle->cycle_to_die = CYCLE_TO_DIE;
 	cycle->check = 1;
-}
-
-static int		vm_do_cycles_end(t_datas *datas, t_cycle *cycle)
-{
-/*	ft_printf("\n\nlast %d\n\n", datas->lives->last_live);
-	ft_printf("\n\nlast live cycle %d\n\n", datas->lives->cycle_last_live);
-	endwin();
-	ft_printf("total_live %d\n", datas->lives->total_lives);
-	ft_printf("total_cycle %d\n", cycle->total_cycle);*/
-	vm_destroy_all_process(datas);
-	if (datas->flag & FLAG_N)
-		ncurses_end(datas);
-	(void)cycle;
-	return(0/*ft_int_error("Fin de cycle to die")*/);
 }
 
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
@@ -150,11 +136,7 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 				cycle->cycle++;
 			}
 			if (datas->dump > 0 && cycle->cycle + cycle->total_cycle == datas->dump)
-			{
-				vm_show_arene(datas);
-				//FREE STP
-				exit(0);
-			}
+				return (vm_show_arene(datas));
 			if (cycle->cycle_to_die <= 0)
 				break ;
 		}
@@ -175,5 +157,6 @@ int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *))
 		}
 		datas->lives->cycle_lives = 0;
 	}
-	return(vm_do_cycles_end(datas, cycle));
+	datas->end = 1;
+	return(0);
 }

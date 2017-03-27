@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 06:32:43 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 18:38:15 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:01:04 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ typedef struct		s_datas
 
 	long int		nb_process;
 	int				i_debug;
-	int				voider;
+	int				end;
 
 	char			arene[MEM_SIZE];
 }					t_datas;

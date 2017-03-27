@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 05:12:17 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 18:38:27 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:01:17 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			vm_innit_to_0(t_datas *datas, t_champ *champs, t_lives *lives)
 	datas->nbr_cycles = CYCLE_TO_DIE;
 	datas->nb_process = 0;
 	datas->dump = -1;
+	datas->end = 0;
 	vm_innit_inf(datas);
 	innit_op_tab(datas);
 }

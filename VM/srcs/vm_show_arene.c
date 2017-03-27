@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 22:05:56 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/23 18:08:50 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/27 01:59:36 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,10 @@ static void	vm_print_elem(t_datas *datas, char elem)
 	ft_printf("%s ", line);
 }
 
-void		vm_show_arene(t_datas *datas)
+int			vm_show_arene(t_datas *datas)
 {
 	int i;
 
-	i = 0;
-	ft_printf("Introducing contestants...\n");
-	while (i < datas->player_nbr)
-	{
-		ft_printf("* Player %i, weighing %i bytes, \"%s\" (\"%s\") !\n",
-			i + 1, datas->begin_champ[i].champ_size,
-			datas->begin_champ[i].champ_name, datas->begin_champ[i].champ_com);
-		i++;
-	}
 	i = 0;
 	ft_putstr("0x0000 : ");
 	while (i < MEM_SIZE)
@@ -48,4 +39,5 @@ void		vm_show_arene(t_datas *datas)
 		i++;
 	}
 	ft_printf("\n");
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:21:10 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/26 18:06:38 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:51:27 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@
 ** le prcesseur jump ensuite sur pc + 5
 */
 
+void				vm_incr_lives(t_datas *datas, int arg1, int arg2)
+{
+	if (datas->flag & FLAG_N)
+	{
+		datas->inf[arg2 + 1].total_lives++;
+		datas->inf[arg2 + 1].cycle_lives++;
+		datas->inf[arg2 + 1].cycle_last_live = datas->cycle.cycle +
+											datas->cycle.total_cycle + 1;
+		datas->inf[ALL].total_lives++;
+		datas->inf[ALL].cycle_lives++;
+		datas->inf[ALL].cycle_last_live = datas->cycle.cycle +
+											datas->cycle.total_cycle + 1;
+	}
+	datas->lives->total_lives++;
+	datas->lives->champ_total_lives[arg2]++;
+	datas->lives->champ_cycle_lives[arg2]++;
+	datas->lives->last_live = arg1;
+	datas->lives->cycle_last_live = datas->cycle.cycle
+								+ datas->cycle.total_cycle + 1;
+}
+
 void				vm_op_1_exec(t_datas *datas, t_process *process)
 {
 	int		arg1;
@@ -33,22 +54,11 @@ void				vm_op_1_exec(t_datas *datas, t_process *process)
 	process->PC = vm_add_valid(process->PC + 5);
 	if (arg2 != -1)
 	{
-		datas->inf[arg2 + 1].total_lives++;
-		datas->inf[arg2 + 1].cycle_lives++;
-		datas->inf[arg2 + 1].cycle_last_live = datas->cycle.cycle +
-											datas->cycle.total_cycle + 1;
-		datas->inf[ALL].total_lives++;
-		datas->inf[ALL].cycle_lives++;
-		datas->inf[ALL].cycle_last_live = datas->cycle.cycle +
-											datas->cycle.total_cycle + 1;
-		datas->lives->total_lives++;
-		datas->lives->champ_total_lives[arg2]++;
-		datas->lives->champ_cycle_lives[arg2]++;
-		datas->lives->last_live = arg1;
-		datas->lives->cycle_last_live = datas->cycle.cycle
-								+ datas->cycle.total_cycle + 1;
-		if (!(datas->flag & FLAG_N) && !(datas->flag & FLAG_D))
-			ft_printf("Player %i (%s) is said to be alive\n", datas->begin_champ[(int)process->champion - 1].champ_nbr, datas->begin_champ[(int)process->champion - 1].champ_name);
+		vm_incr_lives(datas, arg1, arg2);
+		if (datas->flag & FLAG_V)
+			ft_printf("Player %i (%s) is said to be alive\n",
+					datas->begin_champ[(int)process->champion - 1].champ_nbr,
+					datas->begin_champ[(int)process->champion - 1].champ_name);
 	}
 	datas->lives->cycle_lives++;
 }

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 00:12:00 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 01:12:56 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void		vm_innit_to_0(t_datas *datas, t_champ *champs,
 						t_lives *lives);
 int			vm_do_cycles(t_datas *datas, void (**exec)(t_datas *, t_process *));
 int			vm_init_process(t_datas *datas);
+void		vm_destroy_all_process(t_datas *datas);
 
-void		vm_show_arene(t_datas *datas);
+int			vm_show_arene(t_datas *datas);
 
 void		start_op_code(t_datas *datas, t_process *pros, int op_code);
 
@@ -65,6 +66,9 @@ int			vm_recup_all_process(t_process *process, char *arene, int flag);
 int			vm_verif_i_code(char code, char a, char b, char c);
 int			vm_recup_indirect_num(t_process *process, char *arene, int adresse);
 int			vm_recup_arena_num(int size, char *arena, int PC);
+
+void		vm_print_start_battle(t_datas *datas);
+void		vm_print_end_battle(t_datas *datas);
 
 void		vm_op_0_exec(t_datas *datas, t_process *process);
 void		vm_op_1_exec(t_datas *datas, t_process *process);

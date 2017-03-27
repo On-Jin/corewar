@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/23 17:40:55 by gnebie           ###   ########.fr        #
+#    Updated: 2017/03/27 01:16:47 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,8 @@ SRC = VM_main.c \
 	  vm_show_arene.c \
 	  vm_verif_macro.c \
 	  vm_start_op_code.c \
+	  vm_print_start_battle.c \
+	  vm_print_end_battle.c \
 	  ft_void_error.c \
 	  ft_int_error.c \
 	  ft_square_root.c \

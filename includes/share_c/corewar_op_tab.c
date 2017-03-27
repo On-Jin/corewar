@@ -14,8 +14,8 @@
 
 /*
 **instructions suplementaires
-** MUL = multiplier {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
-** DIV = diviser (division par 0 == 0) {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
+** MUL = multiplier
+** DIV = diviser (division par 0 == 0)
 ** NOT = d'un int
 ** ASL = (decalage d'un bit a gauche)
 ** ASR = (decalage d'un bit a droite)

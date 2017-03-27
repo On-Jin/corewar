@@ -26,7 +26,7 @@
 /*
 ** Define
 */
-# define NBR_FONC 17
+# define NBR_FONC 25
 
 # define OP_LIVE 1
 # define OP_LD 2

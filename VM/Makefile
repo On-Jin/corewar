@@ -62,6 +62,14 @@ SRC2 = vm_champ_number_to_position.c \
 	   vm_op_14_exec.c \
 	   vm_op_15_exec.c \
 	   vm_op_16_exec.c \
+	   vm_op_17_exec.c \
+	   vm_op_18_exec.c \
+	   vm_op_19_exec.c \
+	   vm_op_20_exec.c \
+	   vm_op_21_exec.c \
+	   vm_op_22_exec.c \
+	   vm_op_23_exec.c \
+	   vm_op_24_exec.c \
 	   vm_op_1_exec.c \
 	   vm_op_2_exec.c \
 	   vm_op_3_exec.c \

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:14:54 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 03:07:25 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:15:59 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		vm_add_flag(char *line, int *flag)
 		cp = *flag;
 		('v' == line[i]) ? (*flag |= FLAG_V) : 0;
 		('b' == line[i]) ? (*flag |= FLAG_B) : 0;
-		('n' == line[i]) ? (*flag |= FLAG_N) : 0;
+		('k' == line[i]) ? (*flag |= FLAG_K) : 0;
 		('m' == line[i]) ? (*flag |= FLAG_M) : 0;
 		('g' == line[i]) ? (*flag |= FLAG_G) : 0;
 		('h' == line[i]) ? (*flag |= FLAG_H) : 0;
@@ -67,9 +67,9 @@ int				vm_create_flags(t_datas *datas, char **argv, int argc,
 	{
 		if (vm_create_dump(datas, argv, flag, &i))
 			;
-		else if (*argv[i] == '-' && ft_strcmp(argv[i], "-k"))
+		else if (*argv[i] == '-' && ft_strcmp(argv[i], "-n"))
 			vm_add_flag(argv[i], flag);
-		else if (ft_strstr(argv[i], ".cor") || !ft_strcmp(argv[i], "-k"))
+		else if (ft_strstr(argv[i], ".cor") || !ft_strcmp(argv[i], "-n"))
 			return (i);
 		else
 			exit(ft_int_error("Option invalide ou champion invalide"));

@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 03:09:23 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:16:38 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int					vm_init_champ(t_champ *champs, int argc, char **argv,
 	champ_nbr = 0;
 	while (i < argc && argv[i])
 	{
-		if (!ft_strcmp(argv[i], "-k"))
+		if (!ft_strcmp(argv[i], "-n"))
 		{
 			if (argv[i + 1] && ft_isatoied(argv[i + 1]) != -1)
 				((champs[champ_nbr].champ_nbr = ft_atoi(argv[i + 1])) > -4 &&

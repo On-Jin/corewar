@@ -16,7 +16,7 @@
 ** rotation droite
 */
 
-void			vm_op_21_exec(t_datas *datas, t_process *process)
+void			vm_op_23_exec(t_datas *datas, t_process *process)
 {
 	if (vm_verif_datas(datas, process))
 	{

@@ -12,11 +12,26 @@
 
 #include "corewar.h"
 
+
+static int			vm_op_create_exec_2(t_datas *datas, void (*exec[NBR_FONC])
+										(t_datas *, t_process *))
+{
+	exec[17] = vm_op_17_exec;
+	exec[18] = vm_op_18_exec;
+	exec[19] = vm_op_19_exec;
+	exec[20] = vm_op_20_exec;
+	exec[21] = vm_op_21_exec;
+	exec[22] = vm_op_22_exec;
+	exec[23] = vm_op_23_exec;
+	exec[24] = vm_op_24_exec;
+	return (vm_do_cycles(datas, exec));
+}
+
 static int			vm_op_create_exec(t_datas *datas)
 {
 	void		(*exec[NBR_FONC])(t_datas *, t_process *);
 
-	if (NBR_FONC != 17)
+	if (NBR_FONC != 25)
 		exit(ft_int_error("Mauvais nombre de fonctions"));
 	exec[0] = vm_op_0_exec;
 	exec[1] = vm_op_1_exec;
@@ -35,7 +50,7 @@ static int			vm_op_create_exec(t_datas *datas)
 	exec[14] = vm_op_14_exec;
 	exec[15] = vm_op_15_exec;
 	exec[16] = vm_op_16_exec;
-	return (vm_do_cycles(datas, exec));
+	return vm_op_create_exec_2(datas, exec);
 }
 
 int					vm_init_process(t_datas *datas)

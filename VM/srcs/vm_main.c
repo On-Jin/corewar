@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 04:00:52 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 03:01:48 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:02:11 by gnebie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		vm_verif_arg(int argc)
 {
 	if (argc == 1)
 	{
-		ft_printf("./corewar [-h nbr_cycles] [-m] [-dump nbr_cycles]");
+		ft_printf("./corewar [-h nbr_cycles] [-m -b -v] [-dump nbr_cycles]");
 		ft_printf(" [[-n number] champion1.cor] ...\n");
 		exit(0);
 	}

@@ -36,7 +36,7 @@ char				*ft_itoa_base_unsigned_max(uintmax_t n, int base, char a)
 	if (base < 2 || base > 16)
 		return (NULL);
 	i = count_uintmax(n, (uintmax_t)base);
-	if (!(number = ft_memalloc(sizeof(char) * (size_t)(i + 1))))
+	if (!(number = malloc(sizeof(char) * (size_t)(i + 1))))
 		return (NULL);
 	number[i--] = 0;
 	if (n == 0)

@@ -176,7 +176,7 @@ void					ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list					*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void					ft_cat(char *path);
 void					ft_foreach(int *tab, int length, void (*f)(int*));
-int						*ft_range(int min, int max);
+void					*ft_range(int min, int max);
 int						ft_factorial(int nb);
 void					ft_swap(int *a, int *b);
 int						ft_gnl(const int fd, char **line);

@@ -16,7 +16,9 @@ int		*ft_intdup(int nbr)
 {
 	int *ptr;
 
-	ptr = ft_memalloc(sizeof(int));
+	ptr = malloc(sizeof(int));
+	if (!ptr)
+		return (NULL);
 	*(ptr) = nbr;
 	return (ptr);
 }

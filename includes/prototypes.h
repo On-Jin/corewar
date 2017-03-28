@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/28 13:35:21 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 17:50:09 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			vm_champ_position_to_number(int champ_pos, t_champ *champ_tab);
 
 int			vm_recup_process_reg(t_process *process, char *arene, int adresse,
 																int *result);
+void		vm_verif_num_champ(t_datas *datas);
 int			vm_recup_all_process(t_process *process, char *arene, int flag);
 int			vm_error(t_datas *datas, const char *message);
 int			vm_recup_indirect_num(t_process *process, char *arene, int adresse);

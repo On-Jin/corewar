@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 04:16:24 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/27 17:16:38 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/28 17:57:05 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,8 @@ int					vm_init_champ(t_champ *champs, int argc, char **argv,
 		if (!ft_strcmp(argv[i], "-n"))
 		{
 			if (argv[i + 1] && ft_isatoied(argv[i + 1]) != -1)
-				((champs[champ_nbr].champ_nbr = ft_atoi(argv[i + 1])) > -4 &&
-				champs[champ_nbr].champ_nbr < 1) ?
-				exit(ft_int_error("Champ number 0 -1 -2 -3 -4 are forbiden !"))
+				((champs[champ_nbr].champ_nbr = ft_atoi(argv[i + 1])) == 0) ?
+				exit(ft_int_error("Champ number 0 are forbiden !"))
 				: 0;
 			else
 				exit(ft_int_error("Number format invalide !"));

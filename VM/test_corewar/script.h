@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 20:38:33 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/28 00:33:30 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 17:54:38 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <time.h>
-# include "libft/includes/ft_printf.h"
-# include "libft/basic/includes/get_next_line.h"
-# include "libft/basic/includes/libft.h"
+# include "../../includes/libft/libft.h"
 
 # define N 32
 

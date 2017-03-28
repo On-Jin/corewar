@@ -1,0 +1,181 @@
+{0}|Fin de [./corewar_zaz -d 19000 champ/skynet.cor champ/darksasuke.cor champ/turtle.cor champ/ultimate-surrender.cor > ret_corewar_zaz.txt] ||| i_champ[23] | j[19] | y[28] | b[30]
+*** ret_corewar.txt	2017-03-28 17:27:53.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:53.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/turtle.cor
+{1}|Fin de [./corewar_zaz -d 19000 champ/loose.cor champ/doge.cor champ/terminator.cor champ/dubo.cor > ret_corewar_zaz.txt] ||| i_champ[18] | j[1] | y[25] | b[3]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{2}|Fin de [./corewar_zaz -d 19000 champ/champ.cor champ/_.cor champ/doge.cor champ/gedeon.cor > ret_corewar_zaz.txt] ||| i_champ[17] | j[26] | y[1] | b[5]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{3}|Fin de [./corewar_zaz -d 19000 champ/Kappa.cor champ/ultimate-surrender.cor champ/ultimate-surrender.cor champ/doge.cor > ret_corewar_zaz.txt] ||| i_champ[2] | j[30] | y[30] | b[1]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{4}|Fin de [./corewar_zaz -d 19000 champ/sam_2.0.cor champ/loose.cor champ/dubo.cor champ/salamahenagalabadoun.cor > ret_corewar_zaz.txt] ||| i_champ[22] | j[18] | y[3] | b[21]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{5}|Fin de [./corewar_zaz -d 19000 champ/meowluigi.cor champ/Misaka_Mikoto.cor champ/live.cor champ/champ.cor > ret_corewar_zaz.txt] ||| i_champ[20] | j[8] | y[14] | b[17]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{6}|Fin de [./corewar_zaz -d 19000 champ/justin_bee.cor champ/helltrain.cor champ/ultimate-surrender.cor champ/loose.cor > ret_corewar_zaz.txt] ||| i_champ[10] | j[27] | y[30] | b[18]
+*** ret_corewar.txt	2017-03-28 17:27:55.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:55.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{7}|Fin de [./corewar_zaz -d 19000 champ/ultimate-surrender.cor champ/THUNDER.cor champ/Misaka_Mikoto.cor champ/darksasuke.cor > ret_corewar_zaz.txt] ||| i_champ[30] | j[13] | y[8] | b[19]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{8}|Fin de [./corewar_zaz -d 19000 champ/Varimathras.cor champ/Rainbow_dash.cor champ/helltrain.cor champ/skynet.cor > ret_corewar_zaz.txt] ||| i_champ[15] | j[11] | y[27] | b[23]
+*** ret_corewar.txt	2017-03-28 17:27:55.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:55.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{9}|Fin de [./corewar_zaz -d 19000 champ/Rainbow_dash.cor champ/bee_gees.cor champ/littlepuppy.cor champ/ultimate-surrender.cor > ret_corewar_zaz.txt] ||| i_champ[11] | j[31] | y[12] | b[30]
+*** ret_corewar.txt	2017-03-28 17:27:55.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:55.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/bee_gees.cor
+{10}|Fin de [./corewar_zaz -d 19000 champ/meowluigi.cor champ/_.cor champ/bee_gees.cor champ/dubo.cor > ret_corewar_zaz.txt] ||| i_champ[20] | j[26] | y[31] | b[3]
+*** ret_corewar.txt	2017-03-28 17:27:55.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:55.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/bee_gees.cor
+{11}|Fin de [./corewar_zaz -d 19000 champ/big_feet.cor champ/Varimathras.cor champ/big_feet.cor champ/dubo.cor > ret_corewar_zaz.txt] ||| i_champ[16] | j[15] | y[16] | b[3]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{12}|Fin de [./corewar_zaz -d 19000 champ/champ.cor champ/terminator.cor champ/big_feet.cor champ/Kappa.cor > ret_corewar_zaz.txt] ||| i_champ[17] | j[25] | y[16] | b[2]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{13}|Fin de [./corewar_zaz -d 19000 champ/Wall.cor champ/turtle.cor champ/Asombra.cor champ/darksasuke.cor > ret_corewar_zaz.txt] ||| i_champ[24] | j[28] | y[0] | b[19]
+*** ret_corewar.txt	2017-03-28 17:27:56.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:56.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/turtle.cor
+{14}|Fin de [./corewar_zaz -d 19000 champ/loose.cor champ/THUNDER.cor champ/ultimate-surrender.cor champ/Wall.cor > ret_corewar_zaz.txt] ||| i_champ[18] | j[13] | y[30] | b[24]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{15}|Fin de [./corewar_zaz -d 19000 champ/sam_2.0.cor champ/ultimate-surrender.cor champ/loose.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[22] | j[30] | y[18] | b[7]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{16}|Fin de [./corewar_zaz -d 19000 champ/loose.cor champ/Rainbow_dash.cor champ/helltrain.cor champ/gedeon.cor > ret_corewar_zaz.txt] ||| i_champ[18] | j[11] | y[27] | b[5]
+*** ret_corewar.txt	2017-03-28 17:27:56.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:56.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{17}|Fin de [./corewar_zaz -d 19000 champ/_.cor champ/dubo.cor champ/MarineKing.cor champ/big_feet.cor > ret_corewar_zaz.txt] ||| i_champ[26] | j[3] | y[6] | b[16]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{18}|Fin de [./corewar_zaz -d 19000 champ/sam_2.0.cor champ/Misaka_Mikoto.cor champ/Wall.cor champ/helltrain.cor > ret_corewar_zaz.txt] ||| i_champ[22] | j[8] | y[24] | b[27]
+*** ret_corewar.txt	2017-03-28 17:27:56.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:56.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{19}|Fin de [./corewar_zaz -d 19000 champ/Rainbow_dash.cor champ/Machine-gun.cor champ/justin_bee.cor champ/Wall.cor > ret_corewar_zaz.txt] ||| i_champ[11] | j[4] | y[10] | b[24]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{20}|Fin de [./corewar_zaz -d 19000 champ/skynet.cor champ/darksasuke.cor champ/MarineKing.cor champ/champ.cor > ret_corewar_zaz.txt] ||| i_champ[23] | j[19] | y[6] | b[17]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{21}|Fin de [./corewar_zaz -d 19000 champ/loose.cor champ/big_feet.cor champ/big_feet.cor champ/Varimathras.cor > ret_corewar_zaz.txt] ||| i_champ[18] | j[16] | y[16] | b[15]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{22}|Fin de [./corewar_zaz -d 19000 champ/Machine-gun.cor champ/casimir.cor champ/helltrain.cor champ/skynet.cor > ret_corewar_zaz.txt] ||| i_champ[4] | j[9] | y[27] | b[23]
+*** ret_corewar.txt	2017-03-28 17:27:57.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:57.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{23}|Fin de [./corewar_zaz -d 19000 champ/live.cor champ/Machine-gun.cor champ/Misaka_Mikoto.cor champ/live.cor > ret_corewar_zaz.txt] ||| i_champ[14] | j[4] | y[8] | b[14]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{24}|Fin de [./corewar_zaz -d 19000 champ/MarineKing.cor champ/casimir.cor champ/big_feet.cor champ/doge.cor > ret_corewar_zaz.txt] ||| i_champ[6] | j[9] | y[16] | b[1]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{25}|Fin de [./corewar_zaz -d 19000 champ/Wall.cor champ/ultimate-surrender.cor champ/MarineKing.cor champ/justin_bee.cor > ret_corewar_zaz.txt] ||| i_champ[24] | j[30] | y[6] | b[10]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{26}|Fin de [./corewar_zaz -d 19000 champ/helltrain.cor champ/ultimate-surrender.cor champ/meowluigi.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[27] | j[30] | y[20] | b[7]
+*** ret_corewar.txt	2017-03-28 17:27:58.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:27:58.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{27}|Fin de [./corewar_zaz -d 19000 champ/Kappa.cor champ/THUNDER.cor champ/THUNDER.cor champ/casimir.cor > ret_corewar_zaz.txt] ||| i_champ[2] | j[13] | y[13] | b[9]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{28}|Fin de [./corewar_zaz -d 19000 champ/ultimate-surrender.cor champ/Rainbow_dash.cor champ/meowluigi.cor champ/loose.cor > ret_corewar_zaz.txt] ||| i_champ[30] | j[11] | y[20] | b[18]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{29}|Fin de [./corewar_zaz -d 19000 champ/casimir.cor champ/dubo.cor champ/gedeon.cor champ/Machine-gun.cor > ret_corewar_zaz.txt] ||| i_champ[9] | j[3] | y[5] | b[4]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{30}|Fin de [./corewar_zaz -d 19000 champ/meowluigi.cor champ/Kappa.cor champ/big_feet.cor champ/terminator.cor > ret_corewar_zaz.txt] ||| i_champ[20] | j[2] | y[16] | b[25]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{31}|Fin de [./corewar_zaz -d 19000 champ/justin_bee.cor champ/gedeon.cor champ/meowluigi.cor champ/big_feet.cor > ret_corewar_zaz.txt] ||| i_champ[10] | j[5] | y[20] | b[16]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{32}|Fin de [./corewar_zaz -d 19000 champ/champ.cor champ/littlepuppy.cor champ/loose.cor champ/sam_2.0.cor > ret_corewar_zaz.txt] ||| i_champ[17] | j[12] | y[18] | b[22]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{33}|Fin de [./corewar_zaz -d 19000 champ/Varimathras.cor champ/_honeybadger.cor champ/Wall.cor champ/_.cor > ret_corewar_zaz.txt] ||| i_champ[15] | j[29] | y[24] | b[26]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{34}|Fin de [./corewar_zaz -d 19000 champ/helltrain.cor champ/terminator.cor champ/Misaka_Mikoto.cor champ/turtle.cor > ret_corewar_zaz.txt] ||| i_champ[27] | j[25] | y[8] | b[28]
+*** ret_corewar.txt	2017-03-28 17:28:04.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:28:04.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{35}|Fin de [./corewar_zaz -d 19000 champ/dubo.cor champ/_.cor champ/casimir.cor champ/Misaka_Mikoto.cor > ret_corewar_zaz.txt] ||| i_champ[3] | j[26] | y[9] | b[8]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{36}|Fin de [./corewar_zaz -d 19000 champ/meowluigi.cor champ/MarineKing.cor champ/skynet.cor champ/casimir.cor > ret_corewar_zaz.txt] ||| i_champ[20] | j[6] | y[23] | b[9]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{37}|Fin de [./corewar_zaz -d 19000 champ/meowluigi.cor champ/turtle.cor champ/littlepuppy.cor champ/loose.cor > ret_corewar_zaz.txt] ||| i_champ[20] | j[28] | y[12] | b[18]
+*** ret_corewar.txt	2017-03-28 17:28:04.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:28:04.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/turtle.cor
+{38}|Fin de [./corewar_zaz -d 19000 champ/MarineKing.cor champ/meowluigi.cor champ/jinx.cor champ/sam_2.0.cor > ret_corewar_zaz.txt] ||| i_champ[6] | j[20] | y[7] | b[22]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{39}|Fin de [./corewar_zaz -d 19000 champ/Wall.cor champ/bee_gees.cor champ/skynet.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[24] | j[31] | y[23] | b[7]
+*** ret_corewar.txt	2017-03-28 17:28:06.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:28:06.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/bee_gees.cor
+{40}|Fin de [./corewar_zaz -d 19000 champ/Kappa.cor champ/_honeybadger.cor champ/Wall.cor champ/littlepuppy.cor > ret_corewar_zaz.txt] ||| i_champ[2] | j[29] | y[24] | b[12]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{41}|Fin de [./corewar_zaz -d 19000 champ/Misaka_Mikoto.cor champ/doge.cor champ/sam_2.0.cor champ/THUNDER.cor > ret_corewar_zaz.txt] ||| i_champ[8] | j[1] | y[22] | b[13]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{42}|Fin de [./corewar_zaz -d 19000 champ/_honeybadger.cor champ/MarineKing.cor champ/dubo.cor champ/THUNDER.cor > ret_corewar_zaz.txt] ||| i_champ[29] | j[6] | y[3] | b[13]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{43}|Fin de [./corewar_zaz -d 19000 champ/Kappa.cor champ/Asombra.cor champ/meowluigi.cor champ/bee_gees.cor > ret_corewar_zaz.txt] ||| i_champ[2] | j[0] | y[20] | b[31]
+*** ret_corewar.txt	2017-03-28 17:28:07.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:28:07.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/bee_gees.cor
+{44}|Fin de [./corewar_zaz -d 19000 champ/ultimate-surrender.cor champ/salamahenagalabadoun.cor champ/Asombra.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[30] | j[21] | y[0] | b[7]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{45}|Fin de [./corewar_zaz -d 19000 champ/helltrain.cor champ/Wall.cor champ/terminator.cor champ/turtle.cor > ret_corewar_zaz.txt] ||| i_champ[27] | j[24] | y[25] | b[28]
+*** ret_corewar.txt	2017-03-28 17:28:07.000000000 +0200
+--- ret_corewar_zaz.txt	2017-03-28 17:28:07.000000000 +0200
+***************
+*** 0 ****
+--- 1 ----
++ Can't read source file champ/helltrain.cor
+{46}|Fin de [./corewar_zaz -d 19000 champ/doge.cor champ/gedeon.cor champ/Kappa.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[1] | j[5] | y[2] | b[7]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{47}|Fin de [./corewar_zaz -d 19000 champ/gedeon.cor champ/jinx.cor champ/Misaka_Mikoto.cor champ/gedeon.cor > ret_corewar_zaz.txt] ||| i_champ[5] | j[7] | y[8] | b[5]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{48}|Fin de [./corewar_zaz -d 19000 champ/justin_bee.cor champ/Rainbow_dash.cor champ/terminator.cor champ/champ.cor > ret_corewar_zaz.txt] ||| i_champ[10] | j[11] | y[25] | b[17]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{49}|Fin de [./corewar_zaz -d 19000 champ/THUNDER.cor champ/champ.cor champ/champ.cor champ/jinx.cor > ret_corewar_zaz.txt] ||| i_champ[13] | j[17] | y[17] | b[7]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{50}|Fin de [./corewar_zaz -d 19000 champ/loose.cor champ/doge.cor champ/sam_2.0.cor champ/gedeon.cor > ret_corewar_zaz.txt] ||| i_champ[18] | j[1] | y[22] | b[5]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{51}|Fin de [./corewar_zaz -d 19000 champ/sam_2.0.cor champ/THUNDER.cor champ/_honeybadger.cor champ/salamahenagalabadoun.cor > ret_corewar_zaz.txt] ||| i_champ[22] | j[13] | y[29] | b[21]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical
+{52}|Fin de [./corewar_zaz -d 19000 champ/live.cor champ/Misaka_Mikoto.cor champ/Misaka_Mikoto.cor champ/Wall.cor > ret_corewar_zaz.txt] ||| i_champ[14] | j[8] | y[8] | b[24]
+Files ret_corewar.txt and ret_corewar_zaz.txt are identical

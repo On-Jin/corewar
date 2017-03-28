@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 14:03:12 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/23 14:32:24 by gnebie           ###   ########.fr       */
+/*   Updated: 2017/03/28 17:57:26 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void			vm_champ_process(t_datas *datas, int argc, char **argv)
 {
 	datas->player_nbr = vm_create_flags(datas, argv, argc, &datas->flag);
 	datas->player_nbr = vm_init_champ(datas->begin_champ, argc, argv, datas);
+	vm_verif_num_champ(datas);
 	vm_place_champ(datas, datas->arene, datas->begin_champ);
 }

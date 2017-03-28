@@ -72,7 +72,6 @@ t_op		*corewar_op_tab(void)
 {
 	t_op *op_tab;
 
-	op_tab = ft_memalloc(sizeof(t_op) * 40);
 	if (!(op_tab = ft_memalloc(sizeof(t_op) * 40)))
 	{
 		write(2, "echec de malloc op_tab\n", 23);

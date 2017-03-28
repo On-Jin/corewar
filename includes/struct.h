@@ -123,7 +123,7 @@ typedef struct		s_datas
 	t_lives			*lives;
 	t_cycle			cycle;
 	t_nc			nc;
-	t_op			op_tab[17];
+	t_op			op_tab[40];
 	t_inf			inf[5];
 	int				player_nbr;
 	int				nbr_cycles;
@@ -134,6 +134,7 @@ typedef struct		s_datas
 	int				i_debug;
 	int				end;
 	char			arene[MEM_SIZE];
+	int				pid[3];
 }					t_datas;
 
 #endif

@@ -27,6 +27,8 @@ int			ft_square_root(int square);
 ** Fonctions
 */
 
+void		corewar_end_music(t_datas *datas, int i);
+int			corewar_music(t_datas *datas, int i, int (*f)(t_datas *));
 t_op		*corewar_op_tab(void);
 t_op		corewar_op_name2tab(char *name);
 void		vm_delete_unlive_process(t_datas *datas);
@@ -40,7 +42,7 @@ void		vm_verif_macro(void);
 int			vm_create_flags(t_datas *datas, char **argv, int argc, int *flag);
 int			vm_init_champ(t_champ *champs, int argc, char **argv, t_datas
 																		*datas);
-int				turn_process(t_datas *datas,
+int			turn_process(t_datas *datas,
 								void (**exec)(t_datas *, t_process *));
 int			vm_ocp_size(char ocp, int nb_arg, int op_flag);
 int			vm_havent_ocp(int op_code);
@@ -65,7 +67,7 @@ int			vm_champ_position_to_number(int champ_pos, t_champ *champ_tab);
 int			vm_recup_process_reg(t_process *process, char *arene, int adresse,
 																int *result);
 int			vm_recup_all_process(t_process *process, char *arene, int flag);
-int			vm_verif_i_code(char code, char a, char b, char c);
+int			vm_error(t_datas *datas, const char *message);
 int			vm_recup_indirect_num(t_process *process, char *arene, int adresse);
 int			vm_recup_arena_num(int size, char *arena, int pc);
 

@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
+#include <dirent.h>
 #include <sys/types.h>
 
 static pid_t		corewar_create_process(void)
@@ -41,12 +42,11 @@ int					corewar_music(t_datas *datas, int i, int (*f)(t_datas *))
 
 	arg[0] = "afplay";
 	if (i == 1)
-		arg[1] = "/Users/gnebie/Desktop/MyProjets/tests_sdl/"
-			"Mark_Petrie_-_Nazca_[Epic_Music_-_Powerful_Dark_Or.wav";
+		arg[1] = "./music/Heros.mp3";
 	else if (i == 2)
-		arg[1] = "../../../../tests_sdl/Heros.mp3";
+		arg[1] = "./music/Heros.mp3";
 	else
-		arg[1] = "../../../../tests_sdl/305.wav";
+		arg[1] = "./music/Heros.mp3";
 	arg[2] = NULL;
 	pid = corewar_create_process();
 	if (pid == 0)

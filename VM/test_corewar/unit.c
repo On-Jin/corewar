@@ -23,7 +23,8 @@ int			run_test_unit(t_env *e)
 														"ret_corewar_zaz.txt");
 	system(e->cmd);
 	ft_bzero(e->cmd, 500);
-	sprintf(e->cmd, "diff -rcs %s %s", "ret_corewar.txt", "ret_corewar_zaz.txt");
+	sprintf(e->cmd, "diff -rcs %s %s", "ret_corewar.txt",
+												"ret_corewar_zaz.txt");
 	system(e->cmd);
 	ft_printf("Fin de [%s%i %s]\n", "./corewar -d ", e->dump, e->str_unit);
 	e->i_champ++;

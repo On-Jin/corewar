@@ -18,7 +18,7 @@ t_process	*vm_create_process(t_datas *datas, int nbr_champ)
 	t_process	*tmp;
 
 	if (!(process = ft_memalloc(sizeof(t_process))))
-		exit(ft_int_error("Malloc invalide"));
+		exit(vm_error(datas, "Malloc invalide"));
 	tmp = datas->begin_process;
 	datas->begin_process = process;
 	process->next = tmp;

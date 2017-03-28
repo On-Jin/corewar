@@ -83,7 +83,6 @@ SRC2 = vm_champ_number_to_position.c \
 	   vm_recup_arena_num.c \
 	   vm_recup_indirect_num.c \
 	   vm_recup_process_reg.c \
-	   vm_verif_i_code.c \
 	   vm_verif_datas.c \
 	   vm_op_jump.c \
 	   vm_put_nbr_in_arene.c
@@ -107,13 +106,16 @@ SRC = vm_main.c \
 	  vm_start_op_code.c \
 	  vm_print_start_battle.c \
 	  vm_print_end_battle.c \
+	  vm_error.c \
 	  ft_void_error.c \
 	  ft_int_error.c \
 	  ft_square_root.c \
 	  ft_gcd.c \
 	  ft_itoa_base_unsigned.c \
 	  ft_isatoied.c \
-	  ../../includes/share_c/corewar_op_tab.c
+	  ../../includes/share_c/corewar_op_tab.c \
+	  ../../includes/share_c/corewar_music.c \
+	  ../../includes/share_c/corewar_end_music.c
 
 SRC_DIR = ./srcs/
 SRC2_DIR = ./srcs/vm_op_mod/
@@ -128,7 +130,7 @@ OBJ2_DIR = ./objs/vm_op_mod/
 OBJ2_DIR = ./objs/ncurses/
 
 INC = ../includes/
-INC_FILES = ../includes/corewar.h
+INC_FILES = ../includes/corewar.h ../includes/struct.h ../includes/prototypes.h
 
 all : $(NAME)
 

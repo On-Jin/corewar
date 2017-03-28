@@ -38,10 +38,10 @@ OBJ_DIR = ./objs/
 INC = ./includes/
 
 all : $(AUTOR) $(NAME) $(LIB)
-	@(cd $(COREWAR_DIR) && $(MAKE) $(COREWAR_NAME))
-	@(cp $(COREWAR_DIR)$(COREWAR_NAME) ./)
 	@(cd $(ASM_DIR) && $(MAKE) $(ASM_NAME))
 	@(cp $(ASM_DIR)$(ASM_NAME) ./)
+	@(cd $(COREWAR_DIR) && $(MAKE) $(COREWAR_NAME))
+	@(cp $(COREWAR_DIR)$(COREWAR_NAME) ./)
 
 $(AUTOR) :
 	echo "gnebie\nntoniolo\nmprevot" > auteur;

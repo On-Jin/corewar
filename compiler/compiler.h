@@ -32,8 +32,8 @@ typedef struct			s_instruct
 	struct s_instruct	*next;
 }						t_instruct;
 
-void					write_exec_magic(header_t *header);
-void					write_comment(int fdin, header_t *header);
+void					write_exec_magic(t_header *header);
+void					write_comment(int fdin, t_header *header);
 void					error(char *str);
 t_instruct				*compiler_compile(int fdin);
 size_t					get_instruct_size(t_instruct *current);

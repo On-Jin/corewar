@@ -29,7 +29,7 @@ void				invert_byte(unsigned int *val)
 	*val = revnbr;
 }
 
-void				write_exec_magic(header_t *header)
+void				write_exec_magic(t_header *header)
 {
 	header->magic = COREWAR_EXEC_MAGIC;
 	invert_byte(&(header->magic));
@@ -54,7 +54,7 @@ char				*write_comment_get_cmd(
 }
 
 void				write_comment_gnl(
-	header_t *header, char *line, char *cmd)
+	t_header *header, char *line, char *cmd)
 {
 	char			*str;
 	int				len;
@@ -82,7 +82,7 @@ void				write_comment_gnl(
 	ft_memdel((void**)&str);
 }
 
-void				write_comment(int fdin, header_t *header)
+void				write_comment(int fdin, t_header *header)
 {
 	char			*line;
 	t_bool			have_comment;

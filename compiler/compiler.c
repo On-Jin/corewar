@@ -56,21 +56,21 @@ int				main(int argc, char **argv)
 	char		*output_path;
 	int			fdin;
 	int			fdout;
-	header_t	header;
+	t_header	header;
 	t_instruct	*instructs;
 
 	if (argc != 2)
 		error("Usage : ./asm mychampion.s\n");
 	fdin = open(argv[1], O_RDONLY);
 	output_path = get_output_path(argv[1]);
-	ft_bzero(&header, sizeof(header_t));
+	ft_bzero(&header, sizeof(t_header));
 	write_exec_magic(&header);
 	write_comment(fdin, &header);
 	instructs = compiler_compile(fdin);
 	header.prog_size = (unsigned int)get_instruct_size(instructs);
 	invert_byte(&header.prog_size);
 	fdout = open(output_path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	write(fdout, &header, sizeof(header_t));
+	write(fdout, &header, sizeof(t_header));
 	write_instruct(fdout, instructs);
 	exit(0);
 	return (0);

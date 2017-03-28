@@ -55,7 +55,7 @@ static void			vm_verif_champ(char *chmp_info, t_champ *champ, int j)
 {
 	int				i;
 	unsigned char	*c;
-	header_t		*champion;
+	t_header		*champion;
 
 	c = (unsigned char*)chmp_info;
 	i = COREWAR_EXEC_MAGIC;
@@ -64,13 +64,13 @@ static void			vm_verif_champ(char *chmp_info, t_champ *champ, int j)
 		;
 	else
 		exit(ft_int_error("magic exec invalide"));
-	champion = (header_t *)&chmp_info[0];
-	if (vm_inv_octets(champion->prog_size) != j - sizeof(header_t) ||
-		j - sizeof(header_t) > CHAMP_MAX_SIZE)
+	champion = (t_header *)&chmp_info[0];
+	if (vm_inv_octets(champion->prog_size) != j - sizeof(t_header) ||
+		j - sizeof(t_header) > CHAMP_MAX_SIZE)
 	{
 		ft_printf("sizes give %#x size find %#x\n",
 							vm_inv_octets(champion->prog_size),
-							j - sizeof(header_t));
+							j - sizeof(t_header));
 		exit(ft_int_error("chamion size incorrect"));
 	}
 	ft_memcpy(champ->champ_name, chmp_info + 4, PROG_NAME_LENGTH);
@@ -81,17 +81,17 @@ static void			vm_create_champ(t_champ *champs, char *entry, int i,
 {
 	int					fd;
 	int					j;
-	char				buff[sizeof(header_t) + CHAMP_MAX_SIZE + 1];
+	char				buff[sizeof(t_header) + CHAMP_MAX_SIZE + 1];
 
 	if (1 > (fd = open(entry, O_RDONLY)))
 		exit(ft_int_error("Echec de lecture du champion"));
-	if ((j = read(fd, &buff, sizeof(header_t) + CHAMP_MAX_SIZE + 1)) == -1
-		|| j < (int)sizeof(header_t) + 1)
+	if ((j = read(fd, &buff, sizeof(t_header) + CHAMP_MAX_SIZE + 1)) == -1
+		|| j < (int)sizeof(t_header) + 1)
 		exit(ft_int_error("Echec de read du champion"));
-	buff[sizeof(header_t) + CHAMP_MAX_SIZE] = 0;
+	buff[sizeof(t_header) + CHAMP_MAX_SIZE] = 0;
 	vm_verif_champ(buff, &champs[i], j);
-	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(header_t)),
-			j - sizeof(header_t));
+	ft_memcpy((void *)&champs[i], (void *)(buff + sizeof(t_header)),
+			j - sizeof(t_header));
 	(!champs[i].champ_nbr) ? (champs[i].champ_nbr = -(i + 1)) : 0;
 	champs[i].champ_size = vm_size_champ(&champs[i], datas);
 	if (close(fd) == -1)

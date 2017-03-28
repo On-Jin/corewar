@@ -19,7 +19,8 @@ static void		innit_op_tab(t_datas *datas)
 	if (!(op_tab_init = corewar_op_tab()))
 		exit(ft_int_error("echec de malloc de l'op_tab"));
 	ft_memcpy((void*)&datas->op_tab[0], (void*)&op_tab_init[0], sizeof(t_op)
-																		* 17);
+																		* 30);
+	ft_memdel((void **)&op_tab_init);
 }
 
 static void		vm_innit_inf(t_datas *datas)

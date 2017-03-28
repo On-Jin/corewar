@@ -41,8 +41,10 @@ static void		vm_verif_arg(int argc)
 	}
 }
 
-static int		vm_end_main(void)
+static int		vm_end_main(t_datas *datas)
 {
+	if (datas->flag & FLAG_K && datas->flag & FLAG_M)
+		corewar_end_music(datas, 1);
 	return (0);
 }
 
@@ -66,11 +68,14 @@ int				main(int argc, char **argv)
 	recup_data_size_arena(&datas);
 	if (datas.flag & FLAG_M)
 		ncurses_init(&datas, datas.nc.size_max_y, datas.nc.size_max_x + 1);
-	vm_init_process(&datas);
+	if (datas.flag & FLAG_K && datas.flag & FLAG_M)
+		corewar_music(&datas, 1, vm_init_process);
+	else
+		vm_init_process(&datas);
 	if (datas.flag & FLAG_M)
 		ncurses_end(&datas);
 	if (datas.end)
 		vm_print_end_battle(&datas);
 	vm_destroy_all_process(&datas);
-	return (vm_end_main());
+	return (vm_end_main(&datas));
 }

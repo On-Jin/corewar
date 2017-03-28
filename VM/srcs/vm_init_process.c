@@ -12,7 +12,6 @@
 
 #include "corewar.h"
 
-
 static int			vm_op_create_exec_2(t_datas *datas, void (*exec[NBR_FONC])
 										(t_datas *, t_process *))
 {
@@ -50,7 +49,7 @@ static int			vm_op_create_exec(t_datas *datas)
 	exec[14] = vm_op_14_exec;
 	exec[15] = vm_op_15_exec;
 	exec[16] = vm_op_16_exec;
-	return vm_op_create_exec_2(datas, exec);
+	return (vm_op_create_exec_2(datas, exec));
 }
 
 int					vm_init_process(t_datas *datas)

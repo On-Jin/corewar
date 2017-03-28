@@ -63,7 +63,7 @@ static t_op g_op_tab[40] =
 		"rotation binaire a gauche (rol r1, r2   r1<<1 -> r2", 1, 0},
 	{"ror", 2, {T_REG | T_IND | T_DIR, T_REG}, 23, 12,
 		"rotation binaire a droite (ror r1, r2   r1>>1 -> r2", 1, 0},
-	{"mov", 2, {T_REG, T_REG}, 24, 36,
+	{"mov", 2, {T_REG, T_REG}, 24, 4,
 		"copier un registre dans un autre (mov  r1, r2  r1->r2", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };

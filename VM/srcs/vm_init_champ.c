@@ -20,7 +20,7 @@ static int			vm_size_champ(t_champ *champ, t_datas *datas)
 
 	size = 0;
 	cur = (int)champ->champ[size];
-	while (cur >= 1 && cur <= 16)
+	while (cur >= 1 && cur < NBR_FONC)
 	{
 		save = size;
 		if (vm_have_ocp(cur))

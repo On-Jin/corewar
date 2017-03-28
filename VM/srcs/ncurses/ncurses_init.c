@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:23:46 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/27 17:11:11 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 13:07:37 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@ static void	struct_init(t_nc *nc)
 	gettimeofday(&nc->t2, NULL);
 }
 
-void		resizehandler(int sig)
-{
-	(void)sig;
-	exit(0);
-}
-
 void		ncurses_init(t_datas *datas, int height, int width)
 {
-	signal(SIGWINCH, resizehandler);
 	struct_init(&datas->nc);
 	initscr();
 	cbreak();

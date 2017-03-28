@@ -6,7 +6,7 @@
 /*   By: gnebie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 09:32:30 by gnebie            #+#    #+#             */
-/*   Updated: 2017/03/22 00:12:00 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 13:35:21 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void		ncurses_base(t_datas *datas);
 void		ncurses_put_background(t_datas *datas, int pc, char champion,
 																	int size);
 void		ncurses_find_pc(t_datas *datas, t_draw *d);
+void		ncurses_print_end(t_datas *datas);
 
 void		print_kirby(t_datas *datas, t_nc *nc);
 void		print_cycle(t_datas *datas, t_nc *nc);

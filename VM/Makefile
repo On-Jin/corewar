@@ -6,7 +6,7 @@
 #    By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/13 14:54:46 by ntoniolo          #+#    #+#              #
-#    Updated: 2017/03/27 02:57:24 by ntoniolo         ###   ########.fr        #
+#    Updated: 2017/03/28 13:37:35 by ntoniolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRC3 = ncurses_end.c \
 	   ncurses_main_menu.c \
 	   ncurses_process.c \
 	   ncurses_start_init.c \
-	   ncurses_init.c
+	   ncurses_init.c \
+	   ncurses_print_end.c
 
 SRC2 = vm_champ_number_to_position.c \
 	   vm_champ_position_to_number.c \

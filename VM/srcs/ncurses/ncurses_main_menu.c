@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 23:05:27 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/27 03:19:17 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:33:24 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,18 @@ static void	print_reverse(t_datas *datas, t_nc *nc, int i)
 	wattroff(nc->inf, WA_REVERSE);
 }
 
+static void	print_c_command(t_nc *nc)
+{
+	mvwprintw(nc->inf, 3, 50, "Limit Cycle [%i]",
+						nc->wall_cycle);
+	mvwprintw(nc->inf, 55, 10, "%s", "Press 'w' for run");
+	mvwprintw(nc->inf, 56, 10, "%s", "Press 'e' for pause");
+	mvwprintw(nc->inf, 57, 10, "%s", "Press 's' for step by step");
+	mvwprintw(nc->inf, 59, 10, "%s", "Press 'c' for place a limit cycle");
+	mvwprintw(nc->inf, 61, 10, "%s", "Press 'e' for pause");
+	mvwprintw(nc->inf, 62, 10, "%s", "Press 'e' for pause");
+}
+
 void		print_main_menu(t_datas *datas, t_nc *nc)
 {
 	int i;
@@ -59,4 +71,5 @@ void		print_main_menu(t_datas *datas, t_nc *nc)
 	}
 	nc->i_print += i;
 	wattroff(nc->inf, WA_BOLD);
+	print_c_command(&datas->nc);
 }

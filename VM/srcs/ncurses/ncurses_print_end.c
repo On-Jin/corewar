@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 13:45:48 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/28 15:33:52 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:32:45 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	print_finish(t_datas *datas)
 		}
 		i++;
 	}
+	mvwprintw(datas->nc.win, 63, ((64 * 3) / 2), "%s", "Press 'q' :)");
 	wrefresh(datas->nc.win);
 	while (getch() != 'q')
 		usleep(50000);

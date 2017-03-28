@@ -75,24 +75,24 @@ live4:
 live3:
 	live	%1;
 	fork	%:live1
-	st      r2, -210
-	st      r2, -220
-	st      r2, -268
-	st      r2, -277
-	st      r2, -286
-	st      r2, -295
-	st      r2, -204
-	st      r2, -213
-	st      r2, -222
-	st      r2, -231
-	st      r2, -240
-	st      r2, -249
-	st      r2, -258
-	st      r2, -267
-	st      r2, -276
-	st      r2, -285
-	st      r2, -294
-	st      r2, -303
+	st      r2, -510
+	st      r2, -420
+	st      r2, -468
+	st      r2, -477
+	st      r2, -486
+	st      r2, -495
+	st      r2, 304
+	st      r2, 313
+	st      r2, 322
+	st      r2, 331
+	st      r2, 440
+	st      r2, 449
+	st      r2, 458
+	st      r2, 467
+	st      r2, 476
+	st      r2, 485
+	st      r2, 494
+	st      r2, 403
 
 
 live2:
@@ -117,22 +117,20 @@ live2:
 live4:
 	live	%1
 	fork	%:live1
+	and		%0, %0, r5
 
 live5:
 	live	%1	
-	and		%0, %0, r5
-	zjmp	%:live5
+	zjmp	%-5	
 
 begin_coromp:
 	ld		%57675809,r15 
-	st		r15,496
-	ld		%57675809,r15 
-	st		r15,489
-	ld		%57675809,r15 
-	st		r15,482
+	ld		%57675521,r15 
+	st		r15,510
+	st		r15,500
+	st		r15,491
 	ld		%4194959340,r16
-	ld		%57675809,r15 
-	st		r15,467
-	st		r16,466
+	st		r15,470
+	st		r15,490
 	and		r14,%0,r14
-	zjmp	%445
+	zjmp	%436

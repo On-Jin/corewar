@@ -16,6 +16,6 @@
 
 void			corewar_end_music(t_datas *datas, int i)
 {
-	if (datas->pid[i] != -1 && datas->pid[i] != 0)
+	if (datas->pid[i] != -1 && datas->pid[i] != 0 && datas->pid[i] != 1)
 		kill((pid_t)datas->pid[i], SIGTERM);
 }

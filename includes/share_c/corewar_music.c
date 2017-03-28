@@ -44,9 +44,11 @@ int					corewar_music(t_datas *datas, int i, int (*f)(t_datas *))
 	if (i == 1)
 		arg[1] = "./music/Heros.mp3";
 	else if (i == 2)
-		arg[1] = "./music/Heros.mp3";
+		arg[1] = "./music/kill.mp3";
+	else if (i == 3)
+		arg[1] = "./music/ffvii.mp3";
 	else
-		arg[1] = "./music/Heros.mp3";
+		arg[1] = "./music/ffvii.mp3";
 	arg[2] = NULL;
 	pid = corewar_create_process();
 	if (pid == 0)

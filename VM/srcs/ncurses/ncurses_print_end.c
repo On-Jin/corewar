@@ -75,8 +75,21 @@ static void	print_winner(t_datas *datas, t_nc *nc)
 	close(fd);
 }
 
+static int	ncurse_end_music(t_datas *datas)
+{
+	(void)datas;
+	return (0);
+}
+
 void		ncurses_print_end(t_datas *datas)
 {
+	if (datas->flag & FLAG_K)
+	{
+		corewar_end_music(datas, 1);
+		corewar_music(datas, 3, ncurse_end_music);
+	}
 	print_winner(datas, &datas->nc);
 	print_finish(datas);
+	if (datas->flag & FLAG_K)
+		corewar_end_music(datas, 3);
 }

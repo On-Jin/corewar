@@ -12,10 +12,19 @@
 
 #include "corewar.h"
 
+static int	vm_delete_unlive_musique(t_datas *datas)
+{
+	usleep(500000);
+	corewar_end_music(datas, 2);
+	return (0);
+}
+
 static void	vm_delete_first_unlive_process(t_datas *datas)
 {
 	t_process		*process;
 
+	if (datas->flag & FLAG_G)
+		corewar_music(datas, 2, vm_delete_unlive_musique);
 	while (datas->begin_process && !(datas->begin_process->live))
 	{
 		process = datas->begin_process;

@@ -6,7 +6,7 @@
 /*   By: ntoniolo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 13:45:48 by ntoniolo          #+#    #+#             */
-/*   Updated: 2017/03/28 18:32:45 by ntoniolo         ###   ########.fr       */
+/*   Updated: 2017/03/28 20:31:08 by ntoniolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_finish(t_datas *datas)
 	i = 0;
 	fd = 0;
 	line = NULL;
-	fd = open("finish.art", O_RDONLY);
+	fd = open("art/finish.art", O_RDONLY);
 	while (ft_gnl(fd, &line) == 1)
 	{
 		if (line)
@@ -60,7 +60,7 @@ static void	print_winner(t_datas *datas, t_nc *nc)
 				datas->lives->last_live, datas->begin_champ)].champ_name;
 	else
 		winner = datas->begin_champ[datas->player_nbr - 1].champ_name;
-	fd = open("crown.art", O_RDONLY);
+	fd = open("art/crown.art", O_RDONLY);
 	while (ft_gnl(fd, &line) == 1)
 	{
 		if (line)

@@ -6,7 +6,7 @@ do
 	echo $path
 	cp $path zaz.s
 	cp $path me.s
-	../../samples_files/asm zaz.s
+	../../samples_files/asm_zaz zaz.s
 	../asm me.s  > /dev/null
 	if [ $? != 0 ]
 	then

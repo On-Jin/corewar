@@ -49,22 +49,22 @@ t_op			compiler_hydrate_opcode(
 	int			i;
 	t_op		opecode_config;
 
-	str = ft_strtrim(line);
+	tmpstr = ft_strtrim(line);
+	if ((str = ft_strchr(tmpstr, COMMENT_CHAR)))
+		*str = 0;
+	str = tmpstr;
 	i = 0;
-	while (ft_strchr(OPCODE_CHARS, str[i]))
+	while (str[i] != ' ' && str[i] != '\t' && str[i])
 		i++;
 	tmpstr = ft_strsub(str, 0, i);
 	opecode_config = get_config(tmpstr);
 	ft_memdel((void**)&tmpstr);
 	tmpstr = ft_strtrim(str + i);
-	if (opecode_config.op_code == 0)
-		return (opecode_config);
+	ft_memdel((void**)&str);
 	inst->opcode = opecode_config.op_code;
 	inst->arg_nbrs = opecode_config.nb_arg;
-	ft_memdel((void**)&str);
-	if ((str = ft_strchr(tmpstr, COMMENT_CHAR)))
-		*str = 0;
-	*splited = ft_strsplit(tmpstr, SEPARATOR_CHAR);
+	if (opecode_config.op_code != 0)
+		*splited = ft_strsplit(tmpstr, SEPARATOR_CHAR);
 	ft_memdel((void**)&tmpstr);
 	return (opecode_config);
 }
@@ -92,8 +92,8 @@ void			compiler_compile_line(
 		error("Bad arguments number.\n");
 	while (y++ < 4)
 		inst->argcode = inst->argcode << 2;
-	while (splited[y - 4])
-		ft_memdel((void**)&splited[(y++ - 4)]);
+	while (splited[y - 5])
+		ft_memdel((void**)&splited[(y++ - 5)]);
 	ft_memdel((void**)&splited);
 	inst->size = inst->args[0][1] + inst->args[1][1] + inst->args[2][1] + 1;
 	inst->size = (inst->argcode) ? inst->size + 1 : inst->size;

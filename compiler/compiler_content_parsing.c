@@ -53,14 +53,11 @@ int			compiler_compile_get_label(char *line)
 	while (line[i])
 	{
 		if (!ft_strchr(LABEL_CHARS, line[i]))
-		{
-			if (line[i] == LABEL_CHAR)
-				return (i);
-			else
-				return (-1);
-		}
+			break ;
 		i++;
 	}
+	if (line[i] == LABEL_CHAR)
+		return (i);
 	return (-1);
 }
 

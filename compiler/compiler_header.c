@@ -67,15 +67,15 @@ void				write_comment_gnl(
 		error("Command don't end by '\"'\n");
 	if (ft_strcmp(cmd, NAME_CMD_STRING) == 0)
 	{
-		if (len > PROG_NAME_LENGTH)
-			error("Name too long");
+		if (len > PROG_NAME_LENGTH + 2)
+			error("Name too long\n");
 		ft_bzero(&(header->prog_name), PROG_NAME_LENGTH + 1);
 		ft_memcpy(&(header->prog_name), str + 1, len - 2);
 	}
 	else
 	{
-		if (len > COMMENT_LENGTH)
-			error("Command too long");
+		if (len > COMMENT_LENGTH + 2)
+			error("Comment too long\n");
 		ft_bzero(&(header->comment), COMMENT_LENGTH + 1);
 		ft_memcpy(&(header->comment), str + 1, len - 2);
 	}

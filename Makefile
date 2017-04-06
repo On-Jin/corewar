@@ -38,36 +38,36 @@ OBJ_DIR = ./objs/
 INC = ./includes/
 
 all : $(AUTOR) $(NAME) $(LIB)
-	@(cd $(ASM_DIR) && $(MAKE) $(ASM_NAME))
+	@(cd $(ASM_DIR) && make $(ASM_NAME))
 	@(cp $(ASM_DIR)$(ASM_NAME) ./)
-	@(cd $(COREWAR_DIR) && $(MAKE) $(COREWAR_NAME))
+	@(cd $(COREWAR_DIR) && make $(COREWAR_NAME))
 	@(cp $(COREWAR_DIR)$(COREWAR_NAME) ./)
 
 $(AUTOR) :
 	echo "gnebie\nntoniolo\nmprevot" > auteur;
 
 $(LIB) :
-	@(cd $(LIB_DIR) && MAKE)
+	@(cd $(LIB_DIR) && make)
 
 %.o : %.c
 
 $(COREWAR_NAME) : $(LIB)
-	@(cd $(COREWAR_DIR) && $(MAKE) $@)
+	@(cd $(COREWAR_DIR) && make)
 	@(cp $(COREWAR_DIR)$(COREWAR_NAME) ./)
 
 $(ASM_NAME) : $(LIB)
-	@(cd $(ASM_DIR) && $(MAKE) $@)
+	@(cd $(ASM_DIR) && make)
 	@(cp $(ASM_DIR)$(ASM_NAME) ./)
 
 clean :
-	@(cd $(LIB_DIR) && $(MAKE) $@)
-	@(cd $(ASM_DIR) && $(MAKE) $@)
-	@(cd $(COREWAR_DIR) && $(MAKE) $@)
+	@(cd $(LIB_DIR) && make clean)
+	@(cd $(ASM_DIR) && make clean)
+	@(cd $(COREWAR_DIR) && make clean)
 
 fclean :
 	@(rm -f $(NAME))
-	@(cd $(LIB_DIR) && $(MAKE) $@)
-	@(cd $(ASM_DIR) && $(MAKE) $@)
-	@(cd $(COREWAR_DIR) && $(MAKE) $@)
+	@(cd $(LIB_DIR) && make fclean)
+	@(cd $(ASM_DIR) && make fclean)
+	@(cd $(COREWAR_DIR) && make fclean)
 
 re : fclean all

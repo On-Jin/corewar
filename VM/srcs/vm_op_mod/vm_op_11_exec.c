@@ -20,9 +20,6 @@
 
 void			vm_op_11_exec(t_datas *datas, t_process *process)
 {
-	char		i;
-
-	i = datas->arene[vm_add_valid(process->pc + 1)];
 	if (vm_verif_datas(datas, process))
 	{
 		if (!vm_recup_all_process(process, datas->arene, 1 << 24 | 1 << 17 |

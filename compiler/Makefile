@@ -46,7 +46,7 @@ $(NAME) : $(LIB) $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(OBJ)) ../includes/corewar.
 	@(echo "\033[33mASM Pret\033[32;6m\n ---Les Champions peuvent commencer la compilation !---\033[0m")
 
 $(LIB) :
-	@(cd $(LIB_DIR) && MAKE)
+	@(cd $(LIB_DIR) && make)
 
 $(OBJ_DIR) :
 	mkdir $(OBJ_DIR)
@@ -57,11 +57,11 @@ $(OBJ_DIR)%.o : $(addprefix $(SRC_DIR), %.c)
 clean :
 	@(rm -f $(addprefix $(OBJ_DIR), $(OBJ)))
 	@(echo "\033[33msupression des points o\033[0m")
-	@(cd $(LIB_DIR) && MAKE $@)
+	@(cd $(LIB_DIR) && make)
 
 fclean : clean
 	@(rm -f $(NAME))
 	@(echo "\033[33msupression de l'asm\033[0m")
-	@(cd $(LIB_DIR) && MAKE $@)
+	@(cd $(LIB_DIR) && make)
 
 re : fclean all

@@ -17,9 +17,9 @@
 ** Includes
 */
 
+# include <ncurses.h>
 # include "op.h"
 # include "libft.h"
-# include <ncurses.h>
 # include <sys/time.h>
 # include <signal.h>
 

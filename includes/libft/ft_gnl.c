@@ -84,7 +84,7 @@ int			concat(t_fd *mail, void **buff, int *j)
 		ft_memcpy(tmp, mail->tampon, mail->lastbuff + 1);
 		free(mail->tampon);
 	}
-	ft_memcpy(&tmp[mail->lastbuff], buff[0], i + 1);
+	ft_memcpy(tmp + mail->lastbuff, buff[0], i + 1);
 	mail->lastbuff = mail->lastbuff + i;
 	mail->tampon = tmp;
 	return (0);

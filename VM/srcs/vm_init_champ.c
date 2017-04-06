@@ -15,14 +15,12 @@
 static int			vm_size_champ(t_champ *champ, t_datas *datas)
 {
 	int size;
-	int save;
 	int cur;
 
 	size = 0;
 	cur = (int)champ->champ[size];
 	while (cur >= 1 && cur < NBR_FONC)
 	{
-		save = size;
 		if (vm_have_ocp(cur))
 		{
 			size += vm_ocp_size(champ->champ[size + 1], 3,
@@ -36,7 +34,7 @@ static int			vm_size_champ(t_champ *champ, t_datas *datas)
 	return (size);
 }
 
-int					vm_inv_octets(unsigned int champion)
+unsigned int		vm_inv_octets(unsigned int champion)
 {
 	char	c[4];
 	int		i;
@@ -48,7 +46,7 @@ int					vm_inv_octets(unsigned int champion)
 		champion >>= 8;
 		--i;
 	}
-	return (*(int *)c);
+	return (*(unsigned int *)c);
 }
 
 static void			vm_verif_champ(char *chmp_info, t_champ *champ, int j)

@@ -1,9 +1,8 @@
 ### Définitions pour comprendre l'incompréhensible
 
-* Trois projets :
+* Deux projets :
 	* virtual machine (VM)
 	* assembleur (asm)
-	* champions (chmp)
 
 * `But` : creer une machine virtuelle dans laquelle des champions s'affronterons.
 		* la partie est finie quand plus aucun processus n'est en vie
@@ -51,25 +50,8 @@
 		* un decremente CyCLE_TO_DIE de CYCLE_DELTA. (-50 suvant les param de base)
 	* `Fin de la partie`
 		* Quand il n'y a plus de processus en vie la partie est finie et le gagnant est le dernier joueur rapporte en vie(live)
-	* `Affichage fin de partie`
-		* afficher : "le joueur x(nom_champion) a gagne", où x est le numéro du joueur et nom_champion le nom de son champion. (Exemple : "le joueur 2(rainbowdash) a gagne")
-	* Les executions
-		* A chaque exécution valide de l’instruction live, la machine doit afficher :
-		* "un processus dit que le joueur x(nom_champion) est en vie"
 	* Taille de la VM
 		* la memoire est circulaire et fait MEM_SIZE octets.
-
-* macros non définies
-	* MAX_ARGS_NUMBER		4
-	* REG_CODE				1
-	* DIR_CODE				2
-	* IND_CODE				3
-	* IND_SIZE				2
-	* typedef char			t_arg_type;
-	* T_REG					1
-	* T_DIR					2
-	* T_IND					4
-	* T_LAB					8
 
 * Les champions :
 	* les champions seront recompile depuis un psedo-assembleur en  'bytecde',par notre asm
@@ -87,4 +69,3 @@
 				Ex : sti r1, %:live, %1 == 0x0b | 0x68
 									  (sti)	| (r1, %:line, %1) == (01, 10, 10, 00)
 
-	*Incoming;

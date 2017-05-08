@@ -1,41 +1,60 @@
 # corewar
 
-La VM dispose de 4096 cases memoires dans lesquels le bytecode des champions vont y etre ecris.
-Le bytecode des champions est généré grace a l'asm qui traduit l'assembleur des .s en .cor.
-Le bytecode est un ensemble d'instruction, suivis de ses parametres, qui defini donc les champions.
-Ces meme instructions vont etre interpreté par les processus.
+La VM dispose de 4096 cases memoires dans lesquels le bytecode des champions vont y etre ecris.<br/>
+Le bytecode des champions est généré grace a l'asm qui traduit l'assembleur des .s en .cor.<br/>
+Le bytecode est un ensemble d'instruction, suivis de ses parametres, qui defini donc les champions.<br/>
+Ces meme instructions vont etre interpreté par les processus.<br/>
 
-Un processus va etre attribuer nativement par la VM a chaque debut de bytecode des champions.
+Un processus va etre attribuer nativement par la VM a chaque debut de bytecode des champions.<br/>
 
 Voicit l'etat de l'arene a l'initialisation:
-[Photo Base]
+![Init_arena](https://github.com/Jino42/corewar/blob/master/pic/init_arena.png)
 
-Nous avons creer des script afin de comparer notre VM avec celle de Zaz.
-Le visualisateur dispose de moultes outils de debug.
-Chaque processus peut etre etudie en temps direct, trier par Ordre de creation, par champions si vous le desirez.
+Nous avons creer des script afin de comparer notre VM avec celle de Zaz.<br/>
+Le visualisateur dispose de moultes outils de debug.<br/>
+Chaque processus peut etre etudie en temps direct, trier par Ordre de creation, par champions si vous le desirez.<br/>
 Le processus est presente ainsi :
-[Photo cycle 1]//
+![pros_cycle_1](https://github.com/Jino42/corewar/blob/master/pic/pros_cycle_1.png)
 
 Lorque le cycle de l'instruction est arrive a 0, les stocks des processus sont mis a jour. Il s'agit du resultat de l'intrepretation de la VM par rapport a une instruction+Octect_Codage_Parametre+parametres
-[Photo Fin de cycle]//
+![pros_cycle_0](https://github.com/Jino42/corewar/blob/master/pic/proce_cycle_0.png)
 
-De ce fait nous avons pu reussir a creer notre VM avec la meme logique que celle de Zaz. Une logique tres generique (Qui nous a permis de rajouter des instruction suplementaire en toute simplicite)
+De ce fait nous avons pu reussir a creer notre VM avec la meme logique que celle de Zaz. Une logique tres generique (Qui nous a permis de rajouter des instruction suplementaire en toute simplicite)<br/>
 
 [Diff Parfaite entre Zaz et notre VM, grace a des outils puissant]
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-VM : Machine Virtuelle
+//////////////////////////////////////////////////////////////////////////////////////////////////////// <br/>
 
-L'arene est constitue de 4096 octets;
-L'arene est circulaire;
+Retrouvez le sujet d'Epitech (Moins fun que celui de 42) ici : https://github.com/Jino42/corewar/blob/master/documents/coreware-epitech.pdf
+
+VM : Machine Virtuelle
+-
+- L'arene est constitue de 4096 octets;
+- L'arene est circulaire;
+- Chaque instruction s'execute uniquement a la fin de son cycle(et attends toute sa duree);
+- Les processus s'executent sequentiellement et dans le meme espace memoire, du dernier née au premier née;
 
 Champions :
+-
+- Le bytecode des champions est généré grace a l'asm qui traduit l'assembleur des .s en .cor.
+- Le bytecode est un ensemble d'instruction, suivis de ses parametres, qui defini donc les champions.
 
-Le bytecode des champions est généré grace a l'asm qui traduit l'assembleur des .s en .cor.
-Le bytecode est un ensemble d'instruction, suivis de ses parametres, qui defini donc les champions.
+Processus :
+-
+Un processus dipose de :<br/>
+- Un Live : Une valeur qui designe si le processus est vivant.
+- Un PC : Registre special qui contient l'adresse dans la memoire de la VM.<br/>
+- Un Carry : Un flag qui vaut 1 si l'opperation a reussie. (Si le resultat de l'operation == 0)<br/>
+- 16 Registres : Chaque fait REG_SIZE (4) octets. A l'initialisation de l'arene, le Carry, le Live, et les Registres sont mis a 0, hormis le premier registre, ou est contenu le numero du joueur. A la copie d'un processus (fork, lfork), le Carry, le Live et les registres sont copié.
+
+Regles :
+-
+- Quand il n'y a plus de processus en vie, la partie est finie, et le gagnant est le dernier joueur rapporte en vie (Live);
+- Tous les CYCLE_TO_DIE, la machine verifie que chaque processus est vivant (Live). Si le Live est a 0, le processus est detruit. Sinon, il reste en vie et son Live est mis a 0.
+- La decrementation de CYCLE_TO_DIE est de CYCLE_DELTA (-50). Elle s'effectue lorsque CYCLE_TO_DIE cycle est passé et qu'il y a eu NBR_LIVE (21) exectute par l'ensemble des processus durant le CYCLE_TO_DIE. Sinon on augmente CHECK de 1. Lorsque CHECK atteint MAX_CHECKS, la VM execute une verification des processus.;
 
 Instructions basic
---------
+-
 
 | Mnemonic |                               Effects                        |
 |:----------:| ----------------------------------------------------------- |
@@ -58,15 +77,14 @@ Instructions basic
 
 (Retrouvez les aussi ici : https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0)
 
-Regles :
-
-Les champions peuvent donc adopter differentes strategie :
-
-(Ce n'est que 3 simples exemples)
-
--Sniper :
-	*Ecrire de la memoire tres tres loins, afin de toucher les bytecodes source des autres champions
--Train :
-	* Multiplier ses processus jusqu'a pouvoir ecrire les bytescodes permettant d'ecrire plus loins dans la memoire les meme bytecodes. C'est un train
--Tortue :
-	*Multiplier ses processus pour creer des mur autour de ses bytecodes sources. Cela permet d'arreter les trains, car le mur doit s'ecrire plus souvent (Dans l'idee : Plus rapidement) pour ecraser continuellement les bytescodes du train. Cela peut aussi permettre de faire travailler des processus, qui ce serait perdu dans l'ecrasement des bytecodes, pour son compte.
+* Encodage :
+	* Chaque instruction est encodée par :
+	* Code de l'instruction (live == 0x01, ld == 0x02 ...)
+	* L’octet de codage des paramètres (OCP), jusqu'a MAX_ARGS_NUMBER (4):
+		* -------(Chaque parametre prends 2bits)
+		* 01 SI Registre, Suivie d’un octet            (le numéro de registre)
+		* 10 SI Direct,   Suivie de DIR_SIZE (4)octets (la valeur directement)
+		* 11 Si Indirect, Suivie de IND_SIZE octets    (la valeur de l’indirection)
+	
+				Ex : sti r1, %:live, %1 == 0x0b | 0x68
+							    sti | (r1, %:line, %1) == (01, 10, 10, 00)

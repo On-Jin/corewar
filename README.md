@@ -1,4 +1,12 @@
-# corewar
+COREWAR
+===
+
+![presentation](https://github.com/Jino42/corewar/blob/master/pic/presentation.png)
+
+Lancement basic :
+- make
+- ./asm ./champ/[nom_du_champion].s
+- ./corewar -m ./champ/[nom_du_champion].cor ...
 
 La VM dispose de 4096 cases memoires dans lesquels le bytecode des champions vont y etre ecris.<br/>
 Le bytecode des champions est généré grace a l'asm qui traduit l'assembleur des .s en .cor.<br/>
@@ -77,14 +85,16 @@ Instructions basic
 
 (Retrouvez les aussi ici : https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0)
 
-* Encodage :
-	* Chaque instruction est encodée par :
-	* Code de l'instruction (live == 0x01, ld == 0x02 ...)
-	* L’octet de codage des paramètres (OCP), jusqu'a MAX_ARGS_NUMBER (4):
+Encodage :
+-
+- Chaque instruction est encodée par :
+- Code de l'instruction (live == 0x01, ld == 0x02 ...)
+- L’octet de codage des paramètres (OCP), jusqu'a MAX_ARGS_NUMBER (4):<br/>
+
 		* -------(Chaque parametre prends 2bits)
 		* 01 SI Registre, Suivie d’un octet            (le numéro de registre)
 		* 10 SI Direct,   Suivie de DIR_SIZE (4)octets (la valeur directement)
 		* 11 Si Indirect, Suivie de IND_SIZE octets    (la valeur de l’indirection)
-	
+
 				Ex : sti r1, %:live, %1 == 0x0b | 0x68
 							    sti | (r1, %:line, %1) == (01, 10, 10, 00)

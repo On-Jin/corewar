@@ -1,6 +1,8 @@
 COREWAR
 ===
 
+Sujet : https://github.com/Jino42/corewar/blob/master/documents/corewar.pdf
+
 ![presentation](https://github.com/Jino42/corewar/blob/master/pic/presentation.png)
 
 Lancement basic :

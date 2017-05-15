@@ -20,13 +20,13 @@ Un processus va etre attribuer nativement par la VM a chaque debut de bytecode d
 Voicit l'etat de l'arene a l'initialisation:
 ![Init_arena](https://github.com/Jino42/corewar/blob/master/pic/init_arena.png)
 
-Nous avons creer des script afin de comparer notre VM avec celle de Zaz.<br/>
+Nous avons crée des scripts afin de comparer notre VM avec celle de Zaz.<br/>
 Le visualisateur dispose de moultes outils de debug.<br/>
-Chaque processus peut etre etudie en temps direct, trier par Ordre de creation, par champions si vous le desirez.<br/>
-Le processus est presente ainsi :
+Chaque processus peut etre etudié en temps direct, trié par Ordre de creation, et par champions si vous le desirez.<br/>
+Le processus est presenté ainsi :
 ![pros_cycle_1](https://github.com/Jino42/corewar/blob/master/pic/pros_cycle_1.png)
 
-Lorque le cycle de l'instruction est arrive a 0, les stocks des processus sont mis a jour. Il s'agit du resultat de l'intrepretation de la VM par rapport a une instruction+Octect_Codage_Parametre+parametres
+Lorque le cycle de l'instruction est arrivé a 0, les stocks des processus sont mis a jour. Il s'agit du resultat de l'intrepretation de la VM par rapport a une instruction+Octect_Codage_Parametre+parametres
 ![pros_cycle_0](https://github.com/Jino42/corewar/blob/master/pic/proce_cycle_0.png)
 
 De ce fait nous avons pu reussir a creer notre VM avec la meme logique que celle de Zaz. Une logique tres generique (Qui nous a permis de rajouter des instruction suplementaire en toute simplicite)<br/>
@@ -41,7 +41,7 @@ VM : Machine Virtuelle
 -
 - L'arene est constitue de 4096 octets;
 - L'arene est circulaire;
-- Chaque instruction s'execute uniquement a la fin de son cycle(et attends toute sa duree);
+- Chaque instruction s'execute uniquement a la fin de son cycle(et attends toute sa durée);
 - Les processus s'executent sequentiellement et dans le meme espace memoire, du dernier née au premier née;
 
 Champions :
@@ -59,7 +59,7 @@ Un processus dipose de :<br/>
 
 Regles :
 -
-- Quand il n'y a plus de processus en vie, la partie est finie, et le gagnant est le dernier joueur rapporte en vie (Live);
+- Quand il n'y a plus de processus en vie, la partie est finie, et le gagnant est le dernier joueur rapporté en vie (Live);
 - Tous les CYCLE_TO_DIE, la machine verifie que chaque processus est vivant (Live). Si le Live est a 0, le processus est detruit. Sinon, il reste en vie et son Live est mis a 0.
 - La decrementation de CYCLE_TO_DIE est de CYCLE_DELTA (-50). Elle s'effectue lorsque CYCLE_TO_DIE cycle est passé et qu'il y a eu NBR_LIVE (21) exectute par l'ensemble des processus durant le CYCLE_TO_DIE. Sinon on augmente CHECK de 1. Lorsque CHECK atteint MAX_CHECKS, la VM execute une verification des processus.;
 
